@@ -4,32 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Platform Navigation — Tina Singh</title>
-<meta name="description" content="Case study: Defining cross-product navigation behavior for enterprise scale — multi-tenant switching, hierarchy, and structural clarity before visuals.">
+<meta name="description" content="Case study: Defining behavior before visuals to map 6 legacy products into a single hub and spoke model.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg:      #0f1218;
-  --bg2:     #181d28;
-  --bg3:     #222838;
-  --text:    #f0eef5;
-  --text2:   #c4bfd8;
-  --muted:   #8a86a0;
-  --border:  #2e3248;
-  --accent:  #e05a42;
-  --accent2: #c74b35;
-  --accent-teal: #3dd8c5;
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #f8f7f3;
-  --bg2:     #eeeae2;
-  --bg3:     #e4e0d6;
-  --text:    #181620;
-  --text2:   #4a4662;
-  --muted:   #88849c;
-  --border:  #d4d0e2;
+  --bg:      #fcfcfc;
+  --bg2:     #f2f2f2;
+  --bg3:     #e8e8e8;
+  --text:    #111111;
+  --text2:   #404040;
+  --muted:   #8a8a8a;
+  --border:  #d4d4d4;
   --accent:  #d94e38;
   --accent2: #bc3f2c;
   --yellow:  #b87a00;
@@ -64,7 +64,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .pip.teal { background: var(--accent-teal); }
 .stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
 
-.cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
 .cs-meta-cell:last-child { border-right: none; }
 .cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
@@ -95,44 +95,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
 .step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
-
-.outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 22px; }
-.outcome-cell { background: var(--bg); padding: 26px 30px; }
-.outcome-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-.outcome-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
-
-/* Nav hierarchy diagram */
-.nav-diagram {
-  border: 1px solid var(--border);
-  margin: 22px 0;
-  padding: 0;
-}
-.nav-level {
-  display: flex; align-items: stretch;
-  border-bottom: 1px solid var(--border);
-}
-.nav-level:last-child { border-bottom: none; }
-.nav-level-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--accent);
-  letter-spacing: 0.06em;
-  width: 120px; flex-shrink: 0;
-  padding: 18px 16px;
-  display: flex; align-items: center;
-  border-right: 1px solid var(--border);
-  background: var(--bg2);
-}
-.nav-level-content {
-  padding: 18px 20px;
-  font-size: 14px; font-weight: 300; color: var(--text2);
-  line-height: 1.65;
-  flex: 1;
-}
-.nav-level-content strong { color: var(--text); font-weight: 400; }
-.nav-level-content code {
-  font-size: 12px; color: var(--accent-teal);
-  background: var(--bg2); padding: 2px 6px; border-radius: 2px;
-}
 
 .cs-reframe { padding: 52px 0 8px; max-width: 800px; margin: 0 auto; padding-left: 56px; padding-right: 56px; }
 .cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
@@ -167,211 +129,138 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Platform<br>Navigation</h1>
-  <p class="cs-sub">Behavior before visuals. I defined cross-product navigation logic for enterprise security — multi-tenant switching, hierarchy, and structural clarity at scale.</p>
+  <p class="cs-sub">Defining Behavior Before Visuals.</p>
 
   <div class="stat-card fade-in">
-    <div class="stat-card-title">// NAV ARCHITECTURE</div>
+    <div class="stat-card-title">// NAVIGATION SCOPE</div>
     <div class="stat-row">
-      <span class="stat-name">LEVELS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-      </div>
-      <span class="stat-val">4-TIER</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">PRODUCTS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-      </div>
-      <span class="stat-val">3 SUITES</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">TENANTS</span>
+      <span class="stat-name">REDUNDANCY</span>
       <div class="stat-pips">
         <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip off"></div><div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
+        <div class="pip teal"></div><div class="pip off"></div>
       </div>
-      <span class="stat-val">MULTI-TENANT</span>
+      <span class="stat-val">40% CUT</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">DEEP LINKS</span>
+      <div class="stat-pips">
+        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip"></div><div class="pip"></div>
+      </div>
+      <span class="stat-val">1,000+ ROUTES</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">ADOPTION</span>
+      <div class="stat-pips">
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+        <div class="pip teal"></div>
+      </div>
+      <span class="stat-val">6 PRODUCTS</span>
     </div>
   </div>
 
   <div class="cs-meta">
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Role</div>
-      <div class="cs-meta-val">Sr. Product Designer<br><em>IA / Navigation Lead</em></div>
+      <div class="cs-meta-val">UI Designer, UX Architect</div>
     </div>
     <div class="cs-meta-cell">
-      <div class="cs-meta-label">Scope</div>
-      <div class="cs-meta-val">Information Architecture · Multi-tenant Logic · Cross-product Behavior</div>
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-val">2024</div>
     </div>
     <div class="cs-meta-cell">
-      <div class="cs-meta-label">Tools</div>
-      <div class="cs-meta-val">Figma · FigJam · Engineering Specs</div>
-    </div>
-    <div class="cs-meta-cell">
-      <div class="cs-meta-label">Company</div>
-      <div class="cs-meta-val"><em>BeyondTrust</em></div>
+      <div class="cs-meta-label">Status</div>
+      <div class="cs-meta-val"><em>Shipped</em></div>
     </div>
   </div>
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">Navigation isn't a component.<br><em>It's an argument about product structure.</em></p>
+  <p class="cs-reframe-line">The company had 6 distinct products that were being merged into a single "Platform." However, each product had its own navigation logic. Users felt like they were leaving one website and entering another every time they switched tools.<br><em>The tech debt was massive.</em></p>
 </div>
 
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Three product suites. No shared navigation logic.</h2>
-    <p class="cs-p">BeyondTrust's platform spans multiple product suites — each with its own navigation patterns, hierarchy rules, and tenant-switching behavior. As the platform grew, the navigation diverged:</p>
+    <div class="s-label">The Goal</div>
+    <h2 class="cs-h2">A unified navigation framework.</h2>
+    <p class="cs-p">We needed a single source of truth for routing that solved three core issues:</p>
     <ul class="cs-list">
-      <li>Each product suite defined its own sidebar hierarchy independently</li>
-      <li>Multi-tenant switching worked differently across products — some used dropdowns, others used separate login flows</li>
-      <li>No consistent behavior for what happens when a user switches context (tenant, product, or scope)</li>
-      <li>Breadcrumb patterns contradicted sidebar hierarchy in multiple products</li>
-      <li>Engineering teams had no shared specification — each rebuilt navigation from assumptions</li>
+      <li>Works for single-product users and multi-product enterprise admins.</li>
+      <li>Supports 1,000+ deep links without breaking the UI.</li>
+      <li>Scales from a 13" laptop to a 40" security operations center monitor.</li>
     </ul>
-    <div class="pull-quote">"We didn't have a navigation problem. We had a product-structure problem that hadn't been made explicit."</div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">My Approach</div>
-    <h2 class="cs-h2">Define behavior before visuals.</h2>
-    <p class="cs-p">Most teams start navigation redesigns with wireframes. I started with a behavior specification. Before deciding what the sidebar looks like, I needed to answer:</p>
-    <ul class="cs-list">
-      <li>What are the navigation levels and how do they nest?</li>
-      <li>What happens when a user switches tenants mid-workflow?</li>
-      <li>Which state persists across context switches and which resets?</li>
-      <li>How does the hierarchy work for single-product vs. multi-product users?</li>
-    </ul>
-    <p class="cs-p">This produced a behavioral spec — a document that defined navigation rules without any visual design. Engineering reviewed it first. Visuals came after behavior was agreed upon.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Navigation Architecture</div>
-    <h2 class="cs-h2">Four levels. Clear hierarchy.</h2>
-    <div class="nav-diagram">
-      <div class="nav-level">
-        <div class="nav-level-label">L1 · PLATFORM</div>
-        <div class="nav-level-content"><strong>Product suite selection.</strong> Top-level context — which product surface is the user in? Persistent across the session. <code>platform.context</code></div>
-      </div>
-      <div class="nav-level">
-        <div class="nav-level-label">L2 · TENANT</div>
-        <div class="nav-level-content"><strong>Tenant/organization switching.</strong> Which customer environment? Switching resets L3 and L4 state. <code>tenant.active</code></div>
-      </div>
-      <div class="nav-level">
-        <div class="nav-level-label">L3 · MODULE</div>
-        <div class="nav-level-content"><strong>Primary sidebar navigation.</strong> Feature modules within the product. Collapse/expand behavior with deep-link support. <code>module.current</code></div>
-      </div>
-      <div class="nav-level">
-        <div class="nav-level-label">L4 · VIEW</div>
-        <div class="nav-level-content"><strong>Sub-navigation and tabs.</strong> Views within a module — list/detail, settings panels, nested workflows. <code>view.active</code></div>
-      </div>
-    </div>
-    <p class="cs-p">The key rule: <strong style="color:var(--text)">switching a higher level resets all lower levels.</strong> This prevents orphaned state — a user never lands in a view that doesn't belong to their current tenant or module.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Three decisions that shaped the architecture.</h2>
+    <div class="s-label">Implementation</div>
+    <h2 class="cs-h2">Phases to production.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Write the spec before the wireframe</div>
-          <p class="decision-p">I wrote a behavioral specification first — defining state management, context-switching rules, and hierarchy constraints. Engineering reviewed it and gave feedback before I opened Figma. This meant the visual design was implementing an agreed-upon contract, not proposing one.</p>
+          <div class="decision-h">Phase 1: Information Architecture (IA)</div>
+          <p class="decision-p">I audited every menu item across 6 products. I discovered that 40% of the links were redundant. I proposed a "Hub and Spoke" model:<br>
+            • <strong>The Global Bar:</strong> Product switcher, User profile, Global search.<br>
+            • <strong>The Side Rail:</strong> Contextual navigation for the active product.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Tenant switching resets downstream state</div>
-          <p class="decision-p">When a user switches tenants, module and view state resets to defaults. This prevents data leakage (showing one tenant's data in another's context) and eliminates an entire class of edge cases. Some product teams pushed back — but the alternative was unpredictable state across every product.</p>
+          <div class="decision-h">Phase 2: Interactive States & Tokens</div>
+          <p class="decision-p">Navigation isn't just a list of links; it's a series of behaviors. I defined:<br>
+            • <strong>Active state logic:</strong> What happens when a user is in a sub-sub-menu?<br>
+            • <strong>Hover behaviors:</strong> Delay timings for fly-out menus to prevent "diagonal mouse" frustration.<br>
+            • <strong>Responsiveness:</strong> A "Slim" vs. "Expanded" state for the sidebar.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">One navigation model, flexible rendering</div>
-          <p class="decision-p">The behavioral model is shared across all products. But visual rendering can differ — one product might render L3 as a sidebar, another as a tab bar. The hierarchy and state rules stay the same. This gave product teams flexibility without fragmenting the architecture.</p>
+          <div class="decision-h">Phase 3: The Handoff</div>
+          <p class="decision-p">Instead of just handing off Figma files, I delivered a Navigation Matrix—a spreadsheet mapping every URL path to a navigation state. This became the source of truth for the engineering team.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Process</div>
-    <h2 class="cs-h2">Behavior → spec → design → ship.</h2>
+    <div class="s-label">The Impact</div>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
-        <div class="step-text"><strong>Cross-product audit</strong> — Mapped navigation patterns across all 3 product suites. Documented hierarchy, state behavior, and tenant-switching flows.</div>
+        <div class="step-text"><strong>Reduced TTM:</strong> Engineering now uses a single JSON-driven navigation module, significantly reducing frontend dev time.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">02</div>
-        <div class="step-text"><strong>Behavioral specification</strong> — Wrote a detailed spec defining the 4-level hierarchy, state management rules, and multi-tenant switching logic. No visuals in this document.</div>
+        <div class="step-text"><strong>User Success:</strong> Established a consistent mental model for users moving between products, reducing navigation errors and friction.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">03</div>
-        <div class="step-text"><strong>Engineering review</strong> — Shared the spec with engineering leads across all product teams. Three rounds of feedback refined edge cases around deep linking and session persistence.</div>
+        <div class="step-text"><strong>Operational Efficiency:</strong> Eliminated the "logic gaps" in handoff, cutting down QA cycles related to navigation bugs.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">04</div>
-        <div class="step-text"><strong>Visual design</strong> — Designed the navigation components in Figma based on the agreed spec. Built responsive variants for sidebar, collapsed, and mobile states.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">05</div>
-        <div class="step-text"><strong>Phased rollout</strong> — Rolled out to the primary product suite first, validated behavior with real user sessions, then expanded to remaining suites.</div>
+        <div class="step-text"><strong>System Adoption:</strong> The logic defined here became the standard for future platform components, proving the value of a token-driven interaction model.</div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Outcome</div>
-    <h2 class="cs-h2">What changed.</h2>
-    <div class="outcome-grid">
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">3 product suites with independent navigation. No shared hierarchy or state model. Breadcrumbs contradicting sidebars.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">Unified 4-level navigation architecture. Deterministic state management. Shared behavioral contract across all products.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">Tenant switching was inconsistent — some products used dropdowns, others required re-login. State leaked across contexts.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">Consistent tenant switching with predictable state reset. No data leakage. Users always know where they are.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">What I Learned</div>
-    <div class="pull-quote">"Navigation is the most political component in enterprise software. Everyone has an opinion about the sidebar — but almost no one has defined the rules behind it."</div>
-    <p class="cs-p">The biggest insight: visual design is the last 20% of navigation work. The first 80% is defining behavior — state management, hierarchy rules, and multi-tenant logic. Starting with wireframes would have locked us into visual debates while the actual problems (state leakage, inconsistent hierarchy) went unsolved.</p>
+    <div class="s-label">Reflection</div>
+    <div class="pull-quote">"I learned that polished visuals fail if behavior is unclear. My goal was to create a system with straightforward rules so teams could build confidently."</div>
+    <p class="cs-p">A key refinement was the site-switching experience. Initially, complex controls confused users about their location. By simplifying the tenant switcher from a search box to a dropdown and moving it to the top global bar, I provided a clear "where am I?" anchor. This small shift in IA made the entire platform feel more integrated.</p>
   </div>
 
 </div>
 
-<a href="portfolio-as-product.html" class="cs-next">
+<a href="login-redesign.html" class="cs-next">
   <div class="cs-next-inner">
     <div>
       <div class="cs-next-label">Next Case Study</div>
-      <div class="cs-next-title">Portfolio as a Product</div>
+      <div class="cs-next-title">Login Redesign</div>
     </div>
     <div class="cs-next-arrow">→</div>
   </div>

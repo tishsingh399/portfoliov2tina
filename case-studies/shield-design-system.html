@@ -3,367 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shield Design System — Tina Singh</title>
-<meta name="description" content="Case study: How I built a token-driven design system from scratch, unifying 8 enterprise products with 340+ components and full Figma-code parity.">
+<title>Design System Rebuild — Tina Singh</title>
+<meta name="description" content="Case study: How I rebuilt a fragmented UI into a governed token-driven design system across 6 products and 11 teams.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg:      #0f1218;
-  --bg2:     #181d28;
-  --bg3:     #222838;
-  --text:    #f0eef5;
-  --text2:   #c4bfd8;
-  --muted:   #8a86a0;
-  --border:  #2e3248;
-  --accent:  #e05a42;
-  --accent2: #c74b35;
-  --accent-teal: #3dd8c5;
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #f8f7f3;
-  --bg2:     #eeeae2;
-  --bg3:     #e4e0d6;
-  --text:    #181620;
-  --text2:   #4a4662;
-  --muted:   #88849c;
-  --border:  #d4d0e2;
+  --bg:      #fcfcfc;
+  --bg2:     #f2f2f2;
+  --bg3:     #e8e8e8;
+  --text:    #111111;
+  --text2:   #404040;
+  --muted:   #8a8a8a;
+  --border:  #d4d4d4;
   --accent:  #d94e38;
   --accent2: #bc3f2c;
   --yellow:  #b87a00;
 }
 
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Jost', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-}
-body, nav, section, .cs-hero, .decision-item, .security-step, .outcome-cell {
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
-}
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body, nav, section, .cs-hero, .decision-item, .security-step, .outcome-cell { transition: background 0.3s, color 0.3s, border-color 0.3s; }
 
-/* ── Nav ── */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 56px;
-}
-.nav-back {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px; color: var(--muted);
-  text-decoration: none;
-  display: flex; align-items: center; gap: 12px;
-  transition: color 0.2s;
-}
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
 .nav-back:hover { color: var(--text); }
 .nav-back-arrow { color: var(--accent); }
 .nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
-.theme-toggle {
-  width: 34px; height: 34px;
-  border: 1px solid var(--border); background: transparent;
-  color: var(--muted); cursor: pointer; font-size: 15px;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
-}
+.theme-toggle { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ── Hero ── */
-.cs-hero {
-  padding: 80px 56px 0;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.cs-bg-num {
-  position: absolute;
-  top: -30px; right: 32px;
-  font-family: 'Spectral', serif;
-  font-size: clamp(160px, 22vw, 260px);
-  font-weight: 600; line-height: 1;
-  color: var(--border);
-  user-select: none; pointer-events: none;
-  letter-spacing: -0.05em;
-}
-.cs-tag {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--accent);
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 20px; position: relative; z-index: 1;
-}
+.cs-hero { padding: 80px 56px 0; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-bg-num { position: absolute; top: -30px; right: 32px; font-family: 'Spectral', serif; font-size: clamp(160px, 22vw, 260px); font-weight: 600; line-height: 1; color: var(--border); user-select: none; pointer-events: none; letter-spacing: -0.05em; }
+.cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
 .cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
-.cs-h1 {
-  font-family: 'Spectral', serif;
-  font-size: clamp(42px, 6vw, 72px);
-  font-weight: 300; line-height: 1.05; letter-spacing: -0.03em;
-  color: var(--text); margin-bottom: 18px;
-  position: relative; z-index: 1;
-}
-.cs-sub {
-  font-size: 18px; font-weight: 300; line-height: 1.7;
-  color: var(--muted); max-width: 52ch; margin-bottom: 52px;
-  position: relative; z-index: 1;
-}
+.cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
+.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
-/* ── Stat Card ── */
-.stat-card {
-  display: inline-flex; flex-direction: column; gap: 13px;
-  padding: 22px 28px;
-  border: 2px solid var(--border);
-  background: var(--bg2);
-  margin-bottom: 52px;
-  position: relative; z-index: 1;
-  transition: background 0.3s, border-color 0.3s;
-}
-.stat-card-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px; color: var(--accent);
-  letter-spacing: 0.1em; margin-bottom: 6px;
-}
+.stat-card { display: inline-flex; flex-direction: column; gap: 13px; padding: 22px 28px; border: 2px solid var(--border); background: var(--bg2); margin-bottom: 52px; position: relative; z-index: 1; transition: background 0.3s, border-color 0.3s; }
+.stat-card-title { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
 .stat-row { display: flex; align-items: center; gap: 14px; }
-.stat-name {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--muted);
-  width: 82px; letter-spacing: 0.04em;
-}
+.stat-name { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); width: 82px; letter-spacing: 0.04em; }
 .stat-pips { display: flex; gap: 4px; }
 .pip { width: 10px; height: 10px; background: var(--accent); flex-shrink: 0; }
 .pip.off { background: var(--border); }
-.stat-val {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--text2); letter-spacing: 0.04em;
-}
+.pip.teal { background: var(--accent-teal); }
+.stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
 
-/* ── Meta ── */
-.cs-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border);
-  position: relative; z-index: 1;
-}
-.cs-meta-cell {
-  padding: 24px 28px;
-  border-right: 1px solid var(--border);
-  transition: background 0.3s;
-}
+.cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
 .cs-meta-cell:last-child { border-right: none; }
-.cs-meta-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 10px;
-}
+.cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .cs-meta-val { font-size: 14px; font-weight: 400; color: var(--text2); line-height: 1.55; }
 .cs-meta-val em { font-style: normal; color: var(--accent); font-weight: 500; }
 
-/* ── Body ── */
-.cs-body {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 80px 56px;
-}
+.cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
 .cs-section { margin-bottom: 80px; }
-
-.s-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent);
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 16px;
-}
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
-
-.cs-h2 {
-  font-family: 'Spectral', serif;
-  font-size: clamp(24px, 2.8vw, 34px);
-  font-weight: 300; line-height: 1.2; letter-spacing: -0.02em;
-  color: var(--text); margin-bottom: 22px;
-}
-.cs-p {
-  font-size: 16px; font-weight: 300; line-height: 1.9;
-  color: var(--text2); margin-bottom: 16px;
-}
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
 .cs-p:last-child { margin-bottom: 0; }
+.cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+.cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
 
-.cs-list {
-  list-style: none;
-  display: flex; flex-direction: column; gap: 10px;
-  margin: 18px 0;
-}
-.cs-list li {
-  font-size: 15px; font-weight: 300; color: var(--text2);
-  display: flex; align-items: flex-start; gap: 10px; line-height: 1.75;
-}
-.cs-list li::before {
-  content: '→'; color: var(--accent); font-size: 12px;
-  flex-shrink: 0; margin-top: 3px;
-}
-
-/* pull quote */
-.pull-quote {
-  font-family: 'Spectral', serif;
-  font-size: clamp(20px, 2.6vw, 28px);
-  font-style: italic; font-weight: 300;
-  line-height: 1.5; color: var(--text);
-  padding: 24px 0 24px 32px;
-  border-left: 2px solid var(--accent);
-  margin: 32px 0;
-}
-
-/* ── Key Decisions ── */
 .decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
 .decision-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; }
-.decision-num {
-  font-family: 'Spectral', serif;
-  font-size: 60px; font-weight: 600; line-height: 0.9;
-  color: var(--border); user-select: none;
-  padding-top: 4px;
-}
-.decision-h {
-  font-family: 'Spectral', serif;
-  font-size: 20px; font-weight: 400; color: var(--text);
-  margin-bottom: 10px; line-height: 1.3;
-}
+.decision-num { font-family: 'Spectral', serif; font-size: 60px; font-weight: 600; line-height: 0.9; color: var(--border); user-select: none; padding-top: 4px; }
+.decision-h { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
 .decision-p { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--text2); }
 
-/* ── Steps ── */
-.security-list {
-  border: 1px solid var(--border);
-  margin-top: 22px;
-}
-.security-step {
-  display: flex; align-items: flex-start; gap: 20px;
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--border);
-}
+.security-list { border: 1px solid var(--border); margin-top: 22px; }
+.security-step { display: flex; align-items: flex-start; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
 .security-step:last-child { border-bottom: none; }
-.step-icon {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px; color: var(--accent);
-  flex-shrink: 0; padding-top: 3px;
-}
+.step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
 .step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
 
-/* ── Outcome grid ── */
-.outcome-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-  margin-top: 22px;
-}
-.outcome-cell { background: var(--bg); padding: 26px 30px; }
-.outcome-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--muted);
-  letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.outcome-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.cs-reframe { padding: 52px 0 8px; max-width: 800px; margin: 0 auto; padding-left: 56px; padding-right: 56px; }
+.cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+.cs-reframe-line em { font-style: normal; color: var(--accent); }
 
-/* ── Token table ── */
-.token-table {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-collapse: collapse;
-  margin-top: 22px;
-  font-size: 14px;
-}
-.token-table th {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted);
-  padding: 16px 20px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg2);
-}
-.token-table td {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text2);
-  font-weight: 300;
-  line-height: 1.6;
-}
-.token-table td:first-child { color: var(--text); font-weight: 400; }
-.token-table code {
-  font-size: 12px;
-  color: var(--accent-teal);
-  background: var(--bg2);
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-/* ── Reframe ── */
-.cs-reframe {
-  padding: 52px 0 8px;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-left: 56px; padding-right: 56px;
-}
-.cs-reframe-line {
-  font-family: 'Spectral', serif;
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 300;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--border);
-}
-.cs-reframe-line em {
-  font-style: normal;
-  color: var(--accent);
-}
-
-/* ── Footer ── */
-.cs-footer {
-  border-top: 1px solid var(--border);
-  padding: 28px 56px;
-  display: flex; justify-content: space-between; align-items: center;
-  background: var(--bg);
-  transition: background 0.3s, border-color 0.3s;
-}
-.footer-back {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px; color: var(--muted);
-  text-decoration: none;
-  display: flex; align-items: center; gap: 10px;
-  transition: color 0.2s;
-}
+.cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); transition: background 0.3s, border-color 0.3s; }
+.footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
 .footer-back:hover { color: var(--text); }
 .footer-back-arrow { color: var(--accent); }
-.footer-copy {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px; color: var(--border);
-}
-.cs-next {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-decoration: none;
-  transition: background 0.3s;
-}
+.footer-copy { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--border); }
+.cs-next { display: flex; border-top: 1px solid var(--border); text-decoration: none; transition: background 0.3s; }
 .cs-next:hover { background: var(--bg2); }
-.cs-next-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%;
-  padding: 32px 56px;
-}
-.cs-next-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--muted);
-  letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.cs-next-title {
-  font-family: 'Spectral', serif;
-  font-size: 22px; font-weight: 300; color: var(--text);
-}
+.cs-next-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 32px 56px; }
+.cs-next-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+.cs-next-title { font-family: 'Spectral', serif; font-size: 22px; font-weight: 300; color: var(--text); }
 .cs-next-arrow { font-size: 24px; color: var(--accent); }
 
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -373,232 +119,114 @@ nav {
 <body>
 
 <nav>
-  <a href="../index.html" class="nav-back">
-    <span class="nav-back-arrow">←</span> Back to Work
-  </a>
+  <a href="../index.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Work</a>
   <span class="nav-name">Tina Singh</span>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
-    <span id="themeIcon">◑</span>
-  </button>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
 </nav>
 
 <div class="cs-hero">
   <div class="cs-bg-num">01</div>
 
   <div class="cs-tag">Case Study</div>
-  <h1 class="cs-h1">Shield Design<br>System</h1>
-  <p class="cs-sub">From scattered files to governed infrastructure.<br>I built the first unified design system across 8 enterprise security products — from zero.</p>
+  <h1 class="cs-h1">Design System<br>Rebuild</h1>
+  <p class="cs-sub">From Scattered Files to Governed Infrastructure.</p>
 
   <div class="stat-card fade-in">
-    <div class="stat-card-title">// SYSTEM STATUS</div>
+    <div class="stat-card-title">// 30-SECOND SUMMARY</div>
     <div class="stat-row">
-      <span class="stat-name">COMPONENTS</span>
+      <span class="stat-name">DETACH</span>
       <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
-      </div>
-      <span class="stat-val">340+</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">PRODUCTS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
         <div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div>
       </div>
-      <span class="stat-val">8 UNIFIED</span>
+      <span class="stat-val">< 1%</span>
     </div>
     <div class="stat-row">
-      <span class="stat-name">PARITY</span>
+      <span class="stat-name">INSERTIONS</span>
       <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+        <div class="pip teal"></div><div class="pip"></div>
       </div>
-      <span class="stat-val">FIGMA ↔ CODE</span>
+      <span class="stat-val">61,000+</span>
     </div>
     <div class="stat-row">
       <span class="stat-name">TOKENS</span>
       <div class="stat-pips">
         <div class="pip"></div><div class="pip"></div><div class="pip"></div>
         <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div>
+        <div class="pip"></div>
       </div>
-      <span class="stat-val">FORK MODEL</span>
+      <span class="stat-val">791 VARS</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">ADOPTION</span>
+      <div class="stat-pips">
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+      </div>
+      <span class="stat-val">6 PRODUCTS</span>
     </div>
   </div>
 
   <div class="cs-meta">
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Role</div>
-      <div class="cs-meta-val">Sr. Product Designer<br><em>Design Systems Lead</em></div>
+      <div class="cs-meta-val">UI Designer, Design Systems</div>
+    </div>
+    <div class="cs-meta-cell">
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-val">2023–2025</div>
     </div>
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Scope</div>
-      <div class="cs-meta-val">Token Architecture · Component Library · Governance · Migration</div>
-    </div>
-    <div class="cs-meta-cell">
-      <div class="cs-meta-label">Tools</div>
-      <div class="cs-meta-val">Figma · Tokens Studio · Angular · React · Storybook</div>
-    </div>
-    <div class="cs-meta-cell">
-      <div class="cs-meta-label">Company</div>
-      <div class="cs-meta-val"><em>BeyondTrust</em></div>
+      <div class="cs-meta-val">6 products, 11 teams, enterprise cybersecurity ($400M+ ARR)</div>
     </div>
   </div>
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">8 products. Zero shared language.<br><em>That was the starting point.</em></p>
+  <p class="cs-reframe-line">An enterprise cybersecurity company had a system mapped to zero governance. Products looked different, broke in dark mode, and failed the accessibility audits required for federal procurement. <br><em>I rebuilt it.</em></p>
 </div>
 
 <div class="cs-body">
 
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Design debt at enterprise scale.</h2>
-    <p class="cs-p">BeyondTrust's product suite — 8 enterprise security products across Angular and React stacks — had no shared design language. Each product team maintained its own component files, color values, and interaction patterns.</p>
-    <p class="cs-p">The consequences were measurable:</p>
-    <ul class="cs-list">
-      <li>Inconsistent UI across every product surface</li>
-      <li>No Figma-to-code parity — designers and engineers worked from different sources of truth</li>
-      <li>Duplicated effort across teams building the same components differently</li>
-      <li>No token architecture — color, spacing, and type values were hardcoded everywhere</li>
-      <li>Accessibility gaps compounding across products with no systematic remediation path</li>
-    </ul>
-    <div class="pull-quote">"The problem wasn't that we had no design system. It's that we had eight of them — all unintentional."</div>
+    <h2 class="cs-h2">Revenue Protection</h2>
+    <p class="cs-p">The company sells to US federal agencies under contracts that require Section 508 compliance and VPAT maintenance. Stale accessibility documentation and inconsistent UI across products create disqualification risk during procurement reviews. A governed, accessible design system is not a design preference. It is procurement infrastructure.</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">My Role</div>
-    <h2 class="cs-h2">Systems architect for design infrastructure.</h2>
-    <p class="cs-p">I was brought in to build the design system from zero. Not to adopt an existing framework, not to reskin what existed — to define the foundation that would unify the entire product suite.</p>
-    <p class="cs-p">I led the system end-to-end: defining the token architecture, designing and documenting 340+ components, establishing governance processes, and working directly with engineering teams across both Angular and React stacks to ensure parity.</p>
+    <div class="s-label">The Cost of Drift</div>
+    <h2 class="cs-h2">Engineering time recovered.</h2>
+    <p class="cs-p">Before the rebuild, designers detached components at a 40% rate. Every detach means engineering builds custom UI instead of using the system. At scale across 11 teams and 6 products, that is hundreds of hours per quarter spent rebuilding what should already exist. Reducing detach to under 1% returned that time to feature work.</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Token Architecture</div>
-    <h2 class="cs-h2">The FORK model.</h2>
-    <p class="cs-p">The core design decision was the token architecture. I developed the FORK token model — a system where primitive tokens never chain through semantic tokens. This prevents cascading breakage and makes the system predictable at scale.</p>
-    <table class="token-table">
-      <tr>
-        <th>Layer</th>
-        <th>Role</th>
-        <th>Example</th>
-      </tr>
-      <tr>
-        <td>Primitive</td>
-        <td>Raw values — the atomic palette</td>
-        <td><code>color.blue.500</code></td>
-      </tr>
-      <tr>
-        <td>Semantic</td>
-        <td>Intent-mapped — what values mean</td>
-        <td><code>color.action.primary</code></td>
-      </tr>
-      <tr>
-        <td>Component</td>
-        <td>Scoped to component context</td>
-        <td><code>button.bg.default</code></td>
-      </tr>
-    </table>
-    <p class="cs-p" style="margin-top: 20px;">The key insight: semantic tokens reference primitives directly, never other semantics. Component tokens reference semantics. This creates a clean dependency graph that doesn't tangle when you need to change a color across 8 products.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Four decisions that defined the system.</h2>
+    <div class="s-label">Implementation</div>
+    <h2 class="cs-h2">Faster product delivery + Reduced onboarding cost.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Start with tokens, not components</div>
-          <p class="decision-p">Most teams start by building a button. I started by defining the token architecture. Without a shared value system, components are just more inconsistent UI wearing a uniform. Tokens first meant every component was born consistent.</p>
+          <div class="decision-h">Delivery Velocity</div>
+          <p class="decision-p">New product surfaces that previously required weeks of custom component work now ship using system components. The documentation migration means engineers spend less time asking designers "how does this work?" and more time building. Design reviews shortened because the system enforces consistency before the review happens.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Build for two stacks simultaneously</div>
-          <p class="decision-p">Angular and React have fundamentally different component models. I designed the system to be framework-agnostic at the token and specification layer, with framework-specific implementations that share the same visual and behavioral contract.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">03</div>
-        <div class="decision-body">
-          <div class="decision-h">Embed governance from day one</div>
-          <p class="decision-p">A system without governance is a suggestion. I established contribution guidelines, review processes, and documentation standards before the first component shipped. This meant adoption was structured, not chaotic.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">04</div>
-        <div class="decision-body">
-          <div class="decision-h">Treat Figma as code</div>
-          <p class="decision-p">I used Tokens Studio to sync design tokens between Figma and code repositories. This meant designers and engineers were always working from the same source. No more "it looks different in the spec" conversations.</p>
+          <div class="decision-h">Onboarding</div>
+          <p class="decision-p">New designers inherit a governed system with versioned docs instead of tribal knowledge. Ramp-up shortened across all 11 teams.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Process</div>
-    <h2 class="cs-h2">From audit to adoption.</h2>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Audit</strong> — Cataloged every component, pattern, and color value across all 8 products. Identified 200+ unique button variants alone.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Token foundation</strong> — Defined the FORK token architecture. Built the primitive palette, semantic mappings, and component token structure in Tokens Studio.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Core components</strong> — Designed the first 40 foundational components (buttons, inputs, alerts, modals, tables) with full specification documentation.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">04</div>
-        <div class="step-text"><strong>Engineering handoff</strong> — Worked with Angular and React teams to implement components with token parity. Validated output in Storybook.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">05</div>
-        <div class="step-text"><strong>Migration + scale</strong> — Migrated existing product UIs to the new system. Expanded to 340+ components with governance and contribution workflows.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Outcome</div>
-    <h2 class="cs-h2">What changed.</h2>
-    <div class="outcome-grid">
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">8 products with independent, inconsistent UI. No shared tokens. No Figma-code parity.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">Unified design system with 340+ components, FORK token architecture, and full Figma-code parity across Angular + React.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">Design debt compounding with every new feature. Engineers guessing at specs.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">Governed system with documentation, contribution guidelines, and predictable component behavior across stacks.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">What I Learned</div>
-    <div class="pull-quote">"A design system isn't a component library. It's an argument about how your products should behave — made tangible in tokens, components, and governance."</div>
-    <p class="cs-p">The hardest part wasn't building the components. It was building consensus. Getting 8 product teams to agree on a shared language required more persuasion than pixels. The technical architecture was the easy part — the organizational architecture was the real design challenge.</p>
+    <div class="s-label">Connections</div>
+    <div class="pull-quote">"This case study connects to the Inline Alert (feedback taxonomy, cross-team adoption) and Platform Navigation (three-layer model, naming conventions) work documented separately."</div>
   </div>
 
 </div>
@@ -614,9 +242,7 @@ nav {
 </a>
 
 <footer class="cs-footer">
-  <a href="../index.html" class="footer-back">
-    <span class="footer-back-arrow">←</span> Back to Work
-  </a>
+  <a href="../index.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Work</a>
   <span class="footer-copy">© 2026 Tina Singh</span>
 </footer>
 

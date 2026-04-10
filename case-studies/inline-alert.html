@@ -3,33 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inline Alert System — Tina Singh</title>
-<meta name="description" content="Case study: Solving alert fatigue in enterprise security products through contextual hierarchy — banners, inline alerts, and toasts.">
+<title>Inline Alert — Tina Singh</title>
+<meta name="description" content="Case study: Solving Alert Fatigue in Security Software with a semantic 4-tier alert system.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg:      #0f1218;
-  --bg2:     #181d28;
-  --bg3:     #222838;
-  --text:    #f0eef5;
-  --text2:   #c4bfd8;
-  --muted:   #8a86a0;
-  --border:  #2e3248;
-  --accent:  #e05a42;
-  --accent2: #c74b35;
-  --accent-teal: #3dd8c5;
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #f8f7f3;
-  --bg2:     #eeeae2;
-  --bg3:     #e4e0d6;
-  --text:    #181620;
-  --text2:   #4a4662;
-  --muted:   #88849c;
-  --border:  #d4d0e2;
+  --bg:      #fcfcfc;
+  --bg2:     #f2f2f2;
+  --bg3:     #e8e8e8;
+  --text:    #111111;
+  --text2:   #404040;
+  --muted:   #8a8a8a;
+  --border:  #d4d4d4;
   --accent:  #d94e38;
   --accent2: #bc3f2c;
   --yellow:  #b87a00;
@@ -64,7 +64,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .pip.teal { background: var(--accent-teal); }
 .stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
 
-.cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
 .cs-meta-cell:last-child { border-right: none; }
 .cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
@@ -95,44 +95,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
 .step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
-
-.outcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 22px; }
-.outcome-cell { background: var(--bg); padding: 26px 30px; }
-.outcome-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-.outcome-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
-
-/* Alert hierarchy diagram */
-.alert-hierarchy {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-  margin: 22px 0;
-}
-.alert-tier {
-  background: var(--bg); padding: 28px 24px;
-  text-align: center;
-}
-.alert-tier-icon {
-  font-size: 28px; margin-bottom: 12px;
-  display: block;
-}
-.alert-tier-name {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px; color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 10px;
-}
-.alert-tier-desc {
-  font-size: 13px; font-weight: 300; color: var(--text2);
-  line-height: 1.65;
-}
-.alert-tier-scope {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 5px; color: var(--muted);
-  letter-spacing: 0.06em;
-  margin-top: 12px;
-  text-transform: uppercase;
-}
 
 .cs-reframe { padding: 52px 0 8px; max-width: 800px; margin: 0 auto; padding-left: 56px; padding-right: 56px; }
 .cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
@@ -166,193 +128,117 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-bg-num">02</div>
 
   <div class="cs-tag">Case Study</div>
-  <h1 class="cs-h1">Inline Alert<br>System</h1>
-  <p class="cs-sub">Proximity matters. I redesigned alert patterns to reduce noise and surface the right information at the right time — solving alert fatigue across enterprise security products.</p>
+  <h1 class="cs-h1">Inline Alert</h1>
+  <p class="cs-sub">Solving Alert Fatigue in Security Software.</p>
 
   <div class="stat-card fade-in">
-    <div class="stat-card-title">// ALERT STATUS</div>
-    <div class="stat-row">
-      <span class="stat-name">NOISE ↓</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-      </div>
-      <span class="stat-val">60% REDUCED</span>
-    </div>
+    <div class="stat-card-title">// ALERT EFFICIENCY</div>
     <div class="stat-row">
       <span class="stat-name">HIERARCHY</span>
       <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+        <div class="pip teal"></div>
       </div>
-      <span class="stat-val">3 TIERS</span>
+      <span class="stat-val">4 LEVELS</span>
     </div>
     <div class="stat-row">
-      <span class="stat-name">PRODUCTS</span>
+      <span class="stat-name">FATIGUE</span>
       <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div>
+        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
         <div class="pip off"></div><div class="pip off"></div>
       </div>
-      <span class="stat-val">6 SHIPPED</span>
+      <span class="stat-val">REDUCED</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-name">TOKENS</span>
+      <div class="stat-pips">
+        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip off"></div>
+      </div>
+      <span class="stat-val">SEMANTIC</span>
     </div>
   </div>
 
   <div class="cs-meta">
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Role</div>
-      <div class="cs-meta-val">Sr. Product Designer<br><em>Component Lead</em></div>
+      <div class="cs-meta-val">UI Designer, Platform Design</div>
     </div>
     <div class="cs-meta-cell">
-      <div class="cs-meta-label">Scope</div>
-      <div class="cs-meta-val">Pattern Design · Hierarchy · A11y · Documentation</div>
+      <div class="cs-meta-label">Timeline</div>
+      <div class="cs-meta-val">2023</div>
     </div>
     <div class="cs-meta-cell">
-      <div class="cs-meta-label">Tools</div>
-      <div class="cs-meta-val">Figma · Storybook · WCAG · AI-Assisted Audit</div>
-    </div>
-    <div class="cs-meta-cell">
-      <div class="cs-meta-label">Company</div>
-      <div class="cs-meta-val"><em>BeyondTrust</em></div>
+      <div class="cs-meta-label">Status</div>
+      <div class="cs-meta-val"><em>Shipped</em></div>
     </div>
   </div>
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">When every alert is critical,<br><em>nothing is.</em></p>
+  <p class="cs-reframe-line">In security software, everything feels like a priority. Because the visual treatment was the same, users stopped paying attention. When a critical "Unauthorized Access" error looks exactly like a "File Saved" message, the system has failed.</p>
 </div>
 
 <div class="cs-body">
 
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Alert fatigue in high-stakes environments.</h2>
-    <p class="cs-p">Enterprise security products deal in urgency. Every status needs attention. Every error matters. But when the UI treats every message with the same weight — banners stacking on banners, red everywhere — users stop reading.</p>
-    <p class="cs-p">Across BeyondTrust's product suite, alert patterns had evolved organically. Different teams used different components, different severities, and different placements. The result:</p>
-    <ul class="cs-list">
-      <li>Users ignoring critical alerts because they were buried in noise</li>
-      <li>No consistent hierarchy — same visual weight for "session expired" and "privilege escalation detected"</li>
-      <li>Banner overload — some screens stacked 3-4 persistent banners simultaneously</li>
-      <li>Accessibility failures — color-only severity indicators with no semantic markup</li>
-      <li>No clear pattern for contextual vs. global alerts</li>
-    </ul>
-    <div class="pull-quote">"The problem wasn't missing alerts. It was that every alert screamed at the same volume — and users learned to stop listening."</div>
+    <h2 class="cs-h2">Alert Fatigue.</h2>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>No hierarchy:</strong> Banners vs. Inline vs. Toast messages were used interchangeably.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Color misuse:</strong> Red was used for "Critical Errors" but also for "Expired Trials" (which aren't critical to safe operation).</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>Heavyweight:</strong> The existing alert took up 80px of vertical space, pushing content below the fold.</div>
+      </div>
+    </div>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Solution</div>
-    <h2 class="cs-h2">A three-tier alert hierarchy.</h2>
-    <p class="cs-p">I designed a structured alert system based on one principle: <strong style="color:var(--text)">proximity to context determines the pattern.</strong> Global issues get banners. Contextual issues get inline alerts. Transient confirmations get toasts.</p>
-    <div class="alert-hierarchy">
-      <div class="alert-tier">
-        <span class="alert-tier-icon">▬</span>
-        <div class="alert-tier-name">Banner</div>
-        <div class="alert-tier-desc">System-wide, persistent. Sits at the top of the viewport. For states that affect the entire session.</div>
-        <div class="alert-tier-scope">Global · Persistent · Max 1</div>
-      </div>
-      <div class="alert-tier">
-        <span class="alert-tier-icon">▸</span>
-        <div class="alert-tier-name">Inline Alert</div>
-        <div class="alert-tier-desc">Contextual, positioned near the relevant content. For field-level or section-level feedback.</div>
-        <div class="alert-tier-scope">Contextual · Persistent · Unlimited</div>
-      </div>
-      <div class="alert-tier">
-        <span class="alert-tier-icon">◦</span>
-        <div class="alert-tier-name">Toast</div>
-        <div class="alert-tier-desc">Transient, auto-dismissing. For confirmations and non-blocking status updates.</div>
-        <div class="alert-tier-scope">Transient · 5s Auto-dismiss · Queue</div>
-      </div>
-    </div>
-    <p class="cs-p">Each tier has distinct visual language, ARIA roles, and interaction rules. They never compete — they complement.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Three principles that shaped the system.</h2>
+    <h2 class="cs-h2">A multi-phase semantic structural repair.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Proximity determines the pattern</div>
-          <p class="decision-p">If the issue is global, it's a banner. If it relates to a specific field or section, it's inline. If it's a confirmation of an action, it's a toast. The placement logic is deterministic — teams don't decide which pattern to use, the context decides for them.</p>
+          <div class="decision-h">Phase 1: Taxonomy & Logic</div>
+          <p class="decision-p">I shifted the focus from "What does it look like?" to "What is it doing?". I defined four specific alert levels:<br>
+            1. <strong>Critical:</strong> Immediate action required to prevent data loss or security breach. (Red)<br>
+            2. <strong>Warning:</strong> Potential issue; proceed with caution. (Orange)<br>
+            3. <strong>Info:</strong> Contextual help; no action needed. (Blue/Grey)<br>
+            4. <strong>Success:</strong> Confirmation of a user-initiated task. (Green)</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Severity is not just color</div>
-          <p class="decision-p">Every alert tier uses icon + color + text to communicate severity. Color alone fails accessibility. I defined four severity levels (info, success, warning, critical) with distinct iconography, ARIA labels, and contrast-checked color tokens that work in both light and dark modes.</p>
+          <div class="decision-h">Phase 2: Component Architecture</div>
+          <p class="decision-p">I rebuilt the component to be modular.<br>
+            • <strong>Dismissibility:</strong> Optional (some legal alerts must stay visible).<br>
+            • <strong>Actionability:</strong> Added support for primary/secondary buttons.<br>
+            • <strong>Compact mode:</strong> Reduced the height to 48px for dense data tables.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Constrain the noise by design</div>
-          <p class="decision-p">Banners have a hard cap: one at a time. If a second system-level issue arises, it queues. Toasts auto-dismiss after 5 seconds with a hover-to-pause rule. These constraints aren't limitations — they're the design doing its job.</p>
+          <div class="decision-h">Phase 3: Adoption & Tokenization</div>
+          <p class="decision-p">I mapped the alert colors to our new Semantic Tokens. This ensured that if the "Warning Orange" needed to be changed for accessibility (WCAG AA), it would update across all products simultaneously.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Process</div>
-    <h2 class="cs-h2">Audit, define, test, ship.</h2>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Alert audit</strong> — Cataloged every alert pattern across 6 products. Found 47 unique alert implementations with no shared API or visual language.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Hierarchy definition</strong> — Defined the three-tier model with clear usage rules. Documented when each tier applies and when it doesn't.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Accessibility pass</strong> — Ensured all severity levels meet WCAG AA. Used AI-assisted scanning to identify contrast failures across existing implementations.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">04</div>
-        <div class="step-text"><strong>Component build</strong> — Designed Banner, InlineAlert, and Toast components in Figma with full token integration. Spec'd interaction states, keyboard nav, and screen reader behavior.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">05</div>
-        <div class="step-text"><strong>Migration</strong> — Worked with product teams to migrate legacy alerts to the new hierarchy. Prioritized pages with the highest alert density first.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Outcome</div>
-    <h2 class="cs-h2">What changed.</h2>
-    <div class="outcome-grid">
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">47 different alert implementations. No hierarchy. Users ignoring critical security notifications.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">3-tier system with deterministic placement rules. 60% reduction in alert noise. Users engaging with critical alerts again.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">Before</div>
-        <div class="outcome-text">Color-only severity. Multiple WCAG failures. No ARIA support for alert announcements.</div>
-      </div>
-      <div class="outcome-cell">
-        <div class="outcome-label">After</div>
-        <div class="outcome-text">Full WCAG AA compliance. Icon + color + text severity. Live-region ARIA announcements for all tiers.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">What I Learned</div>
-    <div class="pull-quote">"Solving alert fatigue isn't about better alerts. It's about fewer of them in the right places — and the discipline to enforce that constraint."</div>
-    <p class="cs-p">In enterprise security, every stakeholder believes their alert is the most important. The design challenge wasn't visual — it was political. Building a system that constrains noise requires convincing product teams that less is more. The hierarchy gave us a shared vocabulary to have those conversations.</p>
+    <div class="s-label">Reflection</div>
+    <div class="pull-quote">"By re-establishing feedback hierarchy, it made the design system more predictable, accessible, and easier to scale."</div>
+    <p class="cs-p">The Inline Alert may be a small component, but it solved a large structural issue. It now serves as the bridge between banners and toasts, anchoring how communication patterns behave across the platform.</p>
   </div>
 
 </div>
