@@ -862,65 +862,87 @@ footer {
   </div>
   <div class="work-grid">
     <div class="card card--primary fade-in" data-n="01">
-      <div class="card-num">01 / 03</div>
-      <div class="card-title">Shield Design System Architecture</div>
-      <div class="card-problem" id="prob1">8 enterprise products. No shared design language. No Figma-code parity. Inconsistent tokens across Angular and React stacks.</div>
+      <div class="card-num">01 / 04</div>
+      <div class="card-title">Design System Rebuild</div>
+      <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
       <div class="card-desc" id="desc1">
-        Rebuilt a fragmented UI into a token-driven system adopted across 8+ products, reducing drift and enabling consistent scale.
+        Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.
       </div>
       <ul class="card-bullets" id="bullets1">
-        <li>0→1 design system across 8 enterprise products</li>
-        <li>340+ components with Figma + code token parity</li>
-        <li>FORK token model: primitives never chain through semantic</li>
+        <li>Reduced component detach rate from 40% to under 1%</li>
+        <li>Implemented 791 tokens across light and dark modes</li>
+        <li>Federal procurement compliance (WCAG AA & Section 508)</li>
       </ul>
-      <div class="card-outcome" id="outcome1">340+ components · 8 products · full Figma-code parity</div>
+      <div class="card-outcome" id="outcome1">61k+ insertions · <1% detach rate · 6 products</div>
       <div class="card-tags">
         <span class="tag">Design Systems</span>
-        <span class="tag">Tokens</span>
-        <span class="tag">Figma</span>
-        <span class="tag">Angular + React</span>
+        <span class="tag">Architecture</span>
+        <span class="tag">Governance</span>
       </div>
       <a href="case-studies/shield-design-system.html" class="card-link">View Case Study →</a>
     </div>
+
     <div class="card fade-in" data-n="02">
-      <div class="card-num">02 / 03</div>
-      <div class="card-title">Inline Alert System</div>
-      <div class="card-problem" id="prob2">Alert fatigue across enterprise security products. Every message treated with the same urgency. Users stopped reading.</div>
+      <div class="card-num">02 / 04</div>
+      <div class="card-title">Inline Alert</div>
+      <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software. When everything is an emergency, nobody reads anything.</div>
       <div class="card-desc" id="desc2">
-        Designed a three-tier alert hierarchy — banners, inline alerts, and toasts — reducing noise by 60% and restoring signal in high-stakes interfaces.
+        Redesigned the alert taxonomy from a single visual into a 4-tier system (Critical, Warning, Info, Success) rooted in user actionability.
       </div>
       <ul class="card-bullets" id="bullets2">
-        <li>60% alert noise reduction across 6 products</li>
-        <li>3-tier hierarchy: Banner → Inline → Toast</li>
-        <li>Full WCAG AA compliance with icon + color + text severity</li>
+        <li>Established a structured visual hierarchy for system events</li>
+        <li>Compact 48px mode for dense dashboard environments</li>
+        <li>Tokenized mapping ensuring WCAG AA adoption blindly</li>
       </ul>
-      <div class="card-outcome" id="outcome2">60% noise reduction · 3-tier hierarchy · 6 products</div>
+      <div class="card-outcome" id="outcome2">4-tier system · unified semantic scale · adopted platform-wide</div>
       <div class="card-tags">
         <span class="tag">Component Design</span>
         <span class="tag">Accessibility</span>
-        <span class="tag">Enterprise UX</span>
+        <span class="tag">Enterprise Logic</span>
       </div>
       <a href="case-studies/inline-alert.html" class="card-link">View Case Study →</a>
     </div>
+
     <div class="card fade-in" data-n="03">
-      <div class="card-num">03 / 03</div>
+      <div class="card-num">03 / 04</div>
       <div class="card-title">Platform Navigation</div>
-      <div class="card-problem" id="prob3">3 product suites with independent navigation. No shared hierarchy, state model, or multi-tenant switching logic.</div>
+      <div class="card-problem" id="prob3">Defining Behavior Before Visuals. 6 legacy products merged with no shared hierarchy or routing logic.</div>
       <div class="card-desc" id="desc3">
-        Defined cross-product navigation architecture — a 4-level behavioral spec that unified hierarchy and multi-tenant switching before visual design.
+        Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.
       </div>
       <ul class="card-bullets" id="bullets3">
-        <li>4-level navigation architecture across 3 product suites</li>
-        <li>Behavioral spec written and reviewed before any wireframes</li>
-        <li>Deterministic state management with tenant-switch reset logic</li>
+        <li>Addressed 40% navigation redundancy in IA restructuring</li>
+        <li>Governed active state, deep-link routing, and tenant switching</li>
+        <li>Driven by JSON payload avoiding custom frontend rewrites</li>
       </ul>
-      <div class="card-outcome" id="outcome3">4-level hierarchy · 3 suites · behavior-first spec</div>
+      <div class="card-outcome" id="outcome3">Unified routing · single JSON logic · 6 products</div>
       <div class="card-tags">
         <span class="tag">Information Architecture</span>
-        <span class="tag">Multi-tenant</span>
-        <span class="tag">Cross-product</span>
+        <span class="tag">System Design</span>
+        <span class="tag">Behavior Specs</span>
       </div>
       <a href="case-studies/platform-navigation.html" class="card-link">View Case Study →</a>
+    </div>
+
+    <div class="card fade-in" data-n="04">
+      <div class="card-num">04 / 04</div>
+      <div class="card-title">Login Redesign</div>
+      <div class="card-problem" id="prob4">A System Fix Disguised as a Small Update. The entry point was unbranded, siloed, and failing basic SSO states.</div>
+      <div class="card-desc" id="desc4">
+        Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.
+      </div>
+      <ul class="card-bullets" id="bullets4">
+        <li>Architected progressive disclosure flow (Email → Auth Method)</li>
+        <li>Formalized error taxonomy for specific MFA/Expired interactions</li>
+        <li>Hardened WCAG AA structure passing strict federal mandates</li>
+      </ul>
+      <div class="card-outcome" id="outcome4">SSO failure recovery · system adoption · progressive auth</div>
+      <div class="card-tags">
+        <span class="tag">Interaction Design</span>
+        <span class="tag">Identity Access</span>
+        <span class="tag">Error Handling</span>
+      </div>
+      <a href="case-studies/login-redesign.html" class="card-link">View Case Study →</a>
     </div>
   </div>
 </section>
