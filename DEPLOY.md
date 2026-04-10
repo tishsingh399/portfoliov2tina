@@ -60,7 +60,7 @@ Go to [github.com](https://github.com) → Sign up → Free plan is fine.
 
 In Terminal, navigate to your portfolio folder:
 ```
-cd ~/tina-portfolio
+cd ~/Desktop/tina-portfolio
 ```
 
 Initialize Git, connect to GitHub, and push:
@@ -69,11 +69,11 @@ git init
 git add .
 git commit -m "Initial portfolio deploy"
 git branch -M main
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/tina-portfolio.git
+git remote add origin https://github.com/tishsingh399/portfoliov2tina.git
 git push -u origin main
 ```
 
-**Replace `YOUR_GITHUB_USERNAME`** with your actual GitHub username (visible in the URL on GitHub).
+Your GitHub username is `tishsingh399` and the repo is `portfoliov2tina`.
 
 When prompted for a password: GitHub no longer accepts passwords here. You need a **Personal Access Token** — see the note below.
 
@@ -131,7 +131,7 @@ Vercel will build and deploy in about 30 seconds.
 
 After deploy, Vercel gives you a URL like:
 ```
-https://tina-portfolio-abc123.vercel.app
+https://tina-portfolio-self.vercel.app
 ```
 
 You can also set a custom domain — go to your project → **Settings → Domains** → add your domain.
@@ -143,7 +143,7 @@ You can also set a custom domain — go to your project → **Settings → Domai
 This is all you need from now on. Every time you edit the HTML and want it live:
 
 ```
-cd ~/tina-portfolio
+cd ~/Desktop/tina-portfolio
 git add .
 git commit -m "Update portfolio content"
 git push
@@ -211,7 +211,7 @@ The `?r=1` auto-activates the condensed recruiter view.
 
 | What you want to do | Command |
 |---|---|
-| Go to your portfolio folder | `cd ~/tina-portfolio` |
+| Go to your portfolio folder | `cd ~/Desktop/tina-portfolio` |
 | See what files changed | `git status` |
 | Stage all changes | `git add .` |
 | Commit with a message | `git commit -m "your message here"` |
@@ -223,7 +223,7 @@ The `?r=1` auto-activates the condensed recruiter view.
 ## Troubleshooting
 
 **"fatal: not a git repository"**
-→ You're not in the right folder. Run `cd ~/tina-portfolio` first.
+→ You're not in the right folder. Run `cd ~/Desktop/tina-portfolio` first.
 
 **"error: remote origin already exists"**
 → Run `git remote remove origin` then re-run the `git remote add origin ...` line.
