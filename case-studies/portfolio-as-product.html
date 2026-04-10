@@ -9,16 +9,17 @@
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg:      #0a0a12;
-  --bg2:     #0f0f1e;
-  --bg3:     #161628;
-  --text:    #e4e0f0;
-  --text2:   #b0acc4;
-  --muted:   #6a6682;
-  --border:  #1e1e34;
+  --bg:      #0c0e14;
+  --bg2:     #141822;
+  --bg3:     #1c2130;
+  --text:    #f0eef5;
+  --text2:   #c4bfd8;
+  --muted:   #8a86a0;
+  --border:  #2a2d40;
   --accent:  #e05a42;
   --accent2: #c74b35;
-  --yellow:  #ffd700;
+  --accent-teal: #3dd8c5;
+  --yellow:  #f5c542;
 }
 [data-theme="light"] {
   --bg:      #f8f7f3;
@@ -392,7 +393,7 @@ nav {
     </div>
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Tools</div>
-      <div class="cs-meta-val">HTML · CSS · Vercel</div>
+      <div class="cs-meta-val">HTML · CSS · Vercel · <em>Antigravity AI</em></div>
     </div>
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Constraint</div>
@@ -423,7 +424,7 @@ nav {
 
   <div class="cs-section fade-in">
     <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Five decisions that shaped the outcome.</h2>
+    <h2 class="cs-h2">Six decisions that shaped the outcome.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
@@ -458,6 +459,13 @@ nav {
         <div class="decision-body">
           <div class="decision-h">Build within constraints instead of waiting for perfect skills</div>
           <p class="decision-p">I did not wait until I "learned frontend properly." I worked within what I knew, made trade-offs, and focused on delivering a functional, complete product. Shipping beats perfecting.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">06</div>
+        <div class="decision-body">
+          <div class="decision-h">Use AI as a design collaborator, not a replacement</div>
+          <p class="decision-p">I used Antigravity — an AI coding agent — not to design for me, but to extend my ability to ship. I directed the fixes: I identified the bugs (uneven card widths, broken dark mode contrast), and the AI executed targeted CSS changes, ran accessibility audits on color ratios, and deployed to Vercel via CLI. The design decisions were mine. The velocity was collaborative.</p>
         </div>
       </div>
     </div>
@@ -514,6 +522,28 @@ nav {
   </div>
 
   <div class="cs-section fade-in">
+    <div class="s-label">AI-Assisted Debugging & Deployment</div>
+    <h2 class="cs-h2">Antigravity as a force multiplier.</h2>
+    <p class="cs-p">After the initial build, I used <strong style="color:var(--accent-teal, var(--accent))">Antigravity</strong> — Google DeepMind's agentic AI coding assistant — to debug and ship the next iteration. This wasn't about handing off design decisions. It was about extending my ability to execute with precision.</p>
+    <p class="cs-p">Here's exactly what was fixed in a single session:</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Uneven card widths</strong> — the work grid used <code style="color:var(--accent);font-size:13px">grid-template-columns: 2fr 1fr 1fr</code>, making the first case study card twice as wide. Fixed to <code style="color:var(--accent-teal, var(--accent));font-size:13px">repeat(3, 1fr)</code> for equal columns.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Dark mode contrast overhaul</strong> — backgrounds, text, muted tones, and borders were all too close in luminance. Rewrote the entire <code style="color:var(--accent);font-size:13px">:root</code> color palette with WCAG AA-passing contrast ratios and added a teal accent for visual variety.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>Vercel deployment via CLI</strong> — connected the repo to GitHub (<code style="color:var(--accent);font-size:13px">tishsingh399/portfoliov2tina</code>), pushed fixes, and deployed to production using <code style="color:var(--accent);font-size:13px">vercel --prod</code>. Live in under 10 seconds.</div>
+      </div>
+    </div>
+    <div class="pull-quote">"I directed the diagnosis. AI executed the surgery. The decisions were mine — the velocity was collaborative."</div>
+  </div>
+
+  <div class="cs-section fade-in">
     <div class="s-label">Constraints</div>
     <h2 class="cs-h2">Working with what you have.</h2>
     <p class="cs-p">The biggest constraint was my own technical depth. I had to balance what I wanted to build with what I could realistically execute without turning this into a long-term engineering project.</p>
@@ -548,6 +578,7 @@ nav {
     <h2 class="cs-h2">More than a portfolio.</h2>
     <p class="cs-p">This project shows how I approach ambiguous problems, work within constraints, and make decisions across design and implementation.</p>
     <p class="cs-p">It reflects a shift in how I work. Instead of relying on tools to define the outcome, I define the structure and use tools to execute it.</p>
+    <p class="cs-p">The Antigravity iteration proves something else: I can work <em style="color:var(--accent)">with</em> AI tools effectively — not as a crutch, but as a deliberate extension of my process. I identified the problems, directed the fixes, and validated the results. That's how design leadership works in an AI-augmented world.</p>
   </div>
 
   <div class="cs-section fade-in">
