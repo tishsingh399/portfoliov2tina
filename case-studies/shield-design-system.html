@@ -96,6 +96,9 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
 
+.cs-image-container { max-width: 1000px; margin: 0 auto; padding: 0 56px; margin-top: -20px; position: relative; z-index: 2; margin-bottom: 40px; }
+.cs-image-container img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; background: var(--bg2); }
+
 .cs-reframe { padding: 52px 0 8px; max-width: 800px; margin: 0 auto; padding-left: 56px; padding-right: 56px; }
 .cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .cs-reframe-line em { font-style: normal; color: var(--accent); }
@@ -129,7 +132,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Design System<br>Rebuild</h1>
-  <p class="cs-sub">From Scattered Files to Governed Infrastructure.</p>
+  <p class="cs-sub">From Scattered Files to Governed Infrastructure. 🛡️</p>
 
   <div class="stat-card fade-in">
     <div class="stat-card-title">// 30-SECOND SUMMARY</div>
@@ -167,6 +170,14 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       </div>
       <span class="stat-val">6 PRODUCTS</span>
     </div>
+    <div class="stat-row">
+      <span class="stat-name">COMPLIANCE</span>
+      <div class="stat-pips">
+        <div class="pip yellow"></div><div class="pip yellow"></div><div class="pip yellow"></div>
+        <div class="pip yellow"></div>
+      </div>
+      <span class="stat-val">SECTION 508</span>
+    </div>
   </div>
 
   <div class="cs-meta">
@@ -185,48 +196,66 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 </div>
 
+<div class="cs-image-container fade-in">
+  <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
+</div>
+
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">An enterprise cybersecurity company had a system mapped to zero governance. Products looked different, broke in dark mode, and failed the accessibility audits required for federal procurement. <br><em>I rebuilt it.</em></p>
+  <p class="cs-reframe-line">An enterprise cybersecurity company selling to every US cabinet-level agency had a design system that was a shared file with no governance. Products looked different, broke in dark mode, and failed the accessibility audits required for federal procurement. <br><em>I rebuilt it.</em></p>
 </div>
 
 <div class="cs-body">
 
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Revenue Protection</h2>
-    <p class="cs-p">The company sells to US federal agencies under contracts that require Section 508 compliance and VPAT maintenance. Stale accessibility documentation and inconsistent UI across products create disqualification risk during procurement reviews. A governed, accessible design system is not a design preference. It is procurement infrastructure.</p>
+    <h2 class="cs-h2">What Was Broken</h2>
+    <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Cost of Drift</div>
-    <h2 class="cs-h2">Engineering time recovered.</h2>
-    <p class="cs-p">Before the rebuild, designers detached components at a 40% rate. Every detach means engineering builds custom UI instead of using the system. At scale across 11 teams and 6 products, that is hundreds of hours per quarter spent rebuilding what should already exist. Reducing detach to under 1% returned that time to feature work.</p>
+    <div class="s-label">Scope & Execution</div>
+    <h2 class="cs-h2">What I Owned</h2>
+    <ul class="cs-list">
+      <li><strong>Initial Audit:</strong> Mapped inconsistencies across 6 legacy platforms.</li>
+      <li><strong>Component Rebuild:</strong> Hand-crafted and strictly defined variants bridging the gap to engineering.</li>
+      <li><strong>Token Architecture:</strong> Defined a multi-layer strategy to enforce theming via CSS rules.</li>
+      <li><strong>Documentation Migration:</strong> Unified guidance and code demos.</li>
+      <li><strong>Governance Model:</strong> Created formal entry gates for new components.</li>
+    </ul>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">Implementation</div>
-    <h2 class="cs-h2">Faster product delivery + Reduced onboarding cost.</h2>
+    <h2 class="cs-h2">Decisions Made</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Delivery Velocity</div>
-          <p class="decision-p">New product surfaces that previously required weeks of custom component work now ship using system components. The documentation migration means engineers spend less time asking designers "how does this work?" and more time building. Design reviews shortened because the system enforces consistency before the review happens.</p>
+          <div class="decision-h">Three-layer token architecture</div>
+          <p class="decision-p">Transitioned from hardcoded hex values to a <strong>Primitive → Semantic → Component</strong> variable structure. This allowed framework abstraction, so updating a primary button color seamlessly pushed updates to both the Angular and React frontends without touching the components directly.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Onboarding</div>
-          <p class="decision-p">New designers inherit a governed system with versioned docs instead of tribal knowledge. Ramp-up shortened across all 11 teams.</p>
+          <div class="decision-h">Governance model</div>
+          <p class="decision-p">Defined formal entry gates for adoption. Clarified component definitions (e.g., Tiles vs. Cards) so designers stopped creating divergent patterns due to naming confusion. Created a submission-and-review protocol mapped to Jira.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <div class="decision-h">Documentation Migration</div>
+          <p class="decision-p">Unified product guidance, exact design tokens, and live code demos into a single versioned framework that engineers actually trusted and read.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Connections</div>
-    <div class="pull-quote">"This case study connects to the Inline Alert (feedback taxonomy, cross-team adoption) and Platform Navigation (three-layer model, naming conventions) work documented separately."</div>
+    <div class="s-label">The Outcome</div>
+    <div class="pull-quote">"Protected an estimated $60M–$140M in federal contract exposure."</div>
+    <p class="cs-p">Why it mattered: Federal contracts require stringent <strong>Section 508</strong> and VPAT accessibility compliance. By strictly enforcing WCAG AA+ contrast at the token layer, we eliminated disqualification risk during procurement reviews. Furthermore, we recovered hundreds of engineering hours by slashing component detaches from 40% to <1%.</p>
   </div>
 
 </div>
