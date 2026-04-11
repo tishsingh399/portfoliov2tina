@@ -54,15 +54,20 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
-.stat-card { display: inline-flex; flex-direction: column; gap: 13px; padding: 22px 28px; border: 2px solid var(--border); background: var(--bg2); margin-bottom: 52px; position: relative; z-index: 1; transition: background 0.3s, border-color 0.3s; }
-.stat-card-title { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
-.stat-row { display: flex; align-items: center; gap: 14px; }
-.stat-name { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); width: 82px; letter-spacing: 0.04em; }
-.stat-pips { display: flex; gap: 4px; }
-.pip { width: 10px; height: 10px; background: var(--accent); flex-shrink: 0; }
-.pip.off { background: var(--border); }
-.pip.teal { background: var(--accent-teal); }
-.stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
+.impact-dashboard { margin-bottom: 52px; position: relative; z-index: 1; }
+.impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.impact-item { background: var(--bg2); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: background 0.3s; }
+.impact-item:hover { background: var(--bg3); }
+.impact-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.impact-value { font-family: 'Spectral', serif; font-size: 28px; font-weight: 400; color: var(--text); line-height: 1.1; }
+.impact-status { font-family: 'Press Start 2P', monospace; font-size: 6px; padding: 4px 8px; width: fit-content; border-radius: 2px; letter-spacing: 0.05em; }
+.status--success { background: rgba(0, 217, 180, 0.1); color: var(--accent-teal); border: 1px solid rgba(0, 217, 180, 0.2); }
+.status--scale { background: rgba(255, 92, 61, 0.1); color: var(--accent); border: 1px solid rgba(255, 92, 61, 0.2); }
+.status--governed { background: rgba(245, 197, 66, 0.1); color: var(--yellow); border: 1px solid rgba(245, 197, 66, 0.2); }
+.status--unified { background: rgba(255, 255, 255, 0.05); color: var(--text2); border: 1px solid var(--border); }
+
+.cs-image-breakout { width: 100%; max-width: 1200px; margin: 40px auto 60px; padding: 0 56px; }
+.cs-image-breakout img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; background: var(--bg2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
 .cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
@@ -145,49 +150,34 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <h1 class="cs-h1">Design System<br>Rebuild</h1>
   <p class="cs-sub">From Scattered Files to Governed Infrastructure. 🛡️</p>
 
-  <div class="stat-card fade-in">
-    <div class="stat-card-title">// 30-SECOND SUMMARY</div>
-    <div class="stat-row">
-      <span class="stat-name">DETACH</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip"></div><div class="pip"></div>
+  <div class="impact-dashboard fade-in">
+    <div class="stat-card-title" style="margin-bottom: 16px;">// IMPACT DASHBOARD</div>
+    <div class="impact-grid">
+      <div class="impact-item">
+        <span class="impact-label">Detach Rate</span>
+        <span class="impact-value">40% → <1%</span>
+        <span class="impact-status status--success">[ SUCCESS ]</span>
       </div>
-      <span class="stat-val">< 1%</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">INSERTIONS</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip"></div>
+      <div class="impact-item">
+        <span class="impact-label">Insertions</span>
+        <span class="impact-value">61k+ / qtr</span>
+        <span class="impact-status status--scale">[ SCALE ]</span>
       </div>
-      <span class="stat-val">61,000+</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">TOKENS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
+      <div class="impact-item">
+        <span class="impact-label">Tokens</span>
+        <span class="impact-value">791 Vars</span>
+        <span class="impact-status status--governed">[ GOVERNANCE ]</span>
       </div>
-      <span class="stat-val">791 VARS</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">ADOPTION</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
+      <div class="impact-item">
+        <span class="impact-label">Adoption</span>
+        <span class="impact-value">6 Products</span>
+        <span class="impact-status status--unified">[ UNIFIED ]</span>
       </div>
-      <span class="stat-val">6 PRODUCTS</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">COMPLIANCE</span>
-      <div class="stat-pips">
-        <div class="pip yellow"></div><div class="pip yellow"></div><div class="pip yellow"></div>
-        <div class="pip yellow"></div>
+      <div class="impact-item">
+        <span class="impact-label">Compliance</span>
+        <span class="impact-value">Sec. 508</span>
+        <span class="impact-status status--success">[ PASSED ]</span>
       </div>
-      <span class="stat-val">SECTION 508</span>
     </div>
   </div>
 
@@ -219,14 +209,16 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What Was Broken</h2>
     <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
-    <div class="cs-image-container fade-in" style="margin-top: 40px; padding: 0;">
-      <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
-      <div class="cs-image-caption">Legacy interface fragmentation across different product silos before the design system rebuild.</div>
-    </div>
   </div>
 
-  <div class="cs-section fade-in">
-    <div class="s-label">Scope & Execution</div>
+  <div class="cs-image-breakout fade-in">
+    <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
+    <div class="cs-image-caption">Legacy interface fragmentation across different product silos before the design system rebuild.</div>
+  </div>
+
+  <div class="cs-body">
+    <div class="cs-section fade-in">
+      <div class="s-label">Scope & Execution</div>
     <h2 class="cs-h2">What I Owned</h2>
     <ul class="cs-list">
       <li><strong>Initial Audit:</strong> Mapped inconsistencies across 6 legacy platforms.</li>
