@@ -115,6 +115,17 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-next-title { font-family: 'Spectral', serif; font-size: 22px; font-weight: 300; color: var(--text); }
 .cs-next-arrow { font-size: 24px; color: var(--accent); }
 
+.cs-image-caption {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 14px;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  line-height: 1.5;
+}
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 </style>
@@ -196,9 +207,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 </div>
 
-<div class="cs-image-container fade-in">
-  <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
-</div>
+
 
 <div class="cs-reframe fade-in">
   <p class="cs-reframe-line">An enterprise cybersecurity company selling to every US cabinet-level agency had a design system that was a shared file with no governance. Products looked different, broke in dark mode, and failed the accessibility audits required for federal procurement. <br><em>I rebuilt it.</em></p>
@@ -210,6 +219,10 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What Was Broken</h2>
     <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
+    <div class="cs-image-container fade-in" style="margin-top: 40px; padding: 0;">
+      <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
+      <div class="cs-image-caption">Legacy interface fragmentation across different product silos before the design system rebuild.</div>
+    </div>
   </div>
 
   <div class="cs-section fade-in">
