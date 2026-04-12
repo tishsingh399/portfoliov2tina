@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio as a Product — Detailed — Tina Singh</title>
+<meta name="description" content="The honest build log: 4 hours with Claude Code, every bug, the AI that didn't listen, the images I still can't add, and why I bought a domain anyway.">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
+  --yellow:  #f5c542;
+}
+[data-theme="light"] {
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
+  --text:    #1a1a1a;
+  --text2:   #555555;
+  --muted:   #999999;
+  --border:  #d4d4d4;
+  --accent:  #e04420;
+  --accent2: #bc3518;
+  --accent-teal: #008573;
+  --yellow:  #b87a00;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-back:hover { color: var(--text); }
+.nav-back-arrow { color: var(--accent); }
+.nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.theme-toggle { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+.cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-bg-num { position: absolute; top: -30px; right: 32px; font-family: 'Spectral', serif; font-size: clamp(160px, 22vw, 260px); font-weight: 600; line-height: 1; color: var(--border); user-select: none; pointer-events: none; letter-spacing: -0.05em; }
+.cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+.cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
+.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+
+.cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
+.cs-section { margin-bottom: 80px; }
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-p:last-child { margin-bottom: 0; }
+.cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+.cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
+
+.security-list { border: 1px solid var(--border); margin-top: 22px; }
+.security-step { display: flex; align-items: flex-start; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+.security-step:last-child { border-bottom: none; }
+.step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; min-width: 28px; }
+.step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.step-text strong { font-weight: 500; color: var(--text); }
+.step-text em { font-style: normal; color: var(--accent-teal); }
+
+.hurdle-card { border: 1px solid var(--border); background: var(--bg2); padding: 24px 28px; margin: 22px 0; position: relative; }
+.hurdle-card::before { content: ''; position: absolute; top: -1px; left: -1px; width: 8px; height: 8px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.hurdle-num { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 12px; }
+.hurdle-title { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 12px; }
+.hurdle-body { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.8; }
+.hurdle-body strong { color: var(--text); font-weight: 500; }
+.hurdle-status { display: inline-block; font-family: 'Press Start 2P', monospace; font-size: 6px; padding: 4px 10px; margin-top: 14px; letter-spacing: 0.06em; }
+.hurdle-status.resolved { background: rgba(0,217,180,0.1); color: var(--accent-teal); border: 1px solid rgba(0,217,180,0.2); }
+.hurdle-status.open { background: rgba(255,92,61,0.1); color: var(--accent); border: 1px solid rgba(255,92,61,0.2); }
+.hurdle-status.workaround { background: rgba(245,197,66,0.1); color: var(--yellow); border: 1px solid rgba(245,197,66,0.2); }
+
+.timeline { display: flex; flex-direction: column; gap: 0; margin: 22px 0; border: 1px solid var(--border); }
+.timeline-item { display: flex; align-items: flex-start; gap: 20px; padding: 16px 22px; border-bottom: 1px solid var(--border); }
+.timeline-item:last-child { border-bottom: none; }
+.timeline-time { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); flex-shrink: 0; width: 60px; padding-top: 2px; }
+.timeline-text { font-size: 14px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.timeline-text strong { color: var(--text); font-weight: 500; }
+
+.recruiter-box { border: 1px solid var(--accent-teal); background: rgba(0,217,180,0.04); padding: 28px 32px; margin: 32px 0; }
+.recruiter-box-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--accent-teal); letter-spacing: 0.12em; margin-bottom: 14px; }
+.recruiter-box-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.8; }
+.recruiter-box-text strong { color: var(--text); font-weight: 500; }
+
+.cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+.footer-back:hover { color: var(--text); }
+.footer-back-arrow { color: var(--accent); }
+.footer-copy { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--border); }
+
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="portfolio-as-product.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Brief</a>
+  <span class="nav-name">Tina Singh</span>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-bg-num">05</div>
+  <div class="cs-tag">Detailed Case Study</div>
+  <h1 class="cs-h1">Portfolio<br>as a Product</h1>
+  <p class="cs-sub">The honest build log — 4 hours with Claude Code, every bug that had to be forced, the image problem I still haven't fully solved, and why I bought a domain anyway.</p>
+</div>
+
+<div class="cs-body">
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Context</div>
+    <h2 class="cs-h2">I'm not a frontend developer. I built this anyway.</h2>
+    <p class="cs-p">I designed and shipped this portfolio without a template, without a frontend background, and without waiting until I "knew enough." I used Claude Code — Anthropic's AI coding agent — as the implementation layer. I was the product manager, the designer, the QA, and the decision-maker. Claude Code was the engineer.</p>
+    <p class="cs-p">This page documents what that actually looked like — not the polished version, but the real one. The bugs, the forced corrections, the constraint I still haven't solved, and what 4 hours of continuous iteration actually produces.</p>
+    <div class="recruiter-box">
+      <div class="recruiter-box-label">// WHAT THIS TELLS A RECRUITER</div>
+      <div class="recruiter-box-text">This is a live demonstration of how I work with constraints. <strong>I identified the problems. I directed the fixes. I validated the results.</strong> That is exactly what a senior designer does when embedded with an engineering team — except the engineering team was an AI. The skill being demonstrated here is not frontend development. It's <strong>product judgment under pressure</strong>.</div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The session</div>
+    <h2 class="cs-h2">4 hours. One continuous session. No breaks.</h2>
+    <p class="cs-p">This is approximately how the session went, in order:</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 0</div>
+        <div class="timeline-text"><strong>Started with homepage sequence.</strong> Proof Points should appear above the case study cards. The AI placed them correctly in code — but changes weren't live because nothing had been committed to git. First lesson: Vercel only deploys what's in the repo.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 1</div>
+        <div class="timeline-text"><strong>Pip stat cards.</strong> Asked to replace the pixel bar charts on case study cards with something useful to a recruiter. The AI replaced them — then they came back. Then gone again. Then a different version reappeared. Asked 4 times before the right implementation held. Eventually had to specify the exact CSS class name to delete.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 1.5</div>
+        <div class="timeline-text"><strong>Card sequence problem.</strong> Had a specific order: Design System → Inline Alert → Platform Nav → Login. The sequence kept being ignored or partially reverted. Screenshot-and-paste was the only thing that finally worked.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 2</div>
+        <div class="timeline-text"><strong>Discovered all images were AI-generated fakes.</strong> Every image added to the case studies was fictional: "NEXUS CORE" cyberpunk dashboards, "AETHER SYSTEMS" desk mockups, "QuantumFlow" red neon diagrams. None of it was my work. Removed every single image from every case study.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 2.5</div>
+        <div class="timeline-text"><strong>Theme toggle missing on 3 pages.</strong> The detailed views for Shield, Inline Alert, and Platform Nav were dark mode only — no toggle button, no light mode support. Fixed on all three.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 3</div>
+        <div class="timeline-text"><strong>Social links and contact form.</strong> LinkedIn, Medium, Dribbble, and 8-Bit Resume moved to the top nav. Contact section replaced with a working form (mailto fallback for static site).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 3.5</div>
+        <div class="timeline-text"><strong>Interactive resume was 404ing.</strong> The file existed locally but had never been committed to git. Same issue with the resume PDF. Both pushed separately.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">Hour 4</div>
+        <div class="timeline-text"><strong>Case study detailed pages rewritten.</strong> Full detailed pages for Inline Alert, Platform Navigation, Login Redesign — each with multiple sections, behavior specs tables, decision lists, and proper structure. Then this page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The hurdles</div>
+    <h2 class="cs-h2">Every real problem, with its status.</h2>
+
+    <div class="hurdle-card">
+      <div class="hurdle-num">// HURDLE 01 — BIGGEST</div>
+      <div class="hurdle-title">How do I add my own images?</div>
+      <div class="hurdle-body">
+        This is the problem I haven't fully solved. The portfolio is a static site — no CMS, no admin panel, no drag-and-drop uploader. Adding an image means: saving it to the right folder on my computer, committing it to git, pushing to GitHub, and waiting for Vercel to redeploy. That requires knowing git. I don't know git.<br><br>
+        I asked Claude Code to build me a drag-and-drop tool that would let me place images without touching code. The honest answer was: for a static site deployed via git, there's no clean solution that bypasses the git workflow. The workaround we landed on: I save images to <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">case-studies/images/</code>, tell Claude Code the filename and which page, and it adds the HTML. Still requires a handoff. Still not self-sufficient.<br><br>
+        <strong>This is the most honest constraint of building a portfolio I can't fully maintain on my own.</strong> The alternative — a CMS or a no-code tool — would have given me less control over the design. I made the trade-off consciously.
+      </div>
+      <span class="hurdle-status workaround">[ WORKAROUND — NOT FULLY SOLVED ]</span>
+    </div>
+
+    <div class="hurdle-card">
+      <div class="hurdle-num">// HURDLE 02</div>
+      <div class="hurdle-title">The AI that didn't listen</div>
+      <div class="hurdle-body">
+        Claude Code is excellent at execution but occasionally persistent about its own interpretation of a request. The pip stat cards were the clearest example: I asked to remove them and replace with recruiter-focused summaries. The AI would replace them — and then a subsequent edit would reintroduce an old version, or a partial version, or a different component that still had the same pixel bar logic underneath.<br><br>
+        I had to be increasingly explicit: "Delete the CSS class <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">.stat-card</code> entirely. Remove every <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">div class="stat-card"</code> in the HTML. Do not add it back." Specificity is the solution. Vague instructions produce vague results.<br><br>
+        <strong>What this taught me about AI collaboration:</strong> The AI doesn't have context across sessions the way a human teammate does. Each instruction needs to be self-contained. If something keeps coming back, the previous instruction left an ambiguity.
+      </div>
+      <span class="hurdle-status resolved">[ RESOLVED — THROUGH SPECIFICITY ]</span>
+    </div>
+
+    <div class="hurdle-card">
+      <div class="hurdle-num">// HURDLE 03</div>
+      <div class="hurdle-title">Changes weren't deploying</div>
+      <div class="hurdle-body">
+        Multiple times in the session I'd refresh the live site and see the old version. The AI would confirm the code had been updated. But the site was unchanged. This was disorienting — was the fix wrong? Was the cache stale? Was something broken in Vercel?<br><br>
+        The answer: <strong>Vercel only deploys what's in the git repository.</strong> Local file edits don't trigger a deployment. You have to <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">git add → git commit → git push</code> before anything goes live. This is obvious in retrospect and invisible when you don't know it. Every time I hit this, 15-30 minutes of "why isn't this working?" could have been avoided.
+      </div>
+      <span class="hurdle-status resolved">[ RESOLVED — UNDERSTOOD THE DEPLOY PIPELINE ]</span>
+    </div>
+
+    <div class="hurdle-card">
+      <div class="hurdle-num">// HURDLE 04</div>
+      <div class="hurdle-title">The AI added fake images to my case studies</div>
+      <div class="hurdle-body">
+        I asked Claude Code to add images to the case study pages from the <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">case-studies/images/</code> folder. What I didn't know: the folder was mostly empty. Instead of telling me that, the AI added placeholder references to images that didn't exist — and some that appeared to be AI-generated stock images with fictional company names.<br><br>
+        "NEXUS CORE" dashboard. "AETHER SYSTEMS" branding on a desk photo. "QuantumFlow" neon wireframe. None of it was my work. All of it was in my portfolio. I only caught it by opening the case study pages and reading what was actually there.<br><br>
+        <strong>Lesson: AI will fill gaps you didn't know were there.</strong> You have to verify the output, not just the intent. The instruction "add images from the images folder" was technically followed — just not in the way I meant it.
+      </div>
+      <span class="hurdle-status resolved">[ RESOLVED — ALL AI IMAGES REMOVED ]</span>
+    </div>
+
+    <div class="hurdle-card">
+      <div class="hurdle-num">// HURDLE 05</div>
+      <div class="hurdle-title">Files existed locally but were invisible to Vercel</div>
+      <div class="hurdle-body">
+        The interactive resume page and the PDF download both 404'd on the live site. Both files were on my computer. Both looked fine when opened locally. But they had never been committed to git — so as far as Vercel was concerned, they didn't exist.<br><br>
+        <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">git status</code> showed them as "untracked." One <code style="font-size:13px;background:var(--bg3);padding:2px 6px;">git add + commit + push</code> each fixed it instantly.
+      </div>
+      <span class="hurdle-status resolved">[ RESOLVED — COMMITTED AND PUSHED ]</span>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The domain</div>
+    <h2 class="cs-h2">tinasingh.app — a deliberate choice.</h2>
+    <p class="cs-p">I bought a custom domain. This sounds minor but it's a product decision. It signals that this portfolio is a live, maintained product — not a temporary link or a shared Notion doc. The .app TLD is HTTPS-only by specification, which means the browser enforces security without any configuration on my end.</p>
+    <p class="cs-p">Connecting the domain to Vercel was 10 minutes. DNS propagation took a couple of hours. The decision to buy it took longer — not because it was hard, but because committing to a domain is committing to the thing it points to. It meant the portfolio had to be good enough to put my name on permanently.</p>
+    <div class="pull-quote">"A custom domain is not a technical decision. It's a commitment that the work behind it is worth finding."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// What this demonstrates</div>
+    <h2 class="cs-h2">For recruiters: what to actually take from this.</h2>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Product thinking, not portfolio thinking</strong> — I defined the user (recruiter), mapped their journey (land → scan → read → contact), and designed the experience around that job-to-be-done. The homepage order, the At-a-Glance boxes, the metrics placement — all of it is user research applied to a personal project.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Decision-making under constraint</strong> — Every choice had a trade-off. More control meant more maintenance burden. HTML/CSS meant faster iteration but no image CMS. AI assistance meant faster execution but required careful verification. I made these trade-offs deliberately, not accidentally.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>AI collaboration that's actually collaborative</strong> — I wasn't prompted by AI. I directed it. I caught the fake images. I forced the card sequence. I identified which bugs mattered and in what order. <em>The AI was fast. The judgment was mine.</em></div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">04</div>
+        <div class="step-text"><strong>Honesty about unsolved problems</strong> — The image workflow is still a constraint. I documented it here instead of hiding it. That's not weakness — that's the same transparency I'd bring to a design review: here's what ships, here's what doesn't, here's why.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">05</div>
+        <div class="step-text"><strong>End-to-end ownership</strong> — Design, content, QA, deployment, domain, DNS, PDF, interactive resume, 5 case studies, 5 detailed pages. One person. One session. Shipped.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// What I learned</div>
+    <h2 class="cs-h2">Three things that stuck.</h2>
+    <ul class="cs-list">
+      <li><strong>Specificity beats clarity with AI.</strong> "Remove the stat cards" produces inconsistent results. "Delete every instance of class='stat-card' from the HTML and remove the .stat-card CSS block entirely" produces one result, correctly.</li>
+      <li><strong>Verify the output, not the intent.</strong> The AI followed every instruction. Some of those instructions produced the wrong outcome because the intent wasn't precise enough. Read what actually shipped, not what you asked for.</li>
+      <li><strong>Shipping beats perfecting.</strong> This portfolio went live with constraints I knew about. The image problem is still open. The git workflow is still something I'm learning. But it's live, it's real, and it's mine. A perfect portfolio I never shipped would not have gotten me any further.</li>
+    </ul>
+    <div class="pull-quote">"You don't need to be an engineer to ship something. You need to be specific about what you want, honest about what you don't know, and willing to push through the friction."</div>
+  </div>
+
+</div>
+
+<footer class="cs-footer">
+  <a href="portfolio-as-product.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Brief</a>
+  <span class="footer-copy">© 2026 Tina Singh</span>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'light' ? '☀' : '◑';
+  localStorage.setItem('sds-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('sds-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
+})();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -547,32 +547,42 @@ nav {
 
   <div class="cs-section fade-in">
     <div class="s-label">Iteration 2: Claude Code</div>
-    <h2 class="cs-h2">Fixing what shipped, with better tools.</h2>
-    <p class="cs-p">After the initial build with Antigravity, I continued iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> (Anthropic's AI coding agent) inside VS Code. This iteration was more targeted — I knew exactly what was wrong and what mattered to fix.</p>
-    <p class="cs-p">Here's what changed in this pass:</p>
+    <h2 class="cs-h2">4 hours straight. Every bug had a story.</h2>
+    <p class="cs-p">After the initial build with Antigravity, I spent 4+ consecutive hours iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> — Anthropic's AI coding agent inside VS Code. This pass was brutal in the best way: real bugs, real constraints, and the constant tension of working with an AI that sometimes didn't listen the first time.</p>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
-        <div class="step-text"><strong>Replaced abstract pip-stat cards with "At a Glance" summaries</strong> — The old hero cards on each case study showed HIERARCHY: ████░ 4 LEVELS, which looks interesting but tells a recruiter nothing. Replaced with structured role, problem, and 3 quantified outcomes in plain language. Scannable in under 10 seconds.</div>
+        <div class="step-text"><strong>Replaced abstract pip-stat cards</strong> — The old hero cards showed pixel bar charts (HIERARCHY: ████░) that looked interesting but told a recruiter nothing. I asked for them to be replaced 4 times before they fully disappeared. Eventually forced the change by specifying the exact CSS class to delete.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">02</div>
-        <div class="step-text"><strong>Reordered homepage sections for recruiter narrative flow</strong> — Moved the Proof Points (metrics: 8+ products, 340+ components, 60% accessibility improvement) from below the case study grid to above it. Now the data lands before the work, not after. The argument is made first.</div>
+        <div class="step-text"><strong>Card sequence ignored repeatedly</strong> — I had a specific order: Design System → Inline Alert → Platform Nav → Login. The AI kept reverting or reordering. I had to screenshot the sequence and paste it explicitly before it held.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">03</div>
-        <div class="step-text"><strong>Fully rewrote the Login Redesign detailed case study</strong> — The old version was thin: three sections, no structure, no IAM depth. The new version covers scope reframing, a 15-state error taxonomy table, progressive disclosure rationale, accessibility implementation specifics, and a reflection on scope creep as scope correction.</div>
+        <div class="step-text"><strong>All images were AI-generated</strong> — Discovered mid-session that every image the AI had added to my case studies were AI-generated stock fakes: "NEXUS CORE" sci-fi dashboards, "AETHER SYSTEMS" mockups, "QuantumFlow" neon diagrams. None of it was real work. Removed all of them.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">04</div>
-        <div class="step-text"><strong>Added real images with captions to all case studies</strong> — Before/after login comparison, alert variant grid, alert hierarchy diagram, navigation audit map, Hub & Spoke framework. Each image has a caption in the design system's monospace typographic style.</div>
+        <div class="step-text"><strong>Interactive resume and PDF were 404ing</strong> — Both files existed locally but were never committed to git. Vercel only deploys what's in the repo. Fixed by explicitly staging and pushing each file.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">05</div>
-        <div class="step-text"><strong>Removed spacing gaps between homepage sections</strong> — The metrics section had excess padding creating a visual dead zone between the section header and the case study cards. Tightened to 40px margin, feels like one cohesive section now.</div>
+        <div class="step-text"><strong>Theme toggle missing on 3 detailed pages</strong> — The detailed case study pages (Shield, Inline Alert, Platform Nav) were dark-mode only with no toggle. Added the CSS, button, and localStorage script to each.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">06</div>
+        <div class="step-text"><strong>The image problem — still unsolved</strong> — The biggest unresolved hurdle: how to add real screenshots to the portfolio without knowing HTML. The workflow (drop image in folder → commit → push) requires git knowledge I don't have. This remains the most honest constraint of building a site you can't fully maintain yourself.</div>
       </div>
     </div>
     <div class="pull-quote">"Each iteration isn't about adding features. It's about removing friction between the work and the person reading it."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">The Domain</div>
+    <h2 class="cs-h2">tinasingh.app — a real commitment.</h2>
+    <p class="cs-p">I bought a custom domain. That's not a technical decision — it's a product decision. A custom domain signals that this portfolio isn't a side experiment or a Notion doc shared as a link. It's something I own, maintain, and stand behind. The .app TLD enforces HTTPS by spec, which also meant I couldn't accidentally ship an insecure site even if I tried.</p>
+    <p class="cs-p">Connecting the domain to Vercel took under 10 minutes. The DNS propagation took longer than the actual work. But the decision to buy it — to treat this portfolio as a live product with a real address — was a more significant step than the technical setup.</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -619,6 +629,15 @@ nav {
     <p class="cs-p">Constraint-driven work often produces better outcomes than waiting for ideal conditions. The discipline of building with limits forces you to be precise about what actually matters.</p>
   </div>
 
+</div>
+
+<!-- Detailed CTA -->
+<div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <span style="font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">// READ REPORT</span>
+    <span style="font-family:'Spectral',serif;font-size:20px;font-weight:300;color:var(--text);">The full build log — bugs, hurdles, and what the AI got wrong.</span>
+  </div>
+  <a href="portfolio-as-product-detailed.html" style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0.1em;color:var(--accent);text-decoration:none;padding:14px 24px;border:2px solid var(--accent);white-space:nowrap;box-shadow:0 2px 8px rgba(255,92,61,0.15);transition:background 0.2s,color 0.2s,transform 0.15s;flex-shrink:0;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='';this.style.color='var(--accent)';this.style.transform=''">View Detailed Case Study →</a>
 </div>
 
 <!-- Footer -->
