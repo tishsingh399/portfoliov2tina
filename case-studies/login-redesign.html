@@ -53,13 +53,13 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
 .cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
-.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
+.cs-sub { font-size: 20px; font-weight: 300; line-height: 1.65; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
 .cs-glance { border: 1px solid var(--border); background: var(--bg2); padding: 24px 28px; margin-bottom: 52px; position: relative; z-index: 1; max-width: 580px; transition: background 0.3s, border-color 0.3s; }
 .cs-glance-header { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; }
 .cs-glance-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
 .cs-glance-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; }
-.cs-glance-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.06em; white-space: nowrap; }
+.cs-glance-label { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.05em; white-space: nowrap; }
 .cs-glance-val { font-size: 13px; font-weight: 400; color: var(--text2); line-height: 1.55; }
 .cs-glance-divider { border-top: 1px solid var(--border); margin: 16px 0; }
 .cs-glance-outcomes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -69,7 +69,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
 .cs-meta-cell:last-child { border-right: none; }
-.cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .cs-meta-val { font-size: 14px; font-weight: 400; color: var(--text2); line-height: 1.55; }
 .cs-meta-val em { font-style: normal; color: var(--accent); font-weight: 500; }
 
@@ -77,29 +77,29 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-section { margin-bottom: 60px; }
 .cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
 .cs-img-full { width: 100%; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
-.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0; }
 .cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
-.cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
 .cs-actions-msg { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 14px; }
 .cs-actions-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 .cs-btn-next { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; padding: 14px 24px; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
 .cs-btn-next:hover { background: var(--accent); color: #fff; }
 .cs-btn-contact { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; padding: 14px 24px; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
 .cs-btn-contact:hover { border-color: var(--text2); color: var(--text); }
-.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
-.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(30px, 3.8vw, 46px); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: var(--text); margin-bottom: 24px; }
 .cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
 .cs-p:last-child { margin-bottom: 0; }
 .cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
 .cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
 .cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
-.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(24px, 3vw, 34px); font-style: italic; font-weight: 300; line-height: 1.45; color: var(--text); padding: 28px 0 28px 36px; border-left: 3px solid var(--accent); margin: 40px 0; }
 
 .decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
 .decision-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; }
 .decision-num { font-family: 'Spectral', serif; font-size: 60px; font-weight: 600; line-height: 0.9; color: var(--border); user-select: none; padding-top: 4px; }
-.decision-h { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.decision-h { font-family: 'Spectral', serif; font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.25; }
 .decision-p { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--text2); }
 
 .security-list { border: 1px solid var(--border); margin-top: 22px; }
@@ -110,7 +110,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .step-text strong { font-weight: 500; color: var(--text); }
 
 .cs-reframe { padding: 52px 0 8px; max-width: 800px; margin: 0 auto; padding-left: 56px; padding-right: 56px; }
-.cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(22px, 2.4vw, 30px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--text); padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+.cs-reframe-line { font-family: 'Spectral', serif; font-size: clamp(28px, 3.2vw, 42px); font-weight: 300; line-height: 1.3; letter-spacing: -0.02em; color: var(--text); padding-bottom: 32px; border-bottom: 1px solid var(--border); }
 .cs-reframe-line em { font-style: normal; color: var(--accent); }
 
 .cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); transition: background 0.3s, border-color 0.3s; }

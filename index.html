@@ -384,19 +384,19 @@ section { padding: 96px 56px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 7px;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   font-family: 'Press Start 2P', monospace;
 }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .s-title {
   font-family: 'Spectral', serif;
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(32px, 3.5vw, 46px);
   font-weight: 300;
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 48px;
@@ -478,14 +478,14 @@ section { padding: 96px 56px; }
 }
 .card-title {
   font-family: 'Spectral', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--text);
   margin-bottom: 16px;
   transition: color 0.2s;
 }
-.card--primary .card-title { font-size: 22px; margin-bottom: 16px; }
+.card--primary .card-title { font-size: 24px; margin-bottom: 16px; }
 .card:hover .card-title { color: var(--text); }
 .card-desc {
   font-size: 14px;
@@ -644,11 +644,11 @@ section { padding: 96px 56px; }
 .about { background: var(--bg); border-top: 1px solid var(--border); }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-text p {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 300;
   line-height: 1.8;
   color: var(--text2);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .about-text p:last-child { margin-bottom: 0; }
 .about-list { display: flex; flex-direction: column; border: 1px solid var(--border); }
@@ -705,7 +705,7 @@ section { padding: 96px 56px; }
 .contact-email:hover { border-color: var(--yellow); }
 .contact-form { flex: 1; max-width: 480px; }
 .contact-form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.contact-form-row label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.contact-form-row label { font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .contact-form-row input,
 .contact-form-row textarea {
   background: var(--bg3);
