@@ -617,6 +617,19 @@ nav {
   </div>
 
   <div class="cs-section fade-in">
+    <div class="s-label">Infrastructure</div>
+    <h2 class="cs-h2">$0/month professional email. Not straightforward.</h2>
+    <p class="cs-p">Getting hello@tinasingh.app working turned into a small infrastructure project. Zoho's "Forever Free" tier is region-locked — Alberta, Canada is excluded, and nowhere does the UI tell you that. Their SMTP setup also has a silent loop between personal and business account types. I spent time inside that loop before realizing the architecture itself was wrong, not my configuration.</p>
+    <p class="cs-p">Switched the model entirely. Instead of a hosted mailbox, serverless email routing via Cloudflare. That required migrating DNS nameservers from Vercel to Cloudflare mid-project, navigating ICANN registrant verification during a live transfer, and getting MX, SPF, and DKIM records configured correctly. Cloudflare's auto-fix handled most of it in one pass. The email now routes directly into Gmail. No second mailbox, no recurring cost.</p>
+    <ul class="cs-list">
+      <li>Nameserver delegation and MX/TXT record configuration</li>
+      <li>SPF + DKIM setup for 100% deliverability</li>
+      <li>Honeypot bot protection on the contact form</li>
+      <li>ICANN verification during live domain transfer with zero downtime</li>
+    </ul>
+  </div>
+
+  <div class="cs-section fade-in">
     <div class="s-label">Constraints</div>
     <h2 class="cs-h2">Working with what you have.</h2>
     <p class="cs-p">The biggest constraint was my own technical depth. I had to balance what I wanted to build with what I could realistically execute without turning this into a long-term engineering project.</p>
@@ -673,7 +686,7 @@ nav {
     <p class="cs-actions-msg">A detailed build log exists — the full session timeline, every problem I ran into, and how I worked through each one. Happy to walk through it if you'd like to see how I think in real time.</p>
   </div>
   <div class="cs-actions-btns">
-    <a href="mailto:tishsingh3@gmail.com" class="cs-btn-next">Contact Me</a>
+    <a href="mailto:hello@tinasingh.app" class="cs-btn-next">Contact Me</a>
     <a href="../index.html" class="cs-btn-contact">Back to Work</a>
   </div>
 </div>

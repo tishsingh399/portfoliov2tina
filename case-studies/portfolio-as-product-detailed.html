@@ -242,6 +242,39 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
+    <div class="s-label">// Email infrastructure</div>
+    <h2 class="cs-h2">Architecting a $0 professional email.</h2>
+    <p class="cs-p">Getting hello@tinasingh.app working was supposed to take 20 minutes. It took considerably longer, and the reason is worth documenting.</p>
+    <p class="cs-p">Zoho's "Forever Free" tier is the obvious first stop for custom domain email. The regional paywall isn't mentioned anywhere in the UI — you find out only after going through signup, verifying the domain, and attempting to enable the mailbox. Alberta, Canada is excluded from the free tier. No documentation. No error message with context. Just a payment screen where a free screen was supposed to be.</p>
+    <p class="cs-p">The second problem surfaced in the SMTP setup: Zoho has two separate account types, personal and business, with different authentication flows and app-password systems. Setting one up and attempting to use the other's SMTP settings creates a silent failure loop. Both look like they should work. Neither does. I spent time inside that loop before realizing the issue was architectural, not a configuration mistake on my end.</p>
+    <p class="cs-p">The fix was to change the model entirely. Instead of a hosted mailbox, serverless email routing via Cloudflare Email Routing. That required migrating DNS nameservers from Vercel to Cloudflare — a live transfer, not a test environment. During the migration, ICANN registrant verification protocols kicked in, which is standard but adds latency. The transfer completed with zero downtime.</p>
+    <p class="cs-p">Once on Cloudflare, the DNS setup was straightforward. MX records, SPF record, DKIM signature — Cloudflare's auto-fix diagnosed and configured all three in one pass. The custom domain email now routes directly into an existing Gmail inbox. No second mailbox to log into, no monthly overhead, 100% deliverability verified against SPF/DKIM checks.</p>
+    <p class="cs-p">The contact form on the portfolio also got hardened. A honeypot field — hidden from humans via CSS, invisible to screen readers, no tab stop — is included in the form markup. Bots that auto-fill every field will populate it. The JS handler checks for it on submit and drops the request silently if it's filled. No captcha, no friction for real visitors.</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Problem identification</strong> — Zoho regional paywall (Alberta excluded from free tier, undocumented). SMTP authentication loop between personal vs. business account types.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Architecture switch</strong> — Hosted mailbox model abandoned. Serverless email routing via Cloudflare adopted. Fundamentally different infrastructure with zero monthly cost.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>DNS migration</strong> — Nameserver delegation moved from Vercel to Cloudflare. ICANN registrant verification completed during live transfer. Zero downtime.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">04</div>
+        <div class="step-text"><strong>Security configuration</strong> — MX records, SPF TXT record, and DKIM signature configured. Cloudflare auto-fix verified deliverability. Gmail SPOG integration confirmed working.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">05</div>
+        <div class="step-text"><strong>Form bot protection</strong> — Honeypot field added to the contact form. CSS-hidden, no tab index, aria-hidden. Silently drops submissions from bots that auto-fill fields. No captcha required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
     <div class="s-label">// What this demonstrates</div>
     <h2 class="cs-h2">For recruiters: what to actually take from this.</h2>
     <div class="security-list">
