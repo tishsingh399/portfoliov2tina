@@ -78,6 +78,14 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
 .cs-img-full { width: 100%; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
 .cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0; }
+.cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
+.cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.cs-actions-msg { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 14px; }
+.cs-actions-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.cs-btn-next { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; padding: 14px 24px; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
+.cs-btn-next:hover { background: var(--accent); color: #fff; }
+.cs-btn-contact { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; padding: 14px 24px; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
+.cs-btn-contact:hover { border-color: var(--text2); color: var(--text); }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
@@ -189,8 +197,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Context</div>
-    <h2 class="cs-h2">A disconnected experience.</h2>
+    <div class="s-label">The Challenge</div>
+    <h2 class="cs-h2">Where It Started: The Old Login Page Was Working Against Us.</h2>
     <p class="cs-p">The login page is the "Front Door" of the company. It’s what customers see first. For years, the login page was a standalone piece of code that didn’t use the design system. It was inconsistent with the product it was letting people into.</p>
     <div class="s-label" style="margin-top:32px;">The Risks:</div>
     <ul class="cs-list">
@@ -203,8 +211,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Solution</div>
-    <h2 class="cs-h2">Structure, clarity, and integration.</h2>
+    <div class="s-label">What I Did</div>
+    <h2 class="cs-h2">Turning a Trust Liability Into a Brand Moment.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
@@ -254,31 +262,23 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Outcome and Impact</div>
+    <div class="s-label">Impact & Learnings</div>
     <div class="pull-quote">"This project transformed a stalled, undefined feature into a polished system entry point."</div>
     <p class="cs-p">By addressing the underlying logic and system infrastructure instead of just the visual gloss, the redesign solved critical support load issues while re-establishing user trust from the very first interaction.</p>
   </div>
 
 </div>
 
-<!-- Detailed Case Study CTA -->
-<div class="cs-detail-cta fade-in" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-  <div style="display:flex;flex-direction:column;gap:6px;">
-    <span style="font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">// READ REPORT</span>
-    <span style="font-family:'Spectral',serif;font-size:20px;font-weight:300;color:var(--text);">Want to go deeper?</span>
+<div class="cs-actions fade-in">
+  <div>
+    <div class="cs-actions-label">// Full Documentation</div>
+    <p class="cs-actions-msg">There's a detailed version of this case study — every decision, the rejected directions, the constraints I navigated, and what I'd do differently. I don't put it on a public link. I share it in the room when someone's genuinely curious.</p>
   </div>
-  <a href="login-redesign-detailed.html" style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0.1em;color:var(--accent);text-decoration:none;padding:14px 24px;border:2px solid var(--accent);white-space:nowrap;box-shadow:0 2px 8px rgba(255,92,61,0.15);transition:background 0.2s,color 0.2s,transform 0.15s;flex-shrink:0;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='';this.style.color='var(--accent)';this.style.transform=''">View Detailed Case Study →</a>
+  <div class="cs-actions-btns">
+    <a href="portfolio-as-product.html" class="cs-btn-next">Next Case Study →</a>
+    <a href="mailto:tishsingh3@gmail.com" class="cs-btn-contact">Contact Me</a>
+  </div>
 </div>
-
-<a href="portfolio-as-product.html" class="cs-next">
-  <div class="cs-next-inner">
-    <div>
-      <div class="cs-next-label">Next Case Study</div>
-      <div class="cs-next-title">Portfolio as a Product</div>
-    </div>
-    <div class="cs-next-arrow">→</div>
-  </div>
-</a>
 
 <footer class="cs-footer">
   <a href="../index.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Work</a>

@@ -182,6 +182,14 @@ nav {
   padding: 72px 48px;
 }
 .cs-section { margin-bottom: 60px; }
+.cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
+.cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.cs-actions-msg { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 14px; }
+.cs-actions-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.cs-btn-next { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; padding: 14px 24px; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
+.cs-btn-next:hover { background: var(--accent); color: #fff; }
+.cs-btn-contact { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; padding: 14px 24px; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
+.cs-btn-contact:hover { border-color: var(--text2); color: var(--text); }
 
 .s-label {
   font-family: 'Press Start 2P', monospace;
@@ -631,13 +639,15 @@ nav {
 
 </div>
 
-<!-- Detailed CTA -->
-<div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-  <div style="display:flex;flex-direction:column;gap:6px;">
-    <span style="font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">// READ REPORT</span>
-    <span style="font-family:'Spectral',serif;font-size:20px;font-weight:300;color:var(--text);">The full build log — bugs, hurdles, and what the AI got wrong.</span>
+<div class="cs-actions fade-in">
+  <div>
+    <div class="cs-actions-label">// Full Build Log</div>
+    <p class="cs-actions-msg">There's a detailed version of this — the full 4-hour log, every bug, every forced correction, and the honest post-mortem. I keep it for conversations, not public links. If you want to see how I think through a build in real time, ask me about it.</p>
   </div>
-  <a href="portfolio-as-product-detailed.html" style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0.1em;color:var(--accent);text-decoration:none;padding:14px 24px;border:2px solid var(--accent);white-space:nowrap;box-shadow:0 2px 8px rgba(255,92,61,0.15);transition:background 0.2s,color 0.2s,transform 0.15s;flex-shrink:0;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='';this.style.color='var(--accent)';this.style.transform=''">View Detailed Case Study →</a>
+  <div class="cs-actions-btns">
+    <a href="mailto:tishsingh3@gmail.com" class="cs-btn-next">Contact Me</a>
+    <a href="../index.html" class="cs-btn-contact">Back to Work</a>
+  </div>
 </div>
 
 <!-- Footer -->
