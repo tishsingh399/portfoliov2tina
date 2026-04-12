@@ -144,7 +144,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Login<br>Redesign</h1>
-  <p class="cs-sub">A System Fix Disguised as a Small Update. I transformed a stalled, undefined feature into a polished, accessible system entry point.</p>
+  <p class="cs-sub">The login page had been stalled since 2023. A mockup I put together in 2025 got it moving again, and then it turned into something bigger than a visual refresh.</p>
 
   <div class="cs-glance fade-in">
     <div class="cs-glance-header">// AT A GLANCE</div>
@@ -191,7 +191,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">The login page is the front door.<br><em>It establishes trust or shatters it immediately.</em></p>
+  <p class="cs-reframe-line">The project had been sitting since 2023, not because the design was complicated, but because nobody had written down what should happen after a failed MFA attempt. Or a locked account. Or an expired SSO session. I counted 15 distinct failure modes. The original design handled one of them.</p>
 </div>
 
 <div class="cs-body">
@@ -199,7 +199,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-section fade-in">
     <div class="s-label">The Context</div>
     <h2 class="cs-h2">A 2-year stall. Restarted in 3 days.</h2>
-    <p class="cs-p">This project had been stuck since 2023 — undefined requirements, no clear owner. In 2025, a simple mockup I put together sparked renewed interest. I was handed a "visual refresh." I quickly identified it needed to be more than that.</p>
+    <p class="cs-p">This project had been stuck since 2023. Undefined requirements, no clear owner. In 2025, a simple mockup I put together sparked renewed interest. I was handed a "visual refresh." It became more than that.</p>
     <p class="cs-p">The login page is the first surface every cloud customer sees permanently — when accounts activate, users are moved from product-specific URLs to this centralised page with no opt-out. A dated, inconsistent experience for a <strong>cybersecurity company</strong> creates a trust problem before anyone has even signed in.</p>
     <div class="s-label" style="margin-top:32px;">Five pain points from the audit:</div>
     <ul class="cs-list">
@@ -235,7 +235,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="decision-num">03</div>
         <div class="decision-body">
           <div class="decision-h">What authentication errors taught me</div>
-          <p class="decision-p">I initially used inline errors on form fields. Authentication errors come from the backend — not the UI. Inline form errors were architecturally wrong for this context. I shifted to banner alerts. <strong>Design must reflect system architecture, not just visual convention.</strong></p>
+          <p class="decision-p">I initially designed inline errors on form fields. Then I realized authentication errors come from the backend, not the UI layer. Inline form errors were architecturally wrong for this context. I shifted to banner alerts. The change was small in the file; the reasoning behind it mattered.</p>
         </div>
       </div>
     </div>
@@ -262,7 +262,9 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     </div>
     <img src="images/login-current-vs-new.png" alt="Current login vs new design in light and dark mode" class="cs-img-full">
     <p class="cs-img-caption">// Current (left) vs new design — light and dark mode</p>
-    <div class="pull-quote">"The project didn’t stall because of bad design — it stalled because of undefined behavior. Once I mapped the logic, the path to production became clear."</div>
+    <img src="images/login-final-desktop.png" alt="Final login design — desktop view" class="cs-img">
+    <p class="cs-img-caption">// Final desktop design — SDS-integrated, full state coverage</p>
+    <div class="pull-quote">"Once I mapped all 15 failure modes, the engineers stopped asking clarifying questions. The handoff took less back-and-forth than anything I’d shipped in the previous six months."</div>
   </div>
 
 </div>

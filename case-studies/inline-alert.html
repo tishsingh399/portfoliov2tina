@@ -143,7 +143,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Inline Alert</h1>
-  <p class="cs-sub">Solving Alert Fatigue in Security Software.</p>
+  <p class="cs-sub">Security engineers were dismissing critical errors because every alert looked the same. That's not an alert problem.</p>
 
   <div class="cs-glance fade-in">
     <div class="cs-glance-header">// AT A GLANCE</div>
@@ -186,7 +186,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">In security software, everything feels like a priority. Because the visual treatment was the same, users stopped paying attention. When a critical "Unauthorized Access" error looks exactly like a "File Saved" message, the system has failed.</p>
+  <p class="cs-reframe-line">I audited message types across six products and found that 40% of what teams were calling a "banner" was actually a form-level error. It just didn't live where the form was. The component wasn't the problem. The category was.</p>
 </div>
 
 <div class="cs-body">
@@ -217,7 +217,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-section fade-in">
     <div class="s-label">The Solution</div>
     <h2 class="cs-h2">A clear taxonomy. Negotiated across 7 teams.</h2>
-    <p class="cs-p">Dec 2024 – May 2025. I led the definition, design, and rollout of the feedback taxonomy — not just designing the component in Figma, but negotiating usage contracts with 7+ product teams to ensure the pattern actually replaced the old habits.</p>
+    <p class="cs-p">Dec 2024 – May 2025. I led the definition, design, and rollout of the feedback taxonomy. Not just the component in Figma, but the usage contracts with 7+ product teams that determined whether the pattern would actually stick or get quietly ignored.</p>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
@@ -243,12 +243,14 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     </div>
     <img src="images/alert-iterations.png" alt="Alert design iterations — Feb 2025 to May 2025" class="cs-img-full">
     <p class="cs-img-caption">// First iteration Feb 2025 → second iteration May 2025</p>
+    <img src="images/alert-anatomy.png" alt="Inline alert component anatomy — icon, message, action, dismiss" class="cs-img">
+    <p class="cs-img-caption">// Component anatomy: icon, severity color, message area, optional action, dismiss control</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">Reflection</div>
-    <div class="pull-quote">"A small component. A large structural fix. Global banner misuse dropped 70% after rollout."</div>
-    <p class="cs-p">The Inline Alert solved a pattern problem, not a visual problem. It introduced a missing middle layer that made banners mean something again — because when everything is a banner, nothing is.</p>
+    <div class="pull-quote">"Global banner misuse dropped 70% after rollout. Not because we removed banners, but because teams finally had something more specific to reach for."</div>
+    <p class="cs-p">A lot of the work was persuasion, not design. Showing teams with audit data that what they'd been calling banners were actually form errors, then making the switch low-effort with migration guides. The component shipped. The harder thing was getting seven product teams to agree on what each type of message was for.</p>
   </div>
 
 </div>

@@ -218,7 +218,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Design System<br>Rebuild</h1>
-  <p class="cs-sub">Architecting a single source of truth for unified enterprise UI.</p>
+  <p class="cs-sub">The design system existed. Nobody trusted it.</p>
 
   <div class="cs-glance fade-in">
     <div class="cs-glance-header">// AT A GLANCE</div>
@@ -281,12 +281,14 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">Scope & Execution</div>
     <h2 class="cs-h2">What I owned, start to finish.</h2>
     <ul class="cs-list">
-      <li><strong>Audit:</strong> Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioural view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</li>
-      <li><strong>Naming conflicts:</strong> Resolved "Tiles vs Cards" — teams used both interchangeably, blurring accessibility focus state requirements. Defined Tiles as navigation triggers, Cards as content containers. One decision, five products clarified.</li>
+      <li><strong>Audit:</strong> Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioral view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</li>
+      <li><strong>Naming conflicts:</strong> Resolved "Tiles vs Cards." Teams used both interchangeably, which was blurring accessibility focus state requirements across products. Defined Tiles as navigation triggers, Cards as content containers. One decision. Five products clarified.</li>
       <li><strong>Token architecture:</strong> Built a three-layer Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.</li>
-      <li><strong>Documentation:</strong> Migrated usage guidance, token references, and code demos into a single versioned Storybook + README framework. Designers and engineers read the same source.</li>
+      <li><strong>Documentation:</strong> Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.</li>
       <li><strong>Governance:</strong> Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</li>
     </ul>
+    <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" class="cs-img">
+    <p class="cs-img-caption">// Token Studio — Primitive, Semantic, and Component token layers in Figma</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -297,7 +299,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="decision-num">01</div>
         <div class="decision-body">
           <div class="decision-h">Current: Component tokens → Primitives</div>
-          <p class="decision-p">For speed and immediate stability during rollout. Two products ran legacy frameworks (PrimeNG, custom Angular) that couldn't consume tokens natively — I wrote migration guides mapping hardcoded values to semantic tokens to keep adoption low-effort.</p>
+          <p class="decision-p">For speed and immediate stability during rollout. Two products ran legacy frameworks (PrimeNG, custom Angular) that couldn't consume tokens natively. I wrote migration guides mapping hardcoded values to semantic tokens to keep adoption low-effort.</p>
         </div>
       </div>
       <div class="decision-item">

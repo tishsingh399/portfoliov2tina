@@ -144,7 +144,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Platform<br>Navigation</h1>
-  <p class="cs-sub">Defining Behavior Before Visuals.</p>
+  <p class="cs-sub">Four acquisitions, four navigation systems. Users felt like they were changing apps every time they switched tools.</p>
 
   <div class="cs-glance fade-in">
     <div class="cs-glance-header">// AT A GLANCE</div>
@@ -187,7 +187,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 </div>
 
 <div class="cs-reframe fade-in">
-  <p class="cs-reframe-line">The company had 6 distinct products that were being merged into a single "Platform." However, each product had its own navigation logic. Users felt like they were leaving one website and entering another every time they switched tools.<br><em>The tech debt was massive.</em></p>
+  <p class="cs-reframe-line">Nobody had written down what "pinned" meant. Or what should happen to a pinned item after a tenant switch. Or what the active state for a nav icon should be called. Six products. Six different answers to the same questions. That's what I was actually solving.</p>
 </div>
 
 <div class="cs-body">
@@ -203,13 +203,13 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-section fade-in">
     <div class="s-label">My Approach</div>
-    <h2 class="cs-h2">Interaction logic before visuals.</h2>
+    <h2 class="cs-h2">State maps before mockups.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
           <div class="decision-h">Replaced static mocks with full lifecycle prototypes</div>
-          <p class="decision-p">Documented every state: Hover, Focus, Active, Pinned, Expanded, Collapsed — in both light and dark mode. This gave stakeholders behavior to react to, not just pixels. The UXA team used the state map to build a functional proof of concept immediately after handoff.</p>
+          <p class="decision-p">Documented every state: Hover, Focus, Active, Pinned, Expanded, Collapsed, in both light and dark mode. This gave stakeholders behavior to react to, not just pixels. The UXA team used the state map to build a functional proof of concept immediately after handoff.</p>
         </div>
       </div>
       <div class="decision-item">
@@ -223,12 +223,14 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="decision-num">03</div>
         <div class="decision-body">
           <div class="decision-h">Token-driven theming throughout</div>
-          <p class="decision-p">Colors, typography, spacing, and elevation mapped to semantic tokens — <strong>icon.action.active</strong> for built-in accessibility and theming. The nav is consistent in light and dark mode and aligned to the design system without manual overrides.</p>
+          <p class="decision-p">Colors, typography, spacing, and elevation mapped to semantic tokens, including <strong>icon.action.active</strong> for built-in accessibility and theming. The nav is consistent in light and dark mode and aligned to the design system without manual overrides.</p>
         </div>
       </div>
     </div>
     <img src="images/nav-light-dark.png" alt="Navigation in light and dark mode" class="cs-img-full">
     <p class="cs-img-caption">// Light and dark mode — same structure, same tokens, no manual overrides</p>
+    <img src="images/nav-component-specs.png" alt="Navigation component specs and annotation" class="cs-img">
+    <p class="cs-img-caption">// Component specs: states, spacing, token references, and interaction annotations</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -247,7 +249,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="step-text"><strong>Defined behavior became the system standard</strong> for future platform components. The logic introduced here prevented future navigation debt.</div>
       </div>
     </div>
-    <div class="pull-quote">"Polished visuals fail when behavior is undefined. My role was to give the system rules clear enough that teams could build from them without me in the room."</div>
+    <div class="pull-quote">"I built three fully interactive pin/unpin prototypes before we settled on one. The team needed to react to real behavior, not a description of it. The state map went to engineering the next day."</div>
   </div>
 
 </div>
