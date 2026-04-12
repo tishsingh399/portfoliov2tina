@@ -28,6 +28,9 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/case-studies/shield-design-system", "destination": "/case-studies/design-system-rebuild", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/case-studies/:slug", "destination": "/case-studies/:slug.html" }
   ]
