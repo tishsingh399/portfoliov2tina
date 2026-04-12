@@ -137,6 +137,9 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .cs-body { max-width: 1080px; margin: 0 auto; padding: 72px 48px; }
 .cs-section { margin-bottom: 60px; }
+.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-full { width: 100%; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0; }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
@@ -261,6 +264,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What Was Broken</h2>
     <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
+    <img src="images/shield-component-library.png" alt="Legacy component library vs new Shield Design System library" class="cs-img-full">
+    <p class="cs-img-caption">// Legacy Library 1, Legacy Library 2, and the unified existing library</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -301,6 +306,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
+    <img src="images/shield-design-code-diagram.jpg" alt="Shield Design System — Design and Code architecture" class="cs-img">
+    <p class="cs-img-caption">// Token architecture: Design → Shield Design System → Development</p>
   </div>
 
   <div class="cs-section fade-in">

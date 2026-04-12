@@ -75,6 +75,9 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .cs-body { max-width: 1080px; margin: 0 auto; padding: 72px 48px; }
 .cs-section { margin-bottom: 60px; }
+.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-full { width: 100%; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0; }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
@@ -195,6 +198,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       <li><strong>Functional failure:</strong> The page lacked clear error handling for SSO (Single Sign-On) failures, leading to high support ticket volume.</li>
       <li><strong>Performance:</strong> Large, unoptimized background images caused slow load times on mobile connections.</li>
     </ul>
+    <img src="images/login-competitor-audit.png" alt="Competitor login audit — Vault, CyberArk, CrowdStrike" class="cs-img-full">
+    <p class="cs-img-caption">// Competitor audit: how Vault, CyberArk, and CrowdStrike handle login</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -223,6 +228,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
+    <img src="images/login-iterations.png" alt="Login design iterations — current, V1, V2" class="cs-img-full">
+    <p class="cs-img-caption">// Current state + Design V1 + Design V2 iterations</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -242,6 +249,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="step-text"><strong>Login Portal Dropdown</strong> — Added a portal selector in the Workforce Passwords UI to help admins understand which environment they are accessing.</div>
       </div>
     </div>
+    <img src="images/login-current-vs-new.png" alt="Current login vs new design in light and dark mode" class="cs-img-full">
+    <p class="cs-img-caption">// Current (left) vs new design — light and dark mode</p>
   </div>
 
   <div class="cs-section fade-in">

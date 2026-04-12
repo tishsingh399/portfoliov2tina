@@ -74,6 +74,9 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .cs-body { max-width: 1080px; margin: 0 auto; padding: 72px 48px; }
 .cs-section { margin-bottom: 60px; }
+.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-full { width: 100%; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0; }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
@@ -197,6 +200,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         <div class="step-text"><strong>Heavyweight:</strong> The existing alert took up 80px of vertical space, pushing content below the fold.</div>
       </div>
     </div>
+    <img src="images/alert-types.png" alt="Banner, Toast, and Inline alert comparison" class="cs-img-full">
+    <p class="cs-img-caption">// Three alert types — Banner, Toast, Inline — and when each fires</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -232,7 +237,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
-
+    <img src="images/alert-iterations.png" alt="Alert design iterations — Feb 2025 to May 2025" class="cs-img-full">
+    <p class="cs-img-caption">// First iteration Feb 2025 → second iteration May 2025</p>
   </div>
 
   <div class="cs-section fade-in">
