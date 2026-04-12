@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inline Alert — Detailed Case Study — Tina Singh</title>
-<meta name="description" content="Detailed case study: How I redesigned the messaging architecture from a binary choice into a tiered system that respects user context and actionability.">
+<meta name="description" content="How I identified a missing component in the Shield Design System and defined a tiered messaging architecture — moving from a binary Banner/Toast choice to a context-aware 4-tier inline alert system.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -37,82 +37,256 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
 nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
 .nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
 .nav-back:hover { color: var(--text); }
 .nav-back-arrow { color: var(--accent); }
 .nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.theme-toggle { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
 .cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-bg-num { position: absolute; top: -30px; right: 32px; font-family: 'Spectral', serif; font-size: clamp(160px, 22vw, 260px); font-weight: 600; line-height: 1; color: var(--border); user-select: none; pointer-events: none; letter-spacing: -0.05em; }
 .cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
 .cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+
 .cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
 .cs-section { margin-bottom: 80px; }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
 .cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-p:last-child { margin-bottom: 0; }
 .cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
 .cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
 .cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
-.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
-.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
-.cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
-.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 14px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
-.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
+
+.decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
+.decision-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; }
+.decision-num { font-family: 'Spectral', serif; font-size: 60px; font-weight: 600; line-height: 0.9; color: var(--border); user-select: none; padding-top: 4px; }
+.decision-h { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.decision-p { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--text2); }
+
+.security-list { border: 1px solid var(--border); margin-top: 22px; }
+.security-step { display: flex; align-items: flex-start; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+.security-step:last-child { border-bottom: none; }
+.step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
+.step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.step-text strong { font-weight: 500; color: var(--text); }
+
+.variant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 22px 0; }
+.variant-cell { background: var(--bg2); padding: 20px 22px; transition: background 0.3s; }
+.variant-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.variant-label.info { color: #4fa8e0; }
+.variant-label.success { color: var(--accent-teal); }
+.variant-label.warning { color: var(--yellow); }
+.variant-label.error { color: var(--accent); }
+.variant-desc { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+
+.hierarchy-table { border: 1px solid var(--border); margin: 22px 0; }
+.hierarchy-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.hierarchy-row:last-child { border-bottom: none; }
+.hierarchy-row.header { background: var(--bg3); }
+.hierarchy-cell { padding: 14px 18px; font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.5; border-right: 1px solid var(--border); }
+.hierarchy-cell:last-child { border-right: none; }
+.hierarchy-row.header .hierarchy-cell { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.hierarchy-cell em { color: var(--accent-teal); font-style: normal; font-weight: 500; }
+.hierarchy-cell strong { color: var(--text); font-weight: 500; }
+
+.cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+.footer-back:hover { color: var(--text); }
+.footer-back-arrow { color: var(--accent); }
+.footer-copy { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--border); }
+
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="inline-alert.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
-  <div class="nav-name">TINA SINGH</div>
+  <a href="inline-alert.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Brief</a>
+  <span class="nav-name">Tina Singh</span>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
 </nav>
 
-<section class="cs-hero">
-  <div class="cs-tag">DETAILED CASE STUDY</div>
+<div class="cs-hero">
+  <div class="cs-bg-num">02</div>
+  <div class="cs-tag">Detailed Case Study</div>
   <h1 class="cs-h1">Inline Alert</h1>
-  <p class="cs-sub">Establishing Clarity Between Banners, Toasts, and Contextual Feedback — redesigning a broken messaging architecture.</p>
-</section>
-
-<div class="cs-body">
-  <div class="cs-section">
-    <div class="s-label">// OVERVIEW</div>
-    <h2 class="cs-h2">Overview</h2>
-    <p class="cs-p">The feedback system was incoherent. "Inline Alerts" was one of the missing components in the library. Users were receiving global banners for local input errors, or toasts that vanished before they could be read. I led the redesign of the messaging architecture, moving from a binary choice (Banner or Toast) to a tiered system that respected user context and actionability.</p>
-  </div>
-
-  <div class="cs-section">
-    <div class="s-label">// AUDIT & RESEARCH</div>
-    <h2 class="cs-h2">Audit & Research</h2>
-    <p class="cs-p">During the audit, I mapped message types across six product areas and identified a "missing middle" layer. Users struggled to differentiate between global system alerts and local form errors. I analyzed patterns in Carbon and Polaris to define a clear hierarchy: Banners (Global), Inline Alerts (Contextual), and Toasts (Transient).</p>
-  </div>
-
-  <div class="cs-section">
-    <div class="s-label">// VARIANTS</div>
-    <h2 class="cs-h2">Variants</h2>
-    <ul class="cs-list">
-      <li><strong>Info:</strong> Neutral guidance or feature discovery.</li>
-      <li><strong>Success:</strong> Confirmation of positive action.</li>
-      <li><strong>Warning:</strong> Potential issue, requires caution.</li>
-      <li><strong>Error:</strong> Critical blocker or failure.</li>
-    </ul>
-  </div>
-
-  <div class="cs-section">
-    <div class="s-label">// OUTCOME</div>
-    <h2 class="cs-h2">Impact</h2>
-    <ul class="cs-list">
-      <li>Shifted the system from "shouting" to "guiding."</li>
-      <li>Adopted platform-wide across all six product areas.</li>
-      <li>Compact 48px mode for dense dashboard environments.</li>
-      <li>Tokenized mapping ensuring WCAG AA compliance automatically.</li>
-    </ul>
-  </div>
+  <p class="cs-sub">Establishing Clarity Between Banners, Toasts, and Contextual Feedback — how I found and filled a structural gap in the messaging system.</p>
 </div>
 
-<div class="cs-footer">// END OF RECORD</div>
+<div class="cs-body">
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// How it started</div>
+    <h2 class="cs-h2">The system had two tools for feedback. It needed three.</h2>
+    <p class="cs-p">When I joined and began auditing the Shield Design System, the component library had two options for communicating status to users: Banners and Toasts. Banners were full-width, persistent, and sat at the top of the page. Toasts were floating notifications that auto-dismissed after a few seconds.</p>
+    <p class="cs-p">In theory, these covered the spectrum. In practice, they were being used for everything — including the things neither was designed for. Forms were throwing global page banners when a single field failed validation. Dashboards were using toasts to notify users of system-critical errors that disappeared before anyone could read them. Engineers were improvising in-between states using hardcoded div styles that weren't in the system at all.</p>
+    <div class="pull-quote">"If your design system doesn't have the right tool, teams will build their own version — poorly, inconsistently, and at scale."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The audit</div>
+    <h2 class="cs-h2">Mapping the problem across six products.</h2>
+    <p class="cs-p">Before designing anything, I audited every product area to understand how feedback messaging was actually being used. I documented message instances across six products and tagged them by type, trigger, placement, and severity.</p>
+    <p class="cs-p">The pattern was immediate: there was a massive "missing middle." Teams needed a way to show contextual, in-line feedback — tied to a specific form, table row, or UI region — that was neither a full-page announcement nor a transient float. That component didn't exist in the library.</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Banner misuse</strong> — Global banners were appearing for local, field-level errors. A failed form submission was triggering a page-level red banner that implied the entire system had a problem.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Toast misuse</strong> — Critical errors were being delivered as toasts. Security warnings were auto-dismissing. Users in complex workflows were missing error states entirely because the notification had already disappeared.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>Ad-hoc markup</strong> — At least four teams had built their own inline error states using raw div and span elements outside the design system, each with different colors, typography, and spacing. No token usage. No consistency. No accessibility.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Defining the hierarchy</div>
+    <h2 class="cs-h2">Three layers. One clear rule for each.</h2>
+    <p class="cs-p">I looked at how Carbon (IBM) and Polaris (Shopify) had solved this. Both had arrived at a similar tiered architecture: global, contextual, and transient. That gave me validation for the structure. The design challenge was building the middle tier in a way that fit Shield's token system and cybersecurity context.</p>
+    <div class="hierarchy-table">
+      <div class="hierarchy-row header">
+        <div class="hierarchy-cell">Component</div>
+        <div class="hierarchy-cell">Scope</div>
+        <div class="hierarchy-cell">Behavior</div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-cell"><strong>Banner</strong></div>
+        <div class="hierarchy-cell">Global — page or session level</div>
+        <div class="hierarchy-cell"><em>Persistent</em> — requires user action to dismiss</div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-cell"><strong>Inline Alert</strong> (new)</div>
+        <div class="hierarchy-cell">Contextual — tied to a specific UI region</div>
+        <div class="hierarchy-cell"><em>Persistent</em> — stays until the condition resolves</div>
+      </div>
+      <div class="hierarchy-row">
+        <div class="hierarchy-cell"><strong>Toast</strong></div>
+        <div class="hierarchy-cell">Transient — floating, unanchored</div>
+        <div class="hierarchy-cell"><em>Auto-dismisses</em> — for low-stakes confirmations only</div>
+      </div>
+    </div>
+    <p class="cs-p">The rule I wrote into the documentation: if the error will still be true in 10 seconds, it cannot be a toast. That single sentence eliminated the most common misuse pattern immediately.</p>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Variant architecture</div>
+    <h2 class="cs-h2">Four variants. Each one earns its color.</h2>
+    <p class="cs-p">I designed four semantic variants. The constraint was strict: color had to communicate severity, not brand. In a security product, color carries high stakes — a yellow warning in a SIEM dashboard is not the same as a yellow promotion banner on an e-commerce site. Every choice had to be justified by the cognitive load it placed on the user.</p>
+    <div class="variant-grid">
+      <div class="variant-cell">
+        <div class="variant-label info">// INFO</div>
+        <div class="variant-desc">Neutral guidance, tips, or feature discovery. No action required. Non-interruptive. Used for onboarding nudges and configuration hints.</div>
+      </div>
+      <div class="variant-cell">
+        <div class="variant-label success">// SUCCESS</div>
+        <div class="variant-desc">Confirmation of a completed positive action. Tied to the triggering UI region — not a toast. Disappears when the user navigates away, not on a timer.</div>
+      </div>
+      <div class="variant-cell">
+        <div class="variant-label warning">// WARNING</div>
+        <div class="variant-desc">A potential problem that doesn't block the user but requires awareness. The user can proceed — but they should read this first. Used for configuration drift, expiring sessions, and policy conflicts.</div>
+      </div>
+      <div class="variant-cell">
+        <div class="variant-label error">// ERROR</div>
+        <div class="variant-desc">A critical failure or blocker. Cannot be dismissed without resolving the underlying condition. Always includes specific, actionable copy — never generic error text.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Component decisions</div>
+    <h2 class="cs-h2">Three decisions that defined the structure.</h2>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">01</div>
+        <div class="decision-body">
+          <div class="decision-h">Compact mode for dense environments</div>
+          <p class="decision-p">The standard alert height was 64px. Security dashboards — SIEMs, endpoint management consoles — operate at much higher information density. I designed a Compact variant at 48px that reduced vertical padding and used a condensed label format. It carries the same semantic color and icon, but takes up 25% less vertical space. The constraint was real: in a table with 50 rows, an alert that pushed the row height up by 30px added 1,500px of scroll debt.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">02</div>
+        <div class="decision-body">
+          <div class="decision-h">Icon as a required element, not an optional one</div>
+          <p class="decision-p">Color alone is never sufficient for accessibility — and in a security context, it's not sufficient for clarity either. Every variant ships with a required icon: info circle, check circle, exclamation triangle, x-circle. The icons are drawn from Shield's icon system and map to the same tokens as the text and background. Color-blind users get the icon signal. Screen readers get the aria-label. The icon isn't decoration — it's a second channel for severity communication.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <div class="decision-h">Dismissibility tied to severity</div>
+          <p class="decision-p">I made dismissibility a property of the variant, not a property the consuming team configures. Info and Success alerts are dismissible by default — the information is useful but not blocking. Warning alerts are dismissible with a visible acknowledgment state. Error alerts are not dismissible at all until the underlying condition is resolved. This decision was controversial internally, but I stood by it: letting users dismiss an error they haven't fixed leads to silent failures in security workflows.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Token architecture</div>
+    <h2 class="cs-h2">Compliance baked in, not bolted on.</h2>
+    <p class="cs-p">Every color in the Inline Alert component maps to a semantic token, not a raw hex value. The token names encode intent: <code style="font-family:monospace;font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:2px;">feedback-error-background</code>, <code style="font-family:monospace;font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:2px;">feedback-warning-border</code>, <code style="font-family:monospace;font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:2px;">feedback-success-text</code>. These tokens are resolved from the core palette through a semantic layer — which means when the core palette changes (rebranding, dark mode update, contrast adjustment), the alerts update automatically.</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>WCAG AA contrast</strong> — All text/background combinations in all four variants verified at 4.5:1 minimum in both light and dark mode. The tokens prevent non-compliant combinations by design.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Focus states</strong> — Dismissible variants have a visible focus ring that passes contrast requirements. The close button is reachable via keyboard. Tab order is logical within the component.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>ARIA roles</strong> — Info and Success use <code style="font-family:monospace;font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:2px;">role="status"</code> (polite announcement). Warning and Error use <code style="font-family:monospace;font-size:13px;background:var(--bg3);padding:2px 6px;border-radius:2px;">role="alert"</code> (assertive, immediate announcement). Screen readers prioritize the severity correctly.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Adoption</div>
+    <h2 class="cs-h2">Rolling it out across six product areas.</h2>
+    <p class="cs-p">Shipping the component was the easier half. Getting six teams to migrate away from their ad-hoc implementations was the real work. I wrote the documentation to answer the questions I knew teams would ask: what's the difference between this and a Banner? When do I use Warning vs Error? Can I add a CTA button?</p>
+    <p class="cs-p">I ran office hours for two sprints after launch. Every team that had built a custom inline alert migrated to the system component without exception. The migrations were straightforward because the component was designed to be a drop-in for the patterns that already existed — just governed, tokenized, and accessible.</p>
+    <ul class="cs-list">
+      <li>All 6 product areas migrated ad-hoc implementations to the system component</li>
+      <li>No rework required after initial handoff — the spec was complete enough that engineering implemented it correctly on the first pass</li>
+      <li>Compact mode was adopted immediately by two dashboard-heavy products that had been struggling with information density</li>
+    </ul>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Outcome</div>
+    <h2 class="cs-h2">What changed and what I learned.</h2>
+    <p class="cs-p">The Inline Alert component closed a gap that was generating real engineering debt and real user confusion. The "shouting" problem — where everything looked equally urgent regardless of severity — was structurally solved by the hierarchy. Teams stopped improvising. Users stopped missing critical errors because they'd been wrapped in an auto-dismissing toast.</p>
+    <ul class="cs-list">
+      <li>4-tier severity system replaced a flat, one-size-fits-all feedback pattern across the entire platform</li>
+      <li>Ad-hoc inline error states eliminated from all six product codebases</li>
+      <li>WCAG AA compliance automatic — the tokens enforce it at the system level, not per-implementation</li>
+    </ul>
+    <div class="pull-quote">"The best component design solves the use case teams already have — it just does it right. The goal wasn't to introduce a new pattern. It was to govern the one that already existed, badly."</div>
+    <p class="cs-p">The lesson I took from this project: gaps in a design system don't stay empty. Teams fill them with something. The question is whether that something is governed or improvised. Finding and filling the gap before it compounds is the actual systems design work.</p>
+  </div>
+
+</div>
+
+<footer class="cs-footer">
+  <a href="inline-alert.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Brief</a>
+  <span class="footer-copy">© 2026 Tina Singh</span>
+</footer>
+
 <script>
 function toggleTheme() {
   const html = document.documentElement;
@@ -128,6 +302,13 @@ function toggleTheme() {
   const icon = document.getElementById('themeIcon');
   if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
 })();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>

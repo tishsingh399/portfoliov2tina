@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login Redesign — Detailed Case Study — Tina Singh</title>
-<meta name="description" content="How I transformed a legacy login page into a governed system component — mapping IAM error states, building progressive disclosure, and aligning with the Shield Design System.">
+<meta name="description" content="How I transformed a stalled login project into a trusted system entry point — mapping IAM error states, driving the texture-only pivot, and integrating the Shield Design System end-to-end.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -58,6 +58,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-h3 { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
 .cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
 .cs-p:last-child { margin-bottom: 0; }
 .cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
@@ -79,18 +80,26 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
 
-.error-table { border: 1px solid var(--border); margin: 22px 0; }
-.error-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
-.error-row:last-child { border-bottom: none; }
-.error-row.header { background: var(--bg3); }
-.error-cell { padding: 14px 18px; font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.5; border-right: 1px solid var(--border); }
-.error-cell:last-child { border-right: none; }
-.error-row.header .error-cell { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-.error-cell em { color: var(--accent-teal); font-style: normal; font-weight: 500; }
+.criteria-list { border: 1px solid var(--border); margin: 22px 0; }
+.criteria-item { display: flex; align-items: flex-start; gap: 20px; padding: 16px 22px; border-bottom: 1px solid var(--border); }
+.criteria-item:last-child { border-bottom: none; }
+.criteria-num { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent-teal); flex-shrink: 0; padding-top: 2px; }
+.criteria-text { font-size: 14px; font-weight: 300; color: var(--text2); line-height: 1.7; }
+.criteria-text strong { color: var(--text); font-weight: 500; }
 
-.cs-img-block { margin: 32px 0 8px; }
-.cs-img-block img { width: 100%; height: auto; border: 1px solid var(--border); display: block; background: var(--bg2); }
-.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; padding: 10px 0 32px; text-transform: uppercase; }
+.open-table { border: 1px solid var(--border); margin: 22px 0; }
+.open-row { display: grid; grid-template-columns: 2fr 1.2fr 1fr; border-bottom: 1px solid var(--border); }
+.open-row:last-child { border-bottom: none; }
+.open-row.header { background: var(--bg3); }
+.open-cell { padding: 12px 16px; font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.5; border-right: 1px solid var(--border); }
+.open-cell:last-child { border-right: none; }
+.open-row.header .open-cell { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.open-cell em { color: var(--accent-teal); font-style: normal; font-weight: 500; }
+.open-cell strong { color: var(--yellow); font-weight: 500; }
+
+.cs-img-placeholder { width: 100%; height: 240px; background: var(--bg2); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; margin: 28px 0 8px; }
+.cs-img-placeholder span { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 
 .cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
 .footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
@@ -114,167 +123,181 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-bg-num">04</div>
   <div class="cs-tag">Detailed Case Study</div>
   <h1 class="cs-h1">Login Redesign</h1>
-  <p class="cs-sub">A System Fix Disguised as a Small Update — how a "simple visual refresh" became a foundational rebuild of the authentication entry point.</p>
+  <p class="cs-sub">A Trust Liability Turned Brand Moment — how a stalled, undefined login project became a governed system entry point for every cloud customer.</p>
 </div>
 
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">// How it started</div>
-    <h2 class="cs-h2">The request sounded small. It wasn't.</h2>
-    <p class="cs-p">The initial ask was a refresh: update the logo, fix the colors, make it match the new brand. But when I pulled the page apart, it was clear this was a structural problem, not a visual one.</p>
-    <p class="cs-p">The login page was written as standalone code — it lived completely outside the Shield Design System. It used hardcoded hex values, imported its own fonts separately, and had no relationship to the token system or component library the rest of the product ran on. Every visual decision was a one-off. Nothing was governed.</p>
+    <div class="s-label">// Overview</div>
+    <h2 class="cs-h2">The project had stalled for two years. A mockup I made revived it.</h2>
+    <p class="cs-p">As the platform expanded its cloud offerings, the login experience became the primary entry point for customers accessing multiple products and tenants. Functionally, it worked — but visually and behaviourally, it lacked consistency, clear messaging, and polish.</p>
+    <p class="cs-p">The project had originally stalled in 2023 due to undefined requirements. Two years later, a simple mockup I created sparked renewed interest. I was tasked with a refresh — but I quickly identified that a visual update wouldn't suffice. The flow had logical gaps, ambiguous feedback, and inconsistent branding. I took ownership of rebuilding the login experience from the ground up: intuitive for users, rock-solid for engineers, and aligned with the Shield Design System.</p>
     <div class="pull-quote">"The login page is the front door. For a PAM security product, if the front door looks off, security professionals immediately question whether it's a phishing attempt."</div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// What I found</div>
-    <h2 class="cs-h2">Three layers of broken.</h2>
-    <p class="cs-p">I ran a full audit before touching any design. What I found fell into three categories:</p>
+    <div class="s-label">// The challenge</div>
+    <h2 class="cs-h2">Five pain points that made this more than a refresh.</h2>
+    <p class="cs-p">User feedback, internal reviews, and my own audit surfaced critical problems across the authentication journey:</p>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
-        <div class="step-text"><strong>Brand disconnect</strong> — The login page used an old background photo, a previous iteration of the logo, and typography that predated our current font system. It looked like a different product from a different company.</div>
+        <div class="step-text"><strong>Inconsistent visual design</strong> — Colors, spacing, and typography drifted across screens (login, MFA, confirmation), creating a disjointed feel that didn't match the platform's evolving design language.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">02</div>
-        <div class="step-text"><strong>Error state gap</strong> — There was one error message: "Login Failed." No specificity for expired SSO sessions, locked accounts, invalid MFA codes, or tenant mismatches. Every failure looked identical. Support tickets piled up because users couldn't self-serve.</div>
+        <div class="step-text"><strong>Weak system feedback</strong> — The "Authenticating" state was static and ambiguous, leaving users on slower connections unsure if the system was working or stuck. Support tickets referenced "stuck login screens" as a recurring pattern.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">03</div>
-        <div class="step-text"><strong>Accessibility failures</strong> — Color contrast ratios fell below WCAG AA on multiple states. Focus indicators were missing. The tab order was broken. Federal agency customers — a major segment — had specific compliance requirements we were actively failing.</div>
+        <div class="step-text"><strong>Ambiguous actions</strong> — Generic button labels like "Confirm" increased cognitive load during security-critical steps. Users couldn't tell what they were confirming or what would happen next.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">04</div>
+        <div class="step-text"><strong>Fragmented flows</strong> — "Forgot Password" and "Context Switching" felt bolted-on rather than part of a cohesive ecosystem. Logic gaps forced unnecessary round-trips back to the start of the flow.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">05</div>
+        <div class="step-text"><strong>Brand misalignment</strong> — The platform's branding had evolved through multiple iterations, but login surfaces still reflected outdated naming, logos, and visuals from previous product generations.</div>
       </div>
     </div>
-
-    <div class="cs-img-block fade-in">
-      </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// The scope shift</div>
-    <h2 class="cs-h2">Reframing the project.</h2>
-    <p class="cs-p">I went back to the PM and engineering lead with the audit findings. This wasn't a visual refresh — it was a system integration project with an accessibility mandate attached. We needed to:</p>
-    <ul class="cs-list">
-      <li>Bring the login page into the Shield Design System completely — no more standalone code</li>
-      <li>Map every IAM error state to a specific, actionable UI response</li>
-      <li>Implement a progressive disclosure flow to reduce cognitive load and support SSO users</li>
-      <li>Achieve WCAG AA compliance across all interactive states</li>
-    </ul>
-    <p class="cs-p">The scope change was approved. The "small update" became a four-week project with IAM engineering involvement.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">// Key design decisions</div>
-    <h2 class="cs-h2">Three decisions that defined the solution.</h2>
+    <div class="s-label">// What I improved</div>
+    <h2 class="cs-h2">Five targeted refinements that rebuilt trust in the system.</h2>
+    <p class="cs-p">I approached this not as a single "redesign" but as a series of targeted refinements addressing each problem at the root cause.</p>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Progressive disclosure over a single form</div>
-          <p class="decision-p">The old design showed every field simultaneously — email, password, SSO toggle — regardless of what authentication method applied to that user. I split it into two steps: Step 1 collects the email, Step 2 shows only what's relevant (password field, SSO redirect, or MFA prompt). SSO users go straight to their identity provider without ever seeing a password field. The form got shorter. The path got faster.</p>
+          <div class="decision-h">Visual & layout standardization</div>
+          <p class="decision-p">I conducted a screen-by-screen audit to align the login journey with the Shield Design System. I standardized spacing scales across all screens to reduce visual noise, aligned header sizes, form labels, and helper text, and corrected focus and error states to meet WCAG AA standards. The result: the login flow felt like a stable, unified product rather than a collection of loosely related pages.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Error taxonomy mapped to IAM logic</div>
-          <p class="decision-p">I sat with the IAM engineering team for two sessions and walked through every possible failure path the backend could return. We categorized them into 15+ specific states and matched each to a UI response — not just a message, but an action. Expired sessions got a re-authenticate link. Locked accounts got admin contact info. Tenant mismatches got a tenant selector. "Login Failed" was retired.</p>
+          <div class="decision-h">Clearer feedback and system messaging</div>
+          <p class="decision-p">Users previously saw static messages that caused uncertainty. I reworked the authentication status to be explicit — "Signing you in..." — and paired it with a clear loading indicator. This directly addressed the support ticket pattern around users abandoning login assuming the system was broken.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Design System integration as a requirement, not an upgrade</div>
-          <p class="decision-p">I enforced a rule: no hardcoded values. Every color came from a semantic token. Every spacing unit came from the spacing scale. Every component — inputs, buttons, error states — came from Shield. This meant the login page would automatically inherit any future system updates, dark mode support, and accessibility improvements without a dedicated engineering pass.</p>
+          <div class="decision-h">Explicit, action-oriented labels</div>
+          <p class="decision-p">Generic labels were replaced with specific, high-confidence CTAs: "Verify," "Send Code," "Reset Password." I added supporting microcopy under each action so users understood the consequence before committing. In security workflows, ambiguity is a trust problem, not just a UX problem.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">04</div>
+        <div class="decision-body">
+          <div class="decision-h">Unified supporting flows</div>
+          <p class="decision-p">The login experience doesn't start at the login page. I unified the visual language for "Forgot Password" and post-login "Context Switching" screens. I simplified copy to explain why a user might need to select a tenant. I eliminated unnecessary round-trips that forced users back to step one. I also added a portal dropdown in the Workforce Passwords UI to help admins distinguish which environment they were accessing — a real confusion point in multi-tenant setups.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">05</div>
+        <div class="decision-body">
+          <div class="decision-h">Brand and entry-point alignment</div>
+          <p class="decision-p">I refreshed logos, product names, and alt text across all touchpoints — including invite emails and deep links. I also addressed the MFA confirmation screen: replaced static instruction text with a countdown timer for TOTP codes so users had a live signal on when to request a new one.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// Error state taxonomy</div>
-    <h2 class="cs-h2">Every failure had a name and an action.</h2>
-    <p class="cs-p">The full error map covered authentication failures, session states, access control, and MFA. Here's a representative sample:</p>
-    <div class="error-table">
-      <div class="error-row header">
-        <div class="error-cell">Error State</div>
-        <div class="error-cell">Root Cause</div>
-        <div class="error-cell">UI Response</div>
+    <div class="s-label">// The design system play</div>
+    <h2 class="cs-h2">Writing SDS-5676 and driving the texture-only pivot.</h2>
+    <p class="cs-p">The second, more strategic layer of this project involved the login page's visual background — and a trust problem that went beyond copy and layout. User feedback had surfaced concerns about the existing side imagery: it felt dated, didn't align with the brand's evolution, and for security-conscious admins, the sudden URL change combined with an unfamiliar-looking page was raising phishing red flags. An engineering ticket explicitly called out that users were mistaking the new login page for a phishing attempt.</p>
+    <p class="cs-p">I authored SDS-5676, the Shield Design System story for updating the login screen background. I framed the requirements around six specific criteria that would make the login page durable and trustworthy:</p>
+    <div class="criteria-list">
+      <div class="criteria-item">
+        <div class="criteria-num">01</div>
+        <div class="criteria-text"><strong>Stable design</strong> — something that doesn't go stale and require repeated updates as campaigns change</div>
       </div>
-      <div class="error-row">
-        <div class="error-cell">SSO session expired</div>
-        <div class="error-cell">Token TTL exceeded</div>
-        <div class="error-cell"><em>Re-authenticate via your provider →</em></div>
+      <div class="criteria-item">
+        <div class="criteria-num">02</div>
+        <div class="criteria-text"><strong>Branding consistency</strong> to build trust with security users — pattern and texture consistent with the company website, not stock photography</div>
       </div>
-      <div class="error-row">
-        <div class="error-cell">Account locked</div>
-        <div class="error-cell">5 failed attempts</div>
-        <div class="error-cell"><em>Contact your administrator</em></div>
+      <div class="criteria-item">
+        <div class="criteria-num">03</div>
+        <div class="criteria-text"><strong>Marketing alignment</strong> with current brand materials and direction</div>
       </div>
-      <div class="error-row">
-        <div class="error-cell">MFA code invalid</div>
-        <div class="error-cell">Wrong code / expired</div>
-        <div class="error-cell"><em>Code expires in 30s — request a new one</em></div>
+      <div class="criteria-item">
+        <div class="criteria-num">04</div>
+        <div class="criteria-text"><strong>Responsive behavior</strong> — including mobile, where the side image should drop entirely</div>
       </div>
-      <div class="error-row">
-        <div class="error-cell">Tenant mismatch</div>
-        <div class="error-cell">Wrong URL for org</div>
-        <div class="error-cell"><em>Select your organization →</em> [dropdown]</div>
+      <div class="criteria-item">
+        <div class="criteria-num">05</div>
+        <div class="criteria-text"><strong>Competitive parity</strong> — I benchmarked against CyberArk and other enterprise security competitors and attached screenshots to the ticket</div>
       </div>
-      <div class="error-row">
-        <div class="error-cell">Invalid credentials</div>
-        <div class="error-cell">Wrong password</div>
-        <div class="error-cell"><em>Incorrect password. Reset password →</em></div>
+      <div class="criteria-item">
+        <div class="criteria-num">06</div>
+        <div class="criteria-text"><strong>Reduced distraction</strong> — background texture over imagery to keep visual focus on the login task itself</div>
       </div>
     </div>
+    <p class="cs-p">During the cross-functional design review, I participated alongside the design lead, a product designer, and an engineer working through two layout options: texture-only versus background with a side image. I flagged that the side image approach carried compounding risk — imagery ages, requires repeated update cycles, and introduces visual noise that competes with the one thing users need to focus on. <strong style="color:var(--text);">The decision the team agreed on was to remove the side image entirely and proceed with texture-only.</strong> This wasn't a rejection of the image concept; it was a deliberate deferral pending Marketing's brand direction confirmation.</p>
+    <p class="cs-p">I captured the full decision rationale in the Design Decisions Log — a structured documentation system I created to make design rationale discoverable and auditable for cross-functional decisions.</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// Accessibility implementation</div>
-    <h2 class="cs-h2">Compliance wasn't a checkbox — it was a constraint.</h2>
-    <p class="cs-p">Federal agency users have mandated WCAG AA requirements. Failing that meant disqualification from procurement. I treated accessibility as a hard requirement from the start, not a QA pass at the end.</p>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Color contrast</strong> — All text/background combinations verified to meet 4.5:1 minimum ratio. Error states tested in both light and dark mode.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Focus management</strong> — On step transition (email → auth method), focus moves programmatically to the first new field. No user has to hunt for where they are.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Screen reader labels</strong> — All inputs, error messages, and status states have explicit ARIA labels. Error messages are announced on trigger, not just visually shown.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Keyboard navigation</strong> — Full tab order validated. The form is 100% operable without a mouse, including the SSO redirect and tenant selector.</div>
-      </div>
-    </div>
+    <div class="s-label">// What I learned</div>
+    <h2 class="cs-h2">Two lessons that changed how I approach flows.</h2>
+    <p class="cs-p">I initially treated the login screen like a standard form — using inline errors. I quickly learned that authentication errors come from the backend, not the UI, which dictated a shift to banner-level alerts. It taught me that design must reflect system architecture, not just visual conventions.</p>
+    <p class="cs-p">The project didn't stall because of bad design — it stalled because of undefined behavior. Once I mapped out the logic, edge cases, and error states, the path to production became clear. This reinforced that my role isn't just to make things look good, but to untangle complexity so the team can ship.</p>
+    <div class="pull-quote">"Scope creep is sometimes scope correction. What felt like a bigger ask was actually the right-sized fix."</div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// Additional scope: supporting flows</div>
-    <h2 class="cs-h2">The login experience doesn't start at the login page.</h2>
-    <p class="cs-p">Once the core page was solved, I extended the same rigor to three adjacent surfaces that were part of the same authentication journey:</p>
+    <div class="s-label">// Business impact</div>
+    <h2 class="cs-h2">Why the login page matters at scale.</h2>
     <ul class="cs-list">
-      <li><strong>Invite emails</strong> — Refreshed branding, updated logo and product name references, updated deep-link format for new URL structure.</li>
-      <li><strong>Tenant selector (Workforce Passwords)</strong> — Added a portal dropdown so admins could distinguish which environment they were accessing — a real confusion point in multi-tenant setups.</li>
-      <li><strong>MFA confirmation screen</strong> — Added a countdown timer for TOTP codes, replacing the static instruction text that gave no signal on expiry.</li>
+      <li><strong>Reduced trust erosion at the authentication surface</strong> — Every activated customer's first platform interaction is this page. Moving from stale imagery to stable, brand-consistent texture directly reduces the phishing-perception risk that was documented in support tickets.</li>
+      <li><strong>Reduced support case volume</strong> — Clearer status messages, explicit button labels, and better error feedback addressed recurring "stuck login" confusion patterns from the Platform Support FAQ.</li>
+      <li><strong>Activation velocity</strong> — With major products targeting cloud-only by Q2 2026 and expanded activation in Q3, every improvement in first-login success rate compounds across thousands of activating users.</li>
+      <li><strong>Competitive parity</strong> — CyberArk and peer enterprise security companies use clean, texture-based login treatments. The previous approach was visibly behind market standard for an enterprise security product.</li>
+      <li><strong>Design system durability</strong> — The texture-only approach means no recurring update cycles for imagery. One design, one token set, minimal maintenance — freeing the team for higher-impact work.</li>
     </ul>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">// Outcome</div>
-    <h2 class="cs-h2">What changed and what I learned.</h2>
-    <p class="cs-p">The redesign shipped. The login page now runs fully on Shield Design System tokens — no exceptions. Future system updates (dark mode, rebranding, accessibility patches) propagate automatically.</p>
-    <ul class="cs-list">
-      <li>SSO-related support tickets dropped — users could now self-identify their error and take action without contacting support</li>
-      <li>WCAG AA compliance achieved, removing a procurement blocker for federal accounts</li>
-      <li>Engineering handoff was cleaner than any previous login work — everything mapped to the design system, no custom CSS to negotiate</li>
-    </ul>
-    <div class="pull-quote">"The biggest lesson: scope creep is sometimes scope correction. What felt like a bigger ask was actually the right-sized fix."</div>
-    <p class="cs-p">If I'd shipped just the visual refresh, we'd have updated the logo and still had 15 broken error states. The audit forced the right conversation. That's the job — not just making it look better, but making it actually work.</p>
+    <div class="s-label">// What's still open</div>
+    <h2 class="cs-h2">Tracked, documented, and handed off.</h2>
+    <p class="cs-p">Not everything shipped in this cycle. The following items were documented and tracked before handoff:</p>
+    <div class="open-table">
+      <div class="open-row header">
+        <div class="open-cell">Item</div>
+        <div class="open-cell">Status</div>
+        <div class="open-cell">Owner</div>
+      </div>
+      <div class="open-row">
+        <div class="open-cell">Marketing image confirmation</div>
+        <div class="open-cell"><strong>Pending</strong> — layout shared, awaiting response</div>
+        <div class="open-cell">Marketing</div>
+      </div>
+      <div class="open-row">
+        <div class="open-cell">Stakeholder sign-off on texture direction</div>
+        <div class="open-cell"><strong>Pending</strong></div>
+        <div class="open-cell">Stakeholder</div>
+      </div>
+      <div class="open-row">
+        <div class="open-cell">Mobile login spec (media query breakpoints)</div>
+        <div class="open-cell"><strong>Undefined</strong> — flagged in review, no design spec yet</div>
+        <div class="open-cell">TBD</div>
+      </div>
+      <div class="open-row">
+        <div class="open-cell">Dark mode grid dots bug (BIPS-34873)</div>
+        <div class="open-cell"><em>Triage — unassigned</em></div>
+        <div class="open-cell">Needs owner</div>
+      </div>
+      <div class="open-row">
+        <div class="open-cell">Contextual redirect messaging (USER-1507)</div>
+        <div class="open-cell"><em>In Progress</em></div>
+        <div class="open-cell">Engineering</div>
+      </div>
+    </div>
   </div>
 
 </div>

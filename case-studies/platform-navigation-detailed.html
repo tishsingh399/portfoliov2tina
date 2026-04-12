@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Platform Navigation — Detailed Case Study — Tina Singh</title>
-<meta name="description" content="Detailed case study: How I redesigned a fragmented multi-product navigation into a modular, scalable framework.">
+<meta name="description" content="How I rebuilt a fragmented multi-product navigation into a single Hub and Spoke architecture — eliminating 40% redundancy, unifying 1,000+ deep links, and delivering behavior specs engineering could actually ship.">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -37,75 +37,253 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
 nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
 .nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
 .nav-back:hover { color: var(--text); }
 .nav-back-arrow { color: var(--accent); }
 .nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.theme-toggle { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
 .cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-bg-num { position: absolute; top: -30px; right: 32px; font-family: 'Spectral', serif; font-size: clamp(160px, 22vw, 260px); font-weight: 600; line-height: 1; color: var(--border); user-select: none; pointer-events: none; letter-spacing: -0.05em; }
 .cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
 .cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+
 .cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
 .cs-section { margin-bottom: 80px; }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
 .cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-p:last-child { margin-bottom: 0; }
 .cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
 .cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
 .cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
-.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
-.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
-.cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
-.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 14px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
-.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
+
+.decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
+.decision-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; }
+.decision-num { font-family: 'Spectral', serif; font-size: 60px; font-weight: 600; line-height: 0.9; color: var(--border); user-select: none; padding-top: 4px; }
+.decision-h { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.decision-p { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--text2); }
+
+.security-list { border: 1px solid var(--border); margin-top: 22px; }
+.security-step { display: flex; align-items: flex-start; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+.security-step:last-child { border-bottom: none; }
+.step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
+.step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.step-text strong { font-weight: 500; color: var(--text); }
+
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 22px 0; }
+.arch-cell { background: var(--bg2); padding: 22px 24px; transition: background 0.3s; }
+.arch-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--accent-teal); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+.arch-name { font-family: 'Spectral', serif; font-size: 18px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+.arch-desc { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+
+.behavior-table { border: 1px solid var(--border); margin: 22px 0; }
+.behavior-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.behavior-row:last-child { border-bottom: none; }
+.behavior-row.header { background: var(--bg3); }
+.behavior-cell { padding: 13px 16px; font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.5; border-right: 1px solid var(--border); }
+.behavior-cell:last-child { border-right: none; }
+.behavior-row.header .behavior-cell { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.behavior-cell em { color: var(--accent-teal); font-style: normal; font-weight: 500; }
+.behavior-cell strong { color: var(--text); font-weight: 500; }
+
+.cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+.footer-back:hover { color: var(--text); }
+.footer-back-arrow { color: var(--accent); }
+.footer-copy { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--border); }
+
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="platform-navigation.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
-  <div class="nav-name">TINA SINGH</div>
+  <a href="platform-navigation.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Brief</a>
+  <span class="nav-name">Tina Singh</span>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
 </nav>
 
-<section class="cs-hero">
-  <div class="cs-tag">DETAILED CASE STUDY</div>
-  <h1 class="cs-h1">Platform Navigation Redesign</h1>
+<div class="cs-hero">
+  <div class="cs-bg-num">03</div>
+  <div class="cs-tag">Detailed Case Study</div>
+  <h1 class="cs-h1">Platform Navigation</h1>
   <p class="cs-sub">Systems Architecture for Scalable Usability — rebuilding navigation for a multi-product cybersecurity platform after four acquisitions.</p>
-</section>
-
-<div class="cs-body">
-  <div class="cs-section">
-    <div class="s-label">// PROBLEM</div>
-    <h2 class="cs-h2">Problem</h2>
-    <p class="cs-p">The platform's navigation was fragmented. Every new product acquisition brought its own navigation style, resulting in a "Frankenstein" user experience. Users had to relearn how to navigate between primary tools, and high-value features were buried under deep, inconsistent menus.</p>
-  </div>
-
-  <div class="cs-section">
-    <div class="s-label">// SOLUTION</div>
-    <h2 class="cs-h2">Solutions</h2>
-    <p class="cs-p">A modular navigation framework built with Shield's semantic tokens. Key features include:</p>
-    <ul class="cs-list">
-      <li>Pinned state for high-frequency access.</li>
-      <li>Unpinned state for focus on deep data analysis.</li>
-      <li>Consistent sub-navigation tiered logic.</li>
-    </ul>
-  </div>
-
-  <div class="cs-section">
-    <div class="s-label">// OUTCOME</div>
-    <h2 class="cs-h2">Impact</h2>
-    <ul class="cs-list">
-      <li>100% adoption within 4 months.</li>
-      <li>22% faster workflows across all product suites.</li>
-      <li>Unified routing via single JSON logic across 6 products.</li>
-    </ul>
-  </div>
 </div>
 
-<div class="cs-footer">// END OF RECORD</div>
+<div class="cs-body">
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// How it started</div>
+    <h2 class="cs-h2">Four acquisitions. Four navigation systems. No shared logic.</h2>
+    <p class="cs-p">The company had grown through acquisition. Each acquired product came with its own navigation architecture — its own URL structure, its own sidebar logic, its own concept of what "home" meant. When these products were being merged into a single platform, no one had unified the navigation layer. They'd just placed products next to each other and hoped users would figure it out.</p>
+    <p class="cs-p">The result was a "Frankenstein" navigation experience. Users switching between products felt like they were changing apps. Active states were contradictory — the same section could be highlighted in two different sidebars simultaneously. Deep links broke across suites. 40% of the visible menu items were redundant, appearing in multiple places with different labels for the same destination.</p>
+    <div class="pull-quote">"Navigation is how users build a mental model of a product. If that model breaks every time they cross a product boundary, trust collapses — and so does retention."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The audit</div>
+    <h2 class="cs-h2">Before designing, I had to understand what we had.</h2>
+    <p class="cs-p">I spent the first phase auditing every navigation surface across the six products. I documented every menu item, every route, every contextual label, and every state — hover, active, disabled, selected. What I found confirmed the scope of the problem:</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>40% redundancy</strong> — Nearly half of all navigation items existed in two or more places with inconsistent naming. "Reports" in one product was "Analytics" in another and "Audit Logs" in a third — all pointing to functionally similar views.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>1,000+ unmanaged routes</strong> — Deep links were hardcoded per-product with no shared routing logic. A link that worked in one suite's context would 404 or redirect incorrectly in another. Engineering was managing exceptions manually.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>No behavioral spec</strong> — There were no documented rules for how navigation should behave. Hover delays, fly-out timing, active state persistence, breadcrumb logic — these had never been defined. Every team had implemented their own interpretation.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">04</div>
+        <div class="step-text"><strong>Tenant switching confusion</strong> — Multi-tenant users — security admins managing multiple client environments — had no clear "where am I?" anchor. Switching tenants felt disorienting because the navigation didn't change in any meaningful way to signal context.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The architecture</div>
+    <h2 class="cs-h2">Hub and Spoke — one model for six products.</h2>
+    <p class="cs-p">I proposed a Hub and Spoke IA model. The core idea: separate global navigation from contextual navigation. Stop asking users to find their way through a monolithic sidebar that tried to do everything for every product simultaneously.</p>
+    <div class="arch-grid">
+      <div class="arch-cell">
+        <div class="arch-label">// GLOBAL BAR</div>
+        <div class="arch-name">The Hub</div>
+        <div class="arch-desc">Persistent across all products. Contains: Product switcher, Global search, User profile, Notifications. Answers: "Where can I go?" and "Who am I logged in as?" Never changes regardless of which suite is active.</div>
+      </div>
+      <div class="arch-cell">
+        <div class="arch-label">// SIDE RAIL</div>
+        <div class="arch-name">The Spoke</div>
+        <div class="arch-desc">Contextual to the active product. Contains only items relevant to the current suite. Collapses to a slim icon rail for deep work sessions. Expands to a labeled nav for orientation and discovery.</div>
+      </div>
+    </div>
+    <p class="cs-p">This separation gave users a stable global anchor (the hub) while letting each product's navigation be purpose-built for its workflows (the spoke). Users in the SIEM view got a SIEM-optimized sidebar. Users in endpoint management got endpoint-specific navigation. The product switcher moved them between contexts — but the global bar always stayed the same.</p>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Key design decisions</div>
+    <h2 class="cs-h2">Three decisions that defined the framework.</h2>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">01</div>
+        <div class="decision-body">
+          <div class="decision-h">Behavior before visuals</div>
+          <p class="decision-p">The most important decision was sequencing. I refused to open Figma until I had written the behavioral specification — a document defining every navigation state, every transition rule, every edge case. Hover delays for fly-outs (to prevent "diagonal mouse" frustration). How active state should persist when a user is three levels deep in a sub-menu. What breadcrumbs should show after a deep link. What happens when a user's session expires mid-navigation. Engineering needed these answers before a single pixel was placed.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">02</div>
+        <div class="decision-body">
+          <div class="decision-h">Single JSON payload for all routing</div>
+          <p class="decision-p">I worked with the engineering lead to define a single JSON routing payload that would govern navigation across all six products. Instead of each product maintaining its own routing table, one structured data file would define: the navigation tree, permission levels per item, active state logic, and deep link mappings. This meant that adding a new product or updating a navigation item required a change in one place — not six. It also meant QA could test routing behavior systematically, not product by product.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <div class="decision-h">Slim vs. Expanded rail — designed for real environments</div>
+          <p class="decision-p">Security operations center users work on wide monitors at high information density. They don't need a labeled sidebar eating 240px of horizontal space. I designed a Slim state (icon-only, 56px wide) that collapsed the sidebar without hiding it, preserving spatial awareness while maximizing content area. The transition between Slim and Expanded was state-persisted per user — your preference followed you across sessions. This required a simple localStorage flag but dramatically improved the experience for power users who spent 8-hour shifts in the platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Behavior specification</div>
+    <h2 class="cs-h2">Defining what had never been written down.</h2>
+    <p class="cs-p">The behavioral matrix was the most valuable deliverable of this project. It wasn't a Figma file — it was a structured document that engineering could implement directly. Here's a representative sample of what it covered:</p>
+    <div class="behavior-table">
+      <div class="behavior-row header">
+        <div class="behavior-cell">Scenario</div>
+        <div class="behavior-cell">Expected behavior</div>
+        <div class="behavior-cell">Notes</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">User navigates 3 levels deep</div>
+        <div class="behavior-cell"><em>Active state persists on all parent items</em></div>
+        <div class="behavior-cell">Breadcrumb shows full path</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">Fly-out menu — mouse hover</div>
+        <div class="behavior-cell"><em>150ms delay before open</em></div>
+        <div class="behavior-cell">Prevents accidental triggers on diagonal mouse movement</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">Product switcher — tenant switch</div>
+        <div class="behavior-cell"><em>Full context reset, global bar stays</em></div>
+        <div class="behavior-cell">Spoke reloads for new tenant. Banner confirms context.</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">Deep link from external source</div>
+        <div class="behavior-cell"><em>Nav state reconstructed from URL</em></div>
+        <div class="behavior-cell">JSON payload resolves active state from path params</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">Slim → Expanded transition</div>
+        <div class="behavior-cell"><em>200ms ease. Preference saved to localStorage.</em></div>
+        <div class="behavior-cell">State persists across sessions per user</div>
+      </div>
+      <div class="behavior-row">
+        <div class="behavior-cell">Session expiry mid-navigation</div>
+        <div class="behavior-cell"><em>Preserve current URL, redirect after re-auth</em></div>
+        <div class="behavior-cell">User returns to intended destination, not home</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The handoff</div>
+    <h2 class="cs-h2">Not just Figma files — a navigation matrix.</h2>
+    <p class="cs-p">Previous handoffs had been Figma-first: hand the engineer the frames, answer questions as they come up, patch issues in QA. This project flipped that model. I delivered three artifacts before a single Figma frame was handed over:</p>
+    <ul class="cs-list">
+      <li><strong>Behavioral specification</strong> — the full document covering every state, every transition, every edge case, written for engineering consumption</li>
+      <li><strong>Navigation matrix</strong> — a structured mapping of every URL path to a navigation state, active item, breadcrumb label, and permission level</li>
+      <li><strong>JSON schema</strong> — the structure for the routing payload, agreed on with engineering before implementation began</li>
+    </ul>
+    <p class="cs-p">Figma frames came last — and they were faster to build because the hard decisions had already been made. Engineering had fewer questions. QA had fewer surprises. The spec became the source of truth.</p>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// A key refinement</div>
+    <h2 class="cs-h2">The tenant switcher: from search box to dropdown.</h2>
+    <p class="cs-p">One of the most impactful late changes was the tenant switcher. The initial design used a search field — type to find your organization. In usability testing, this caused immediate confusion: users didn't know what to search for, and the input field felt like it required knowledge they didn't have (exact tenant names).</p>
+    <p class="cs-p">I replaced the search box with a dropdown — a pre-populated list of tenants the user was authorized to access, surfaced in priority order. The dropdown moved to the top global bar, making it a permanent "where am I?" anchor rather than a buried utility. This one change resolved the tenant switching confusion pattern that had appeared in multiple support tickets. Users could see their options instead of having to remember them.</p>
+    <div class="pull-quote">"The best navigation design is the one users don't notice. They just end up where they intended to go."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Outcome</div>
+    <h2 class="cs-h2">100% adoption in 4 months. One JSON file for all of it.</h2>
+    <p class="cs-p">The framework shipped and was adopted across all six products within four months. The JSON-driven routing eliminated the per-product navigation maintenance burden that had been generating ongoing engineering debt.</p>
+    <ul class="cs-list">
+      <li>40% navigation redundancy eliminated through the Hub & Spoke IA restructuring — menus got shorter, paths got clearer</li>
+      <li>1,000+ deep-link routes unified under a single JSON routing payload — no custom rewrites per product</li>
+      <li>22% faster cross-product workflows measured after rollout — the behavioral matrix meant engineers implemented it correctly the first time</li>
+      <li>Behavioral spec became the template for future platform components — proving that defining behavior before visuals is the right sequencing</li>
+    </ul>
+    <p class="cs-p">The biggest takeaway: navigation design is information architecture, not visual design. The visual execution took a fraction of the time once the structure was right. The work that mattered was the audit, the matrix, and the specification — the unglamorous foundation that let everything else ship cleanly.</p>
+  </div>
+
+</div>
+
+<footer class="cs-footer">
+  <a href="platform-navigation.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Brief</a>
+  <span class="footer-copy">© 2026 Tina Singh</span>
+</footer>
+
 <script>
 function toggleTheme() {
   const html = document.documentElement;
@@ -121,6 +299,13 @@ function toggleTheme() {
   const icon = document.getElementById('themeIcon');
   if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
 })();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
