@@ -513,8 +513,7 @@ nav {
   <div class="cs-section fade-in">
     <div class="s-label">My Role</div>
     <h2 class="cs-h2">End-to-end, on purpose.</h2>
-    <p class="cs-p">I handled everything: defining structure and content, designing layout and interaction, writing all case studies, building the site using HTML and CSS, and handling deployment and basic security considerations.</p>
-    <p class="cs-p">This was not about writing perfect code. It was about making correct decisions within my skill set.</p>
+    <p class="cs-p">I handled everything: structure and content, layout and interaction, all five case studies, the HTML and CSS build, deployment, and the infrastructure decisions that came after. Writing every line myself meant I owned every mistake in it too.</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -549,8 +548,7 @@ nav {
   <div class="cs-section fade-in">
     <div class="s-label">AI-Assisted Debugging & Deployment</div>
     <h2 class="cs-h2">Antigravity as a force multiplier.</h2>
-    <p class="cs-p">After the initial build, I used <strong style="color:var(--accent-teal, var(--accent))">Antigravity</strong> — Google DeepMind's agentic AI coding assistant — to debug and ship the next iteration. This wasn't about handing off design decisions. It was about extending my ability to execute with precision.</p>
-    <p class="cs-p">Here's exactly what was fixed in a single session:</p>
+    <p class="cs-p">After the initial build, I used <strong style="color:var(--accent-teal, var(--accent))">Antigravity</strong> to debug and ship the next iteration. Three things got fixed in one session:</p>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
@@ -562,12 +560,12 @@ nav {
       </div>
       <div class="security-step">
         <div class="step-icon">03</div>
-        <div class="step-text"><strong>Vercel deployment via CLI</strong> — connected the repo to GitHub (<code style="color:var(--accent);font-size:13px">tishsingh399/portfoliov2tina</code>), pushed fixes, and deployed to production using <code style="color:var(--accent);font-size:13px">vercel --prod</code>. Live in under 10 seconds.</div>
+        <div class="step-text"><strong>Vercel deployment via CLI</strong> — pushed fixes to GitHub and deployed to production using <code style="color:var(--accent);font-size:13px">vercel --prod</code>. Live in under 10 seconds.</div>
       </div>
     </div>
     <img src="images/portfolio-design-versions.png" alt="Portfolio design iterations — versions before the final" class="cs-img-full">
     <p class="cs-img-caption">// Different versions of the portfolio before landing on the final direction</p>
-    <div class="pull-quote">"I directed the diagnosis. AI executed the surgery. The decisions were mine — the velocity was collaborative."</div>
+    <div class="pull-quote">"I caught what was wrong. The AI fixed it. That division held for the whole session."</div>
   </div>
 
   <div class="cs-section fade-in">
@@ -612,21 +610,13 @@ nav {
   <div class="cs-section fade-in">
     <div class="s-label">The Domain</div>
     <h2 class="cs-h2">tinasingh.app — a real commitment.</h2>
-    <p class="cs-p">I bought a custom domain. That's not a technical decision — it's a product decision. A custom domain signals that this portfolio isn't a side experiment or a Notion doc shared as a link. It's something I own, maintain, and stand behind. The .app TLD enforces HTTPS by spec, which also meant I couldn't accidentally ship an insecure site even if I tried.</p>
-    <p class="cs-p">Connecting the domain to Vercel took under 10 minutes. The DNS propagation took longer than the actual work. But the decision to buy it — to treat this portfolio as a live product with a real address — was a more significant step than the technical setup.</p>
+    <p class="cs-p">I bought tinasingh.app. The setup took about 10 minutes. DNS propagated in a couple of hours. The .app TLD enforces HTTPS by spec, so security came with the purchase. The harder part was knowing that a domain is permanent in a way a Notion link isn't. This URL will show up in job applications for years. That made me more careful about what was actually shipping.</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">Infrastructure</div>
     <h2 class="cs-h2">$0/month professional email. Not straightforward.</h2>
-    <p class="cs-p">Getting hello@tinasingh.app working turned into a small infrastructure project. Zoho's "Forever Free" tier is region-locked — Alberta, Canada is excluded, and nowhere does the UI tell you that. Their SMTP setup also has a silent loop between personal and business account types. I spent time inside that loop before realizing the architecture itself was wrong, not my configuration.</p>
-    <p class="cs-p">Switched the model entirely. Instead of a hosted mailbox, serverless email routing via Cloudflare. That required migrating DNS nameservers from Vercel to Cloudflare mid-project, navigating ICANN registrant verification during a live transfer, and getting MX, SPF, and DKIM records configured correctly. Cloudflare's auto-fix handled most of it in one pass. The email now routes directly into Gmail. No second mailbox, no recurring cost.</p>
-    <ul class="cs-list">
-      <li>Nameserver delegation and MX/TXT record configuration</li>
-      <li>SPF + DKIM setup for 100% deliverability</li>
-      <li>Honeypot bot protection on the contact form</li>
-      <li>ICANN verification during live domain transfer with zero downtime</li>
-    </ul>
+    <p class="cs-p">Setting up hello@tinasingh.app hit a regional paywall on Zoho that isn't documented anywhere in their UI. Switched to Cloudflare email routing instead, which required migrating DNS nameservers mid-project and navigating ICANN verification during a live transfer. MX, SPF, and DKIM configured in one pass. Routes into Gmail. No second mailbox, no monthly fee.</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -660,22 +650,9 @@ nav {
   </div>
 
   <div class="cs-section fade-in">
-    <img src="images/login-current-vs-new.png" alt="Login redesign — current vs new design" class="cs-img-full">
-    <p class="cs-img-caption">// Login redesign: current state vs new design. Real screenshots, real work.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Why This Mattered</div>
-    <h2 class="cs-h2">More than a portfolio.</h2>
-    <p class="cs-p">This project shows how I approach ambiguous problems, work within constraints, and make decisions across design and implementation.</p>
-    <p class="cs-p">It reflects a shift in how I work. Instead of relying on tools to define the outcome, I define the structure and use tools to execute it.</p>
-    <p class="cs-p">The Antigravity and Claude Code iterations prove something else: I can work <em style="color:var(--accent)">with</em> AI tools effectively — not as a crutch, but as a deliberate extension of my process. When the AI drifted (fake images, wrong widths, ignored instructions), I didn't debug it with complaints — I debugged it with a design contract. DESIGN.md is the artifact of that. The decisions were mine. The discipline was mine.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">What I Learned</div>
-    <div class="pull-quote">"You don't need to be a frontend engineer to build something functional and thoughtful. You need to understand what matters, make clear decisions, and accept trade-offs."</div>
-    <p class="cs-p">Constraint-driven work often produces better outcomes than waiting for ideal conditions. The discipline of building with limits forces you to be precise about what actually matters.</p>
+    <div class="s-label">What I learned</div>
+    <p class="cs-p">AI-generated work left alone drifts fast. Fake screenshots, wrong card order, images stretched past the container. None of those are failures of the tool exactly. They're what happens when you stop checking. Writing DESIGN.md was just a more efficient way to keep checking.</p>
+    <p class="cs-p">The constraint that slowed me down most wasn't the code. It was deciding what the portfolio actually needed to say, and what to leave out.</p>
   </div>
 
 </div>
