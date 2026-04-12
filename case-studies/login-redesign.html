@@ -197,74 +197,72 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Challenge</div>
-    <h2 class="cs-h2">Where It Started: The Old Login Page Was Working Against Us.</h2>
-    <p class="cs-p">The login page is the "Front Door" of the company. It’s what customers see first. For years, the login page was a standalone piece of code that didn’t use the design system. It was inconsistent with the product it was letting people into.</p>
-    <div class="s-label" style="margin-top:32px;">The Risks:</div>
+    <div class="s-label">The Context</div>
+    <h2 class="cs-h2">A 2-year stall. Restarted in 3 days.</h2>
+    <p class="cs-p">This project had been stuck since 2023 — undefined requirements, no clear owner. In 2025, a simple mockup I put together sparked renewed interest. I was handed a "visual refresh." I quickly identified it needed to be more than that.</p>
+    <p class="cs-p">The login page is the first surface every cloud customer sees permanently — when accounts activate, users are moved from product-specific URLs to this centralised page with no opt-out. A dated, inconsistent experience for a <strong>cybersecurity company</strong> creates a trust problem before anyone has even signed in.</p>
+    <div class="s-label" style="margin-top:32px;">Five pain points from the audit:</div>
     <ul class="cs-list">
-      <li><strong>Trust gap:</strong> A dated, unbranded login page looks suspicious to security professionals (it resembles a phishing attempt).</li>
-      <li><strong>Functional failure:</strong> The page lacked clear error handling for SSO (Single Sign-On) failures, leading to high support ticket volume.</li>
-      <li><strong>Performance:</strong> Large, unoptimized background images caused slow load times on mobile connections.</li>
+      <li><strong>Inconsistent visuals:</strong> Typography, spacing, and color drifted across login, MFA, and confirmation screens.</li>
+      <li><strong>Weak feedback:</strong> The "Authenticating" state was static — users couldn’t tell if the system was working or stuck.</li>
+      <li><strong>Ambiguous actions:</strong> Generic "Confirm" buttons during security-critical steps increased cognitive load.</li>
+      <li><strong>Fragmented flows:</strong> Forgot Password and Context Switching felt bolted on, not designed in.</li>
+      <li><strong>Brand misalignment:</strong> The platform had evolved; login still showed outdated naming and visuals.</li>
     </ul>
     <img src="images/login-competitor-audit.png" alt="Competitor login audit — Vault, CyberArk, CrowdStrike" class="cs-img-full">
-    <p class="cs-img-caption">// Competitor audit: how Vault, CyberArk, and CrowdStrike handle login</p>
+    <p class="cs-img-caption">// Competitor audit: how Vault, CyberArk, and CrowdStrike handle authentication entry</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">What I Did</div>
-    <h2 class="cs-h2">Turning a Trust Liability Into a Brand Moment.</h2>
+    <div class="s-label">What I Changed</div>
+    <h2 class="cs-h2">Logic first. Then visuals.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">System Integration</div>
-          <p class="decision-p">I brought the login page into the Design System. This meant using the same typography, shadows, and button components as the core product.</p>
+          <div class="decision-h">Microcopy that reflects the action</div>
+          <p class="decision-p">"Confirm" → <strong>"Verify"</strong>, <strong>"Send Code"</strong>, <strong>"Reset Password"</strong>. "Authenticating..." → <strong>"Signing you in..."</strong> with a visible loading indicator. Every label now reflects consequence, not just direction.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Error Taxonomy</div>
-          <p class="decision-p">I worked with the IAM (Identity and Access Management) engineers to map every potential failure state to a specific UI feedback. We moved from generic "Login Failed" messages to actionable help (e.g., "Your SSO session has expired. Please re-authenticate through your provider.").</p>
+          <div class="decision-h">A design system login — for the first time</div>
+          <p class="decision-p">Brought the login page into Shield Design System. Same typography, spacing scales, button components, and focus states as the core product. The flow now feels like a continuation of the platform, not a separate site.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Progressive Disclosure</div>
-          <p class="decision-p">The new design uses a two-step login flow:<br>Step 1: Identify the user (Email).<br>Step 2: Determine the authentication method (Password vs. SSO vs. MFA).<br>This reduced visual clutter and allowed for a faster path to the product for SSO users.</p>
+          <div class="decision-h">What authentication errors taught me</div>
+          <p class="decision-p">I initially used inline errors on form fields. Authentication errors come from the backend — not the UI. Inline form errors were architecturally wrong for this context. I shifted to banner alerts. <strong>Design must reflect system architecture, not just visual convention.</strong></p>
         </div>
       </div>
     </div>
     <img src="images/login-iterations.png" alt="Login design iterations — current, V1, V2" class="cs-img-full">
-    <p class="cs-img-caption">// Current state + Design V1 + Design V2 iterations</p>
+    <p class="cs-img-caption">// Current state → Design V1 → Design V2</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Implementation</div>
-    <h2 class="cs-h2">Accessibility and Brand Alignment.</h2>
+    <div class="s-label">Outcome</div>
+    <h2 class="cs-h2">Shipped. Cleaner handoff. Fewer open questions.</h2>
     <div class="security-list">
       <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Accessibility First</strong> — The new login page was built to be fully keyboard-navigable and screen-reader compliant, meeting the strict requirements for federal agency users.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Unified visual language</strong> across login, MFA, error states, Forgot Password, and Context Switching — all aligned to SDS for the first time.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Updated Branding</strong> — Refreshed logos, product names, and alt text across all touchpoints, including invite emails and deep links.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Reduced "stuck" support tickets</strong> — explicit status messaging addressed the most common user confusion during authentication latency.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Login Portal Dropdown</strong> — Added a portal selector in the Workforce Passwords UI to help admins understand which environment they are accessing.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Engineering had what it needed</strong> — mapped logic, edge cases, and error states before handoff eliminated the ambiguity that had kept this project stalled for two years.</div>
       </div>
     </div>
     <img src="images/login-current-vs-new.png" alt="Current login vs new design in light and dark mode" class="cs-img-full">
     <p class="cs-img-caption">// Current (left) vs new design — light and dark mode</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Impact & Learnings</div>
-    <div class="pull-quote">"This project transformed a stalled, undefined feature into a polished system entry point."</div>
-    <p class="cs-p">By addressing the underlying logic and system infrastructure instead of just the visual gloss, the redesign solved critical support load issues while re-establishing user trust from the very first interaction.</p>
+    <div class="pull-quote">"The project didn’t stall because of bad design — it stalled because of undefined behavior. Once I mapped the logic, the path to production became clear."</div>
   </div>
 
 </div>
@@ -272,7 +270,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-actions fade-in">
   <div>
     <div class="cs-actions-label">// Full Documentation</div>
-    <p class="cs-actions-msg">There's a detailed version of this case study — every decision, the rejected directions, the constraints I navigated, and what I'd do differently. I don't put it on a public link. I share it in the room when someone's genuinely curious.</p>
+    <p class="cs-actions-msg">A more detailed write-up of this project exists — the full process, what was explored and set aside, and what I'd approach differently. Happy to walk through it if you'd like to go deeper.</p>
   </div>
   <div class="cs-actions-btns">
     <a href="portfolio-as-product.html" class="cs-btn-next">Next Case Study →</a>

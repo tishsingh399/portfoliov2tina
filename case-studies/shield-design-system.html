@@ -270,58 +270,76 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">What Was Broken</h2>
-    <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
+    <h2 class="cs-h2">What I walked into.</h2>
+    <p class="cs-p">The Shield Design System existed technically — a shared Figma file that nobody trusted. Designers detached components at a <strong>40% rate</strong>. Products looked different from each other. Dark mode was handled per-product with hardcoded values. Federal accessibility audits produced inconsistent results, putting government contracts at real risk.</p>
+    <p class="cs-p">I audited the v3.0 library and found 100+ components misaligned between what Figma showed and what engineering had built. The same UI got built twice because nobody trusted the source. This wasn't a cosmetic problem — the company sells to US federal agencies under contracts requiring Section 508 compliance and VPAT maintenance. The estimated contract exposure: <strong>$60M–$140M</strong>.</p>
     <img src="images/shield-component-library.png" alt="Legacy component library vs new Shield Design System library" class="cs-img-full">
-    <p class="cs-img-caption">// Legacy Library 1, Legacy Library 2, and the unified existing library</p>
+    <p class="cs-img-caption">// Legacy Library 1 → Legacy Library 2 → unified existing library</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">Scope & Execution</div>
-    <h2 class="cs-h2">What I Owned</h2>
+    <h2 class="cs-h2">What I owned, start to finish.</h2>
     <ul class="cs-list">
-      <li><strong>Initial Audit:</strong> Mapped inconsistencies across 6 legacy platforms.</li>
-      <li><strong>Component Rebuild:</strong> Hand-crafted and strictly defined variants bridging the gap to engineering.</li>
-      <li><strong>Token Architecture:</strong> Defined a multi-layer strategy to enforce theming via CSS rules.</li>
-      <li><strong>Documentation Migration:</strong> Unified guidance and code demos.</li>
-      <li><strong>Governance Model:</strong> Created formal entry gates for new components.</li>
+      <li><strong>Audit:</strong> Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioural view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</li>
+      <li><strong>Naming conflicts:</strong> Resolved "Tiles vs Cards" — teams used both interchangeably, blurring accessibility focus state requirements. Defined Tiles as navigation triggers, Cards as content containers. One decision, five products clarified.</li>
+      <li><strong>Token architecture:</strong> Built a three-layer Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.</li>
+      <li><strong>Documentation:</strong> Migrated usage guidance, token references, and code demos into a single versioned Storybook + README framework. Designers and engineers read the same source.</li>
+      <li><strong>Governance:</strong> Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</li>
     </ul>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Implementation</div>
-    <h2 class="cs-h2">Decisions Made</h2>
+    <div class="s-label">Key Decision</div>
+    <h2 class="cs-h2">A hybrid architecture — deliberately.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Three-layer token architecture</div>
-          <p class="decision-p">Transitioned from hardcoded hex values to a <strong>Primitive → Semantic → Component</strong> variable structure. This allowed framework abstraction, so updating a primary button color seamlessly pushed updates to both the Angular and React frontends without touching the components directly.</p>
+          <div class="decision-h">Current: Component tokens → Primitives</div>
+          <p class="decision-p">For speed and immediate stability during rollout. Two products ran legacy frameworks (PrimeNG, custom Angular) that couldn't consume tokens natively — I wrote migration guides mapping hardcoded values to semantic tokens to keep adoption low-effort.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Governance model</div>
-          <p class="decision-p">Defined formal entry gates for adoption. Clarified component definitions (e.g., Tiles vs. Cards) so designers stopped creating divergent patterns due to naming confusion. Created a submission-and-review protocol mapped to Jira.</p>
+          <div class="decision-h">Future: Component tokens → Semantics → Primitives</div>
+          <p class="decision-p">I documented and championed the full three-layer roadmap. Moving component tokens to reference semantics will fully decouple intent from implementation. I needed teams to trust the system before asking them to trust additional abstraction. This was a conscious decision, not a shortcut.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Documentation Migration</div>
-          <p class="decision-p">Unified product guidance, exact design tokens, and live code demos into a single versioned framework that engineers actually trusted and read.</p>
+          <div class="decision-h">Token naming that explains itself</div>
+          <p class="decision-p">Semantic tokens: <strong>{category}.{role}.{state}.{mode}</strong>. Component tokens: <strong>{component}.{variant}.{state}-{element}.{attribute}</strong>. Designers and engineers can read a token name and understand what it controls without needing documentation. Automation tools can parse the taxonomy without special logic.</p>
         </div>
       </div>
     </div>
     <img src="images/shield-design-code-diagram.jpg" alt="Shield Design System — Design and Code architecture" class="cs-img">
-    <p class="cs-img-caption">// Token architecture: Design → Shield Design System → Development</p>
+    <p class="cs-img-caption">// Token flow: Design → Shield Design System → Development</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Outcome</div>
-    <div class="pull-quote">"Protected an estimated $60M–$140M in federal contract exposure."</div>
-    <p class="cs-p">Why it mattered: Federal contracts require stringent <strong>Section 508</strong> and VPAT accessibility compliance. By strictly enforcing WCAG AA+ contrast at the token layer, we eliminated disqualification risk during procurement reviews. Furthermore, we recovered hundreds of engineering hours by slashing component detaches from 40% to <1%.</p>
+    <h2 class="cs-h2">Measured. Verified. Still running.</h2>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">↓</div>
+        <div class="step-text"><strong>Detach rate: 40% → under 1%</strong> — Hundreds of engineering hours per quarter returned to feature work instead of rebuilding UI that already existed in the system.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">↑</div>
+        <div class="step-text"><strong>Component usage: 7,000 → 61,000+ insertions per quarter</strong> — Across 6 products and 11 teams. 90% system-wide adoption. All numbers verified via design analytics tooling.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>791 variables, 94,000+ tokens in production</strong> — Light and dark mode. AA+ contrast. Section 508 alignment. Procurement risk from accessibility failures mitigated across 16 active VPATs.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">!</div>
+        <div class="step-text"><strong>What I still question:</strong> Adoption metrics confirm teams use the system. They don't confirm teams understand it well enough to extend it correctly without me. The gap between usage and genuine shared ownership is unsolved.</div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -329,7 +347,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-actions fade-in">
   <div>
     <div class="cs-actions-label">// Full Documentation</div>
-    <p class="cs-actions-msg">There's a detailed version of this case study — every decision, the rejected directions, the constraints I navigated, and what I'd do differently. I don't put it on a public link. I share it in the room when someone's genuinely curious.</p>
+    <p class="cs-actions-msg">A more detailed write-up of this project exists — the full process, what was explored and set aside, and what I'd approach differently. Happy to walk through it if you'd like to go deeper.</p>
   </div>
   <div class="cs-actions-btns">
     <a href="inline-alert.html" class="cs-btn-next">Next Case Study →</a>

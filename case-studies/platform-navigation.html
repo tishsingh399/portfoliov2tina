@@ -193,79 +193,61 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Goal</div>
-    <h2 class="cs-h2">A unified navigation framework.</h2>
-    <p class="cs-p">We needed a single source of truth for routing that solved three core issues:</p>
-    <ul class="cs-list">
-      <li>Works for single-product users and multi-product enterprise admins.</li>
-      <li>Supports 1,000+ deep links without breaking the UI.</li>
-      <li>Scales from a 13" laptop to a 40" security operations center monitor.</li>
-    </ul>
+    <div class="s-label">The Problem</div>
+    <h2 class="cs-h2">Navigation as a bottleneck.</h2>
+    <p class="cs-p">As the platform expanded across multiple products, navigation stopped being an enabler and started being a blocker. Behavior changed from one product to another. Users didn't know where they were. Developers maintained separate codebases for the same UI. New product integrations slowed because navigation had to be reinvented each time.</p>
+    <p class="cs-p">The problem was <strong>architectural, not visual</strong>. No shared logic for states like pin/unpin, no persistence model, no defined behavior for hierarchy and tenant switching. What looked like a styling problem was actually undefined behavior.</p>
     <img src="images/nav-before-after.png" alt="Navigation before and after redesign" class="cs-img-full">
-    <p class="cs-img-caption">// Before: fragmented nav structure. After: unified hub-and-spoke model</p>
+    <p class="cs-img-caption">// Before: fragmented, annotated with issues. After: unified hub-and-spoke</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Implementation</div>
-    <h2 class="cs-h2">Phases to production.</h2>
+    <div class="s-label">My Approach</div>
+    <h2 class="cs-h2">Interaction logic before visuals.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 1: Information Architecture (IA)</div>
-          <p class="decision-p">I audited every menu item across 6 products. I discovered that 40% of the links were redundant. I proposed a "Hub and Spoke" model:<br>
-            • <strong>The Global Bar:</strong> Product switcher, User profile, Global search.<br>
-            • <strong>The Side Rail:</strong> Contextual navigation for the active product.</p>
+          <div class="decision-h">Replaced static mocks with full lifecycle prototypes</div>
+          <p class="decision-p">Documented every state: Hover, Focus, Active, Pinned, Expanded, Collapsed — in both light and dark mode. This gave stakeholders behavior to react to, not just pixels. The UXA team used the state map to build a functional proof of concept immediately after handoff.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 2: Interactive States & Tokens</div>
-          <p class="decision-p">Navigation isn't just a list of links; it's a series of behaviors. I defined:<br>
-            • <strong>Active state logic:</strong> What happens when a user is in a sub-sub-menu?<br>
-            • <strong>Hover behaviors:</strong> Delay timings for fly-out menus to prevent "diagonal mouse" frustration.<br>
-            • <strong>Responsiveness:</strong> A "Slim" vs. "Expanded" state for the sidebar.</p>
+          <div class="decision-h">Pin/unpin: three prototypes, one decision</div>
+          <p class="decision-p">To define the pinned state, I built three distinct prototypes: a solid pin for clarity, an outline pin with an accent ring for dark mode visibility, and a dynamic motion-based indicator. Each was fully interactive and linked to design tokens. The final model uses action-based labels, instant persistent feedback, and <strong>160ms fade and scale transitions</strong> aligned to SDS tokens.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 3: The Handoff</div>
-          <p class="decision-p">Instead of just handing off Figma files, I delivered a Navigation Matrix—a spreadsheet mapping every URL path to a navigation state. This became the source of truth for the engineering team.</p>
+          <div class="decision-h">Token-driven theming throughout</div>
+          <p class="decision-p">Colors, typography, spacing, and elevation mapped to semantic tokens — <strong>icon.action.active</strong> for built-in accessibility and theming. The nav is consistent in light and dark mode and aligned to the design system without manual overrides.</p>
         </div>
       </div>
     </div>
     <img src="images/nav-light-dark.png" alt="Navigation in light and dark mode" class="cs-img-full">
-    <p class="cs-img-caption">// Light mode and dark mode — same nav structure, token-driven theming</p>
+    <p class="cs-img-caption">// Light and dark mode — same structure, same tokens, no manual overrides</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Impact</div>
     <div class="security-list">
       <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Reduced TTM:</strong> Engineering now uses a single JSON-driven navigation module, significantly reducing frontend dev time.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Engineering built a working POC immediately</strong> from the state map. No back-and-forth on "what does hover do?" or "what happens to pinned items after tenant switch?"</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>User Success:</strong> Established a consistent mental model for users moving between products, reducing navigation errors and friction.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Tenant switcher simplified</strong> from a search box to a dropdown in the top global bar — gave users a consistent "where am I?" anchor across all products.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Operational Efficiency:</strong> Eliminated the "logic gaps" in handoff, cutting down QA cycles related to navigation bugs.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">04</div>
-        <div class="step-text"><strong>System Adoption:</strong> The logic defined here became the standard for future platform components, proving the value of a token-driven interaction model.</div>
+        <div class="step-icon">→</div>
+        <div class="step-text"><strong>Defined behavior became the system standard</strong> for future platform components. The logic introduced here prevented future navigation debt.</div>
       </div>
     </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Reflection</div>
-    <div class="pull-quote">"I learned that polished visuals fail if behavior is unclear. My goal was to create a system with straightforward rules so teams could build confidently."</div>
-    <p class="cs-p">A key refinement was the site-switching experience. Initially, complex controls confused users about their location. By simplifying the tenant switcher from a search box to a dropdown and moving it to the top global bar, I provided a clear "where am I?" anchor. This small shift in IA made the entire platform feel more integrated.</p>
+    <div class="pull-quote">"Polished visuals fail when behavior is undefined. My role was to give the system rules clear enough that teams could build from them without me in the room."</div>
   </div>
 
 </div>
@@ -273,7 +255,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-actions fade-in">
   <div>
     <div class="cs-actions-label">// Full Documentation</div>
-    <p class="cs-actions-msg">There's a detailed version of this case study — every decision, the rejected directions, the constraints I navigated, and what I'd do differently. I don't put it on a public link. I share it in the room when someone's genuinely curious.</p>
+    <p class="cs-actions-msg">A more detailed write-up of this project exists — the full process, what was explored and set aside, and what I'd approach differently. Happy to walk through it if you'd like to go deeper.</p>
   </div>
   <div class="cs-actions-btns">
     <a href="login-redesign.html" class="cs-btn-next">Next Case Study →</a>

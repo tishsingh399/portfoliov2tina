@@ -193,55 +193,51 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Alert Fatigue.</h2>
+    <h2 class="cs-h2">Banner blindness.</h2>
+    <p class="cs-p">In complex workflows, users were overlooking critical errors because the system used global banners for everything — from system outages to "save successful" messages. When I audited message types across six product areas, I found that <strong>40% of what teams called "banners" were actually contextual errors</strong> that belonged near the form field causing the problem, not at the top of the screen.</p>
+    <p class="cs-p">The core insight: <strong>proximity</strong>. An error message is only useful if it's visible when the user is trying to fix it. A banner at the top of a page doesn't help someone filling out a form at the bottom.</p>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
-        <div class="step-text"><strong>No hierarchy:</strong> Banners vs. Inline vs. Toast messages were used interchangeably.</div>
+        <div class="step-text"><strong>No hierarchy:</strong> Banners, inline messages, and toasts were used interchangeably — no shared taxonomy across 6 products.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">02</div>
-        <div class="step-text"><strong>Color misuse:</strong> Red was used for "Critical Errors" but also for "Expired Trials" (which aren't critical to safe operation).</div>
+        <div class="step-text"><strong>Alert fatigue:</strong> Stakeholders wanted all alerts sticky and permanent. I pushed back: if every announcement is permanent, users tune them out — including actual security warnings.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">03</div>
-        <div class="step-text"><strong>Heavyweight:</strong> The existing alert took up 80px of vertical space, pushing content below the fold.</div>
+        <div class="step-text"><strong>Missing middle layer:</strong> Banners (global) and toasts (transient) existed. Nothing sat contextually, inline, next to the source of an error.</div>
       </div>
     </div>
     <img src="images/alert-types.png" alt="Banner, Toast, and Inline alert comparison" class="cs-img-full">
-    <p class="cs-img-caption">// Three alert types — Banner, Toast, Inline — and when each fires</p>
+    <p class="cs-img-caption">// Banners (global) · Inline Alerts (contextual) · Toasts (transient) — the three-tier taxonomy</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Solution</div>
-    <h2 class="cs-h2">A multi-phase semantic structural repair.</h2>
+    <h2 class="cs-h2">A clear taxonomy. Negotiated across 7 teams.</h2>
+    <p class="cs-p">Dec 2024 – May 2025. I led the definition, design, and rollout of the feedback taxonomy — not just designing the component in Figma, but negotiating usage contracts with 7+ product teams to ensure the pattern actually replaced the old habits.</p>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 1: Taxonomy & Logic</div>
-          <p class="decision-p">I shifted the focus from "What does it look like?" to "What is it doing?". I defined four specific alert levels:<br>
-            1. <strong>Critical:</strong> Immediate action required to prevent data loss or security breach. (Red)<br>
-            2. <strong>Warning:</strong> Potential issue; proceed with caution. (Orange)<br>
-            3. <strong>Info:</strong> Contextual help; no action needed. (Blue/Grey)<br>
-            4. <strong>Success:</strong> Confirmation of a user-initiated task. (Green)</p>
+          <div class="decision-h">Taxonomy first, component second</div>
+          <p class="decision-p">I shifted the question from "What does it look like?" to "What is it doing?" Four severity levels: <strong>Critical</strong> (blocks work, permanent), <strong>Warning</strong> (proceed with caution), <strong>Info</strong> (contextual, no action needed), <strong>Success</strong> (user-initiated confirmation). Only errors that stop work are permanent. Everything else is dismissible.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 2: Component Architecture</div>
-          <p class="decision-p">I rebuilt the component to be modular.<br>
-            • <strong>Dismissibility:</strong> Optional (some legal alerts must stay visible).<br>
-            • <strong>Actionability:</strong> Added support for primary/secondary buttons.<br>
-            • <strong>Compact mode:</strong> Reduced the height to 48px for dense data tables.</p>
+          <div class="decision-h">Token-first architecture</div>
+          <p class="decision-p">Token structure: <strong>color.feedback.*</strong>, spacing.xs, radius.sm. WCAG 2.1 AA verified via Stark. Chromatic automated regression builds prevented style leaks across legacy code — critical for engineering trust.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Phase 3: Adoption & Tokenization</div>
-          <p class="decision-p">I mapped the alert colors to our new Semantic Tokens. This ensured that if the "Warning Orange" needed to be changed for accessibility (WCAG AA), it would update across all products simultaneously.</p>
+          <div class="decision-h">Migration guides as the adoption lever</div>
+          <p class="decision-p">Audited existing flows (including the Login Redesign) to prove 40% of "banners" were actually contextual errors. Used that data to persuade teams. Wrote migration guides mapping hardcoded values to semantic tokens. Made adoption the path of least resistance.</p>
         </div>
       </div>
     </div>
@@ -251,8 +247,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-section fade-in">
     <div class="s-label">Reflection</div>
-    <div class="pull-quote">"By re-establishing feedback hierarchy, it made the design system more predictable, accessible, and easier to scale."</div>
-    <p class="cs-p">The Inline Alert may be a small component, but it solved a large structural issue. It now serves as the bridge between banners and toasts, anchoring how communication patterns behave across the platform.</p>
+    <div class="pull-quote">"A small component. A large structural fix. Global banner misuse dropped 70% after rollout."</div>
+    <p class="cs-p">The Inline Alert solved a pattern problem, not a visual problem. It introduced a missing middle layer that made banners mean something again — because when everything is a banner, nothing is.</p>
   </div>
 
 </div>
@@ -260,7 +256,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <div class="cs-actions fade-in">
   <div>
     <div class="cs-actions-label">// Full Documentation</div>
-    <p class="cs-actions-msg">There's a detailed version of this case study — every decision, the rejected directions, the constraints I navigated, and what I'd do differently. I don't put it on a public link. I share it in the room when someone's genuinely curious.</p>
+    <p class="cs-actions-msg">A more detailed write-up of this project exists — the full process, what was explored and set aside, and what I'd approach differently. Happy to walk through it if you'd like to go deeper.</p>
   </div>
   <div class="cs-actions-btns">
     <a href="platform-navigation.html" class="cs-btn-next">Next Case Study →</a>
