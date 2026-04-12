@@ -4,3 +4,8 @@ Thumbs.db
 *.env.local
 .vercel
 node_modules/
+
+# Local-only folders — not for the repo
+tools/
+notion export/
+case-study-technical.md
