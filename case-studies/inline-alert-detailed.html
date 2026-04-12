@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inline Alert — Detailed Case Study — Tina Singh</title>
+<meta name="description" content="Detailed case study: How I redesigned the messaging architecture from a binary choice into a tiered system that respects user context and actionability.">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
+  --yellow:  #f5c542;
+}
+[data-theme="light"] {
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
+  --text:    #1a1a1a;
+  --text2:   #555555;
+  --muted:   #999999;
+  --border:  #d4d4d4;
+  --accent:  #e04420;
+  --accent2: #bc3518;
+  --accent-teal: #008573;
+  --yellow:  #b87a00;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-back:hover { color: var(--text); }
+.nav-back-arrow { color: var(--accent); }
+.nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+.cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
+.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+.cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
+.cs-section { margin-bottom: 80px; }
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+.cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
+.cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="inline-alert.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
+  <div class="nav-name">TINA SINGH</div>
+</nav>
+
+<section class="cs-hero">
+  <div class="cs-tag">DETAILED CASE STUDY</div>
+  <h1 class="cs-h1">Inline Alert</h1>
+  <p class="cs-sub">Establishing Clarity Between Banners, Toasts, and Contextual Feedback — redesigning a broken messaging architecture.</p>
+</section>
+
+<div class="cs-body">
+  <div class="cs-section">
+    <div class="s-label">// OVERVIEW</div>
+    <h2 class="cs-h2">Overview</h2>
+    <p class="cs-p">The feedback system was incoherent. "Inline Alerts" was one of the missing components in the library. Users were receiving global banners for local input errors, or toasts that vanished before they could be read. I led the redesign of the messaging architecture, moving from a binary choice (Banner or Toast) to a tiered system that respected user context and actionability.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// AUDIT & RESEARCH</div>
+    <h2 class="cs-h2">Audit & Research</h2>
+    <p class="cs-p">During the audit, I mapped message types across six product areas and identified a "missing middle" layer. Users struggled to differentiate between global system alerts and local form errors. I analyzed patterns in Carbon and Polaris to define a clear hierarchy: Banners (Global), Inline Alerts (Contextual), and Toasts (Transient).</p>
+    <img src="images/alert-hierarchy.png" alt="Messaging hierarchy: Banner (global), Inline Alert (contextual), Toast (transient)" class="cs-img fade-in">
+    <p class="cs-img-cap">// Hierarchy — Banner (global) → Inline Alert (contextual) → Toast (transient)</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// VARIANTS</div>
+    <h2 class="cs-h2">Variants</h2>
+    <ul class="cs-list">
+      <li><strong>Info:</strong> Neutral guidance or feature discovery.</li>
+      <li><strong>Success:</strong> Confirmation of positive action.</li>
+      <li><strong>Warning:</strong> Potential issue, requires caution.</li>
+      <li><strong>Error:</strong> Critical blocker or failure.</li>
+    </ul>
+    <img src="images/alert-variants.png" alt="All four alert variants — Critical, Warning, Info, Success in full and compact modes" class="cs-img fade-in">
+    <p class="cs-img-cap">// Four variants — Critical / Warning / Info / Success, full and 48px compact</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// OUTCOME</div>
+    <h2 class="cs-h2">Impact</h2>
+    <ul class="cs-list">
+      <li>Shifted the system from "shouting" to "guiding."</li>
+      <li>Adopted platform-wide across all six product areas.</li>
+      <li>Compact 48px mode for dense dashboard environments.</li>
+      <li>Tokenized mapping ensuring WCAG AA compliance automatically.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cs-footer">// END OF RECORD</div>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

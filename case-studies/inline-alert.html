@@ -54,15 +54,16 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
-.stat-card { display: inline-flex; flex-direction: column; gap: 13px; padding: 22px 28px; border: 2px solid var(--border); background: var(--bg2); margin-bottom: 52px; position: relative; z-index: 1; transition: background 0.3s, border-color 0.3s; }
-.stat-card-title { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
-.stat-row { display: flex; align-items: center; gap: 14px; }
-.stat-name { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); width: 82px; letter-spacing: 0.04em; }
-.stat-pips { display: flex; gap: 4px; }
-.pip { width: 10px; height: 10px; background: var(--accent); flex-shrink: 0; }
-.pip.off { background: var(--border); }
-.pip.teal { background: var(--accent-teal); }
-.stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
+.cs-glance { border: 1px solid var(--border); background: var(--bg2); padding: 24px 28px; margin-bottom: 52px; position: relative; z-index: 1; max-width: 580px; transition: background 0.3s, border-color 0.3s; }
+.cs-glance-header { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; }
+.cs-glance-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.cs-glance-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; }
+.cs-glance-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.06em; white-space: nowrap; }
+.cs-glance-val { font-size: 13px; font-weight: 400; color: var(--text2); line-height: 1.55; }
+.cs-glance-divider { border-top: 1px solid var(--border); margin: 16px 0; }
+.cs-glance-outcomes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cs-glance-outcomes li { font-size: 13px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
+.cs-glance-outcomes li::before { content: '→'; color: var(--accent-teal); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
 .cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
@@ -114,6 +115,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
+.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 </style>
 </head>
 <body>
@@ -131,32 +134,24 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <h1 class="cs-h1">Inline Alert</h1>
   <p class="cs-sub">Solving Alert Fatigue in Security Software.</p>
 
-  <div class="stat-card fade-in">
-    <div class="stat-card-title">// ALERT EFFICIENCY</div>
-    <div class="stat-row">
-      <span class="stat-name">HIERARCHY</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div>
+  <div class="cs-glance fade-in">
+    <div class="cs-glance-header">// AT A GLANCE</div>
+    <div class="cs-glance-meta">
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">ROLE</span>
+        <span class="cs-glance-val">UI Designer · Component & Pattern Design</span>
       </div>
-      <span class="stat-val">4 LEVELS</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">FATIGUE</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip off"></div><div class="pip off"></div>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">PROBLEM</span>
+        <span class="cs-glance-val">One visual style covered all severity levels — users stopped reading alerts entirely</span>
       </div>
-      <span class="stat-val">REDUCED</span>
     </div>
-    <div class="stat-row">
-      <span class="stat-name">TOKENS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div>
-      </div>
-      <span class="stat-val">SEMANTIC</span>
-    </div>
+    <div class="cs-glance-divider"></div>
+    <ul class="cs-glance-outcomes">
+      <li>4-tier severity system shipped — Critical, Warning, Info, Success with distinct iconography and color</li>
+      <li>Adopted platform-wide across all 6 BeyondTrust products without rework</li>
+      <li>WCAG AA color contrast baked into design tokens — compliance is automatic, not manual</li>
+    </ul>
   </div>
 
   <div class="cs-meta">
@@ -233,6 +228,11 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
+
+    <img src="images/alert-variants.png" alt="All four alert variants — Critical, Warning, Info, Success — compact and full" class="cs-img fade-in">
+    <p class="cs-img-cap">// Alert variants — Critical / Warning / Info / Success in compact (48px) and full</p>
+    <img src="images/alert-hierarchy.png" alt="Messaging hierarchy — Banner, Inline Alert, Toast" class="cs-img fade-in">
+    <p class="cs-img-cap">// Hierarchy — Banner (global) → Inline Alert (contextual) → Toast (transient)</p>
   </div>
 
   <div class="cs-section fade-in">

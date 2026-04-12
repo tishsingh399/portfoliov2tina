@@ -9,52 +9,51 @@
 /* ── Reset & Tokens ──────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
-  --bg:              #0f1218;
-  --bg2:             #181d28;
-  --bg3:             #222838;
-  --text:            #f0eef5;
-  --text2:           #c4bfd8;
-  --muted:           #8a86a0;
-  --border:          #2e3248;
-  --accent:          #e05a42;
-  --accent2:         #c74b35;
-  --accent-teal:     #3dd8c5;
+  --bg:              #111111;
+  --bg2:             #1a1a1a;
+  --bg3:             #242424;
+  --text:            #ffffff;
+  --text2:           #d4d4d4;
+  --muted:           #8a8a8a;
+  --border:          #333333;
+  --accent:          #ff5c3d;
+  --accent2:         #cc4a31;
+  --accent-teal:     #00d9b4;
   --yellow:          #f5c542;
   --blue:            #6da3ff;
-  /* grid background */
   --grid-line:       rgba(255,255,255,0.025);
-  /* contact + footer hardcoded colors as vars */
-  --contact-bg:      #0d1018;
-  --contact-bdr:     #2a2e44;
-  --contact-sub:     #8a86a0;
-  --contact-link-clr:#8a86a0;
-  --contact-email-bdr:#3e4258;
-  --footer-bg:       #0b0e14;
-  --footer-bdr:      #222638;
-  --footer-text:     #5e6078;
+  --contact-bg:      #111111;
+  --contact-bdr:     #333333;
+  --contact-sub:     #8a8a8a;
+  --contact-link-clr:#8a8a8a;
+  --contact-email-bdr:#444444;
+  --footer-bg:       #0d0d0d;
+  --footer-bdr:      #333333;
+  --footer-text:     #5e5e5e;
 }
 
 [data-theme="light"] {
-  --bg:              #f8f7f3;
-  --bg2:             #eeeae2;
-  --bg3:             #e4e0d6;
-  --text:            #181620;
-  --text2:           #4a4662;
-  --muted:           #88849c;
-  --border:          #d4d0e2;
-  --accent:          #d94e38;
-  --accent2:         #bc3f2c;
+  --bg:              #ffffff;
+  --bg2:             #f5f5f5;
+  --bg3:             #ebebeb;
+  --text:            #1a1a1a;
+  --text2:           #555555;
+  --muted:           #999999;
+  --border:          #d4d4d4;
+  --accent:          #e04420;
+  --accent2:         #bc3518;
+  --accent-teal:     #008573;
   --yellow:          #b87a00;
   --blue:            #1a44cc;
-  --grid-line:       rgba(18,18,18,0.022);
-  --contact-bg:      #f0ede5;
-  --contact-bdr:     #d4d0e2;
-  --contact-sub:     #88849c;
-  --contact-link-clr:#88849c;
-  --contact-email-bdr:#d4d0e2;
-  --footer-bg:       #e8e4da;
-  --footer-bdr:      #d4d0e2;
-  --footer-text:     #88849c;
+  --grid-line:       rgba(0,0,0,0.03);
+  --contact-bg:      #f5f5f5;
+  --contact-bdr:     #d4d4d4;
+  --contact-sub:     #999999;
+  --contact-link-clr:#999999;
+  --contact-email-bdr:#d4d4d4;
+  --footer-bg:       #f0f0f0;
+  --footer-bdr:      #d4d4d4;
+  --footer-text:     #999999;
 }
 
 html { scroll-behavior: smooth; }
@@ -96,7 +95,26 @@ body {
   padding: 10px;
   font-family: 'Press Start 2P', monospace;
 }
-.recruiter-banner.on { display: block; }
+/* Only show when recruiter mode is active via URL param or localStorage */
+.recruiter-mode .recruiter-banner { display: block; }
+
+.recruiter-mode .card-desc { display: none; }
+.recruiter-mode .card-bullets, .recruiter-mode .card-problem, .recruiter-mode .r-badge { display: flex !important; opacity: 1 !important; }
+.recruiter-mode .card-problem { display: block !important; }
+
+/* ── Recruiter Banner ── */
+.recruiter-banner {
+  display: none;
+  position: fixed; top: 0; left: 0; width: 100%;
+  background: var(--accent); color: #fff;
+  font-family: 'Press Start 2P', monospace; font-size: 8px;
+  padding: 8px; text-align: center; z-index: 1000;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 12px rgba(255, 92, 61, 0.4);
+}
+.recruiter-mode .recruiter-banner { display: block; }
+.recruiter-mode nav { top: 36px; }
+.recruiter-mode .hero { margin-top: 36px; }
 
 /* ── Nav ─────────────────────────────────────── */
 nav {
@@ -107,19 +125,29 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 18px 56px;
+  transition: top 0.3s;
 }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.recruiter-toggle { 
+  display: flex; align-items: center; gap: 10px; 
+  font-family: 'Press Start 2P', monospace; font-size: 7px; 
+  cursor: pointer; padding: 6px 12px; border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.recruiter-toggle:hover { border-color: var(--accent); color: var(--text); }
+.recruiter-toggle.active { border-color: var(--accent); background: rgba(255, 92, 61, 0.1); color: var(--accent); }
+.recruiter-toggle .toggle-pill { width: 10px; height: 10px; background: var(--border); }
+.recruiter-toggle.active .toggle-pill { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .nav-name {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   color: var(--text);
   line-height: 1.5;
 }
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  list-style: none;
-}
+
 .nav-links a {
   font-size: 11px;
   font-weight: 500;
@@ -275,9 +303,12 @@ nav {
   background: var(--accent);
   padding: 13px 28px;
   text-decoration: none;
-  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(255,92,61,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
-.btn-primary:hover { background: var(--accent2); }
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,92,61,0.35), inset 0 1px 0 rgba(255,255,255,0.1); }
+.btn-primary:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(255,92,61,0.2); }
+.btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .btn-secondary {
   font-size: 11px;
   font-weight: 500;
@@ -285,11 +316,13 @@ nav {
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
+  border: 1px solid var(--border);
+  padding: 11px 24px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
 }
-.btn-secondary:hover { color: var(--text); border-color: var(--text); }
+.btn-secondary:hover { color: var(--text); border-color: var(--text); background: var(--bg2); transform: translateY(-1px); }
+.btn-secondary:active { transform: translateY(0); }
+.btn-secondary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ── Hero Right — Pixel Stage ────────────────── */
 .hero-right {
@@ -410,6 +443,8 @@ section { padding: 96px 56px; }
   border: 1px solid var(--border);
   align-items: stretch;
 }
+
+
 .card {
   background: var(--bg);
   padding: 36px;
@@ -426,11 +461,10 @@ section { padding: 96px 56px; }
   border-top-color: var(--accent);
   transform: translateY(-4px);
 }
-/* Primary card (card 01) — same width as others now */
-.card--primary { background: var(--bg2); padding: 36px; }
-.card--primary:hover { background: var(--bg3); }
-.card--primary .card-num { font-size: 8px; margin-bottom: 24px; color: var(--accent); }
-.card--primary::before { font-size: 56px; bottom: 8px; right: 16px; }
+/* Primary card (card 01) — standardized to high-contrast dark */
+.card--primary { background: var(--bg); padding: 36px; }
+.card--primary:hover { background: var(--bg2); border-top-color: var(--accent); }
+.card--primary .card-num { color: var(--muted); }
 
 .card-num {
   font-size: 8px;
@@ -528,11 +562,34 @@ section { padding: 96px 56px; }
   align-items: center;
   gap: 8px;
   width: fit-content;
-  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(255,92,61,0.2);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   position: relative;
   z-index: 2;
 }
-.card-link:hover { background: var(--accent2); }
+.card-link:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,92,61,0.3); }
+.card-link:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(255,92,61,0.15); }
+.card-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.card-link-detail {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  position: relative;
+  z-index: 2;
+}
+.card-link-detail:hover { color: var(--text); border-color: var(--text); background: var(--bg2); }
+.card-link-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .card-link::after { content: '→'; transition: transform 0.2s; }
 .card:hover .card-link::after { transform: translateX(3px); }
 
@@ -545,10 +602,11 @@ section { padding: 96px 56px; }
 }
 
 /* ── Metrics ─────────────────────────────────── */
-.metrics {
-  background: var(--bg2);
+.metrics-inline {
+  margin-bottom: 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  padding: 28px 0;
 }
 .metrics-grid {
   display: grid;
@@ -748,15 +806,14 @@ footer {
 }
 .featured-cs-cta {
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px; letter-spacing: 0.08em;
-  color: var(--text2); white-space: nowrap;
+  font-size: 8px; letter-spacing: 0.1em;
+  color: #fff; background: var(--accent);
   display: flex; align-items: center; gap: 12px;
   padding: 16px 24px;
-  border: 1px solid var(--border);
-  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  transition: background 0.23s, transform 0.23s;
 }
 .featured-cs:hover .featured-cs-cta {
-  border-color: var(--accent); color: var(--accent);
+  background: var(--accent2);
   transform: translateX(4px);
 }
 .featured-cs-cta-arrow {
@@ -786,6 +843,69 @@ footer {
 /* ── Fade in ─────────────────────────────────── */
 .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
+
+/* ── Mobile Responsive ──────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { gap: 20px; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 48px 24px 40px; order: 1; }
+  .hero-right {
+    order: 2;
+    padding: 32px 24px 48px;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+  }
+  .pixel-stage { align-items: center; }
+  canvas { width: 260px !important; height: 260px !important; }
+
+  .work-grid { grid-template-columns: 1fr; }
+  .card-visual { height: 100px; margin: -36px -36px 24px -36px; }
+
+  section { padding: 56px 24px; }
+  .work { padding: 56px 24px; }
+
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .about-inner { grid-template-columns: 1fr; gap: 40px; }
+
+  .contact-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .contact-links { align-items: flex-start; }
+  .contact { padding: 56px 24px; }
+
+  .featured-cs { padding: 36px 24px; grid-template-columns: 1fr; }
+  .featured-cs-cta { justify-self: start; }
+
+  footer { padding: 22px 24px; }
+  .mini-about { padding: 24px; }
+
+  .work-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+@media (max-width: 480px) {
+  nav { padding: 12px 16px; }
+  .nav-name { font-size: 7px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 9px; }
+
+  section, .work, .contact { padding: 40px 16px; }
+  footer, .mini-about { padding: 18px 16px; }
+
+  .card { padding: 24px; }
+  .card-visual { margin: -24px -24px 20px -24px; height: 88px; }
+
+  .metrics-grid { grid-template-columns: 1fr; }
+  .metric { padding: 28px 20px; }
+  .metric-num { font-size: 24px; }
+
+  .featured-cs { padding: 28px 16px; }
+  .featured-cs-cta { margin-top: 16px; }
+  .footer-r { display: none; }
+
+  .hero-h1 { font-size: clamp(28px, 9vw, 44px); }
+  .hero-h1 .h1-tagline { font-size: clamp(28px, 9vw, 44px); }
+  .hero-h1 .h1-main { font-size: clamp(16px, 5vw, 22px); }
+}
 </style>
 </head>
 <body>
@@ -801,18 +921,14 @@ footer {
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
     <li>
-      <button class="recruiter-toggle" id="rToggle" onclick="toggleRecruiter()">
-        <span class="toggle-dot"></span>
-        Recruiter Mode
-      </button>
-    </li>
-    <li>
       <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">
         <span id="themeIcon">◑</span>
       </button>
     </li>
   </ul>
 </nav>
+
+<div class="recruiter-banner" id="rBanner">// RECRUITER_MODE_ACTIVE // SYSTEM_SIMPLIFIED</div>
 
 <section class="hero">
   <div class="hero-left fade-in">
@@ -839,7 +955,7 @@ footer {
     </div>
     <div class="hero-ctas">
       <a href="#work" class="btn-primary">View Selected Work</a>
-      <a href="#contact" class="btn-secondary">Resume / LinkedIn</a>
+      <a href="mailto:tishsingh3@gmail.com" class="btn-secondary">Email Me</a>
     </div>
   </div>
 
@@ -864,8 +980,19 @@ footer {
     </div>
     <div class="r-badge" id="rBadge">2 min read · Condensed</div>
   </div>
+
+  <div class="metrics-inline">
+    <div class="s-label" style="margin-bottom:20px;">Proof Points</div>
+    <div class="metrics-grid">
+      <div class="metric fade-in"><div class="metric-num">8<sup>+</sup></div><div class="metric-label">Products unified</div></div>
+      <div class="metric fade-in"><div class="metric-num">340<sup>+</sup></div><div class="metric-label">Components shipped</div></div>
+      <div class="metric fade-in"><div class="metric-num">60<sup>%</sup></div><div class="metric-label">Accessibility improvement</div></div>
+      <div class="metric fade-in"><div class="metric-num">6</div><div class="metric-label">Years in systems design</div></div>
+    </div>
+  </div>
+
   <div class="work-grid">
-    <div class="card card--primary fade-in" data-n="01">
+    <div class="card fade-in" data-n="01">
       <div class="card-num">01 / 04</div>
       <div class="card-title">Design System Rebuild</div>
       <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
@@ -951,16 +1078,6 @@ footer {
   </div>
 </section>
 
-<section class="metrics" id="metrics">
-  <div class="s-label">Proof Points</div>
-  <div class="metrics-grid">
-    <div class="metric fade-in"><div class="metric-num">8<sup>+</sup></div><div class="metric-label">Products unified</div></div>
-    <div class="metric fade-in"><div class="metric-num">340<sup>+</sup></div><div class="metric-label">Components shipped</div></div>
-    <div class="metric fade-in"><div class="metric-num">60<sup>%</sup></div><div class="metric-label">Accessibility improvement</div></div>
-    <div class="metric fade-in"><div class="metric-num">6</div><div class="metric-label">Years in systems design</div></div>
-  </div>
-</section>
-
 <a href="case-studies/portfolio-as-product.html" class="featured-cs fade-in">
   <div class="featured-cs-left">
     <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>05 / 05 · Featured Case Study</div>
@@ -971,6 +1088,7 @@ footer {
     Read Case Study <span class="featured-cs-cta-arrow">→</span>
   </div>
 </a>
+
 
 <section class="about" id="about">
   <div class="s-label">About</div>
@@ -999,13 +1117,13 @@ footer {
       <div class="s-label">Contact</div>
       <h2 class="contact-h">Let's build something<br>that lasts.</h2>
       <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
-      <a href="mailto:tina@example.com" class="contact-email">tina@tinasingh.design</a>
+      <a href="mailto:tishsingh3@gmail.com" class="contact-email">tishsingh3@gmail.com</a>
     </div>
     <div class="contact-links fade-in">
-      <a href="#" class="contact-link">LinkedIn →</a>
+      <a href="https://www.linkedin.com/in/tina-singh-0503/" class="contact-link" target="_blank" rel="noopener">LinkedIn →</a>
       <a href="https://medium.com/@tishsingh3" class="contact-link" target="_blank" rel="noopener">Medium →</a>
-      <a href="#" class="contact-link">Read.cv →</a>
-      <a href="#" class="contact-link">Download Resume →</a>
+      <a href="https://dribbble.com/tishiris" class="contact-link" target="_blank" rel="noopener">Dribbble →</a>
+      <a href="interactive-resume.html" class="contact-link">8-Bit Resume →</a>
     </div>
   </div>
 </section>
@@ -1229,6 +1347,7 @@ const frames = [
   [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 ]},
 
+
 ];
 
 // ══════════════════════════════════════════
@@ -1443,10 +1562,10 @@ pixelWrap.addEventListener('mouseleave', () => {
 });
 
 // ═══════════════════════════════════════════
-// RECRUITER MODE
+// RECRUITER MODE & THEME LOGIC
 // ═══════════════════════════════════════════
 let recruiterOn = false;
-// ── Theme Toggle ───────────────────────────────
+
 function toggleTheme() {
   const html = document.documentElement;
   const isLight = html.getAttribute('data-theme') === 'light';
@@ -1455,53 +1574,48 @@ function toggleTheme() {
   document.getElementById('themeIcon').textContent = next === 'light' ? '☀' : '◑';
   localStorage.setItem('sds-theme', next);
 }
-// restore saved theme on load + auto-activate recruiter mode from URL param
-(function() {
-  const saved = localStorage.getItem('sds-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  const icon = document.getElementById('themeIcon');
-  if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
-  // ?r=1 in URL → auto-activate recruiter mode on page load
-  if (new URLSearchParams(window.location.search).get('r') === '1') {
-    // defer until after DOM is fully ready
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!recruiterOn) toggleRecruiter();
-    });
-  }
-})();
 
 function toggleRecruiter() {
   recruiterOn = !recruiterOn;
   const on = recruiterOn;
+  document.body.classList.toggle('recruiter-mode', on);
+  localStorage.setItem('recruiter-mode', on ? 'on' : 'off');
 
   document.getElementById('rToggle').classList.toggle('on', on);
-  document.getElementById('rBanner').classList.toggle('on', on);
-  document.getElementById('rBadge').classList.toggle('on', on);
-
-  // Cards: problem + bullets + outcome vs desc
-  for (let i = 1; i <= 3; i++) {
-    document.getElementById('desc' + i).style.display = on ? 'none' : '';
-    document.getElementById('bullets' + i).classList.toggle('on', on);
-    document.getElementById('prob' + i).classList.toggle('on', on);
-    document.getElementById('outcome' + i).classList.toggle('on', on);
-  }
-
-  // Hero: hide subtext and skills, keep headline
-  document.querySelector('.hero-desc').style.display = on ? 'none' : '';
-  document.querySelector('.hero-skills').style.display = on ? 'none' : '';
-
-  // Mini about: hide in recruiter mode
-  document.querySelector('.mini-about').style.display = on ? 'none' : '';
-
-  // About: hide narrative paragraphs, keep the facts list
+  // Banner visibility handled by body class .recruiter-mode
+  
+  // Cards: problem + bullets + outcome vs desc (instant sync)
+  document.querySelectorAll('.card-bullets, .card-problem, .card-outcome').forEach(el => {
+    el.classList.toggle('on', on);
+  });
+  
+  // Manual overrides for elements not yet fully CSS-automated
+  document.querySelectorAll('.card-desc, .hero-desc, .hero-skills, .mini-about').forEach(el => {
+    if (el) el.style.display = on ? 'none' : '';
+  });
   document.querySelectorAll('.about-text p').forEach(p => {
     p.style.display = on ? 'none' : '';
   });
-
-  // Contact: hide subtext
-  const contactSub = document.querySelector('.contact-sub');
-  if (contactSub) contactSub.style.display = on ? 'none' : '';
 }
+
+(function() {
+  // Theme check
+  const savedTheme = localStorage.getItem('sds-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  const tIcon = document.getElementById('themeIcon');
+  if (tIcon) tIcon.textContent = savedTheme === 'light' ? '☀' : '◑';
+
+  // Recruiter mode sync
+  const savedRM = localStorage.getItem('recruiter-mode') || 'off';
+  const urlParam = new URLSearchParams(window.location.search).get('r') === '1';
+  
+  if (savedRM === 'on' || urlParam) {
+    window.addEventListener('DOMContentLoaded', () => {
+      // If we need it 'on' but it's currently 'off' (initial state)
+      if (!recruiterOn) toggleRecruiter();
+    });
+  }
+})();
 
 
 // ── Featured case study idle pulse ───────────
@@ -1529,5 +1643,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

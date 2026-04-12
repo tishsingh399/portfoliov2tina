@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shield Design System — Detailed Case Study — Tina Singh</title>
+<meta name="description" content="Detailed case study: How I rebuilt a fragmented UI library into a governed, token-driven design system across 6 products and 11 teams.">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
+  --yellow:  #f5c542;
+}
+[data-theme="light"] {
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
+  --text:    #1a1a1a;
+  --text2:   #555555;
+  --muted:   #999999;
+  --border:  #d4d4d4;
+  --accent:  #e04420;
+  --accent2: #bc3518;
+  --accent-teal: #008573;
+  --yellow:  #b87a00;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-back:hover { color: var(--text); }
+.nav-back-arrow { color: var(--accent); }
+.nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+.cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
+.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+.cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
+.cs-section { margin-bottom: 80px; }
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+.cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
+.cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="shield-design-system.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
+  <div class="nav-name">TINA SINGH</div>
+</nav>
+
+<section class="cs-hero">
+  <div class="cs-tag">DETAILED CASE STUDY</div>
+  <h1 class="cs-h1">Shield Design System</h1>
+  <p class="cs-sub">Rebuilding the Foundation, Token by Token — from scattered files to governed infrastructure across an enterprise cybersecurity platform.</p>
+</section>
+
+<div class="cs-body">
+  <div class="cs-section">
+    <div class="s-label">// OVERVIEW</div>
+    <h2 class="cs-h2">Overview</h2>
+    <p class="cs-p">The Shield Design System (SDS) was at a breaking point. What started as a set of shared files had become a bottleneck for the engineering team. Every update to a UI element required tribal knowledge and manual checks. Redesigns were slow, accessibility was an afterthought, and design debt was mounting. My role was to transform SDS from a collection of assets into a governed system.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// WHAT I WALKED INTO</div>
+    <h2 class="cs-h2">What I Walked Into</h2>
+    <ul class="cs-list">
+      <li>Scattered Figma files with inconsistent local styles.</li>
+      <li>Hardcoded hex values everywhere in the codebase.</li>
+      <li>No single source of truth for design decisions.</li>
+      <li>Dev-to-design handoffs were riddled with "slack-based documentation."</li>
+    </ul>
+    <img src="images/shield-before-state.png" alt="Shield before state — inconsistent Figma files, hardcoded values" class="cs-img fade-in">
+    <p class="cs-img-cap">// Before — scattered Figma files, hardcoded hex values, zero governance</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// THE AUDIT</div>
+    <h2 class="cs-h2">The Audit</h2>
+    <p class="cs-p">I spent the first few weeks auditing every single component and pattern. I cataloged:</p>
+    <ul class="cs-list">
+      <li>15+ variations of the color "Blue."</li>
+      <li>Overlapping spacing values.</li>
+      <li>Buttons built with completely different architectures.</li>
+      <li>Zero systematic approach to interactive states (hover, active, focus).</li>
+    </ul>
+    <img src="images/shield-audit-findings.png" alt="Audit findings — 15+ blue variants, overlapping spacing, no state rules" class="cs-img fade-in">
+    <p class="cs-img-cap">// Audit — 15+ variations of "Blue", buttons with three different architectures</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// TOKEN ARCHITECTURE</div>
+    <h2 class="cs-h2">Building the Token Architecture</h2>
+    <p class="cs-p">I designed a three-layer token system:</p>
+    <ul class="cs-list">
+      <li><strong>Core (Primitives):</strong> The raw values (e.g., Blue-500, Space-16).</li>
+      <li><strong>Semantic (Alias):</strong> What the value <em>does</em> (e.g., Background-Primary, Border-Critical).</li>
+      <li><strong>Component (Override):</strong> Specific overrides for complex components (e.g., Button-Primary-Background).</li>
+    </ul>
+    <p class="cs-p">I pushed for a taxonomy that even non-designers could understand. Instead of "Button-Blue," we used "Action-Primary-Background." This shifted the conversation from "what color is it?" to "what is its purpose?"</p>
+    <p class="cs-p">Hovers weren't just "lighter" — they were defined by a systematic adjustment (e.g., +10% emphasis). Focus states were consolidated into a single, high-contrast pattern across the entire platform.</p>
+    <img src="images/shield-token-layers.png" alt="Three-layer token architecture: Primitive, Semantic, Component" class="cs-img fade-in">
+    <p class="cs-img-cap">// Three-layer token system — Primitive → Semantic → Component</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// ADOPTION & EVIDENCE</div>
+    <h2 class="cs-h2">Adoption and Evidence</h2>
+    <ul class="cs-list">
+      <li>Resolved contrast gaps and achieved WCAG compliance.</li>
+      <li>Global updates now occur through tokens, reducing regression risk.</li>
+      <li>Shared tokens shortened design-to-dev handoffs and improved release cadence.</li>
+      <li>Redesigned experiences consistently scored high on usability and customer satisfaction. Task success increased across complex workflows. User errors decreased. Onboarding improved as screens followed consistent patterns.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// AI VALIDATION</div>
+    <h2 class="cs-h2">AI-Assisted Validation</h2>
+    <p class="cs-p">I ran an experiment using AI to stress-test the token system's structure and naming logic. I prompted models to interpret and generate tokens from the established patterns. The results confirmed the taxonomy was predictable and machine-readable. AI could infer intent and hierarchy without documentation.</p>
+  </div>
+
+  <div class="cs-section">
+    <div class="s-label">// BUSINESS IMPACT</div>
+    <h2 class="cs-h2">Business Impact</h2>
+    <ul class="cs-list">
+      <li><strong>Revenue protection:</strong> Stale accessibility documentation and inconsistent UI create disqualification risk during federal procurement reviews.</li>
+      <li><strong>Engineering time recovered:</strong> Every detach meant engineering building custom UI instead of using the system.</li>
+      <li><strong>Faster delivery:</strong> Surfaces that previously required weeks of custom component work now ship using system components.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cs-footer">// END OF RECORD</div>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

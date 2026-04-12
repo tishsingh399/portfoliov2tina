@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Redesign — Detailed Case Study — Tina Singh</title>
+<meta name="description" content="How I transformed a legacy login page into a governed system component — mapping IAM error states, building progressive disclosure, and aligning with the Shield Design System.">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:      #111111;
+  --bg2:     #1a1a1a;
+  --bg3:     #242424;
+  --text:    #ffffff;
+  --text2:   #d4d4d4;
+  --muted:   #8a8a8a;
+  --border:  #333333;
+  --accent:  #ff5c3d;
+  --accent2: #cc4a31;
+  --accent-teal: #00d9b4;
+  --yellow:  #f5c542;
+}
+[data-theme="light"] {
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
+  --text:    #1a1a1a;
+  --text2:   #555555;
+  --muted:   #999999;
+  --border:  #d4d4d4;
+  --accent:  #e04420;
+  --accent2: #bc3518;
+  --accent-teal: #008573;
+  --yellow:  #b87a00;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+body, nav, section { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
+nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-back:hover { color: var(--text); }
+.nav-back-arrow { color: var(--accent); }
+.nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
+.theme-toggle { width: 34px; height: 34px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+.cs-hero { padding: 80px 56px 52px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.cs-bg-num { position: absolute; top: -30px; right: 32px; font-family: 'Spectral', serif; font-size: clamp(160px, 22vw, 260px); font-weight: 600; line-height: 1; color: var(--border); user-select: none; pointer-events: none; letter-spacing: -0.05em; }
+.cs-tag { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+.cs-tag::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
+.cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 0; position: relative; z-index: 1; }
+
+.cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
+.cs-section { margin-bottom: 80px; }
+.s-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.cs-h2 { font-family: 'Spectral', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); margin-bottom: 22px; }
+.cs-p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text2); margin-bottom: 16px; }
+.cs-p:last-child { margin-bottom: 0; }
+.cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.cs-list li { font-size: 15px; font-weight: 300; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
+.cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+
+.pull-quote { font-family: 'Spectral', serif; font-size: clamp(20px, 2.6vw, 28px); font-style: italic; font-weight: 300; line-height: 1.5; color: var(--text); padding: 24px 0 24px 32px; border-left: 2px solid var(--accent); margin: 32px 0; }
+
+.decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
+.decision-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 24px; align-items: start; }
+.decision-num { font-family: 'Spectral', serif; font-size: 60px; font-weight: 600; line-height: 0.9; color: var(--border); user-select: none; padding-top: 4px; }
+.decision-h { font-family: 'Spectral', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.decision-p { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--text2); }
+
+.security-list { border: 1px solid var(--border); margin-top: 22px; }
+.security-step { display: flex; align-items: flex-start; gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+.security-step:last-child { border-bottom: none; }
+.step-icon { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--accent); flex-shrink: 0; padding-top: 3px; }
+.step-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.step-text strong { font-weight: 500; color: var(--text); }
+
+.error-table { border: 1px solid var(--border); margin: 22px 0; }
+.error-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.error-row:last-child { border-bottom: none; }
+.error-row.header { background: var(--bg3); }
+.error-cell { padding: 14px 18px; font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.5; border-right: 1px solid var(--border); }
+.error-cell:last-child { border-right: none; }
+.error-row.header .error-cell { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.error-cell em { color: var(--accent-teal); font-style: normal; font-weight: 500; }
+
+.cs-img-block { margin: 32px 0 8px; }
+.cs-img-block img { width: 100%; height: auto; border: 1px solid var(--border); display: block; background: var(--bg2); }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; padding: 10px 0 32px; text-transform: uppercase; }
+
+.cs-footer { border-top: 1px solid var(--border); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.footer-back { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
+.footer-back:hover { color: var(--text); }
+.footer-back-arrow { color: var(--accent); }
+.footer-copy { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--border); }
+
+.fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="login-redesign.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Brief</a>
+  <span class="nav-name">Tina Singh</span>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
+</nav>
+
+<div class="cs-hero">
+  <div class="cs-bg-num">04</div>
+  <div class="cs-tag">Detailed Case Study</div>
+  <h1 class="cs-h1">Login Redesign</h1>
+  <p class="cs-sub">A System Fix Disguised as a Small Update — how a "simple visual refresh" became a foundational rebuild of the authentication entry point.</p>
+</div>
+
+<div class="cs-body">
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// How it started</div>
+    <h2 class="cs-h2">The request sounded small. It wasn't.</h2>
+    <p class="cs-p">The initial ask was a refresh: update the logo, fix the colors, make it match the new brand. But when I pulled the page apart, it was clear this was a structural problem, not a visual one.</p>
+    <p class="cs-p">The login page was written as standalone code — it lived completely outside the Shield Design System. It used hardcoded hex values, imported its own fonts separately, and had no relationship to the token system or component library the rest of the product ran on. Every visual decision was a one-off. Nothing was governed.</p>
+    <div class="pull-quote">"The login page is the front door. For a PAM security product, if the front door looks off, security professionals immediately question whether it's a phishing attempt."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// What I found</div>
+    <h2 class="cs-h2">Three layers of broken.</h2>
+    <p class="cs-p">I ran a full audit before touching any design. What I found fell into three categories:</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Brand disconnect</strong> — The login page used an old background photo, a previous iteration of the logo, and typography that predated our current font system. It looked like a different product from a different company.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Error state gap</strong> — There was one error message: "Login Failed." No specificity for expired SSO sessions, locked accounts, invalid MFA codes, or tenant mismatches. Every failure looked identical. Support tickets piled up because users couldn't self-serve.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>Accessibility failures</strong> — Color contrast ratios fell below WCAG AA on multiple states. Focus indicators were missing. The tab order was broken. Federal agency customers — a major segment — had specific compliance requirements we were actively failing.</div>
+      </div>
+    </div>
+
+    <div class="cs-img-block fade-in">
+      <img src="images/login-before-after.png" alt="Login page before and after: left shows old disconnected design with generic error, right shows Shield DS integrated design with progressive disclosure">
+      <div class="cs-img-caption">// Before (left): standalone code, hardcoded values, single error state / After (right): SDS integrated, progressive disclosure, specific error feedback</div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// The scope shift</div>
+    <h2 class="cs-h2">Reframing the project.</h2>
+    <p class="cs-p">I went back to the PM and engineering lead with the audit findings. This wasn't a visual refresh — it was a system integration project with an accessibility mandate attached. We needed to:</p>
+    <ul class="cs-list">
+      <li>Bring the login page into the Shield Design System completely — no more standalone code</li>
+      <li>Map every IAM error state to a specific, actionable UI response</li>
+      <li>Implement a progressive disclosure flow to reduce cognitive load and support SSO users</li>
+      <li>Achieve WCAG AA compliance across all interactive states</li>
+    </ul>
+    <p class="cs-p">The scope change was approved. The "small update" became a four-week project with IAM engineering involvement.</p>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Key design decisions</div>
+    <h2 class="cs-h2">Three decisions that defined the solution.</h2>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">01</div>
+        <div class="decision-body">
+          <div class="decision-h">Progressive disclosure over a single form</div>
+          <p class="decision-p">The old design showed every field simultaneously — email, password, SSO toggle — regardless of what authentication method applied to that user. I split it into two steps: Step 1 collects the email, Step 2 shows only what's relevant (password field, SSO redirect, or MFA prompt). SSO users go straight to their identity provider without ever seeing a password field. The form got shorter. The path got faster.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">02</div>
+        <div class="decision-body">
+          <div class="decision-h">Error taxonomy mapped to IAM logic</div>
+          <p class="decision-p">I sat with the IAM engineering team for two sessions and walked through every possible failure path the backend could return. We categorized them into 15+ specific states and matched each to a UI response — not just a message, but an action. Expired sessions got a re-authenticate link. Locked accounts got admin contact info. Tenant mismatches got a tenant selector. "Login Failed" was retired.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <div class="decision-h">Design System integration as a requirement, not an upgrade</div>
+          <p class="decision-p">I enforced a rule: no hardcoded values. Every color came from a semantic token. Every spacing unit came from the spacing scale. Every component — inputs, buttons, error states — came from Shield. This meant the login page would automatically inherit any future system updates, dark mode support, and accessibility improvements without a dedicated engineering pass.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Error state taxonomy</div>
+    <h2 class="cs-h2">Every failure had a name and an action.</h2>
+    <p class="cs-p">The full error map covered authentication failures, session states, access control, and MFA. Here's a representative sample:</p>
+    <div class="error-table">
+      <div class="error-row header">
+        <div class="error-cell">Error State</div>
+        <div class="error-cell">Root Cause</div>
+        <div class="error-cell">UI Response</div>
+      </div>
+      <div class="error-row">
+        <div class="error-cell">SSO session expired</div>
+        <div class="error-cell">Token TTL exceeded</div>
+        <div class="error-cell"><em>Re-authenticate via your provider →</em></div>
+      </div>
+      <div class="error-row">
+        <div class="error-cell">Account locked</div>
+        <div class="error-cell">5 failed attempts</div>
+        <div class="error-cell"><em>Contact your administrator</em></div>
+      </div>
+      <div class="error-row">
+        <div class="error-cell">MFA code invalid</div>
+        <div class="error-cell">Wrong code / expired</div>
+        <div class="error-cell"><em>Code expires in 30s — request a new one</em></div>
+      </div>
+      <div class="error-row">
+        <div class="error-cell">Tenant mismatch</div>
+        <div class="error-cell">Wrong URL for org</div>
+        <div class="error-cell"><em>Select your organization →</em> [dropdown]</div>
+      </div>
+      <div class="error-row">
+        <div class="error-cell">Invalid credentials</div>
+        <div class="error-cell">Wrong password</div>
+        <div class="error-cell"><em>Incorrect password. Reset password →</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Accessibility implementation</div>
+    <h2 class="cs-h2">Compliance wasn't a checkbox — it was a constraint.</h2>
+    <p class="cs-p">Federal agency users have mandated WCAG AA requirements. Failing that meant disqualification from procurement. I treated accessibility as a hard requirement from the start, not a QA pass at the end.</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Color contrast</strong> — All text/background combinations verified to meet 4.5:1 minimum ratio. Error states tested in both light and dark mode.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Focus management</strong> — On step transition (email → auth method), focus moves programmatically to the first new field. No user has to hunt for where they are.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Screen reader labels</strong> — All inputs, error messages, and status states have explicit ARIA labels. Error messages are announced on trigger, not just visually shown.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Keyboard navigation</strong> — Full tab order validated. The form is 100% operable without a mouse, including the SSO redirect and tenant selector.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Additional scope: supporting flows</div>
+    <h2 class="cs-h2">The login experience doesn't start at the login page.</h2>
+    <p class="cs-p">Once the core page was solved, I extended the same rigor to three adjacent surfaces that were part of the same authentication journey:</p>
+    <ul class="cs-list">
+      <li><strong>Invite emails</strong> — Refreshed branding, updated logo and product name references, updated deep-link format for new URL structure.</li>
+      <li><strong>Tenant selector (Workforce Passwords)</strong> — Added a portal dropdown so admins could distinguish which environment they were accessing — a real confusion point in multi-tenant setups.</li>
+      <li><strong>MFA confirmation screen</strong> — Added a countdown timer for TOTP codes, replacing the static instruction text that gave no signal on expiry.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">// Outcome</div>
+    <h2 class="cs-h2">What changed and what I learned.</h2>
+    <p class="cs-p">The redesign shipped. The login page now runs fully on Shield Design System tokens — no exceptions. Future system updates (dark mode, rebranding, accessibility patches) propagate automatically.</p>
+    <ul class="cs-list">
+      <li>SSO-related support tickets dropped — users could now self-identify their error and take action without contacting support</li>
+      <li>WCAG AA compliance achieved, removing a procurement blocker for federal accounts</li>
+      <li>Engineering handoff was cleaner than any previous login work — everything mapped to the design system, no custom CSS to negotiate</li>
+    </ul>
+    <div class="pull-quote">"The biggest lesson: scope creep is sometimes scope correction. What felt like a bigger ask was actually the right-sized fix."</div>
+    <p class="cs-p">If I'd shipped just the visual refresh, we'd have updated the logo and still had 15 broken error states. The audit forced the right conversation. That's the job — not just making it look better, but making it actually work.</p>
+  </div>
+
+</div>
+
+<footer class="cs-footer">
+  <a href="login-redesign.html" class="footer-back"><span class="footer-back-arrow">←</span> Back to Brief</a>
+  <span class="footer-copy">© 2026 Tina Singh</span>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'light' ? '☀' : '◑';
+  localStorage.setItem('sds-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('sds-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
+})();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

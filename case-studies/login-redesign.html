@@ -23,15 +23,16 @@
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #fcfcfc;
-  --bg2:     #f2f2f2;
-  --bg3:     #e8e8e8;
-  --text:    #111111;
-  --text2:   #404040;
-  --muted:   #8a8a8a;
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
+  --text:    #1a1a1a;
+  --text2:   #555555;
+  --muted:   #999999;
   --border:  #d4d4d4;
-  --accent:  #d94e38;
-  --accent2: #bc3f2c;
+  --accent:  #e04420;
+  --accent2: #bc3518;
+  --accent-teal: #008573;
   --yellow:  #b87a00;
 }
 
@@ -54,15 +55,16 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
-.stat-card { display: inline-flex; flex-direction: column; gap: 13px; padding: 22px 28px; border: 2px solid var(--border); background: var(--bg2); margin-bottom: 52px; position: relative; z-index: 1; transition: background 0.3s, border-color 0.3s; }
-.stat-card-title { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
-.stat-row { display: flex; align-items: center; gap: 14px; }
-.stat-name { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); width: 82px; letter-spacing: 0.04em; }
-.stat-pips { display: flex; gap: 4px; }
-.pip { width: 10px; height: 10px; background: var(--accent); flex-shrink: 0; }
-.pip.off { background: var(--border); }
-.pip.teal { background: var(--accent-teal); }
-.stat-val { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--text2); letter-spacing: 0.04em; }
+.cs-glance { border: 1px solid var(--border); background: var(--bg2); padding: 24px 28px; margin-bottom: 52px; position: relative; z-index: 1; max-width: 580px; transition: background 0.3s, border-color 0.3s; }
+.cs-glance-header { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; }
+.cs-glance-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.cs-glance-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; }
+.cs-glance-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.06em; white-space: nowrap; }
+.cs-glance-val { font-size: 13px; font-weight: 400; color: var(--text2); line-height: 1.55; }
+.cs-glance-divider { border-top: 1px solid var(--border); margin: 16px 0; }
+.cs-glance-outcomes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cs-glance-outcomes li { font-size: 13px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
+.cs-glance-outcomes li::before { content: '→'; color: var(--accent-teal); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
 .cs-meta { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
 .cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
@@ -114,6 +116,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
+.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 </style>
 </head>
 <body>
@@ -131,33 +135,24 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <h1 class="cs-h1">Login<br>Redesign</h1>
   <p class="cs-sub">A System Fix Disguised as a Small Update. I transformed a stalled, undefined feature into a polished, accessible system entry point.</p>
 
-  <div class="stat-card fade-in">
-    <div class="stat-card-title">// LOGIN OPTIMIZATION</div>
-    <div class="stat-row">
-      <span class="stat-name">BRAND</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip off"></div>
+  <div class="cs-glance fade-in">
+    <div class="cs-glance-header">// AT A GLANCE</div>
+    <div class="cs-glance-meta">
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">ROLE</span>
+        <span class="cs-glance-val">UI Designer · IAM UX · Accessibility</span>
       </div>
-      <span class="stat-val">ALIGNED</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-name">SUPPORT</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">PROBLEM</span>
+        <span class="cs-glance-val">Login was standalone legacy code — disconnected from the design system, unbranded, and missing SSO/MFA error states entirely</span>
       </div>
-      <span class="stat-val">DECLINED</span>
     </div>
-    <div class="stat-row">
-      <span class="stat-name">ACCESS</span>
-      <div class="stat-pips">
-        <div class="pip teal"></div><div class="pip teal"></div><div class="pip teal"></div>
-        <div class="pip teal"></div><div class="pip teal"></div>
-      </div>
-      <span class="stat-val">WCAG AA</span>
-    </div>
+    <div class="cs-glance-divider"></div>
+    <ul class="cs-glance-outcomes">
+      <li>15+ IAM error states mapped to specific, actionable UI feedback — replacing a single generic "Login Failed" message</li>
+      <li>Progressive disclosure flow (Email → Auth Method) reduced SSO friction and eliminated redundant form fields</li>
+      <li>WCAG AA compliance achieved — keyboard navigation and screen reader support for federal agency users</li>
+    </ul>
   </div>
 
   <div class="cs-meta">
@@ -189,13 +184,15 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-section fade-in">
     <div class="s-label">The Context</div>
     <h2 class="cs-h2">A disconnected experience.</h2>
-    <p class="cs-p">The login page is the "Front Door" of the company. It’s what customers see first. For years, the login page was a standalone piece of code that didn't use the design system. It was inconsistent with the product it was letting people into.</p>
+    <p class="cs-p">The login page is the "Front Door" of the company. It’s what customers see first. For years, the login page was a standalone piece of code that didn’t use the design system. It was inconsistent with the product it was letting people into.</p>
     <div class="s-label" style="margin-top:32px;">The Risks:</div>
     <ul class="cs-list">
       <li><strong>Trust gap:</strong> A dated, unbranded login page looks suspicious to security professionals (it resembles a phishing attempt).</li>
       <li><strong>Functional failure:</strong> The page lacked clear error handling for SSO (Single Sign-On) failures, leading to high support ticket volume.</li>
       <li><strong>Performance:</strong> Large, unoptimized background images caused slow load times on mobile connections.</li>
     </ul>
+    <img src="images/login-before-after.png" alt="Login before and after — brand alignment, progressive disclosure, error states" class="cs-img fade-in">
+    <p class="cs-img-cap">// Before & After — legacy login → Shield DS integrated, progressive disclosure, WCAG AA</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -253,6 +250,15 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 </div>
 
+<!-- Detailed Case Study CTA -->
+<div class="cs-detail-cta fade-in" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <span style="font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);">// READ REPORT</span>
+    <span style="font-family:'Spectral',serif;font-size:20px;font-weight:300;color:var(--text);">Want to go deeper?</span>
+  </div>
+  <a href="login-redesign-detailed.html" style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0.1em;color:var(--accent);text-decoration:none;padding:14px 24px;border:2px solid var(--accent);white-space:nowrap;box-shadow:0 2px 8px rgba(255,92,61,0.15);transition:background 0.2s,color 0.2s,transform 0.15s;flex-shrink:0;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='';this.style.color='var(--accent)';this.style.transform=''">View Detailed Case Study →</a>
+</div>
+
 <a href="portfolio-as-product.html" class="cs-next">
   <div class="cs-next-inner">
     <div>
@@ -291,5 +297,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

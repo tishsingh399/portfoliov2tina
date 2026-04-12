@@ -15,7 +15,7 @@
   --bg3:     #242424;
   --text:    #ffffff;
   --text2:   #d4d4d4;
-  --muted:   #8a8a8a;
+  --muted:   #999999;
   --border:  #333333;
   --accent:  #ff5c3d;
   --accent2: #cc4a31;
@@ -23,16 +23,17 @@
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #fcfcfc;
-  --bg2:     #f2f2f2;
-  --bg3:     #e8e8e8;
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
   --text:    #111111;
-  --text2:   #404040;
-  --muted:   #8a8a8a;
+  --text2:   #555555;
+  --muted:   #999999;
   --border:  #d4d4d4;
-  --accent:  #d94e38;
-  --accent2: #bc3f2c;
+  --accent:  #e04420;
+  --accent2: #bc3518;
   --yellow:  #b87a00;
+  --accent-teal: #007a6a; /* darker teal — WCAG AA on light bg */
 }
 
 html { scroll-behavior: smooth; }
@@ -66,14 +67,73 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .status--governed { background: rgba(245, 197, 66, 0.1); color: var(--yellow); border: 1px solid rgba(245, 197, 66, 0.2); }
 .status--unified { background: rgba(255, 255, 255, 0.05); color: var(--text2); border: 1px solid var(--border); }
 
-.cs-image-breakout { width: 100%; max-width: 1200px; margin: 40px auto 60px; padding: 0 56px; }
-.cs-image-breakout img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; background: var(--bg2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
+.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
+.cs-image-caption {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 20px;        /* clear of shadow */
+  font-style: italic;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
 
-.cs-meta { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); position: relative; z-index: 1; }
-.cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; }
+.cs-detail-cta {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.cs-detail-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cs-detail-cta-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cs-detail-cta-heading {
+  font-family: 'Spectral', serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text);
+}
+.cs-detail-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 14px 24px;
+  border: 2px solid var(--accent);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(255,92,61,0.15);
+  transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+&
+  background: var(--accent);
+  color: #fff;
+}
+
+.cs-img-placeholder { width: 100%; height: 280px; background: var(--bg2); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin: 32px 0 40px; }
+.cs-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-top: 1px solid var(--border); position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
+.cs-meta-cell { padding: 24px 28px; border-right: 1px solid var(--border); transition: background 0.3s; display: flex; flex-direction: row; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .cs-meta-cell:last-child { border-right: none; }
-.cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-.cs-meta-val { font-size: 14px; font-weight: 400; color: var(--text2); line-height: 1.55; }
+.cs-meta-label { font-family: 'Press Start 2P', monospace; font-size: 6px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0; white-space: nowrap; }
+.cs-meta-label::after { content: ':'; }
+.cs-meta-val { font-size: 14px; font-weight: 400; color: var(--text2); line-height: 1.55; margin: 0; }
 .cs-meta-val em { font-style: normal; color: var(--accent); font-weight: 500; }
 
 .cs-body { max-width: 800px; margin: 0 auto; padding: 80px 56px; }
@@ -148,7 +208,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Design System<br>Rebuild</h1>
-  <p class="cs-sub">From Scattered Files to Governed Infrastructure. 🛡️</p>
+  <p class="cs-sub">Architecting a single source of truth for unified enterprise UI.</p>
 
   <div class="impact-dashboard fade-in">
     <div class="stat-card-title" style="margin-bottom: 16px;">// IMPACT DASHBOARD</div>
@@ -209,16 +269,12 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What Was Broken</h2>
     <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
+    <img src="images/shield-before-state.png" alt="Shield design system before state — scattered Figma files, hardcoded values, no governance" class="cs-img fade-in">
+    <p class="cs-img-cap">// Before state — scattered files, hardcoded hex values, no token layer</p>
   </div>
 
-  <div class="cs-image-breakout fade-in">
-    <img src="../assets/img/shield-preview.png" alt="Design System Component Previews">
-    <div class="cs-image-caption">Legacy interface fragmentation across different product silos before the design system rebuild.</div>
-  </div>
-
-  <div class="cs-body">
-    <div class="cs-section fade-in">
-      <div class="s-label">Scope & Execution</div>
+  <div class="cs-section fade-in">
+    <div class="s-label">Scope & Execution</div>
     <h2 class="cs-h2">What I Owned</h2>
     <ul class="cs-list">
       <li><strong>Initial Audit:</strong> Mapped inconsistencies across 6 legacy platforms.</li>
@@ -255,14 +311,27 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
+    <img src="images/shield-audit-findings.png" alt="Shield audit findings — 15+ blue color variations, overlapping spacing, zero interactive state consistency" class="cs-img fade-in">
+    <p class="cs-img-cap">// Audit findings — 15+ color variations of "Blue", overlapping spacing values, no interactive state rules</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Outcome</div>
     <div class="pull-quote">"Protected an estimated $60M–$140M in federal contract exposure."</div>
     <p class="cs-p">Why it mattered: Federal contracts require stringent <strong>Section 508</strong> and VPAT accessibility compliance. By strictly enforcing WCAG AA+ contrast at the token layer, we eliminated disqualification risk during procurement reviews. Furthermore, we recovered hundreds of engineering hours by slashing component detaches from 40% to <1%.</p>
+    <img src="images/shield-token-layers.png" alt="Three-layer token architecture — Primitive, Semantic, Component" class="cs-img fade-in">
+    <p class="cs-img-cap">// Three-layer token architecture: Primitive → Semantic → Component</p>
   </div>
 
+</div>
+
+<!-- ── Detailed case study CTA ── -->
+<div class="cs-detail-cta fade-in">
+  <div class="cs-detail-cta-text">
+    <span class="cs-detail-cta-label">Want to go deeper?</span>
+    <span class="cs-detail-cta-heading">Read the full process, decisions &amp; evidence →</span>
+  </div>
+  <a href="shield-design-system-detailed.html" class="cs-detail-btn">View Detailed Case Study</a>
 </div>
 
 <a href="inline-alert.html" class="cs-next">
@@ -303,5 +372,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

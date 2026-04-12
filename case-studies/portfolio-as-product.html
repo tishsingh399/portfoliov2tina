@@ -14,7 +14,7 @@
   --bg3:     #242424;
   --text:    #ffffff;
   --text2:   #d4d4d4;
-  --muted:   #8a8a8a;
+  --muted:   #999999;
   --border:  #333333;
   --accent:  #ff5c3d;
   --accent2: #cc4a31;
@@ -22,15 +22,15 @@
   --yellow:  #f5c542;
 }
 [data-theme="light"] {
-  --bg:      #fcfcfc;
-  --bg2:     #f2f2f2;
-  --bg3:     #e8e8e8;
+  --bg:      #ffffff;
+  --bg2:     #f5f5f5;
+  --bg3:     #ebebeb;
   --text:    #111111;
-  --text2:   #404040;
-  --muted:   #8a8a8a;
+  --text2:   #555555;
+  --muted:   #999999;
   --border:  #d4d4d4;
-  --accent:  #d94e38;
-  --accent2: #bc3f2c;
+  --accent:  #e04420;
+  --accent2: #bc3518;
   --yellow:  #b87a00;
 }
 
@@ -110,34 +110,49 @@ nav {
   position: relative; z-index: 1;
 }
 
-/* ── 8-bit Stat Card — the ONE retro element on this page ── */
+/* ── Tactical Architect Profile HUD ── */
 .stat-card {
   display: inline-flex; flex-direction: column; gap: 13px;
-  padding: 22px 28px;
-  border: 2px solid var(--border);
-  background: var(--bg2);
+  padding: 24px 32px;
+  border: 1px solid var(--accent);
+  background: rgba(255, 92, 61, 0.05); /* very subtle orange tint */
   margin-bottom: 52px;
   position: relative; z-index: 1;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 0 30px rgba(255, 92, 61, 0.1);
+}
+.stat-card::before {
+  content: ''; position: absolute; top: -1px; left: -1px; width: 10px; height: 10px;
+  border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+}
+.stat-card::after {
+  content: ''; position: absolute; bottom: -2px; right: -2px; width: 10px; height: 10px;
+  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
 }
 .stat-card-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px; color: var(--accent);
-  letter-spacing: 0.1em; margin-bottom: 6px;
+  font-size: 8px; color: var(--text);
+  letter-spacing: 0.15em; margin-bottom: 12px;
+  display: flex; justify-content: space-between;
 }
-.stat-row { display: flex; align-items: center; gap: 14px; }
+.stat-tag { color: var(--accent); }
+.stat-row { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
 .stat-name {
   font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--muted);
-  width: 82px; letter-spacing: 0.04em;
+  font-size: 7px; color: var(--muted);
+  width: 96px; letter-spacing: 0.06em;
 }
-.stat-pips { display: flex; gap: 4px; }
-.pip { width: 10px; height: 10px; background: var(--accent); flex-shrink: 0; }
-.pip.off { background: var(--border); }
 .stat-val {
   font-family: 'Press Start 2P', monospace;
-  font-size: 6px; color: var(--text2); letter-spacing: 0.04em;
+  font-size: 7px; color: var(--accent); letter-spacing: 0.04em;
+  font-weight: 500;
 }
+.stat-bar { 
+  height: 4px; width: 120px; background: var(--bg3); 
+  position: relative; overflow: hidden; margin-left: 10px; 
+}
+.stat-bar-fill { height: 100%; background: var(--accent); }
+.stat-bar-fill.glow { box-shadow: 0 0 10px var(--accent); }
 
 /* ── Meta overview ── */
 .cs-meta {
@@ -330,54 +345,41 @@ nav {
 
 <!-- Hero -->
 <div class="cs-hero">
-  <div class="cs-bg-num">01</div>
+  <div class="cs-bg-num">04</div>
 
   <div class="cs-tag">Case Study</div>
   <h1 class="cs-h1">Portfolio<br>as a Product</h1>
   <p class="cs-sub">I built this portfolio to test how I make decisions under constraints.<br>I'm not a frontend developer. I didn't use a template.<br>I treated this like a product.</p>
 
-  <!-- ── The ONE 8-bit element on this page ── -->
+  <!-- ── Proof of process block ── -->
   <div class="stat-card fade-in">
-    <div class="stat-card-title">// PLAYER: TINA SINGH</div>
-    <div class="stat-row">
-      <span class="stat-name">DESIGN</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
-      </div>
-      <span class="stat-val">MAX</span>
+    <div class="stat-card-title">
+      <span>// PROOF OF PROCESS</span>
+      <span class="stat-tag">[SELF-DIRECTED]</span>
     </div>
+
     <div class="stat-row">
-      <span class="stat-name">SYSTEMS</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div>
-      </div>
-      <span class="stat-val">EXPERT</span>
+      <span class="stat-name">TEMPLATE</span>
+      <div class="stat-bar"><div class="stat-bar-fill" style="width: 0%"></div></div>
+      <span class="stat-val">NONE USED</span>
     </div>
+    
     <div class="stat-row">
-      <span class="stat-name">FRONTEND</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip off"></div><div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div><div class="pip off"></div><div class="pip off"></div>
-        <div class="pip off"></div>
-      </div>
-      <span class="stat-val">LEARNING</span>
+      <span class="stat-name">ITERATIONS</span>
+      <div class="stat-bar"><div class="stat-bar-fill glow" style="width: 66%"></div></div>
+      <span class="stat-val">2 (AND COUNTING)</span>
     </div>
+
     <div class="stat-row">
       <span class="stat-name">SHIPPED</span>
-      <div class="stat-pips">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
-        <div class="pip"></div>
-      </div>
-      <span class="stat-val">VERCEL ✓</span>
+      <div class="stat-bar"><div class="stat-bar-fill glow" style="width: 100%"></div></div>
+      <span class="stat-val">TO PROD ✓</span>
+    </div>
+    
+    <div class="stat-row">
+      <span class="stat-name">CASE STUDIES</span>
+      <div class="stat-bar"><div class="stat-bar-fill glow" style="width: 100%"></div></div>
+      <span class="stat-val">5 / 5</span>
     </div>
   </div>
 
@@ -544,6 +546,36 @@ nav {
   </div>
 
   <div class="cs-section fade-in">
+    <div class="s-label">Iteration 2: Claude Code</div>
+    <h2 class="cs-h2">Fixing what shipped, with better tools.</h2>
+    <p class="cs-p">After the initial build with Antigravity, I continued iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> (Anthropic's AI coding agent) inside VS Code. This iteration was more targeted — I knew exactly what was wrong and what mattered to fix.</p>
+    <p class="cs-p">Here's what changed in this pass:</p>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">01</div>
+        <div class="step-text"><strong>Replaced abstract pip-stat cards with "At a Glance" summaries</strong> — The old hero cards on each case study showed HIERARCHY: ████░ 4 LEVELS, which looks interesting but tells a recruiter nothing. Replaced with structured role, problem, and 3 quantified outcomes in plain language. Scannable in under 10 seconds.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">02</div>
+        <div class="step-text"><strong>Reordered homepage sections for recruiter narrative flow</strong> — Moved the Proof Points (metrics: 8+ products, 340+ components, 60% accessibility improvement) from below the case study grid to above it. Now the data lands before the work, not after. The argument is made first.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">03</div>
+        <div class="step-text"><strong>Fully rewrote the Login Redesign detailed case study</strong> — The old version was thin: three sections, no structure, no IAM depth. The new version covers scope reframing, a 15-state error taxonomy table, progressive disclosure rationale, accessibility implementation specifics, and a reflection on scope creep as scope correction.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">04</div>
+        <div class="step-text"><strong>Added real images with captions to all case studies</strong> — Before/after login comparison, alert variant grid, alert hierarchy diagram, navigation audit map, Hub & Spoke framework. Each image has a caption in the design system's monospace typographic style.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">05</div>
+        <div class="step-text"><strong>Removed spacing gaps between homepage sections</strong> — The metrics section had excess padding creating a visual dead zone between the section header and the case study cards. Tightened to 40px margin, feels like one cohesive section now.</div>
+      </div>
+    </div>
+    <div class="pull-quote">"Each iteration isn't about adding features. It's about removing friction between the work and the person reading it."</div>
+  </div>
+
+  <div class="cs-section fade-in">
     <div class="s-label">Constraints</div>
     <h2 class="cs-h2">Working with what you have.</h2>
     <p class="cs-p">The biggest constraint was my own technical depth. I had to balance what I wanted to build with what I could realistically execute without turning this into a long-term engineering project.</p>
@@ -621,5 +653,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
