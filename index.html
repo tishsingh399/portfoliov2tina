@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tina Singh — Senior Product Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -986,7 +987,7 @@ footer {
     </div>
     <div class="hero-ctas">
       <a href="#work" class="btn-primary">View Selected Work</a>
-      <a href="mailto:tishsingh3@gmail.com" class="btn-secondary">Email Me</a>
+      <a href="mailto:hello@tinasingh.app" class="btn-secondary">Email Me</a>
     </div>
   </div>
 
@@ -1148,10 +1149,15 @@ footer {
       <div class="s-label">Contact</div>
       <h2 class="contact-h">Let's build something<br>that lasts.</h2>
       <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
-      <a href="mailto:tishsingh3@gmail.com" class="contact-email">tishsingh3@gmail.com</a>
+      <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
     </div>
     <div class="contact-form fade-in">
       <form id="contactForm" onsubmit="handleContact(event)">
+        <!-- honeypot: hidden from humans, bots fill it — if non-empty, reject silently -->
+        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+          <label for="cf-pot">Leave this blank</label>
+          <input type="text" id="cf-pot" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <div class="contact-form-row">
           <label for="cf-name">Name</label>
           <input type="text" id="cf-name" name="name" placeholder="Your name" required>
@@ -1611,13 +1617,14 @@ let recruiterOn = false;
 
 function handleContact(e) {
   e.preventDefault();
-  // In a static site, open mailto as fallback
-  const name = document.getElementById('cf-name').value;
-  const email = document.getElementById('cf-email').value;
-  const msg = document.getElementById('cf-msg').value;
+  // Honeypot check — bots fill the hidden field, humans leave it blank
+  if (document.getElementById('cf-pot').value !== '') return;
+  const name = document.getElementById('cf-name').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
   const subject = encodeURIComponent('Portfolio Inquiry from ' + name);
   const body = encodeURIComponent(msg + '\n\nFrom: ' + name + ' <' + email + '>');
-  window.location.href = 'mailto:tishsingh3@gmail.com?subject=' + subject + '&body=' + body;
+  window.location.href = 'mailto:hello@tinasingh.app?subject=' + subject + '&body=' + body;
   document.getElementById('contactSuccess').style.display = 'block';
   document.getElementById('contactForm').reset();
 }
