@@ -140,18 +140,22 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="cs-glance-meta">
       <div class="cs-glance-row">
         <span class="cs-glance-label">ROLE</span>
-        <span class="cs-glance-val">UX Architect · Information Architecture · Behavior Specs</span>
+        <span class="cs-glance-val">UX Architect · Information Architecture · Interaction Spec</span>
+      </div>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">SCOPE</span>
+        <span class="cs-glance-val">6 acquired products, 4 post-acquisition codebases, enterprise security platform</span>
       </div>
       <div class="cs-glance-row">
         <span class="cs-glance-label">PROBLEM</span>
-        <span class="cs-glance-val">6 products merged with no shared routing logic — navigation was duplicated, contradictory, and built independently per suite</span>
+        <span class="cs-glance-val">4 acquisitions brought 4 navigation systems. Users switching products felt like changing apps — 40% of menu links were redundant, active states were contradictory, deep links broke between suites</span>
       </div>
     </div>
     <div class="cs-glance-divider"></div>
     <ul class="cs-glance-outcomes">
-      <li>40% navigation redundancy eliminated through Hub & Spoke IA restructuring</li>
-      <li>1,000+ deep-link routes governed through a single JSON payload — no custom rewrites per product</li>
-      <li>Behavioral matrix covering active states, tenant switching, and breadcrumb logic adopted across 6 suites</li>
+      <li>40% navigation redundancy eliminated — restructured into a Hub & Spoke IA model with a global bar + contextual side rail</li>
+      <li>1,000+ deep-link routes unified through a single JSON payload — no per-product rewrites, 100% adoption in 4 months</li>
+      <li>22% faster cross-product workflows — Behavioral matrix (active states, tenant switching, breadcrumb logic) delivered as engineering handoff, not just Figma</li>
     </ul>
   </div>
 
@@ -220,10 +224,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       </div>
     </div>
 
-    <img src="images/nav-audit.png" alt="Navigation audit — redundant links across 6 products" class="cs-img fade-in">
-    <p class="cs-img-cap">// Navigation audit — 40% of links were redundant across the 6-product suite</p>
-    <img src="images/nav-framework.png" alt="Hub and Spoke framework — Global Bar and contextual Side Rail" class="cs-img fade-in">
-    <p class="cs-img-cap">// Hub & Spoke — Global Bar (switcher, search) + contextual Side Rail per product</p>
   </div>
 
   <div class="cs-section fade-in">

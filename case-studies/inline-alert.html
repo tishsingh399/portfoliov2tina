@@ -139,18 +139,22 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="cs-glance-meta">
       <div class="cs-glance-row">
         <span class="cs-glance-label">ROLE</span>
-        <span class="cs-glance-val">UI Designer · Component & Pattern Design</span>
+        <span class="cs-glance-val">UI Designer · Component & Pattern Design · Design Systems</span>
+      </div>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">SCOPE</span>
+        <span class="cs-glance-val">6 product areas, security operations platform — enterprise B2B</span>
       </div>
       <div class="cs-glance-row">
         <span class="cs-glance-label">PROBLEM</span>
-        <span class="cs-glance-val">One visual style covered all severity levels — users stopped reading alerts entirely</span>
+        <span class="cs-glance-val">A single visual style covered all severity levels. Security engineers were dismissing critical alerts because everything looked the same — alert fatigue at the UI layer</span>
       </div>
     </div>
     <div class="cs-glance-divider"></div>
     <ul class="cs-glance-outcomes">
-      <li>4-tier severity system shipped — Critical, Warning, Info, Success with distinct iconography and color</li>
-      <li>Adopted platform-wide across all 6 BeyondTrust products without rework</li>
-      <li>WCAG AA color contrast baked into design tokens — compliance is automatic, not manual</li>
+      <li>Defined a 4-tier severity system (Critical / Warning / Info / Success) with distinct iconography, color tokens, and dismissal behavior — reducing misread rate in testing</li>
+      <li>Adopted platform-wide across all 6 product suites with zero rework — the component was system-ready from day one</li>
+      <li>WCAG AA contrast baked directly into semantic tokens — compliance became automatic, not a post-launch audit</li>
     </ul>
   </div>
 
@@ -229,10 +233,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       </div>
     </div>
 
-    <img src="images/alert-variants.png" alt="All four alert variants — Critical, Warning, Info, Success — compact and full" class="cs-img fade-in">
-    <p class="cs-img-cap">// Alert variants — Critical / Warning / Info / Success in compact (48px) and full</p>
-    <img src="images/alert-hierarchy.png" alt="Messaging hierarchy — Banner, Inline Alert, Toast" class="cs-img fade-in">
-    <p class="cs-img-cap">// Hierarchy — Banner (global) → Inline Alert (contextual) → Toast (transient)</p>
   </div>
 
   <div class="cs-section fade-in">

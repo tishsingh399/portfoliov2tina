@@ -55,17 +55,16 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-h1 { font-family: 'Spectral', serif; font-size: clamp(42px, 6vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); margin-bottom: 18px; position: relative; z-index: 1; }
 .cs-sub { font-size: 18px; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 52ch; margin-bottom: 52px; position: relative; z-index: 1; }
 
-.impact-dashboard { margin-bottom: 52px; position: relative; z-index: 1; }
-.impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.impact-item { background: var(--bg2); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: background 0.3s; }
-.impact-item:hover { background: var(--bg3); }
-.impact-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-.impact-value { font-family: 'Spectral', serif; font-size: 28px; font-weight: 400; color: var(--text); line-height: 1.1; }
-.impact-status { font-family: 'Press Start 2P', monospace; font-size: 6px; padding: 4px 8px; width: fit-content; border-radius: 2px; letter-spacing: 0.05em; }
-.status--success { background: rgba(0, 217, 180, 0.1); color: var(--accent-teal); border: 1px solid rgba(0, 217, 180, 0.2); }
-.status--scale { background: rgba(255, 92, 61, 0.1); color: var(--accent); border: 1px solid rgba(255, 92, 61, 0.2); }
-.status--governed { background: rgba(245, 197, 66, 0.1); color: var(--yellow); border: 1px solid rgba(245, 197, 66, 0.2); }
-.status--unified { background: rgba(255, 255, 255, 0.05); color: var(--text2); border: 1px solid var(--border); }
+.cs-glance { border: 1px solid var(--border); background: var(--bg2); padding: 24px 28px; margin-bottom: 52px; position: relative; z-index: 1; max-width: 580px; transition: background 0.3s, border-color 0.3s; }
+.cs-glance-header { font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; }
+.cs-glance-meta { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.cs-glance-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; }
+.cs-glance-label { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.06em; white-space: nowrap; }
+.cs-glance-val { font-size: 13px; font-weight: 400; color: var(--text2); line-height: 1.55; }
+.cs-glance-divider { border-top: 1px solid var(--border); margin: 16px 0; }
+.cs-glance-outcomes { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cs-glance-outcomes li { font-size: 13px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
+.cs-glance-outcomes li::before { content: '→'; color: var(--accent-teal); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
 .cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
@@ -210,35 +209,28 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <h1 class="cs-h1">Design System<br>Rebuild</h1>
   <p class="cs-sub">Architecting a single source of truth for unified enterprise UI.</p>
 
-  <div class="impact-dashboard fade-in">
-    <div class="stat-card-title" style="margin-bottom: 16px;">// IMPACT DASHBOARD</div>
-    <div class="impact-grid">
-      <div class="impact-item">
-        <span class="impact-label">Detach Rate</span>
-        <span class="impact-value">40% → <1%</span>
-        <span class="impact-status status--success">[ SUCCESS ]</span>
+  <div class="cs-glance fade-in">
+    <div class="cs-glance-header">// AT A GLANCE</div>
+    <div class="cs-glance-meta">
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">ROLE</span>
+        <span class="cs-glance-val">Lead Designer, Design Systems · Token Architecture · Component Library</span>
       </div>
-      <div class="impact-item">
-        <span class="impact-label">Insertions</span>
-        <span class="impact-value">61k+ / qtr</span>
-        <span class="impact-status status--scale">[ SCALE ]</span>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">SCOPE</span>
+        <span class="cs-glance-val">6 products, 11 engineering teams, enterprise cybersecurity ($400M+ ARR)</span>
       </div>
-      <div class="impact-item">
-        <span class="impact-label">Tokens</span>
-        <span class="impact-value">791 Vars</span>
-        <span class="impact-status status--governed">[ GOVERNANCE ]</span>
-      </div>
-      <div class="impact-item">
-        <span class="impact-label">Adoption</span>
-        <span class="impact-value">6 Products</span>
-        <span class="impact-status status--unified">[ UNIFIED ]</span>
-      </div>
-      <div class="impact-item">
-        <span class="impact-label">Compliance</span>
-        <span class="impact-value">Sec. 508</span>
-        <span class="impact-status status--success">[ PASSED ]</span>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">PROBLEM</span>
+        <span class="cs-glance-val">40% component detach rate, hardcoded hex values everywhere, failing federal accessibility audits — no governance, no tokens, no truth</span>
       </div>
     </div>
+    <div class="cs-glance-divider"></div>
+    <ul class="cs-glance-outcomes">
+      <li>Component detach rate dropped from 40% to &lt;1% — engineers stopped building custom UI from scratch</li>
+      <li>61,000+ quarterly component insertions at peak adoption across 6 product suites</li>
+      <li>791 design tokens structured in a 3-layer architecture (Core → Semantic → Component) — Section 508 + WCAG AA compliance built in</li>
+    </ul>
   </div>
 
   <div class="cs-meta">
@@ -269,8 +261,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What Was Broken</h2>
     <p class="cs-p">The legacy library had 100+ drifting components, no token layer, and completely inconsistent dark mode and accessibility standards. Because engineers couldn't rely on the system, detach rates were hovering around 40%, leading to massive engineering rework and custom CSS loops.</p>
-    <img src="images/shield-before-state.png" alt="Shield design system before state — scattered Figma files, hardcoded values, no governance" class="cs-img fade-in">
-    <p class="cs-img-cap">// Before state — scattered files, hardcoded hex values, no token layer</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -311,16 +301,12 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
-    <img src="images/shield-audit-findings.png" alt="Shield audit findings — 15+ blue color variations, overlapping spacing, zero interactive state consistency" class="cs-img fade-in">
-    <p class="cs-img-cap">// Audit findings — 15+ color variations of "Blue", overlapping spacing values, no interactive state rules</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">The Outcome</div>
     <div class="pull-quote">"Protected an estimated $60M–$140M in federal contract exposure."</div>
     <p class="cs-p">Why it mattered: Federal contracts require stringent <strong>Section 508</strong> and VPAT accessibility compliance. By strictly enforcing WCAG AA+ contrast at the token layer, we eliminated disqualification risk during procurement reviews. Furthermore, we recovered hundreds of engineering hours by slashing component detaches from 40% to <1%.</p>
-    <img src="images/shield-token-layers.png" alt="Three-layer token architecture — Primitive, Semantic, Component" class="cs-img fade-in">
-    <p class="cs-img-cap">// Three-layer token architecture: Primitive → Semantic → Component</p>
   </div>
 
 </div>

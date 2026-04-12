@@ -140,18 +140,22 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="cs-glance-meta">
       <div class="cs-glance-row">
         <span class="cs-glance-label">ROLE</span>
-        <span class="cs-glance-val">UI Designer · IAM UX · Accessibility</span>
+        <span class="cs-glance-val">UI Designer · IAM UX · Accessibility · Design System Integration</span>
+      </div>
+      <div class="cs-glance-row">
+        <span class="cs-glance-label">SCOPE</span>
+        <span class="cs-glance-val">Enterprise login surface — SSO, MFA, tenant routing, federal agency users</span>
       </div>
       <div class="cs-glance-row">
         <span class="cs-glance-label">PROBLEM</span>
-        <span class="cs-glance-val">Login was standalone legacy code — disconnected from the design system, unbranded, and missing SSO/MFA error states entirely</span>
+        <span class="cs-glance-val">Login was standalone legacy code — disconnected from the design system, unbranded, and showing a single generic "Login Failed" for 15+ distinct IAM failure modes including locked accounts, expired SSO sessions, MFA timeouts, and tenant mismatches</span>
       </div>
     </div>
     <div class="cs-glance-divider"></div>
     <ul class="cs-glance-outcomes">
-      <li>15+ IAM error states mapped to specific, actionable UI feedback — replacing a single generic "Login Failed" message</li>
-      <li>Progressive disclosure flow (Email → Auth Method) reduced SSO friction and eliminated redundant form fields</li>
-      <li>WCAG AA compliance achieved — keyboard navigation and screen reader support for federal agency users</li>
+      <li>15+ IAM error states mapped to specific, actionable messages — SSO-related support tickets dropped post-launch</li>
+      <li>Progressive disclosure flow (Email → Auth Method detection → MFA) eliminated redundant fields and aligned with how SSO actually works</li>
+      <li>First login surface built end-to-end on Shield Design System tokens — WCAG AA compliant for federal procurement requirements</li>
     </ul>
   </div>
 
@@ -191,8 +195,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       <li><strong>Functional failure:</strong> The page lacked clear error handling for SSO (Single Sign-On) failures, leading to high support ticket volume.</li>
       <li><strong>Performance:</strong> Large, unoptimized background images caused slow load times on mobile connections.</li>
     </ul>
-    <img src="images/login-before-after.png" alt="Login before and after — brand alignment, progressive disclosure, error states" class="cs-img fade-in">
-    <p class="cs-img-cap">// Before & After — legacy login → Shield DS integrated, progressive disclosure, WCAG AA</p>
   </div>
 
   <div class="cs-section fade-in">

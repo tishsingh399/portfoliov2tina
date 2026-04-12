@@ -59,12 +59,15 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 .cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
+.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 14px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
 </style>
 </head>
 <body>
 <nav>
   <a href="platform-navigation.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
   <div class="nav-name">TINA SINGH</div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
 </nav>
 
 <section class="cs-hero">
@@ -78,8 +81,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">// PROBLEM</div>
     <h2 class="cs-h2">Problem</h2>
     <p class="cs-p">The platform's navigation was fragmented. Every new product acquisition brought its own navigation style, resulting in a "Frankenstein" user experience. Users had to relearn how to navigate between primary tools, and high-value features were buried under deep, inconsistent menus.</p>
-    <img src="images/nav-audit.png" alt="Navigation audit showing redundant links across 6 products" class="cs-img fade-in">
-    <p class="cs-img-cap">// Navigation audit — 40% redundant links across 6-product suite</p>
   </div>
 
   <div class="cs-section">
@@ -91,8 +92,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       <li>Unpinned state for focus on deep data analysis.</li>
       <li>Consistent sub-navigation tiered logic.</li>
     </ul>
-    <img src="images/nav-framework.png" alt="Hub and Spoke navigation framework — Global Bar and contextual Side Rail" class="cs-img fade-in">
-    <p class="cs-img-cap">// Hub & Spoke — Global Bar (switcher, search) + contextual Side Rail per product</p>
   </div>
 
   <div class="cs-section">
@@ -107,6 +106,22 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 </div>
 
 <div class="cs-footer">// END OF RECORD</div>
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'light' ? '☀' : '◑';
+  localStorage.setItem('sds-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('sds-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
+})();
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

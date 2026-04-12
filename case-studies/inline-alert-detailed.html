@@ -59,12 +59,15 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 .cs-footer { padding: 32px 56px; text-align: center; border-top: 1px solid var(--border); font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); }
+.theme-toggle { background: none; border: 1px solid var(--border); color: var(--muted); font-size: 14px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
 </style>
 </head>
 <body>
 <nav>
   <a href="inline-alert.html" class="nav-back"><span class="nav-back-arrow">←</span> BACK TO BRIEF</a>
   <div class="nav-name">TINA SINGH</div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
 </nav>
 
 <section class="cs-hero">
@@ -84,8 +87,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <div class="s-label">// AUDIT & RESEARCH</div>
     <h2 class="cs-h2">Audit & Research</h2>
     <p class="cs-p">During the audit, I mapped message types across six product areas and identified a "missing middle" layer. Users struggled to differentiate between global system alerts and local form errors. I analyzed patterns in Carbon and Polaris to define a clear hierarchy: Banners (Global), Inline Alerts (Contextual), and Toasts (Transient).</p>
-    <img src="images/alert-hierarchy.png" alt="Messaging hierarchy: Banner (global), Inline Alert (contextual), Toast (transient)" class="cs-img fade-in">
-    <p class="cs-img-cap">// Hierarchy — Banner (global) → Inline Alert (contextual) → Toast (transient)</p>
   </div>
 
   <div class="cs-section">
@@ -97,8 +98,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       <li><strong>Warning:</strong> Potential issue, requires caution.</li>
       <li><strong>Error:</strong> Critical blocker or failure.</li>
     </ul>
-    <img src="images/alert-variants.png" alt="All four alert variants — Critical, Warning, Info, Success in full and compact modes" class="cs-img fade-in">
-    <p class="cs-img-cap">// Four variants — Critical / Warning / Info / Success, full and 48px compact</p>
   </div>
 
   <div class="cs-section">
@@ -114,6 +113,22 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 </div>
 
 <div class="cs-footer">// END OF RECORD</div>
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isLight = html.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'light' ? '☀' : '◑';
+  localStorage.setItem('sds-theme', next);
+}
+(function() {
+  const saved = localStorage.getItem('sds-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.textContent = saved === 'light' ? '☀' : '◑';
+})();
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
