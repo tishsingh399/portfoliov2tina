@@ -1153,11 +1153,12 @@ footer {
     </div>
     <div class="contact-form fade-in">
       <form id="contactForm" onsubmit="handleContact(event)">
-        <!-- honeypot: hidden from humans, bots fill it — if non-empty, reject silently -->
-        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
-          <label for="cf-pot">Leave this blank</label>
-          <input type="text" id="cf-pot" name="website" tabindex="-1" autocomplete="off">
-        </div>
+        <!-- Web3Forms access key — delivers to hello@tinasingh.app -->
+        <input type="hidden" name="access_key" id="w3f-key" value="PASTE_YOUR_WEB3FORMS_KEY_HERE">
+        <input type="hidden" name="subject" value="Portfolio Inquiry — tinasingh.app">
+        <input type="hidden" name="from_name" value="tinasingh.app Contact Form">
+        <!-- honeypot — Web3Forms built-in bot check -->
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <div class="contact-form-row">
           <label for="cf-name">Name</label>
           <input type="text" id="cf-name" name="name" placeholder="Your name" required>
@@ -1170,8 +1171,9 @@ footer {
           <label for="cf-msg">Message</label>
           <textarea id="cf-msg" name="message" placeholder="What are you working on?" required></textarea>
         </div>
-        <button type="submit" class="contact-submit">Send Message →</button>
+        <button type="submit" id="contactSubmit" class="contact-submit">Send Message →</button>
         <div class="contact-success" id="contactSuccess">// MESSAGE SENT. I'll be in touch.</div>
+        <div class="contact-error" id="contactError" style="display:none;color:var(--accent);font-family:'Press Start 2P',monospace;font-size:8px;margin-top:16px;">// SOMETHING WENT WRONG. Email me directly.</div>
       </form>
     </div>
   </div>
@@ -1615,18 +1617,37 @@ pixelWrap.addEventListener('mouseleave', () => {
 // ═══════════════════════════════════════════
 let recruiterOn = false;
 
-function handleContact(e) {
+async function handleContact(e) {
   e.preventDefault();
-  // Honeypot check — bots fill the hidden field, humans leave it blank
-  if (document.getElementById('cf-pot').value !== '') return;
-  const name = document.getElementById('cf-name').value.trim();
-  const email = document.getElementById('cf-email').value.trim();
-  const msg = document.getElementById('cf-msg').value.trim();
-  const subject = encodeURIComponent('Portfolio Inquiry from ' + name);
-  const body = encodeURIComponent(msg + '\n\nFrom: ' + name + ' <' + email + '>');
-  window.location.href = 'mailto:hello@tinasingh.app?subject=' + subject + '&body=' + body;
-  document.getElementById('contactSuccess').style.display = 'block';
-  document.getElementById('contactForm').reset();
+  const btn = document.getElementById('contactSubmit');
+  const successEl = document.getElementById('contactSuccess');
+  const errorEl = document.getElementById('contactError');
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const data = new FormData(document.getElementById('contactForm'));
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data
+    });
+    const json = await res.json();
+    if (json.success) {
+      successEl.style.display = 'block';
+      errorEl.style.display = 'none';
+      document.getElementById('contactForm').reset();
+      btn.textContent = 'Sent ✓';
+    } else {
+      throw new Error('Failed');
+    }
+  } catch {
+    errorEl.style.display = 'block';
+    successEl.style.display = 'none';
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+  }
 }
 
 function toggleTheme() {
