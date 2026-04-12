@@ -757,9 +757,9 @@ footer {
 /* ── Featured Case Study Strip ───────────────── */
 .featured-cs {
   background: var(--bg2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 52px 56px;
+  border: 1px solid var(--border);
+  margin-top: 1px;
+  padding: 52px 36px;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -785,19 +785,17 @@ footer {
 }
 .featured-cs:hover {
   background: var(--bg3);
-  border-top-color: var(--accent);
-  border-bottom-color: var(--accent);
+  border-color: var(--accent);
 }
 /* idle pulse — fires via JS class toggle */
 .featured-cs.pulse {
-  border-top-color: var(--accent);
-  border-bottom-color: var(--accent);
+  border-color: var(--accent);
   animation: csPulse 1.2s cubic-bezier(0.25,1,0.5,1) forwards;
 }
 @keyframes csPulse {
-  0%   { border-top-color: var(--accent); border-bottom-color: var(--accent); }
-  60%  { border-top-color: var(--accent); border-bottom-color: var(--accent); }
-  100% { border-top-color: var(--border); border-bottom-color: var(--border); }
+  0%   { border-color: var(--accent); }
+  60%  { border-color: var(--accent); }
+  100% { border-color: var(--border); }
 }
 .featured-cs-left {}
 .featured-cs-eyebrow {
@@ -1109,18 +1107,18 @@ footer {
       <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
     </div>
   </div>
-</section>
 
-<a href="case-studies/portfolio-as-product.html" class="featured-cs fade-in">
-  <div class="featured-cs-left">
-    <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>05 / 05 · Featured Case Study</div>
-    <div class="featured-cs-title">Portfolio as a Product</div>
-    <div class="featured-cs-desc">How I designed and built this portfolio without relying on frontend expertise — and the decisions, constraints, and deployment steps behind it.</div>
-  </div>
-  <div class="featured-cs-cta">
-    Read Case Study <span class="featured-cs-cta-arrow">→</span>
-  </div>
-</a>
+  <a href="case-studies/portfolio-as-product.html" class="featured-cs fade-in">
+    <div class="featured-cs-left">
+      <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>05 / 05 · Featured Case Study</div>
+      <div class="featured-cs-title">Portfolio as a Product</div>
+      <div class="featured-cs-desc">How I designed and built this portfolio without relying on frontend expertise — and the decisions, constraints, and deployment steps behind it.</div>
+    </div>
+    <div class="featured-cs-cta">
+      Read Case Study <span class="featured-cs-cta-arrow">→</span>
+    </div>
+  </a>
+</section>
 
 
 <section class="about" id="about">
