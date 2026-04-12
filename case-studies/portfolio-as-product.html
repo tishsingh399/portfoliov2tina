@@ -434,7 +434,7 @@ nav {
 
   <div class="cs-section fade-in">
     <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Six decisions that shaped the outcome.</h2>
+    <h2 class="cs-h2">Seven decisions that shaped the outcome.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
@@ -475,7 +475,14 @@ nav {
         <div class="decision-num">06</div>
         <div class="decision-body">
           <div class="decision-h">Use AI as a design collaborator, not a replacement</div>
-          <p class="decision-p">I used Antigravity — an AI coding agent — not to design for me, but to extend my ability to ship. I directed the fixes: I identified the bugs (uneven card widths, broken dark mode contrast), and the AI executed targeted CSS changes, ran accessibility audits on color ratios, and deployed to Vercel via CLI. The design decisions were mine. The velocity was collaborative.</p>
+          <p class="decision-p">I used Antigravity and Claude Code — AI coding agents — not to design for me, but to extend my ability to ship. I directed the fixes: identified the bugs, decided what to change, and validated the results. The AI executed targeted CSS changes, ran accessibility audits on color ratios, and deployed to Vercel via CLI. The decisions were mine. The velocity was collaborative.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">07</div>
+        <div class="decision-body">
+          <div class="decision-h">Write a machine-readable contract when AI keeps breaking your rules</div>
+          <p class="decision-p">When the AI repeatedly stretched images to full width and ignored sizing rules I'd stated in conversation, I wrote <strong>DESIGN.md</strong> — a constraint document checked into the repo. It defines image classes, forbids object-fit cropping, sets max-widths, and specifies when to use <code style="color:var(--accent);font-size:13px">.cs-img</code> vs <code style="color:var(--accent);font-size:13px">.cs-img-full</code>. The file exists not for humans to read first — it's for the AI. It worked.</p>
         </div>
       </div>
     </div>
@@ -555,8 +562,8 @@ nav {
 
   <div class="cs-section fade-in">
     <div class="s-label">Iteration 2: Claude Code</div>
-    <h2 class="cs-h2">4 hours straight. Every bug had a story.</h2>
-    <p class="cs-p">After the initial build with Antigravity, I spent 4+ consecutive hours iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> — Anthropic's AI coding agent inside VS Code. This pass was brutal in the best way: real bugs, real constraints, and the constant tension of working with an AI that sometimes didn't listen the first time.</p>
+    <h2 class="cs-h2">4 hours straight. Every bug had a story. Most got solved.</h2>
+    <p class="cs-p">After the initial build with Antigravity, I spent 4+ consecutive hours iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> — Anthropic's AI coding agent inside VS Code. This pass was real: real bugs, real constraints, and the constant tension of working with an AI that had its own ideas about what "correct" meant.</p>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">01</div>
@@ -580,7 +587,11 @@ nav {
       </div>
       <div class="security-step">
         <div class="step-icon">06</div>
-        <div class="step-text"><strong>The image problem — still unsolved</strong> — The biggest unresolved hurdle: how to add real screenshots to the portfolio without knowing HTML. The workflow (drop image in folder → commit → push) requires git knowledge I don't have. This remains the most honest constraint of building a site you can't fully maintain yourself.</div>
+        <div class="step-text"><strong>The image problem — then solved</strong> — Mid-session discovery: every "screenshot" Claude had added was AI-generated fiction. NEXUS CORE dashboards. AETHER SYSTEMS mockups. QuantumFlow neon diagrams. None of it was real work. I tracked down the actual screenshots across three Desktop folders, renamed them with intent (<code style="color:var(--accent);font-size:13px">shield-component-library.png</code>, <code style="color:var(--accent);font-size:13px">login-final-option9.png</code>), deleted all 12 fakes, and dropped in 20+ real images.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">07</div>
+        <div class="step-text"><strong>Images at 100% width — a design contract</strong> — After solving the fake image problem, a new one surfaced: every image stretched to fill the full container. Some were 3000px wide screenshots rendered at viewport width. I wrote a <code style="color:var(--accent);font-size:13px">DESIGN.md</code> file — a machine-readable contract defining exactly how images should be sized, what CSS classes to use (<code style="color:var(--accent);font-size:13px">.cs-img</code>, <code style="color:var(--accent);font-size:13px">.cs-img-full</code>), and explicit rules against <code style="color:var(--accent);font-size:13px">object-fit</code> cropping or 100% width overrides. The AI followed it from that point forward.</div>
       </div>
     </div>
     <div class="pull-quote">"Each iteration isn't about adding features. It's about removing friction between the work and the person reading it."</div>
@@ -628,7 +639,7 @@ nav {
     <h2 class="cs-h2">More than a portfolio.</h2>
     <p class="cs-p">This project shows how I approach ambiguous problems, work within constraints, and make decisions across design and implementation.</p>
     <p class="cs-p">It reflects a shift in how I work. Instead of relying on tools to define the outcome, I define the structure and use tools to execute it.</p>
-    <p class="cs-p">The Antigravity iteration proves something else: I can work <em style="color:var(--accent)">with</em> AI tools effectively — not as a crutch, but as a deliberate extension of my process. I identified the problems, directed the fixes, and validated the results. That's how design leadership works in an AI-augmented world.</p>
+    <p class="cs-p">The Antigravity and Claude Code iterations prove something else: I can work <em style="color:var(--accent)">with</em> AI tools effectively — not as a crutch, but as a deliberate extension of my process. When the AI drifted (fake images, wrong widths, ignored instructions), I didn't debug it with complaints — I debugged it with a design contract. DESIGN.md is the artifact of that. The decisions were mine. The discipline was mine.</p>
   </div>
 
   <div class="cs-section fade-in">
