@@ -9,3 +9,4 @@ node_modules/
 tools/
 notion export/
 case-study-technical.md
+.env
