@@ -95,20 +95,6 @@ body {
   line-height: 1.6;
 }
 
-/* ── Recruiter Banner ────────────────────────── */
-.recruiter-banner {
-  display: none;
-  background: var(--accent);
-  color: #fff;
-  font-size: 8px;
-  letter-spacing: 0.12em;
-  text-align: center;
-  padding: 10px;
-  font-family: 'Press Start 2P', monospace;
-}
-/* Only show when recruiter mode is active via URL param or localStorage */
-.recruiter-mode .recruiter-banner { display: block; }
-
 .recruiter-mode .card-desc { display: none; }
 .recruiter-mode .card-bullets, .recruiter-mode .card-problem, .recruiter-mode .r-badge { display: flex !important; opacity: 1 !important; }
 .recruiter-mode .card-problem { display: block !important; }
@@ -154,19 +140,6 @@ nav.scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-.recruiter-toggle { 
-  display: flex; align-items: center; gap: 10px; 
-  font-family: 'Press Start 2P', monospace; font-size: 7px; 
-  cursor: pointer; padding: 6px 12px; border: 1px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  text-transform: uppercase;
-  transition: all 0.2s;
-}
-.recruiter-toggle:hover { border-color: var(--accent); color: var(--text); }
-.recruiter-toggle.active { border-color: var(--accent); background: rgba(255, 92, 61, 0.1); color: var(--accent); }
-.recruiter-toggle .toggle-pill { width: 10px; height: 10px; background: var(--border); }
-.recruiter-toggle.active .toggle-pill { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .nav-name {
   font-family: 'Press Start 2P', monospace;
   font-size: 13px;
@@ -478,7 +451,7 @@ section { padding: 96px 56px; }
 
 .card {
   background: var(--bg);
-  padding: 36px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
@@ -487,13 +460,29 @@ section { padding: 96px 56px; }
   overflow: hidden;
   border-top: 2px solid transparent;
 }
-.card:hover { 
-  background: var(--bg2); 
+.card-thumb {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+.card:hover .card-thumb { opacity: 0.88; }
+.card-content {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card:hover {
+  background: var(--bg2);
   border-top-color: var(--accent);
   transform: translateY(-4px);
 }
 /* Primary card (card 01) — standardized to high-contrast dark */
-.card--primary { background: var(--bg); padding: 36px; }
+.card--primary { background: var(--bg); }
 .card--primary:hover { background: var(--bg2); border-top-color: var(--accent); }
 .card--primary .card-num { color: var(--muted); }
 
@@ -925,7 +914,8 @@ footer {
   canvas { width: 260px !important; height: 260px !important; }
 
   .work-grid { grid-template-columns: 1fr; }
-  .card-visual { height: 100px; margin: -36px -36px 24px -36px; }
+  .card-visual { height: 100px; }
+  .card-thumb { height: 200px; }
 
   section { padding: 48px 24px; }
   .work { padding: 40px 24px 0; }
@@ -957,8 +947,9 @@ footer {
   section, .work, .contact { padding: 40px 16px; }
   footer, .mini-about { padding: 18px 16px; }
 
-  .card { padding: 24px; }
-  .card-visual { margin: -24px -24px 20px -24px; height: 88px; }
+  .card-content { padding: 24px; }
+  .card-visual { height: 88px; }
+  .card-thumb { height: 160px; }
 
   .metrics-grid { grid-template-columns: 1fr; }
   .metric { padding: 28px 20px; }
@@ -1063,8 +1054,6 @@ footer {
   </div>
 </nav>
 
-<div class="recruiter-banner" id="rBanner">// RECRUITER_MODE_ACTIVE // SYSTEM_SIMPLIFIED</div>
-
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag fade-in"><span>Senior Product Designer</span></div>
@@ -1098,7 +1087,7 @@ footer {
     <div class="pixel-stage fade-in">
       <div class="pixel-wrap">
         <div class="corner corner-tl"></div>
-        <canvas id="c" width="240" height="240"></canvas>
+        <canvas id="c" width="240" height="240" aria-hidden="true"></canvas>
         <div class="corner corner-br"></div>
       </div>
       <div class="dots" id="dots"></div>
@@ -1128,87 +1117,99 @@ footer {
 
   <div class="work-grid">
     <div class="card scale-in" data-delay="1" data-n="01">
-      <div class="card-num">01 / 04</div>
-      <div class="card-title">Design System</div>
-      <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
-      <div class="card-desc" id="desc1">
-        Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.
+      <img src="assets/img/Thumbnailsds.jpg" alt="Design System case study thumbnail" class="card-thumb">
+      <div class="card-content">
+        <div class="card-num">01 / 04</div>
+        <div class="card-title">Design System</div>
+        <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
+        <div class="card-desc" id="desc1">
+          Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.
+        </div>
+        <ul class="card-bullets" id="bullets1">
+          <li>Reduced component detach rate from 40% to under 1%</li>
+          <li>Implemented 791 tokens across light and dark modes</li>
+          <li>Federal procurement compliance (WCAG AA & Section 508)</li>
+        </ul>
+        <div class="card-outcome" id="outcome1">61k+ insertions · &lt;1% detach rate · 6 products</div>
+        <div class="card-tags">
+          <span class="tag">Design Systems</span>
+          <span class="tag">Architecture</span>
+          <span class="tag">Governance</span>
+        </div>
+        <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
       </div>
-      <ul class="card-bullets" id="bullets1">
-        <li>Reduced component detach rate from 40% to under 1%</li>
-        <li>Implemented 791 tokens across light and dark modes</li>
-        <li>Federal procurement compliance (WCAG AA & Section 508)</li>
-      </ul>
-      <div class="card-outcome" id="outcome1">61k+ insertions · <1% detach rate · 6 products</div>
-      <div class="card-tags">
-        <span class="tag">Design Systems</span>
-        <span class="tag">Architecture</span>
-        <span class="tag">Governance</span>
-      </div>
-      <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
     </div>
 
     <div class="card scale-in" data-delay="2" data-n="02">
-      <div class="card-num">02 / 04</div>
-      <div class="card-title">Inline Alert</div>
-      <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software. When everything is an emergency, nobody reads anything.</div>
-      <div class="card-desc" id="desc2">
-        Redesigned the alert taxonomy from a single visual into a 4-tier system (Critical, Warning, Info, Success) rooted in user actionability.
+      <img src="assets/img/Frame 1618873794.png" alt="Inline Alert case study thumbnail" class="card-thumb">
+      <div class="card-content">
+        <div class="card-num">02 / 04</div>
+        <div class="card-title">Inline Alert</div>
+        <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software. When everything is an emergency, nobody reads anything.</div>
+        <div class="card-desc" id="desc2">
+          Redesigned the alert taxonomy from a single visual into a 4-tier system (Critical, Warning, Info, Success) rooted in user actionability.
+        </div>
+        <ul class="card-bullets" id="bullets2">
+          <li>Established a structured visual hierarchy for system events</li>
+          <li>Compact 48px mode for dense dashboard environments</li>
+          <li>Tokenized mapping ensuring WCAG AA adoption blindly</li>
+        </ul>
+        <div class="card-outcome" id="outcome2">4-tier system · unified semantic scale · adopted platform-wide</div>
+        <div class="card-tags">
+          <span class="tag">Component Design</span>
+          <span class="tag">Accessibility</span>
+          <span class="tag">Enterprise Logic</span>
+        </div>
+        <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
       </div>
-      <ul class="card-bullets" id="bullets2">
-        <li>Established a structured visual hierarchy for system events</li>
-        <li>Compact 48px mode for dense dashboard environments</li>
-        <li>Tokenized mapping ensuring WCAG AA adoption blindly</li>
-      </ul>
-      <div class="card-outcome" id="outcome2">4-tier system · unified semantic scale · adopted platform-wide</div>
-      <div class="card-tags">
-        <span class="tag">Component Design</span>
-        <span class="tag">Accessibility</span>
-        <span class="tag">Enterprise Logic</span>
-      </div>
-      <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
     </div>
 
     <div class="card scale-in" data-delay="3" data-n="03">
-      <div class="card-num">03 / 04</div>
-      <div class="card-title">Platform Navigation</div>
-      <div class="card-problem" id="prob3">Defining Behavior Before Visuals. 6 legacy products merged with no shared hierarchy or routing logic.</div>
-      <div class="card-desc" id="desc3">
-        Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.
+      <img src="assets/img/1Thumbnail.jpg" alt="Platform Navigation case study thumbnail" class="card-thumb">
+      <div class="card-content">
+        <div class="card-num">03 / 04</div>
+        <div class="card-title">Platform Navigation</div>
+        <div class="card-problem" id="prob3">Defining Behavior Before Visuals. 6 legacy products merged with no shared hierarchy or routing logic.</div>
+        <div class="card-desc" id="desc3">
+          Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.
+        </div>
+        <ul class="card-bullets" id="bullets3">
+          <li>Addressed 40% navigation redundancy in IA restructuring</li>
+          <li>Governed active state, deep-link routing, and tenant switching</li>
+          <li>Driven by JSON payload avoiding custom frontend rewrites</li>
+        </ul>
+        <div class="card-outcome" id="outcome3">Unified routing · single JSON logic · 6 products</div>
+        <div class="card-tags">
+          <span class="tag">Information Architecture</span>
+          <span class="tag">System Design</span>
+          <span class="tag">Behavior Specs</span>
+        </div>
+        <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
       </div>
-      <ul class="card-bullets" id="bullets3">
-        <li>Addressed 40% navigation redundancy in IA restructuring</li>
-        <li>Governed active state, deep-link routing, and tenant switching</li>
-        <li>Driven by JSON payload avoiding custom frontend rewrites</li>
-      </ul>
-      <div class="card-outcome" id="outcome3">Unified routing · single JSON logic · 6 products</div>
-      <div class="card-tags">
-        <span class="tag">Information Architecture</span>
-        <span class="tag">System Design</span>
-        <span class="tag">Behavior Specs</span>
-      </div>
-      <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
     </div>
 
     <div class="card scale-in" data-delay="4" data-n="04">
-      <div class="card-num">04 / 04</div>
-      <div class="card-title">Login Redesign</div>
-      <div class="card-problem" id="prob4">Where It Started: The Old Login Page Was Working Against Us. The legacy entry point was a visual outlier that shattered trust.</div>
-      <div class="card-desc" id="desc4">
-        Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.
+      <img src="assets/img/Thumbnail5.jpg" alt="Login Redesign case study thumbnail" class="card-thumb">
+      <div class="card-content">
+        <div class="card-num">04 / 04</div>
+        <div class="card-title">Login Redesign</div>
+        <div class="card-problem" id="prob4">Where It Started: The Old Login Page Was Working Against Us. The legacy entry point was a visual outlier that shattered trust.</div>
+        <div class="card-desc" id="desc4">
+          Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.
+        </div>
+        <ul class="card-bullets" id="bullets4">
+          <li>Architected progressive disclosure flow (Email → Auth Method)</li>
+          <li>Formalized error taxonomy for specific MFA/Expired interactions</li>
+          <li>Hardened WCAG AA structure passing strict federal mandates</li>
+        </ul>
+        <div class="card-outcome" id="outcome4">SSO failure recovery · system adoption · progressive auth</div>
+        <div class="card-tags">
+          <span class="tag">Interaction Design</span>
+          <span class="tag">Identity Access</span>
+          <span class="tag">Error Handling</span>
+        </div>
+        <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
       </div>
-      <ul class="card-bullets" id="bullets4">
-        <li>Architected progressive disclosure flow (Email → Auth Method)</li>
-        <li>Formalized error taxonomy for specific MFA/Expired interactions</li>
-        <li>Hardened WCAG AA structure passing strict federal mandates</li>
-      </ul>
-      <div class="card-outcome" id="outcome4">SSO failure recovery · system adoption · progressive auth</div>
-      <div class="card-tags">
-        <span class="tag">Interaction Design</span>
-        <span class="tag">Identity Access</span>
-        <span class="tag">Error Handling</span>
-      </div>
-      <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
     </div>
   </div>
 
@@ -1846,79 +1847,84 @@ window.addEventListener('scroll', () => {
   progressBar.style.width = pct + '%';
 }, { passive: true });
 
-// ── Cursor trail ───────────────────────────
-const TRAIL_COUNT = 7;
-const trailDots = Array.from({ length: TRAIL_COUNT }, (_, i) => {
-  const d = document.createElement('div');
-  d.className = 'cursor-dot';
-  document.body.appendChild(d);
-  return d;
-});
-let mx = 0, my = 0;
-const trailXY = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
-
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-(function animTrail() {
-  let px = mx, py = my;
-  for (let i = 0; i < TRAIL_COUNT; i++) {
-    const lag = 0.28 - i * 0.025;
-    trailXY[i].x += (px - trailXY[i].x) * lag;
-    trailXY[i].y += (py - trailXY[i].y) * lag;
-    const d = trailDots[i];
-    d.style.left = trailXY[i].x + 'px';
-    d.style.top  = trailXY[i].y + 'px';
-    d.style.opacity = ((TRAIL_COUNT - i) / TRAIL_COUNT) * 0.55;
-    d.style.width  = (5 - i * 0.4) + 'px';
-    d.style.height = (5 - i * 0.4) + 'px';
-    px = trailXY[i].x; py = trailXY[i].y;
-  }
-  requestAnimationFrame(animTrail);
-})();
+// ── Cursor trail (fine pointer only, no reduced motion) ────
+const pointerFine = window.matchMedia('(pointer: fine)').matches;
+if (!reducedMotion && pointerFine) {
+  const TRAIL_COUNT = 7;
+  const trailDots = Array.from({ length: TRAIL_COUNT }, () => {
+    const d = document.createElement('div');
+    d.className = 'cursor-dot';
+    document.body.appendChild(d);
+    return d;
+  });
+  let mx = 0, my = 0;
+  const trailXY = Array.from({ length: TRAIL_COUNT }, () => ({ x: 0, y: 0 }));
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animTrail() {
+    let px = mx, py = my;
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const lag = 0.28 - i * 0.025;
+      trailXY[i].x += (px - trailXY[i].x) * lag;
+      trailXY[i].y += (py - trailXY[i].y) * lag;
+      const d = trailDots[i];
+      d.style.left = trailXY[i].x + 'px';
+      d.style.top  = trailXY[i].y + 'px';
+      d.style.opacity = ((TRAIL_COUNT - i) / TRAIL_COUNT) * 0.55;
+      d.style.width  = (5 - i * 0.4) + 'px';
+      d.style.height = (5 - i * 0.4) + 'px';
+      px = trailXY[i].x; py = trailXY[i].y;
+    }
+    requestAnimationFrame(animTrail);
+  })();
+}
 
 // ── Click spark burst ──────────────────────
-const SPARK_COLORS = ['#ff5c3d', '#f5c542', '#ffffff', '#6da3ff', '#00d9b4'];
-document.addEventListener('click', e => {
-  for (let i = 0; i < 10; i++) {
-    const spark = document.createElement('div');
-    spark.className = 'spark';
-    const angle  = (i / 10) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
-    const dist   = 18 + Math.random() * 26;
-    spark.style.cssText = `
-      left:${e.clientX - 2}px;
-      top:${e.clientY - 2}px;
-      background:${SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)]};
-      --tx:${(Math.cos(angle) * dist).toFixed(1)}px;
-      --ty:${(Math.sin(angle) * dist).toFixed(1)}px;
-    `;
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 580);
-  }
-});
+if (!reducedMotion) {
+  const SPARK_COLORS = ['#ff5c3d', '#f5c542', '#ffffff', '#6da3ff', '#00d9b4'];
+  document.addEventListener('click', e => {
+    for (let i = 0; i < 10; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'spark';
+      const angle  = (i / 10) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
+      const dist   = 18 + Math.random() * 26;
+      spark.style.cssText = `
+        left:${e.clientX - 2}px;
+        top:${e.clientY - 2}px;
+        background:${SPARK_COLORS[Math.floor(Math.random() * SPARK_COLORS.length)]};
+        --tx:${(Math.cos(angle) * dist).toFixed(1)}px;
+        --ty:${(Math.sin(angle) * dist).toFixed(1)}px;
+      `;
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 580);
+    }
+  });
+}
 
 // ── Hero floating pixels ───────────────────
-const heroRightEl = document.querySelector('.hero-right');
-if (heroRightEl) {
-  const pixCont = document.createElement('div');
-  pixCont.className = 'hero-pixels';
-  heroRightEl.appendChild(pixCont);
-  const pxColors  = ['var(--accent)', 'var(--yellow)', 'var(--blue)', 'var(--accent-teal)'];
-  const pxSizes   = [4, 5, 6, 7, 4];
-  for (let i = 0; i < 14; i++) {
-    const px = document.createElement('div');
-    px.className = 'hero-px';
-    const sz  = pxSizes[Math.floor(Math.random() * pxSizes.length)];
-    const dur = (3.5 + Math.random() * 4).toFixed(2);
-    const del = (Math.random() * 4).toFixed(2);
-    px.style.cssText = `
-      width:${sz}px; height:${sz}px;
-      left:${(5 + Math.random() * 90).toFixed(1)}%;
-      top:${(5 + Math.random() * 90).toFixed(1)}%;
-      background:${pxColors[Math.floor(Math.random() * pxColors.length)]};
-      opacity:${(0.12 + Math.random() * 0.18).toFixed(2)};
-      animation:pixFloat ${dur}s ease-in-out ${del}s infinite alternate;
-    `;
-    pixCont.appendChild(px);
+if (!reducedMotion) {
+  const heroRightEl = document.querySelector('.hero-right');
+  if (heroRightEl) {
+    const pixCont = document.createElement('div');
+    pixCont.className = 'hero-pixels';
+    heroRightEl.appendChild(pixCont);
+    const pxColors  = ['var(--accent)', 'var(--yellow)', 'var(--blue)', 'var(--accent-teal)'];
+    const pxSizes   = [4, 5, 6, 7, 4];
+    for (let i = 0; i < 14; i++) {
+      const px = document.createElement('div');
+      px.className = 'hero-px';
+      const sz  = pxSizes[Math.floor(Math.random() * pxSizes.length)];
+      const dur = (3.5 + Math.random() * 4).toFixed(2);
+      const del = (Math.random() * 4).toFixed(2);
+      px.style.cssText = `
+        width:${sz}px; height:${sz}px;
+        left:${(5 + Math.random() * 90).toFixed(1)}%;
+        top:${(5 + Math.random() * 90).toFixed(1)}%;
+        background:${pxColors[Math.floor(Math.random() * pxColors.length)]};
+        opacity:${(0.12 + Math.random() * 0.18).toFixed(2)};
+        animation:pixFloat ${dur}s ease-in-out ${del}s infinite alternate;
+      `;
+      pixCont.appendChild(px);
+    }
   }
 }
 </script>

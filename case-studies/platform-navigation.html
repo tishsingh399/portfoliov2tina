@@ -84,8 +84,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-actions-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 .cs-btn-next { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; padding: 18px 36px; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
 .cs-btn-next:hover { background: var(--accent); color: #fff; }
-.cs-btn-contact { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; padding: 18px 36px; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
-.cs-btn-contact:hover { border-color: var(--text2); color: var(--text); }
+.cs-btn-contact { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--text); text-decoration: none; padding: 18px 36px; border: 2px solid var(--text2); transition: border-color 0.2s, color 0.2s, background 0.2s; white-space: nowrap; display: inline-block; }
+.cs-btn-contact:hover { border-color: var(--text); background: var(--bg2); }
 .s-label { font-family: 'Press Start 2P', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .cs-h2 { font-family: 'Spectral', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin-bottom: 24px; }
@@ -134,7 +134,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 <nav>
   <a href="../index.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Work</a>
   <span class="nav-name">Tina Singh</span>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">◑</span></button>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"><span id="themeIcon">◑</span></button>
 </nav>
 
 <div class="cs-hero">
@@ -259,7 +259,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
   <div class="cs-actions-btns">
     <a href="login-redesign.html" class="cs-btn-next">Next Case Study →</a>
-    <a href="mailto:tishsingh3@gmail.com" class="cs-btn-contact">Contact Me</a>
+    <a href="mailto:hello@tinasingh.app" class="cs-btn-contact">Contact Me</a>
   </div>
 </div>
 
