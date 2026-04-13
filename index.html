@@ -73,6 +73,54 @@ body::before {
 nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 .featured-cs, .hero { position: relative; z-index: 1; }
 
+/* ── Section card stack ──────────────────────── */
+.hero {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  min-height: 100vh;
+  background: var(--bg);
+}
+.work {
+  position: relative;
+  z-index: 3;
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+  border-top: none;
+  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
+  margin-top: -20px;
+}
+.about {
+  position: relative;
+  z-index: 4;
+  background: var(--bg2);
+  border-radius: 20px 20px 0 0;
+  border-top: none;
+  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
+  margin-top: -20px;
+}
+.contact {
+  position: relative;
+  z-index: 5;
+  border-radius: 20px 20px 0 0;
+  border-top: none;
+  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
+  margin-top: -20px;
+}
+footer {
+  position: relative;
+  z-index: 6;
+}
+
+/* ── Hero h1 auto-animate (above fold — no observer needed) ── */
+.hero-h1 {
+  animation: heroTextIn 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+}
+@keyframes heroTextIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* smooth theme transitions */
 body, nav, .hero-left, section, .card, .metric, .about-item,
 .contact, footer, .skill-tag, .tag, .recruiter-toggle, .theme-toggle {
@@ -194,6 +242,7 @@ nav {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 .hero-left {
   display: flex;
@@ -419,7 +468,7 @@ section { padding: 96px 56px; }
 .mini-about p + p { margin-top: 6px; }
 
 /* ── Work ────────────────────────────────────── */
-.work { background: var(--bg); border-top: 1px solid var(--border); padding-bottom: 0; }
+.work { padding-bottom: 0; }
 .work-header {
   display: flex;
   justify-content: space-between;
@@ -643,7 +692,7 @@ section { padding: 96px 56px; }
 }
 
 /* ── About ───────────────────────────────────── */
-.about { background: var(--bg); border-top: 1px solid var(--border); }
+.about { }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-text p {
   font-size: 17px;
@@ -670,7 +719,6 @@ section { padding: 96px 56px; }
 .contact {
   background: var(--contact-bg);
   color: var(--text);
-  border-top: 1px solid var(--contact-bdr);
   padding: 80px 56px;
 }
 .contact .s-label { color: var(--accent); }
@@ -967,7 +1015,7 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag fade-in"><span>Senior Product Designer</span></div>
-    <h1 class="hero-h1 wipe-in">
+    <h1 class="hero-h1">
       <span class="h1-tagline">Systems thinker. Pixel-level <em>craft.</em></span>
       <span class="h1-main">I design systems that make complex products usable.</span>
     </h1>
