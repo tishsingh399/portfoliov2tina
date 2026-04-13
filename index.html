@@ -981,22 +981,19 @@ footer {
 #pixel-progress {
   position: fixed;
   top: 0; left: 0;
-  height: 3px;
+  height: 2px;
   width: 0%;
-  background: var(--accent);
+  background: var(--border);
   z-index: 9999;
-  box-shadow: 0 0 10px var(--accent), 0 0 3px var(--accent);
   pointer-events: none;
-  image-rendering: pixelated;
+  opacity: 0.7;
 }
-/* Notched pixel end cap */
 #pixel-progress::after {
   content: '';
   position: absolute;
-  right: -3px; top: 0;
-  width: 6px; height: 3px;
-  background: var(--yellow);
-  box-shadow: 0 0 8px var(--yellow);
+  right: -2px; top: 0;
+  width: 4px; height: 2px;
+  background: var(--muted);
 }
 
 /* Cursor trail dots */
