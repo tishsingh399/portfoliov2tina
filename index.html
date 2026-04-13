@@ -95,9 +95,7 @@ body {
   line-height: 1.6;
 }
 
-.recruiter-mode .card-desc { display: none; }
-.recruiter-mode .card-bullets, .recruiter-mode .card-problem, .recruiter-mode .r-badge { display: flex !important; opacity: 1 !important; }
-.recruiter-mode .card-problem { display: block !important; }
+.recruiter-mode .r-badge { display: flex !important; opacity: 1 !important; }
 
 /* ── Recruiter Banner ── */
 .recruiter-banner {
@@ -456,20 +454,18 @@ section { padding: 96px 56px; }
 }
 
 .card {
-  background: var(--bg);
   display: flex;
   flex-direction: column;
   cursor: pointer;
   position: relative;
   border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
 }
 .card:last-child { border-bottom: none; }
 
-/* Hero image area */
+/* Hero — contains the full card (image + glass overlay) */
 .card-hero {
   position: relative;
-  height: 420px;
+  height: 540px;
   overflow: hidden;
 }
 .card-thumb {
@@ -478,7 +474,7 @@ section { padding: 96px 56px; }
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.5s ease, opacity 0.3s;
+  transition: transform 0.65s ease, filter 0.4s;
 }
 .card-thumb-placeholder {
   display: flex;
@@ -487,7 +483,6 @@ section { padding: 96px 56px; }
   align-items: center;
   justify-content: center;
   background: var(--bg3);
-  border-bottom: 1px solid var(--border);
 }
 .card-thumb-placeholder-inner {
   font-family: 'Press Start 2P', monospace;
@@ -497,144 +492,103 @@ section { padding: 96px 56px; }
   text-align: center;
   line-height: 2;
 }
-.card:hover .card-thumb { transform: scale(1.03); opacity: 0.88; }
+.card:hover .card-thumb { transform: scale(1.04); filter: brightness(0.78); }
 
-/* Gradient overlay with title text */
-.card-hero-overlay {
+/* Top vignette — softens the upper image edge */
+.card-vignette {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.1) 75%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 48px 56px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.28) 0%, transparent 42%);
   pointer-events: none;
-}
-.card-hero-num {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
-  color: var(--accent);
-  letter-spacing: 0.18em;
-  margin-bottom: 18px;
-}
-.card-hero-title {
-  font-family: 'Spectral', serif;
-  font-size: clamp(38px, 4.5vw, 64px);
-  font-weight: 600;
-  line-height: 1.05;
-  color: #fff;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-  max-width: 16ch;
-}
-.card-hero-tagline {
-  font-size: 15px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.68);
-  max-width: 48ch;
-  line-height: 1.55;
+  z-index: 1;
 }
 
-/* Info strip below image */
-.card-content {
-  padding: 28px 56px;
+/* Glass panel — overlaid at bottom of hero */
+.card-glass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  gap: 40px;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  transition: background 0.2s;
+  gap: 36px;
+  padding: 38px 56px;
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  background: rgba(6, 6, 6, 0.60);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+  pointer-events: none;
 }
-.card:hover .card-content { background: var(--bg2); }
-.card-info { flex: 1; min-width: 0; }
+.card:hover .card-glass { background: rgba(6, 6, 6, 0.70); }
+
+.card-glass-left { flex: 1; min-width: 0; }
+.card-glass-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
 .card-num {
-  font-size: 8px;
   font-family: 'Press Start 2P', monospace;
-  color: var(--muted);
-  margin-bottom: 10px;
+  font-size: 7px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  margin-bottom: 13px;
   line-height: 1.6;
 }
 .card-title {
   font-family: 'Spectral', serif;
-  font-size: 22px;
+  font-size: clamp(24px, 3vw, 42px);
   font-weight: 600;
-  line-height: 1.15;
-  color: var(--text);
-  margin-bottom: 8px;
+  line-height: 1.06;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.card-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 .card-desc {
   font-size: 15px;
   font-weight: 400;
-  color: var(--text2);
-  line-height: 1.7;
-  max-width: 60ch;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+  max-width: 58ch;
+  margin-bottom: 10px;
 }
-.card-bullets {
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.card-bullets.on { display: flex; opacity: 1; }
-.card-problem {
-  display: none;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text2);
-  line-height: 1.6;
-  margin-top: 10px;
-  padding: 10px 14px;
-  background: var(--bg3);
-  border-left: 2px solid var(--muted);
-}
-.card-problem.on { display: block; }
 .card-outcome {
   display: block;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--text2);
-  letter-spacing: 0.02em;
-  margin-top: 10px;
+  color: rgba(255,255,255,0.42);
+  letter-spacing: 0.04em;
 }
-.card-outcome::before { content: '→ '; color: var(--accent-teal, var(--accent)); }
-.card-bullets li {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text2);
-  list-style: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-.card-bullets li::before {
-  content: '→';
-  color: var(--accent);
-  font-size: 11px;
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-/* Card right — tags + CTA */
-.card-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
-  flex-shrink: 0;
-}
+.card-outcome::before { content: '→ '; color: var(--accent); }
+
+/* Tags */
 .card-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
 .tag {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text2);
-  padding: 6px 12px;
-  border: 1px solid var(--border);
-  background: var(--bg3);
+  color: rgba(255,255,255,0.55);
+  padding: 5px 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
 }
+
 .card-link {
   font-size: 11px;
   font-weight: 600;
@@ -648,44 +602,15 @@ section { padding: 96px 56px; }
   align-items: center;
   gap: 8px;
   width: fit-content;
-  box-shadow: 0 2px 8px rgba(255,92,61,0.2);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(255,92,61,0.25);
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  position: relative;
-  z-index: 2;
 }
-.card-link:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,92,61,0.3); }
+.card-link:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,92,61,0.35); }
 .card-link:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(255,92,61,0.15); }
 .card-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.card-link-detail {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  width: fit-content;
-  margin-top: 10px;
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-  position: relative;
-  z-index: 2;
-}
-.card-link-detail:hover { color: var(--text); border-color: var(--text); background: var(--bg2); }
-.card-link-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .card-link::after { content: '→'; transition: transform 0.2s; }
 .card:hover .card-link::after { transform: translateX(3px); }
-
-/* Stretched Link to make whole card clickable */
-.card-link::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  z-index: 1;
-}
 
 /* ── Metrics ─────────────────────────────────── */
 .metrics-inline {
@@ -1023,10 +948,9 @@ footer {
   .pixel-stage { align-items: center; }
   canvas { width: 260px !important; height: 260px !important; }
 
-  .card-hero { height: 300px; }
-  .card-hero-overlay { padding: 32px 24px; }
-  .card-content { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 24px; }
-  .card-cta { align-items: flex-start; }
+  .card-hero { height: 520px; }
+  .card-glass { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32px 24px; }
+  .card-glass-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 12px; }
   .card-tags { justify-content: flex-start; }
   .featured-cs-thumb { display: none; }
 
@@ -1060,9 +984,10 @@ footer {
   section, .work, .contact { padding: 40px 16px; }
   footer, .mini-about { padding: 18px 16px; }
 
-  .card-hero { height: 240px; }
-  .card-hero-overlay { padding: 24px 20px; }
-  .card-content { padding: 20px; }
+  .card-hero { height: 480px; }
+  .card-glass { padding: 24px 20px; gap: 16px; }
+  .card-title { font-size: clamp(20px, 6vw, 30px); }
+  .card-desc { font-size: 14px; }
   .featured-cs { flex-direction: column; gap: 24px; }
 
   .metrics-grid { grid-template-columns: 1fr; }
@@ -1235,33 +1160,24 @@ footer {
     <!-- 01 Design System -->
     <div class="card scale-in" data-delay="1" data-n="01">
       <div class="card-hero">
-        <img src="assets/img/Thumbnailsds.jpg" alt="Design System case study" class="card-thumb">
-        <div class="card-hero-overlay">
-          <div class="card-hero-num">01 / 04</div>
-          <div class="card-hero-title">Design System</div>
-          <div class="card-hero-tagline">From scattered files to governed infrastructure across 6 products</div>
-        </div>
-      </div>
-      <div class="card-content">
-        <div class="card-info">
-          <div class="card-num">Design Systems · Architecture · Governance</div>
-          <div class="card-title">Shield Design System</div>
-          <div class="card-desc" id="desc1">Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.</div>
-          <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure — a system mapped to zero governance became the foundation for federal-compliant enterprise software.</div>
-          <ul class="card-bullets" id="bullets1">
-            <li>Reduced component detach rate from 40% to under 1%</li>
-            <li>Implemented 791 tokens across light and dark modes</li>
-            <li>Federal procurement compliance — WCAG AA and Section 508</li>
-          </ul>
-          <div class="card-outcome" id="outcome1">61k+ insertions · &lt;1% detach rate · 6 products</div>
-        </div>
-        <div class="card-cta">
-          <div class="card-tags">
-            <span class="tag">Design Systems</span>
-            <span class="tag">Architecture</span>
-            <span class="tag">Governance</span>
+        <img src="assets/img/Thumbnailsds.jpg" alt="Design System case study" class="card-thumb" loading="lazy">
+        <div class="card-vignette"></div>
+        <div class="card-glass">
+          <div class="card-glass-left">
+            <div class="card-num">01 / 04</div>
+            <div class="card-title">Shield Design System</div>
+            <div class="card-sub">Design Systems · Architecture · Governance</div>
+            <div class="card-desc">Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.</div>
+            <div class="card-outcome">61k+ insertions · &lt;1% detach rate · 6 products</div>
           </div>
-          <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
+          <div class="card-glass-right">
+            <div class="card-tags">
+              <span class="tag">Design Systems</span>
+              <span class="tag">Architecture</span>
+              <span class="tag">Governance</span>
+            </div>
+            <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1269,33 +1185,24 @@ footer {
     <!-- 02 Inline Alert -->
     <div class="card scale-in" data-delay="2" data-n="02">
       <div class="card-hero">
-        <img src="assets/img/Frame 1618873794.png" alt="Inline Alert case study" class="card-thumb">
-        <div class="card-hero-overlay">
-          <div class="card-hero-num">02 / 04</div>
-          <div class="card-hero-title">Inline Alert</div>
-          <div class="card-hero-tagline">When everything is an emergency, nobody reads anything</div>
-        </div>
-      </div>
-      <div class="card-content">
-        <div class="card-info">
-          <div class="card-num">Component Design · Accessibility · Enterprise Logic</div>
-          <div class="card-title">Inline Alert System</div>
-          <div class="card-desc" id="desc2">Redesigned the alert taxonomy from a single visual pattern into a 4-tier system rooted in user actionability.</div>
-          <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software — when alerts carry no urgency hierarchy, compliance teams stop reading them entirely.</div>
-          <ul class="card-bullets" id="bullets2">
-            <li>Established structured visual hierarchy for system events</li>
-            <li>Compact 48px mode for dense dashboard environments</li>
-            <li>Tokenized mapping ensuring WCAG AA adoption platform-wide</li>
-          </ul>
-          <div class="card-outcome" id="outcome2">4-tier system · unified semantic scale · adopted platform-wide</div>
-        </div>
-        <div class="card-cta">
-          <div class="card-tags">
-            <span class="tag">Component Design</span>
-            <span class="tag">Accessibility</span>
-            <span class="tag">Enterprise Logic</span>
+        <img src="assets/img/Frame 1618873794.png" alt="Inline Alert case study" class="card-thumb" loading="lazy">
+        <div class="card-vignette"></div>
+        <div class="card-glass">
+          <div class="card-glass-left">
+            <div class="card-num">02 / 04</div>
+            <div class="card-title">Inline Alert System</div>
+            <div class="card-sub">Component Design · Accessibility · Enterprise Logic</div>
+            <div class="card-desc">Redesigned the alert taxonomy from a single visual pattern into a 4-tier system rooted in user actionability.</div>
+            <div class="card-outcome">4-tier system · unified semantic scale · adopted platform-wide</div>
           </div>
-          <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
+          <div class="card-glass-right">
+            <div class="card-tags">
+              <span class="tag">Component Design</span>
+              <span class="tag">Accessibility</span>
+              <span class="tag">Enterprise Logic</span>
+            </div>
+            <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1303,33 +1210,24 @@ footer {
     <!-- 03 Platform Navigation -->
     <div class="card scale-in" data-delay="3" data-n="03">
       <div class="card-hero">
-        <img src="assets/img/1Thumbnail.jpg" alt="Platform Navigation case study" class="card-thumb">
-        <div class="card-hero-overlay">
-          <div class="card-hero-num">03 / 04</div>
-          <div class="card-hero-title">Platform Navigation</div>
-          <div class="card-hero-tagline">Defining behavior before visuals across 6 merged legacy products</div>
-        </div>
-      </div>
-      <div class="card-content">
-        <div class="card-info">
-          <div class="card-num">Information Architecture · System Design · Behavior Specs</div>
-          <div class="card-title">Platform Navigation Redesign</div>
-          <div class="card-desc" id="desc3">Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.</div>
-          <div class="card-problem" id="prob3">6 legacy products merged with no shared hierarchy or routing logic — the navigation had 40% structural redundancy before a single pixel moved.</div>
-          <ul class="card-bullets" id="bullets3">
-            <li>Addressed 40% navigation redundancy in IA restructuring</li>
-            <li>Governed active state, deep-link routing, and tenant switching</li>
-            <li>Driven by JSON payload — no custom frontend rewrites required</li>
-          </ul>
-          <div class="card-outcome" id="outcome3">Unified routing · single JSON logic · 6 products</div>
-        </div>
-        <div class="card-cta">
-          <div class="card-tags">
-            <span class="tag">Information Architecture</span>
-            <span class="tag">System Design</span>
-            <span class="tag">Behavior Specs</span>
+        <img src="assets/img/1Thumbnail.jpg" alt="Platform Navigation case study" class="card-thumb" loading="lazy">
+        <div class="card-vignette"></div>
+        <div class="card-glass">
+          <div class="card-glass-left">
+            <div class="card-num">03 / 04</div>
+            <div class="card-title">Platform Navigation</div>
+            <div class="card-sub">Information Architecture · System Design · Behavior Specs</div>
+            <div class="card-desc">Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.</div>
+            <div class="card-outcome">Unified routing · single JSON logic · 6 products</div>
           </div>
-          <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
+          <div class="card-glass-right">
+            <div class="card-tags">
+              <span class="tag">Information Architecture</span>
+              <span class="tag">System Design</span>
+              <span class="tag">Behavior Specs</span>
+            </div>
+            <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1337,33 +1235,24 @@ footer {
     <!-- 04 Login Redesign -->
     <div class="card scale-in" data-delay="4" data-n="04">
       <div class="card-hero">
-        <img src="assets/img/Thumbnail5.jpg" alt="Login Redesign case study" class="card-thumb">
-        <div class="card-hero-overlay">
-          <div class="card-hero-num">04 / 04</div>
-          <div class="card-hero-title">Login Redesign</div>
-          <div class="card-hero-tagline">A system fix disguised as a small interface update</div>
-        </div>
-      </div>
-      <div class="card-content">
-        <div class="card-info">
-          <div class="card-num">Interaction Design · Identity Access · Error Handling</div>
-          <div class="card-title">Login Redesign</div>
-          <div class="card-desc" id="desc4">Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.</div>
-          <div class="card-problem" id="prob4">The legacy entry point was a visual outlier that shattered trust at the first touchpoint — before a user had seen a single feature.</div>
-          <ul class="card-bullets" id="bullets4">
-            <li>Architected progressive disclosure flow — Email then Auth Method</li>
-            <li>Formalized error taxonomy for MFA and expired session states</li>
-            <li>Hardened WCAG AA structure passing strict federal mandates</li>
-          </ul>
-          <div class="card-outcome" id="outcome4">SSO failure recovery · system adoption · progressive auth</div>
-        </div>
-        <div class="card-cta">
-          <div class="card-tags">
-            <span class="tag">Interaction Design</span>
-            <span class="tag">Identity Access</span>
-            <span class="tag">Error Handling</span>
+        <img src="assets/img/Thumbnail5.jpg" alt="Login Redesign case study" class="card-thumb" loading="lazy">
+        <div class="card-vignette"></div>
+        <div class="card-glass">
+          <div class="card-glass-left">
+            <div class="card-num">04 / 04</div>
+            <div class="card-title">Login Redesign</div>
+            <div class="card-sub">Interaction Design · Identity Access · Error Handling</div>
+            <div class="card-desc">Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.</div>
+            <div class="card-outcome">SSO failure recovery · system adoption · progressive auth</div>
           </div>
-          <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
+          <div class="card-glass-right">
+            <div class="card-tags">
+              <span class="tag">Interaction Design</span>
+              <span class="tag">Identity Access</span>
+              <span class="tag">Error Handling</span>
+            </div>
+            <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1884,11 +1773,6 @@ function toggleRecruiter() {
 
   document.getElementById('rToggle').classList.toggle('on', on);
   // Banner visibility handled by body class .recruiter-mode
-  
-  // Cards: problem + bullets + outcome vs desc (instant sync)
-  document.querySelectorAll('.card-bullets, .card-problem, .card-outcome').forEach(el => {
-    el.classList.toggle('on', on);
-  });
   
   // Manual overrides for elements not yet fully CSS-automated
   document.querySelectorAll('.card-desc, .hero-desc, .hero-skills, .mini-about').forEach(el => {
