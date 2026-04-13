@@ -74,6 +74,15 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 .featured-cs, .hero { position: relative; z-index: 1; }
 
 /* ── Section card stack ──────────────────────── */
+:root {
+  --card-shadow: 0 -24px 80px rgba(0,0,0,0.65), 0 -1px 0 rgba(255,255,255,0.07);
+  --card-radius: 28px;
+  --card-overlap: -28px;
+}
+[data-theme="light"] {
+  --card-shadow: 0 -24px 80px rgba(0,0,0,0.13), 0 -1px 0 rgba(0,0,0,0.15);
+}
+
 .hero {
   position: sticky;
   top: 0;
@@ -84,28 +93,54 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 .work {
   position: relative;
   z-index: 3;
-  background: var(--bg);
-  border-radius: 20px 20px 0 0;
-  border-top: none;
-  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
-  margin-top: -20px;
+  background: var(--bg2);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  box-shadow: var(--card-shadow);
+  margin-top: var(--card-overlap);
+  overflow: hidden;
+}
+.work::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
 }
 .about {
   position: relative;
   z-index: 4;
-  background: var(--bg2);
-  border-radius: 20px 20px 0 0;
-  border-top: none;
-  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
-  margin-top: -20px;
+  background: var(--bg3);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  box-shadow: var(--card-shadow);
+  margin-top: var(--card-overlap);
+  overflow: hidden;
+}
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+  opacity: 0.5;
 }
 .contact {
   position: relative;
   z-index: 5;
-  border-radius: 20px 20px 0 0;
-  border-top: none;
-  box-shadow: 0 -16px 64px rgba(0,0,0,0.35);
-  margin-top: -20px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  box-shadow: var(--card-shadow);
+  margin-top: var(--card-overlap);
+  overflow: hidden;
+}
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+  opacity: 0.6;
 }
 footer {
   position: relative;
@@ -717,12 +752,11 @@ section { padding: 96px 56px; }
 
 /* ── Contact ─────────────────────────────────── */
 .contact {
-  background: var(--contact-bg);
-  color: var(--text);
   padding: 80px 56px;
 }
-.contact .s-label { color: var(--accent); }
-.contact .s-label::before { background: var(--accent); }
+/* contact is always dark — force colors */
+.contact .s-label { color: #ff5c3d; }
+.contact .s-label::before { background: #ff5c3d; }
 .contact-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; }
 .contact-left { flex: 1; }
 .contact-h {
@@ -731,13 +765,13 @@ section { padding: 96px 56px; }
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.03em;
-  color: var(--text);
+  color: #ffffff;
   margin-bottom: 24px;
 }
 .contact-sub {
   font-size: 16px;
   font-weight: 400;
-  color: var(--text2);
+  color: #a0a0a0;
   max-width: 40ch;
   line-height: 1.7;
   margin-bottom: 36px;
@@ -746,13 +780,13 @@ section { padding: 96px 56px; }
   font-family: 'Spectral', serif;
   font-size: 20px;
   font-weight: 400;
-  color: var(--yellow);
+  color: #f5c542;
   text-decoration: none;
-  border-bottom: 1px solid var(--contact-email-bdr);
+  border-bottom: 1px solid #444444;
   padding-bottom: 4px;
   transition: border-color 0.2s;
 }
-.contact-email:hover { border-color: var(--yellow); }
+.contact-email:hover { border-color: #f5c542; }
 
 /* ── Footer ──────────────────────────────────── */
 footer {
