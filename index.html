@@ -2004,6 +2004,18 @@ if (!reducedMotion) {
   }
 })();
 </script>
+<script>
+// ── Clickable cards ──────────────────────
+document.querySelectorAll('.card').forEach(card => {
+  const link = card.querySelector('.card-link');
+  if (!link) return;
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a, button')) return;
+    window.location.href = link.href;
+  });
+});
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
