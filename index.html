@@ -702,32 +702,85 @@ footer {
   line-height: 1.8;
 }
 
-/* ── Featured Case Study Strip ───────────────── */
-/* Thumbnail placeholder for portfolio-as-product */
+/* ── Featured Case Study — BONUS STAGE ───────── */
+@keyframes marchBorder {
+  from { background-position: 0 0, 0 100%, 0 0, 100% 0; }
+  to   { background-position: 20px 0, -20px 100%, 0 -20px, 100% 20px; }
+}
+@keyframes bonusBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes floatCoin {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+@keyframes csPulse {
+  0%   { box-shadow: 0 0 0 2px var(--accent); }
+  60%  { box-shadow: 0 0 0 2px var(--accent); }
+  100% { box-shadow: none; }
+}
+
+.featured-cs {
+  background: #0d0d0d;
+  border: none;
+  margin-top: 16px;
+  padding: 48px 52px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  /* marching ants dashed border */
+  background-image:
+    repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 10px, transparent 10px, transparent 20px),
+    repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 10px, transparent 10px, transparent 20px),
+    repeating-linear-gradient(0deg,  var(--accent) 0, var(--accent) 10px, transparent 10px, transparent 20px),
+    repeating-linear-gradient(0deg,  var(--accent) 0, var(--accent) 10px, transparent 10px, transparent 20px);
+  background-size: 20px 2px, 20px 2px, 2px 20px, 2px 20px;
+  background-position: 0 0, 0 100%, 0 0, 100% 0;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  animation: marchBorder 0.6s infinite linear;
+  transition: filter 0.3s;
+}
+/* scattered coins background */
+.featured-cs::before {
+  content: '★  ●  ★  ●  ★  ●  ★  ●  ★  ●  ★  ●  ★';
+  position: absolute;
+  top: 12px; left: 0; right: 0;
+  font-size: 8px;
+  letter-spacing: 2.5em;
+  color: rgba(255,92,61,0.12);
+  font-family: 'Press Start 2P', monospace;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.featured-cs:hover {
+  filter: brightness(1.08);
+}
+/* idle pulse */
+.featured-cs.pulse {
+  animation: marchBorder 0.6s infinite linear, csPulse 1.2s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+/* thumbnail: pixel checkerboard */
 .featured-cs-thumb {
-  width: 200px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   flex-shrink: 0;
-  background: var(--bg3);
-  border: 1px solid var(--border);
+  background-image:
+    repeating-conic-gradient(rgba(255,92,61,0.15) 0% 25%, transparent 0% 50%);
+  background-size: 14px 14px;
+  border: 2px solid rgba(255,92,61,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
 }
-.featured-cs-thumb::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 12px,
-    rgba(255,92,61,0.06) 12px,
-    rgba(255,92,61,0.06) 13px
-  );
-}
+.featured-cs-thumb::before { display: none; }
 .featured-cs-thumb-inner {
   text-align: center;
   position: relative;
@@ -735,59 +788,20 @@ footer {
 }
 .featured-cs-thumb-label {
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 9px;
   color: var(--accent);
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  animation: floatCoin 2.4s ease-in-out infinite;
 }
 .featured-cs-thumb-sub {
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: var(--muted);
-  letter-spacing: 0.08em;
+  font-size: 6px;
+  color: rgba(255,92,61,0.5);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
 }
 
-.featured-cs {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  margin-top: 1px;
-  padding: 40px 48px;
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.3s, border-color 0.3s;
-}
-/* shimmer sweep overlay */
-.featured-cs::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 60%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-  transform: skewX(-20deg);
-  transition: none;
-  pointer-events: none;
-}
-.featured-cs:hover::after {
-  left: 160%;
-  transition: left 0.65s cubic-bezier(0.25,1,0.5,1);
-}
-.featured-cs:hover {
-  background: var(--bg3);
-  border-color: var(--accent);
-}
-/* idle pulse — fires via JS class toggle */
-.featured-cs.pulse {
-  border-color: var(--accent);
-  animation: csPulse 1.2s cubic-bezier(0.25,1,0.5,1) forwards;
-}
-@keyframes csPulse {
-  0%   { border-color: var(--accent); }
-  60%  { border-color: var(--accent); }
-  100% { border-color: var(--border); }
-}
 .featured-cs-left { flex: 1; min-width: 0; }
 .featured-cs-eyebrow {
   font-family: 'Press Start 2P', monospace;
@@ -813,28 +827,32 @@ footer {
   font-family: 'Spectral', serif;
   font-size: clamp(26px, 3vw, 38px);
   font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;
-  color: var(--text); margin-bottom: 12px;
+  color: #f5f0e8;
+  margin-bottom: 12px;
 }
 .featured-cs-desc {
   font-size: 16px; font-weight: 400; line-height: 1.75;
-  color: var(--text2); max-width: 56ch;
+  color: rgba(245,240,232,0.6);
+  max-width: 56ch;
 }
 .featured-cs-cta {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px; letter-spacing: 0.1em;
-  color: #fff; background: var(--accent);
+  color: #0d0d0d;
+  background: var(--accent);
   display: flex; align-items: center; gap: 12px;
-  padding: 16px 28px;
+  padding: 18px 28px;
   flex-shrink: 0;
   white-space: nowrap;
-  transition: background 0.23s, transform 0.23s;
+  border: 2px solid var(--accent);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 .featured-cs:hover .featured-cs-cta {
-  background: var(--accent2);
+  background: transparent;
+  color: var(--accent);
   transform: translateX(4px);
 }
 .featured-cs-cta-arrow {
-  color: var(--accent);
   display: inline-block;
   transition: transform 0.2s;
 }
@@ -917,6 +935,7 @@ footer {
   .card-left { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 36px 24px; }
   .card-right { min-height: 280px; }
   .featured-cs-thumb { display: none; }
+  .featured-cs { padding: 36px 28px; gap: 28px; }
 
   section { padding: 48px 24px; }
   .work { padding: 40px 24px 0; }
@@ -1206,12 +1225,12 @@ footer {
   <a href="case-studies/portfolio-as-product.html" class="featured-cs scale-in">
     <div class="featured-cs-thumb">
       <div class="featured-cs-thumb-inner">
-        <div class="featured-cs-thumb-label">// PORTFOLIO</div>
+        <div class="featured-cs-thumb-label">★<br>BONUS<br>STAGE<br>★</div>
         <div class="featured-cs-thumb-sub">tinasingh.app</div>
       </div>
     </div>
     <div class="featured-cs-left">
-      <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>Bonus · Meta Case Study</div>
+      <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>★ Bonus Stage · Meta Case Study</div>
       <div class="featured-cs-title">Portfolio as a Product</div>
       <div class="featured-cs-desc">How I designed and shipped this portfolio without relying on frontend expertise — the decisions, constraints, and trade-offs behind every page.</div>
     </div>
