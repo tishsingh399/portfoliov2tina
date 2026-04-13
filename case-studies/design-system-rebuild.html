@@ -156,6 +156,11 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
 .cs-list li { font-size: 17px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; line-height: 1.75; }
 .cs-list li::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+/* Definition list — label + description two-column aligned */
+.cs-def-list { display: grid; grid-template-columns: auto 1fr; gap: 20px 40px; margin: 24px 0; list-style: none; }
+.cs-def-list dt { font-size: 17px; font-weight: 600; color: var(--text); white-space: nowrap; display: flex; align-items: flex-start; gap: 10px; padding-top: 1px; line-height: 1.75; }
+.cs-def-list dt::before { content: '→'; color: var(--accent); font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+.cs-def-list dd { font-size: 17px; font-weight: 400; color: var(--text2); line-height: 1.75; margin: 0; }
 .pull-quote { font-family: 'Spectral', serif; font-size: clamp(24px, 3vw, 34px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--text); padding: 28px 0 28px 36px; border-left: 3px solid var(--accent); margin: 40px 0; }
 
 .decision-list { display: flex; flex-direction: column; gap: 44px; margin-top: 12px; }
@@ -273,21 +278,26 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <h2 class="cs-h2">What I walked into.</h2>
     <p class="cs-p">The design system existed technically: a shared Figma file that nobody trusted. Designers detached components at a <strong>40% rate</strong>. Products looked different from each other. Dark mode was handled per-product with hardcoded values. Federal accessibility audits produced inconsistent results, putting government contracts at real risk.</p>
     <p class="cs-p">I audited the v3.0 library and found 100+ components misaligned between what Figma showed and what engineering had built. The same UI got built twice because nobody trusted the source. This wasn't a cosmetic problem. The company sells to US federal agencies under contracts requiring Section 508 compliance and VPAT maintenance. The estimated contract exposure: <strong>$60M–$140M</strong>.</p>
-    <img src="images/shield-component-library.png" alt="Legacy component library vs new design system library" class="cs-img-full">
+    <img src="images/shield-component-library.png" alt="Legacy component library vs new design system library" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Legacy Library 1 → Legacy Library 2 → unified existing library</p>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">Scope & Execution</div>
     <h2 class="cs-h2">What I owned, start to finish.</h2>
-    <ul class="cs-list">
-      <li><strong>Audit:</strong> Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioral view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</li>
-      <li><strong>Naming conflicts:</strong> Resolved "Tiles vs Cards." Teams used both interchangeably, which was blurring accessibility focus state requirements across products. Defined Tiles as navigation triggers, Cards as content containers. One decision. Five products clarified.</li>
-      <li><strong>Token architecture:</strong> Built a three-layer Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.</li>
-      <li><strong>Documentation:</strong> Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.</li>
-      <li><strong>Governance:</strong> Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</li>
-    </ul>
-    <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" class="cs-img-full">
+    <dl class="cs-def-list">
+      <dt>Audit</dt>
+      <dd>Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioral view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</dd>
+      <dt>Naming conflicts</dt>
+      <dd>Resolved "Tiles vs Cards." Teams used both interchangeably, which was blurring accessibility focus state requirements across products. Defined Tiles as navigation triggers, Cards as content containers. One decision. Five products clarified.</dd>
+      <dt>Token architecture</dt>
+      <dd>Built a three-layer Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.</dd>
+      <dt>Documentation</dt>
+      <dd>Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.</dd>
+      <dt>Governance</dt>
+      <dd>Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</dd>
+    </dl>
+    <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Token Studio — Primitive, Semantic, and Component token layers in Figma</p>
   </div>
 
@@ -317,7 +327,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
-    <img src="images/shield-design-code-diagram.jpg" alt="Design system — design and code architecture" class="cs-img-full">
+    <img src="images/shield-design-code-diagram.jpg" alt="Design system — design and code architecture" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Token flow: Design → Design System → Development</p>
   </div>
 
@@ -348,12 +358,12 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 <div class="cs-actions fade-in">
   <div>
-    <div class="cs-actions-label">// Full Documentation</div>
-    <p class="cs-actions-msg">A more detailed write-up exists: the full process, what I set aside, and what I'd do differently.</p>
+    <div class="cs-actions-label">// Full Process Write-up</div>
+    <p class="cs-actions-msg">The full documentation: every decision, what I set aside, and what I'd do differently.</p>
   </div>
   <div class="cs-actions-btns">
-    <a href="inline-alert.html" class="cs-btn-next">Next Case Study →</a>
-    <a href="mailto:hello@tinasingh.app" class="cs-btn-contact">Contact Me</a>
+    <a href="shield-design-system-detailed.html" class="cs-btn-next">Read Full Documentation →</a>
+    <a href="inline-alert.html" class="cs-btn-contact">Next Case Study</a>
   </div>
 </div>
 
