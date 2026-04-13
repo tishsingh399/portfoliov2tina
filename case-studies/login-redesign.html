@@ -76,9 +76,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .cs-body { max-width: 1080px; margin: 0 auto; padding: 72px 48px; }
 .cs-section { margin-bottom: 60px; }
-.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px auto 8px; }
-.cs-img-full { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px auto 8px; }
-.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0; display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
+.cs-img, .cs-img-full { width: 100%; max-width: 984px; height: auto; display: block; border: 1px solid var(--border); margin: 40px auto 10px; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0; display: block; max-width: 984px; margin-left: auto; margin-right: auto; }
 .cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
 .cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
 .cs-actions-msg { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 16px; }
@@ -128,7 +127,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
-.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 </style>
 </head>
@@ -263,7 +261,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     </div>
     <img src="images/login-current-vs-new.png" alt="Current login vs new design in light and dark mode" class="cs-img-full">
     <p class="cs-img-caption">// Current (left) vs new design — light and dark mode</p>
-    <img src="images/login-final-desktop.png" alt="Final login design — desktop view" class="cs-img">
+    <img src="images/login-final-desktop.png" alt="Final login design — desktop view" class="cs-img-full">
     <p class="cs-img-caption">// Final desktop design — SDS-integrated, full state coverage</p>
     <div class="pull-quote">"Once I mapped all 15 failure modes, the engineers stopped asking clarifying questions. The handoff took less back-and-forth than anything I’d shipped in the previous six months."</div>
   </div>

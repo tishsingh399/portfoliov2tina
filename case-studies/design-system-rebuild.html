@@ -67,7 +67,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-glance-outcomes li { font-size: 16px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.65; }
 .cs-glance-outcomes li::before { content: '→'; color: var(--accent-teal); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
-.cs-img { max-width: 600px; width: 100%; display: block; border: 1px solid var(--border); margin: 28px 0 4px; background: var(--bg2); }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 6px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
 .cs-image-caption {
   text-align: center;
@@ -138,9 +137,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 .cs-body { max-width: 1080px; margin: 0 auto; padding: 72px 48px; }
 .cs-section { margin-bottom: 60px; }
-.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px auto 8px; }
-.cs-img-full { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px auto 8px; }
-.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0; display: block; max-width: 900px; margin-left: auto; margin-right: auto; }
+.cs-img, .cs-img-full { width: 100%; max-width: 984px; height: auto; display: block; border: 1px solid var(--border); margin: 40px auto 10px; }
+.cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 0; display: block; max-width: 984px; margin-left: auto; margin-right: auto; }
 .cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
 .cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
 .cs-actions-msg { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 16px; }
@@ -288,7 +286,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
       <li><strong>Documentation:</strong> Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.</li>
       <li><strong>Governance:</strong> Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</li>
     </ul>
-    <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" class="cs-img">
+    <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" class="cs-img-full">
     <p class="cs-img-caption">// Token Studio — Primitive, Semantic, and Component token layers in Figma</p>
   </div>
 
@@ -318,7 +316,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
         </div>
       </div>
     </div>
-    <img src="images/shield-design-code-diagram.jpg" alt="Design system — design and code architecture" class="cs-img">
+    <img src="images/shield-design-code-diagram.jpg" alt="Design system — design and code architecture" class="cs-img-full">
     <p class="cs-img-caption">// Token flow: Design → Design System → Development</p>
   </div>
 
