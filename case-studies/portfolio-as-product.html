@@ -426,190 +426,57 @@ nav {
 <div class="cs-body">
 
   <div class="cs-section fade-in">
-    <div class="s-label">What this proves</div>
-    <h2 class="cs-h2">The constraints were the point.</h2>
-    <ul class="cs-list">
-      <li>Making good decisions without the right tools</li>
-      <li>Balancing design and implementation across a full product</li>
-      <li>Shipping within real constraints, not ideal ones</li>
-      <li>Thinking beyond visuals — structure, judgment, and trade-offs</li>
-      <li>Owning the outcome end-to-end, including security and deployment</li>
-    </ul>
-  </div>
-
-  <div class="cs-section fade-in">
     <div class="s-label">Key Decisions</div>
-    <h2 class="cs-h2">Seven decisions that shaped the outcome.</h2>
+    <h2 class="cs-h2">Four decisions that shaped what you're looking at.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Treat the portfolio like a product, not a gallery</div>
-          <p class="decision-p">Most portfolios are collections. I designed this as a guided experience — the homepage leads directly to key work, each case study follows a consistent structure, and the goal is to reduce thinking for the person reviewing it.</p>
+          <div class="decision-h">No templates. No frameworks.</div>
+          <p class="decision-p">Raw HTML and CSS. Full control over structure, interaction, and content. Simple enough to maintain. Fast to load. Nothing I didn't understand and couldn't debug myself.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
           <div class="decision-h">The 8-bit aesthetic is the thesis, not decoration</div>
-          <p class="decision-p">I wanted this to feel like an experience — a quest. Something you move through with intention, not a PDF you scroll and close. The pixel motif, the cursor trail, the coin burst when you hit the bottom of the page, the 8-bit resume — it's all one system. Pixel perfection as a design principle, not a visual gimmick.</p>
+          <p class="decision-p">The pixel motif, cursor trail, coin burst when you hit the bottom, the 8-bit resume — one system with one intent. Something you move through, not scroll past. Pixel perfection as a design principle.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Prioritize clarity over technical complexity</div>
-          <p class="decision-p">Instead of complex frameworks, I used simple HTML and CSS. The system stays understandable and maintainable. Less surface area for things to break. Faster to load.</p>
+          <div class="decision-h">Use AI as a collaborator, not a replacement</div>
+          <p class="decision-p">Two AI coding agents extended what I could ship. I directed, caught mistakes, validated results. The AI executed. The decisions were mine. The velocity was collaborative.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">04</div>
         <div class="decision-body">
-          <div class="decision-h">Design for real usage, not just presentation</div>
-          <p class="decision-p">Recruiters scan quickly. Key information is visible within seconds. Case studies are easy to enter, skim, and exit. Navigation stays predictable throughout.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">05</div>
-        <div class="decision-body">
-          <div class="decision-h">Build within constraints instead of waiting for perfect skills</div>
-          <p class="decision-p">I did not wait until I "learned frontend properly." I worked within what I knew, made trade-offs, and focused on delivering a functional, complete product. Shipping beats perfecting.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">06</div>
-        <div class="decision-body">
-          <div class="decision-h">Use AI as a design collaborator, not a replacement</div>
-          <p class="decision-p">I used Antigravity and Claude Code — AI coding agents — not to design for me, but to extend my ability to ship. I directed the fixes: identified the bugs, decided what to change, and validated the results. The AI executed targeted CSS changes, ran accessibility audits on color ratios, and deployed to Vercel via CLI. The decisions were mine. The velocity was collaborative.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">07</div>
-        <div class="decision-body">
           <div class="decision-h">Write a machine-readable contract when AI keeps breaking your rules</div>
-          <p class="decision-p">When the AI repeatedly stretched images to full width and ignored sizing rules I'd stated in conversation, I wrote <strong>DESIGN.md</strong> — a constraint document checked into the repo. It defines image classes, forbids object-fit cropping, sets max-widths, and specifies when to use <code style="color:var(--accent);font-size:13px">.cs-img</code> vs <code style="color:var(--accent);font-size:13px">.cs-img-full</code>. The file exists not for humans to read first — it's for the AI. It worked.</p>
+          <p class="decision-p">When the AI repeatedly stretched images to full width against explicit instructions, I wrote <strong>DESIGN.md</strong> — a constraint document checked into the repo. The AI followed it from that point forward.</p>
         </div>
       </div>
     </div>
     <img src="images/portfolio-setup-casestudy.png" alt="Portfolio case study setup — building the structure in code" loading="lazy" class="cs-img-full">
-    <p class="cs-img-caption">// Building the portfolio case study structure — no templates, raw HTML and CSS</p>
+    <p class="cs-img-caption">// Building the structure in code — no templates</p>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Problem</div>
-    <h2 class="cs-h2">Most portfolio tools optimize for speed or polish, not control.</h2>
-    <p class="cs-p">Templates made everything feel the same. Heavily visual builders leaned toward animation and presentation over clarity. Fully custom builds required deeper engineering knowledge than I had.</p>
-    <p class="cs-p">I needed something in between:</p>
-    <ul class="cs-list">
-      <li>Control over structure and interaction</li>
-      <li>Ability to reflect my thinking, not just visuals</li>
-      <li>Simple enough to build and maintain myself</li>
-      <li>Fast and reliable when deployed</li>
-    </ul>
-    <div class="pull-quote">"I treated the portfolio itself as a product. Not just something to display work — something that reflects how I think, make decisions, and handle constraints."</div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">My Role</div>
-    <h2 class="cs-h2">End-to-end, on purpose.</h2>
-    <p class="cs-p">I handled everything: structure and content, layout and interaction, all five case studies, the HTML and CSS build, deployment, and the infrastructure decisions that came after. Writing every line myself meant I owned every mistake in it too.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Security + Deployment</div>
-    <h2 class="cs-h2">Intentional, even at small scale.</h2>
-    <p class="cs-p">I deployed using Vercel — reliable hosting, fast global CDN, and automatic HTTPS out of the box. Even for a portfolio, basic security and stability matter. These were not afterthoughts.</p>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Static site</strong> — no backend, no database, nothing to exploit server-side. Minimal attack surface by design.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>No unnecessary third-party scripts</strong> — Google Fonts is the only external dependency. No analytics trackers, no third-party widgets, no hidden surface area.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Clean asset references</strong> — all links and assets are controlled. No user-generated content, no dynamic URL construction, no injection vectors.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Automatic HTTPS via Vercel</strong> — TLS enforced, certificate auto-renewed, no manual certificate management.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">■</div>
-        <div class="step-text"><strong>Tested before deployment</strong> — load behavior, mobile rendering, and link integrity checked manually. No surprises in production.</div>
-      </div>
-    </div>
-    <p class="cs-p" style="margin-top:20px;">This was not enterprise-level security. It was intentional and appropriate for the scope.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">AI-Assisted Debugging & Deployment</div>
-    <h2 class="cs-h2">Antigravity as a force multiplier.</h2>
-    <p class="cs-p">After the initial build, I used <strong style="color:var(--accent-teal, var(--accent))">Antigravity</strong> to debug and ship the next iteration. Three things got fixed in one session:</p>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Uneven card widths</strong> — the work grid used <code style="color:var(--accent);font-size:13px">grid-template-columns: 2fr 1fr 1fr</code>, making the first case study card twice as wide. Fixed to <code style="color:var(--accent-teal, var(--accent));font-size:13px">repeat(3, 1fr)</code> for equal columns.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Dark mode contrast overhaul</strong> — backgrounds, text, muted tones, and borders were all too close in luminance. Rewrote the entire <code style="color:var(--accent);font-size:13px">:root</code> color palette with WCAG AA-passing contrast ratios and added a teal accent for visual variety.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Vercel deployment via CLI</strong> — pushed fixes to GitHub and deployed to production using <code style="color:var(--accent);font-size:13px">vercel --prod</code>. Live in under 10 seconds.</div>
-      </div>
-    </div>
+    <div class="s-label">AI-Assisted Build</div>
+    <h2 class="cs-h2">4 hours. Real bugs. Most got solved.</h2>
+    <p class="cs-p">Every screenshot Claude added mid-session was AI-generated fiction — NEXUS CORE dashboards, AETHER SYSTEMS mockups, QuantumFlow neon diagrams. None of it was real work. I caught it, removed all 12 fakes, and replaced them with 20+ real screenshots from my actual projects. Then wrote DESIGN.md so it wouldn't happen again.</p>
+    <img src="images/portfolio-ai-generated-images.png" alt="AI-generated fake images discovered mid-session" loading="lazy" class="cs-img-full">
+    <p class="cs-img-caption">// The AI-generated fakes. None of it was real work.</p>
     <img src="images/portfolio-design-versions.png" alt="Portfolio design iterations — versions before the final" loading="lazy" class="cs-img-full">
-    <p class="cs-img-caption">// Different versions of the portfolio before landing on the final direction</p>
+    <p class="cs-img-caption">// Design iterations before landing on the final direction</p>
     <div class="pull-quote">"I caught what was wrong. The AI fixed it. That division held for the whole session."</div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Iteration 2: Claude Code</div>
-    <h2 class="cs-h2">4 hours straight. Every bug had a story. Most got solved.</h2>
-    <p class="cs-p">After the initial build with Antigravity, I spent 4+ consecutive hours iterating using <strong style="color:var(--accent-teal, var(--accent))">Claude Code</strong> — Anthropic's AI coding agent inside VS Code. This pass was real: real bugs, real constraints, and the constant tension of working with an AI that had its own ideas about what "correct" meant.</p>
-    <div class="security-list">
-      <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>Replaced abstract pip-stat cards</strong> — The old hero cards showed pixel bar charts (HIERARCHY: ████░) that looked interesting but told a recruiter nothing. I asked for them to be replaced 4 times before they fully disappeared. Eventually forced the change by specifying the exact CSS class to delete.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Card sequence ignored repeatedly</strong> — I had a specific order: Design System → Inline Alert → Platform Nav → Login. The AI kept reverting or reordering. I had to screenshot the sequence and paste it explicitly before it held.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>All images were AI-generated</strong> — Discovered mid-session that every image the AI had added to my case studies were AI-generated stock fakes: "NEXUS CORE" sci-fi dashboards, "AETHER SYSTEMS" mockups, "QuantumFlow" neon diagrams. None of it was real work. Removed all of them.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">04</div>
-        <div class="step-text"><strong>Interactive resume and PDF were 404ing</strong> — Both files existed locally but were never committed to git. Vercel only deploys what's in the repo. Fixed by explicitly staging and pushing each file.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">05</div>
-        <div class="step-text"><strong>Theme toggle missing on 3 detailed pages</strong> — The detailed case study pages (Shield, Inline Alert, Platform Nav) were dark-mode only with no toggle. Added the CSS, button, and localStorage script to each.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">06</div>
-        <div class="step-text"><strong>The image problem — then solved</strong> — Mid-session discovery: every "screenshot" Claude had added was AI-generated fiction. NEXUS CORE dashboards. AETHER SYSTEMS mockups. QuantumFlow neon diagrams. None of it was real work. I tracked down the actual screenshots across three Desktop folders, renamed them with intent (<code style="color:var(--accent);font-size:13px">shield-component-library.png</code>, <code style="color:var(--accent);font-size:13px">login-final-option9.png</code>), deleted all 12 fakes, and dropped in 20+ real images.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">07</div>
-        <div class="step-text"><strong>Images at 100% width — a design contract</strong> — After solving the fake image problem, a new one surfaced: every image stretched to fill the full container. Some were 3000px wide screenshots rendered at viewport width. I wrote a <code style="color:var(--accent);font-size:13px">DESIGN.md</code> file — a machine-readable contract defining exactly how images should be sized, what CSS classes to use (<code style="color:var(--accent);font-size:13px">.cs-img</code>, <code style="color:var(--accent);font-size:13px">.cs-img-full</code>), and explicit rules against <code style="color:var(--accent);font-size:13px">object-fit</code> cropping or 100% width overrides. The AI followed it from that point forward.</div>
-      </div>
-    </div>
-    <img src="images/portfolio-ai-generated-images.png" alt="AI-generated fake images discovered mid-session — NEXUS CORE, AETHER SYSTEMS mockups" loading="lazy" class="cs-img-full">
-    <p class="cs-img-caption">// The AI-generated fakes discovered mid-session. None of it was real work.</p>
-    <div class="pull-quote">"Each iteration isn't about adding features. It's about removing friction between the work and the person reading it."</div>
   </div>
 
   <div class="cs-section fade-in">
     <div class="s-label">⚔ Recon Mission — 6-Agent Eval</div>
     <h2 class="cs-h2">Sent a squad in. They found bugs I had walked past for weeks.</h2>
-    <p class="cs-p">Deployed six agents in parallel — each working a different audit category. Accessibility. Performance. Content. Code. Interaction. Security. I compiled the report and triaged the findings myself.</p>
+    <p class="cs-p">Six agents ran in parallel — accessibility, performance, content, code, interaction, security. I compiled the report and triaged myself.</p>
     <div class="outcome-grid" style="margin-top:24px;margin-bottom:0">
       <div class="outcome-cell">
         <div class="outcome-label">🔴 BUG</div>
@@ -617,11 +484,11 @@ nav {
       </div>
       <div class="outcome-cell">
         <div class="outcome-label">🔴 BUG</div>
-        <div class="outcome-text"><strong>Dot nav built with &lt;div&gt;s.</strong> Not keyboard reachable. Rebuilt as &lt;button&gt; with aria-label + aria-pressed.</div>
+        <div class="outcome-text"><strong>Dot nav built with divs.</strong> Not keyboard reachable. Rebuilt as buttons with aria-label + aria-pressed.</div>
       </div>
       <div class="outcome-cell">
         <div class="outcome-label">🔴 BUG</div>
-        <div class="outcome-text"><strong>Company product name live in card titles.</strong> Removed. Card 02 title wrong too. Corrected.</div>
+        <div class="outcome-text"><strong>Company product name in card titles.</strong> Removed. Card 02 title wrong too. Corrected.</div>
       </div>
       <div class="outcome-cell">
         <div class="outcome-label">🔴 BUG</div>
@@ -633,9 +500,8 @@ nav {
 
   <div class="cs-section fade-in">
     <div class="s-label">🌐 Side Quest — Domain + Email</div>
-    <h2 class="cs-h2">tinasingh.app + $0/month email. Neither was simple.</h2>
-    <p class="cs-p">The domain took 10 minutes. DNS propagated in a few hours. The .app TLD enforces HTTPS by spec — security shipped free with the purchase.</p>
-    <p class="cs-p">The email was a different story. Zoho hit a regional paywall that isn't documented anywhere in their UI. Switched to Cloudflare routing instead — migrated DNS mid-project, navigated ICANN verification during a live transfer, configured MX, SPF, and DKIM in one pass. Routes into Gmail. No second mailbox, no monthly fee.</p>
+    <h2 class="cs-h2">tinasingh.app + $0/month email.</h2>
+    <p class="cs-p">The domain took 10 minutes. The .app TLD enforces HTTPS by spec — security shipped free. The email took longer: Zoho hit a regional paywall not documented anywhere in their UI. Switched to Cloudflare routing, migrated DNS mid-project, configured MX, SPF, and DKIM in one pass. Routes into Gmail. No second mailbox, no monthly fee.</p>
   </div>
 
   <div class="cs-section fade-in">
@@ -656,15 +522,9 @@ nav {
       </div>
       <div class="outcome-cell">
         <div class="outcome-label">After</div>
-        <div class="outcome-text">A working example of bridging design and implementation. Something I can iterate on over time.</div>
+        <div class="outcome-text">A working example of bridging design and implementation. Something I can iterate on.</div>
       </div>
     </div>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">What I learned</div>
-    <p class="cs-p">AI-generated work left alone drifts fast. Fake screenshots, wrong card order, images stretched past the container. None of those are failures of the tool exactly. They're what happens when you stop checking. Writing DESIGN.md was just a more efficient way to keep checking.</p>
-    <p class="cs-p">The constraint that slowed me down most wasn't the code. It was deciding what the portfolio actually needed to say, and what to leave out.</p>
   </div>
 
 </div>
