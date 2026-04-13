@@ -451,8 +451,8 @@ nav {
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Keep visuals restrained, add personality intentionally</div>
-          <p class="decision-p">I introduced one 8-bit motif as a recurring element. It acts as a signature — one accent per page, not background overload. Personality without noise.</p>
+          <div class="decision-h">The 8-bit aesthetic is the thesis, not decoration</div>
+          <p class="decision-p">I wanted this to feel like an experience — a quest. Something you move through with intention, not a PDF you scroll and close. The pixel motif, the cursor trail, the coin burst when you hit the bottom of the page, the 8-bit resume — it's all one system. Pixel perfection as a design principle. A 40-year-old who loves games built this. It shows. On purpose.</p>
         </div>
       </div>
       <div class="decision-item">
@@ -607,22 +607,35 @@ nav {
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Domain</div>
-    <h2 class="cs-h2">tinasingh.app — a real commitment.</h2>
-    <p class="cs-p">I bought tinasingh.app. The setup took about 10 minutes. DNS propagated in a couple of hours. The .app TLD enforces HTTPS by spec, so security came with the purchase. The harder part was knowing that a domain is permanent in a way a Notion link isn't. This URL will show up in job applications for years. That made me more careful about what was actually shipping.</p>
+    <div class="s-label">⚔ Recon Mission — 6-Agent Eval</div>
+    <h2 class="cs-h2">Sent a squad in. They found bugs I had walked past for weeks.</h2>
+    <p class="cs-p">Deployed six agents in parallel — each working a different audit category. Accessibility. Performance. Content. Code. Interaction. Security. I compiled the report and triaged the findings myself.</p>
+    <div class="outcome-grid" style="margin-top:24px;margin-bottom:0">
+      <div class="outcome-cell">
+        <div class="outcome-label">🔴 BUG</div>
+        <div class="outcome-text"><strong>Cursor trail leaked.</strong> rAF loop ran forever on idle. Fixed: 2s timeout + cancelAnimationFrame.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">🔴 BUG</div>
+        <div class="outcome-text"><strong>Dot nav built with &lt;div&gt;s.</strong> Not keyboard reachable. Rebuilt as &lt;button&gt; with aria-label + aria-pressed.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">🔴 BUG</div>
+        <div class="outcome-text"><strong>Company product name live in card titles.</strong> Removed. Card 02 title wrong too. Corrected.</div>
+      </div>
+      <div class="outcome-cell">
+        <div class="outcome-label">🔴 BUG</div>
+        <div class="outcome-text"><strong>Vercel CSP blocked its own analytics.</strong> Silently failing in prod. Updated vercel.json to whitelist both endpoints.</div>
+      </div>
+    </div>
+    <div class="pull-quote">"Same eyes stop seeing the same page. Six agents saw it fresh."</div>
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Infrastructure</div>
-    <h2 class="cs-h2">$0/month professional email. Not straightforward.</h2>
-    <p class="cs-p">Setting up hello@tinasingh.app hit a regional paywall on Zoho that isn't documented anywhere in their UI. Switched to Cloudflare email routing instead, which required migrating DNS nameservers mid-project and navigating ICANN verification during a live transfer. MX, SPF, and DKIM configured in one pass. Routes into Gmail. No second mailbox, no monthly fee.</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Constraints</div>
-    <h2 class="cs-h2">Working with what you have.</h2>
-    <p class="cs-p">The biggest constraint was my own technical depth. I had to balance what I wanted to build with what I could realistically execute without turning this into a long-term engineering project.</p>
-    <p class="cs-p">There was also a constant risk of over-designing instead of finishing. I had to stay focused on shipping a complete version first, then iterating.</p>
+    <div class="s-label">🌐 Side Quest — Domain + Email</div>
+    <h2 class="cs-h2">tinasingh.app + $0/month email. Neither was simple.</h2>
+    <p class="cs-p">The domain took 10 minutes. DNS propagated in a few hours. The .app TLD enforces HTTPS by spec — security shipped free with the purchase.</p>
+    <p class="cs-p">The email was a different story. Zoho hit a regional paywall that isn't documented anywhere in their UI. Switched to Cloudflare routing instead — migrated DNS mid-project, navigated ICANN verification during a live transfer, configured MX, SPF, and DKIM in one pass. Routes into Gmail. No second mailbox, no monthly fee.</p>
   </div>
 
   <div class="cs-section fade-in">
