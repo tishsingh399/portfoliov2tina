@@ -73,51 +73,6 @@ body::before {
 nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 .featured-cs, .hero { position: relative; z-index: 1; }
 
-/* ── Section card stack ──────────────────────── */
-:root {
-  --card-shadow: 0 -4px 24px rgba(0,0,0,0.3);
-  --card-radius: 20px;
-}
-[data-theme="light"] {
-  --card-shadow: 0 -4px 24px rgba(0,0,0,0.08);
-}
-
-.hero {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  min-height: 100vh;
-  background: var(--bg);
-}
-.work {
-  position: relative;
-  z-index: 3;
-  background: var(--bg2);
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-}
-.about {
-  position: relative;
-  z-index: 4;
-  background: var(--bg3);
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-}
-.contact {
-  position: relative;
-  z-index: 5;
-  background: #111111;
-  color: #ffffff;
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-}
-footer {
-  position: relative;
-  z-index: 6;
-}
 
 /* ── Hero h1 auto-animate (above fold — no observer needed) ── */
 .hero-h1 {
@@ -490,7 +445,7 @@ section { padding: 96px 56px; }
 .mini-about p + p { margin-top: 6px; }
 
 /* ── Work ────────────────────────────────────── */
-.work { padding: 56px 56px 0; }
+.work { padding: 56px 56px 0; background: var(--bg); border-top: 1px solid var(--border); }
 .work-header {
   display: flex;
   justify-content: space-between;
@@ -714,7 +669,7 @@ section { padding: 96px 56px; }
 }
 
 /* ── About ───────────────────────────────────── */
-.about { padding: 56px 56px 80px; }
+.about { padding: 56px 56px 80px; background: var(--bg); border-top: 1px solid var(--border); }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-text p {
   font-size: 17px;
@@ -740,17 +695,18 @@ section { padding: 96px 56px; }
 /* ── Contact ─────────────────────────────────── */
 .contact {
   padding: 56px 56px 80px;
+  background: var(--contact-bg);
+  border-top: 1px solid var(--contact-bdr);
 }
-/* contact is always dark — force colors */
-.contact .s-label { color: #ff5c3d; }
-.contact .s-label::before { background: #ff5c3d; }
+.contact .s-label { color: var(--accent); }
+.contact .s-label::before { background: var(--accent); }
 .contact-h {
   font-family: 'Spectral', serif;
   font-size: clamp(52px, 9vw, 120px);
   font-weight: 600;
   line-height: 1.0;
   letter-spacing: -0.04em;
-  color: #ffffff;
+  color: var(--text);
   margin: 24px 0 48px;
   max-width: none;
   width: 100%;
@@ -765,7 +721,7 @@ section { padding: 96px 56px; }
 .contact-sub {
   font-size: 16px;
   font-weight: 400;
-  color: #a0a0a0;
+  color: var(--contact-sub);
   max-width: 44ch;
   line-height: 1.7;
   flex: 1;
@@ -774,15 +730,15 @@ section { padding: 96px 56px; }
   font-family: 'Spectral', serif;
   font-size: 22px;
   font-weight: 400;
-  color: #f5c542;
+  color: var(--yellow);
   text-decoration: none;
-  border-bottom: 1px solid #444444;
+  border-bottom: 1px solid var(--contact-email-bdr);
   padding-bottom: 4px;
   transition: border-color 0.2s;
   white-space: nowrap;
   flex-shrink: 0;
 }
-.contact-email:hover { border-color: #f5c542; }
+.contact-email:hover { border-color: var(--yellow); }
 
 /* ── Footer ──────────────────────────────────── */
 footer {
