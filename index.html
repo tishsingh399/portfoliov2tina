@@ -490,8 +490,8 @@ section { padding: 96px 56px; }
 .card:hover .card-title { color: var(--text); }
 .card-desc {
   font-size: 16px;
-  font-weight: 300;
-  color: var(--muted);
+  font-weight: 400;
+  color: var(--text2);
   line-height: 1.7;
   margin-bottom: 24px;
   flex: 1;
@@ -520,10 +520,10 @@ section { padding: 96px 56px; }
 .card-problem.on { display: block; }
 .card-outcome {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0.04em;
+  color: var(--text2);
+  letter-spacing: 0.03em;
   margin-bottom: 20px;
 }
 .card-outcome::before { content: '→ '; color: var(--accent-teal, var(--accent)); }
@@ -543,15 +543,16 @@ section { padding: 96px 56px; }
   margin-top: 2px;
   flex-shrink: 0;
 }
-.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .tag {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--muted);
-  padding: 4px 8px;
+  color: var(--text2);
+  padding: 5px 10px;
   border: 1px solid var(--border);
+  background: var(--bg3);
 }
 .card-link {
   font-size: 10px;
@@ -634,9 +635,9 @@ section { padding: 96px 56px; }
 }
 .metric-num sup { font-size: 16px; vertical-align: super; color: var(--accent); }
 .metric-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -686,9 +687,9 @@ section { padding: 96px 56px; }
   margin-bottom: 24px;
 }
 .contact-sub {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--contact-sub);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text2);
   max-width: 40ch;
   line-height: 1.7;
   margin-bottom: 36px;
@@ -832,8 +833,17 @@ footer {
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ── Fade in ─────────────────────────────────── */
-.fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
 .fade-in.visible { opacity: 1; transform: none; }
+.fade-in[data-delay="1"] { transition-delay: 0.1s; }
+.fade-in[data-delay="2"] { transition-delay: 0.2s; }
+.fade-in[data-delay="3"] { transition-delay: 0.3s; }
+.fade-in[data-delay="4"] { transition-delay: 0.4s; }
+/* slide variants */
+.slide-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+.slide-left.visible { opacity: 1; transform: none; }
+.slide-right { opacity: 0; transform: translateX(32px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+.slide-right.visible { opacity: 1; transform: none; }
 
 /* ── Mobile Responsive ──────────────────────── */
 @media (max-width: 900px) {
@@ -981,15 +991,15 @@ footer {
   <div class="metrics-inline">
     <div class="s-label" style="margin-bottom:20px;">Proof Points</div>
     <div class="metrics-grid">
-      <div class="metric fade-in"><div class="metric-num">8<sup>+</sup></div><div class="metric-label">Products unified</div></div>
-      <div class="metric fade-in"><div class="metric-num">340<sup>+</sup></div><div class="metric-label">Components shipped</div></div>
-      <div class="metric fade-in"><div class="metric-num">60<sup>%</sup></div><div class="metric-label">Accessibility improvement</div></div>
-      <div class="metric fade-in"><div class="metric-num">6</div><div class="metric-label">Years in systems design</div></div>
+      <div class="metric fade-in" data-delay="1"><div class="metric-num">8<sup>+</sup></div><div class="metric-label">Products unified</div></div>
+      <div class="metric fade-in" data-delay="2"><div class="metric-num">340<sup>+</sup></div><div class="metric-label">Components shipped</div></div>
+      <div class="metric fade-in" data-delay="3"><div class="metric-num">60<sup>%</sup></div><div class="metric-label">Accessibility improvement</div></div>
+      <div class="metric fade-in" data-delay="4"><div class="metric-num">6</div><div class="metric-label">Years in systems design</div></div>
     </div>
   </div>
 
   <div class="work-grid">
-    <div class="card fade-in" data-n="01">
+    <div class="card fade-in" data-delay="1" data-n="01">
       <div class="card-num">01 / 04</div>
       <div class="card-title">Design System</div>
       <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
@@ -1010,7 +1020,7 @@ footer {
       <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-n="02">
+    <div class="card fade-in" data-delay="2" data-n="02">
       <div class="card-num">02 / 04</div>
       <div class="card-title">Inline Alert</div>
       <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software. When everything is an emergency, nobody reads anything.</div>
@@ -1031,7 +1041,7 @@ footer {
       <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-n="03">
+    <div class="card fade-in" data-delay="3" data-n="03">
       <div class="card-num">03 / 04</div>
       <div class="card-title">Platform Navigation</div>
       <div class="card-problem" id="prob3">Defining Behavior Before Visuals. 6 legacy products merged with no shared hierarchy or routing logic.</div>
@@ -1052,7 +1062,7 @@ footer {
       <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-n="04">
+    <div class="card fade-in" data-delay="4" data-n="04">
       <div class="card-num">04 / 04</div>
       <div class="card-title">Login Redesign</div>
       <div class="card-problem" id="prob4">Where It Started: The Old Login Page Was Working Against Us. The legacy entry point was a visual outlier that shattered trust.</div>
@@ -1626,14 +1636,25 @@ function toggleRecruiter() {
 })();
 
 // ═══════════════════════════════════════════
-// SCROLL FADE-IN
+// SCROLL ANIMATIONS
 // ═══════════════════════════════════════════
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
   });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => observer.observe(el));
+
+// ── Subtle hero parallax ──────────────────
+const heroLeft = document.querySelector('.hero-left');
+const heroRight = document.querySelector('.hero-right');
+if (heroLeft && heroRight) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroLeft.style.transform = `translateY(${y * 0.06}px)`;
+    heroRight.style.transform = `translateY(${y * 0.03}px)`;
+  }, { passive: true });
+}
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
