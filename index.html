@@ -731,9 +731,9 @@ section { padding: 96px 56px; }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-text p {
   font-size: 17px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
-  color: var(--text2);
+  color: var(--text);
   margin-bottom: 18px;
 }
 .about-text p:last-child { margin-bottom: 0; }
@@ -748,7 +748,7 @@ section { padding: 96px 56px; }
 }
 .about-item:last-child { border-bottom: none; }
 .about-item-label { font-weight: 500; color: var(--text); }
-.about-item-val { color: var(--muted); font-weight: 300; }
+.about-item-val { color: var(--text2); font-weight: 400; }
 
 /* ── Contact ─────────────────────────────────── */
 .contact {
@@ -1101,7 +1101,7 @@ footer {
 <section class="work" id="work">
   <div class="work-header">
     <div>
-      <div class="s-label wipe-in">Selected Work</div>
+      <div class="s-label fade-in">Selected Work</div>
       <div class="s-title reveal-text">Work that ships.<br>Systems that scale.</div>
     </div>
     <div class="r-badge" id="rBadge">2 min read · Condensed</div>
@@ -1217,7 +1217,8 @@ footer {
 
 
 <section class="about" id="about">
-  <div class="s-label wipe-in">About</div>
+  <div class="s-label fade-in">About</div>
+  <div class="s-title reveal-text fade-in" style="margin-bottom: 40px;">The designer<br>behind the system.</div>
   <div class="about-inner">
     <div class="about-text fade-in">
       <p>I'm a Senior Product Designer. Most of my work is systems: naming conventions, component governance, where the documentation actually lives versus where people think it does.</p>
@@ -1238,7 +1239,7 @@ footer {
 </section>
 
 <section class="contact" id="contact">
-  <div class="s-label wipe-in">Contact</div>
+  <div class="s-label fade-in">Contact</div>
   <h2 class="contact-h reveal-text">Let's build something<br>that lasts.</h2>
   <div class="contact-bottom fade-in">
     <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
