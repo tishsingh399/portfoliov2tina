@@ -484,7 +484,7 @@ section { padding: 96px 56px; }
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--text);
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 /* ── Mini About ──────────────────────────────── */
@@ -503,12 +503,12 @@ section { padding: 96px 56px; }
 .mini-about p + p { margin-top: 6px; }
 
 /* ── Work ────────────────────────────────────── */
-.work { padding-bottom: 0; }
+.work { padding: 56px 56px 0; }
 .work-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 .work-header .s-title { margin-bottom: 0; }
 .r-badge {
@@ -692,10 +692,10 @@ section { padding: 96px 56px; }
 
 /* ── Metrics ─────────────────────────────────── */
 .metrics-inline {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 28px 0;
+  padding: 20px 0;
 }
 .metrics-grid {
   display: grid;
@@ -705,7 +705,7 @@ section { padding: 96px 56px; }
 }
 .metric {
   background: var(--bg2);
-  padding: 40px 32px;
+  padding: 28px 24px;
   transition: background 0.2s;
 }
 .metric:hover { background: var(--bg3); }
@@ -727,7 +727,7 @@ section { padding: 96px 56px; }
 }
 
 /* ── About ───────────────────────────────────── */
-.about { }
+.about { padding: 56px 56px 80px; }
 .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .about-text p {
   font-size: 17px;
@@ -752,7 +752,7 @@ section { padding: 96px 56px; }
 
 /* ── Contact ─────────────────────────────────── */
 .contact {
-  padding: 80px 56px;
+  padding: 56px 56px 80px;
 }
 /* contact is always dark — force colors */
 .contact .s-label { color: #ff5c3d; }
@@ -982,8 +982,9 @@ footer {
   .work-grid { grid-template-columns: 1fr; }
   .card-visual { height: 100px; margin: -36px -36px 24px -36px; }
 
-  section { padding: 56px 24px; }
-  .work { padding: 56px 24px; }
+  section { padding: 48px 24px; }
+  .work { padding: 40px 24px 0; }
+  .about { padding: 40px 24px 56px; }
 
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
 
