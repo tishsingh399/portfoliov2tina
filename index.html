@@ -446,11 +446,12 @@ section { padding: 96px 56px; }
   transition: opacity 0.3s, transform 0.3s;
 }
 .r-badge.on { display: block; opacity: 1; transform: none; }
-/* ── Work Grid — stacked full-width layout ─── */
+/* ── Work Grid ─── */
 .work-grid {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
+  gap: 24px;
+  max-width: 960px;
 }
 
 .card {
@@ -458,14 +459,14 @@ section { padding: 96px 56px; }
   flex-direction: column;
   cursor: pointer;
   position: relative;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border);
+  overflow: hidden;
 }
-.card:last-child { border-bottom: none; }
 
 /* Hero — contains the full card (image + glass overlay) */
 .card-hero {
   position: relative;
-  height: 520px;
+  height: 600px;
   overflow: hidden;
 }
 .card-thumb {
@@ -948,10 +949,11 @@ footer {
   .pixel-stage { align-items: center; }
   canvas { width: 260px !important; height: 260px !important; }
 
-  .card-hero { height: 420px; }
+  .card-hero { height: 480px; }
   .card-glass { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32px 24px; }
   .card-glass-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 12px; }
   .card-tags { justify-content: flex-start; }
+  .work-grid { max-width: 100%; }
   .featured-cs-thumb { display: none; }
 
   section { padding: 48px 24px; }
@@ -984,10 +986,11 @@ footer {
   section, .work, .contact { padding: 40px 16px; }
   footer, .mini-about { padding: 18px 16px; }
 
-  .card-hero { height: 360px; }
+  .card-hero { height: 380px; }
   .card-glass { padding: 24px 20px; gap: 16px; }
   .card-title { font-size: clamp(20px, 6vw, 30px); }
   .card-desc { font-size: 14px; }
+  .work-grid { gap: 16px; }
   .featured-cs { flex-direction: column; gap: 24px; }
 
   .metrics-grid { grid-template-columns: 1fr; }
