@@ -1254,7 +1254,7 @@ footer {
 </section>
 </main>
 
-<footer>
+<footer id="pageFooter">
   <span class="footer-l">© 2026 Tina Singh</span>
   <span class="footer-r">Design is the argument.</span>
 </footer>
@@ -1939,6 +1939,69 @@ if (!reducedMotion) {
     }
   }
 }
+
+// ── Scroll-bottom coin burst ───────────────
+(function() {
+  let fired = false;
+
+  // Inject burst CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    .index-burst-coin {
+      position: fixed; bottom: 24px; pointer-events: none; z-index: 9999;
+      font-size: 20px;
+      animation: indexBurstUp 1.5s ease-out forwards;
+    }
+    @keyframes indexBurstUp {
+      0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+      80%  { opacity: 1; }
+      100% { transform: translateY(-320px) scale(0.4) rotate(400deg); opacity: 0; }
+    }
+    #indexLCToast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(40px);
+      background: #1a1a1a; border: 3px solid #f5c542;
+      color: #f5c542; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      padding: 14px 28px; z-index: 9999; white-space: nowrap;
+      box-shadow: 4px 4px 0 #ff5c3d;
+      opacity: 0; transition: opacity 0.3s, transform 0.4s;
+      pointer-events: none;
+    }
+    #indexLCToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  `;
+  document.head.appendChild(style);
+
+  // Toast element
+  const toast = document.createElement('div');
+  toast.id = 'indexLCToast';
+  toast.textContent = '★ MISSION COMPLETE — THANKS FOR VISITING ★';
+  document.body.appendChild(toast);
+
+  function burst() {
+    if (fired) return;
+    fired = true;
+    const items = ['🪙','⭐','🌟','✨','💛'];
+    for (let i = 0; i < 12; i++) {
+      const el = document.createElement('div');
+      el.className = 'index-burst-coin';
+      el.textContent = items[Math.floor(Math.random() * items.length)];
+      el.style.left = (8 + Math.random() * 84) + '%';
+      el.style.animationDelay = (Math.random() * 0.5) + 's';
+      el.style.animationDuration = (1.1 + Math.random() * 0.7) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2400);
+    }
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  const footer = document.getElementById('pageFooter');
+  if (footer) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) burst();
+    }, { threshold: 0.6 });
+    obs.observe(footer);
+  }
+})();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
