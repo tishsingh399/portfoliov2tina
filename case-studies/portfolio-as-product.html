@@ -101,12 +101,12 @@ nav {
 .cs-h1 {
   font-family: 'Spectral', serif;
   font-size: clamp(42px, 6vw, 72px);
-  font-weight: 300; line-height: 1.05; letter-spacing: -0.03em;
+  font-weight: 400; line-height: 1.05; letter-spacing: -0.03em;
   color: var(--text); margin-bottom: 18px;
   position: relative; z-index: 1;
 }
 .cs-sub {
-  font-size: 20px; font-weight: 300; line-height: 1.65;
+  font-size: 20px; font-weight: 400; line-height: 1.65;
   color: var(--muted); max-width: 52ch; margin-bottom: 52px;
   position: relative; z-index: 1;
 }
@@ -185,7 +185,7 @@ nav {
 .cs-section { margin-bottom: 60px; }
 .cs-actions { border-top: 1px solid var(--border); padding: 56px 56px 72px; display: flex; flex-direction: column; gap: 36px; }
 .cs-actions-label { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-.cs-actions-msg { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 16px; }
+.cs-actions-msg { font-size: 17px; font-weight: 400; line-height: 1.85; color: var(--muted); max-width: 58ch; margin-top: 16px; }
 .cs-actions-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 .cs-btn-next { font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; padding: 18px 36px; border: 2px solid var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; display: inline-block; }
 .cs-btn-next:hover { background: var(--accent); color: #fff; }
@@ -208,7 +208,7 @@ nav {
   color: var(--text); margin-bottom: 24px;
 }
 .cs-p {
-  font-size: 18px; font-weight: 300; line-height: 1.85;
+  font-size: 18px; font-weight: 400; line-height: 1.85;
   color: var(--text2); margin-bottom: 20px;
 }
 .cs-p:last-child { margin-bottom: 0; }
@@ -219,7 +219,7 @@ nav {
   margin: 18px 0;
 }
 .cs-list li {
-  font-size: 17px; font-weight: 300; color: var(--text2);
+  font-size: 17px; font-weight: 400; color: var(--text2);
   display: flex; align-items: flex-start; gap: 10px; line-height: 1.75;
 }
 .cs-list li::before {
@@ -231,7 +231,7 @@ nav {
 .pull-quote {
   font-family: 'Spectral', serif;
   font-size: clamp(24px, 3vw, 34px);
-  font-style: italic; font-weight: 300;
+  font-style: italic; font-weight: 400;
   line-height: 1.45; color: var(--text);
   padding: 28px 0 28px 36px;
   border-left: 3px solid var(--accent);
@@ -253,7 +253,7 @@ nav {
   font-size: 24px; font-weight: 600; color: var(--text);
   margin-bottom: 12px; line-height: 1.2;
 }
-.decision-p { font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--text2); }
+.decision-p { font-size: 17px; font-weight: 400; line-height: 1.85; color: var(--text2); }
 
 /* ── Security steps ── */
 .security-list {
@@ -271,7 +271,7 @@ nav {
   font-size: 8px; color: var(--accent);
   flex-shrink: 0; padding-top: 3px;
 }
-.step-text { font-size: 17px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.step-text { font-size: 17px; font-weight: 400; color: var(--text2); line-height: 1.75; }
 .step-text strong { font-weight: 500; color: var(--text); }
 
 /* ── Before / After grid ── */
@@ -288,7 +288,7 @@ nav {
   letter-spacing: 0.08em; text-transform: uppercase;
   margin-bottom: 12px;
 }
-.outcome-text { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.75; }
+.outcome-text { font-size: 15px; font-weight: 400; color: var(--text2); line-height: 1.75; }
 
 /* ── Footer ── */
 .cs-footer {
@@ -322,7 +322,7 @@ nav {
 .cs-reframe-line {
   font-family: 'Spectral', serif;
   font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.35;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -335,8 +335,7 @@ nav {
 }
 
 /* ── Images ── */
-.cs-img { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px auto 8px; }
-.cs-img-full { width: 100%; max-width: 900px; height: auto; display: block; border: 1px solid var(--border); margin: 32px 0 8px; }
+.cs-img, .cs-img-full { width: 100%; max-width: 984px; height: auto; display: block; border: 1px solid var(--border); margin: 40px auto 10px; }
 .cs-img-caption { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 24px; }
 
 /* ── Fade in ── */
