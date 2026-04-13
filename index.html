@@ -845,6 +845,33 @@ footer {
 .slide-right { opacity: 0; transform: translateX(32px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
 .slide-right.visible { opacity: 1; transform: none; }
 
+/* ── Scale on scroll ─────────────────────────── */
+.scale-in { opacity: 0; transform: scale(0.92) translateY(16px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+.scale-in.visible { opacity: 1; transform: scale(1) translateY(0); }
+.scale-in[data-delay="1"] { transition-delay: 0.08s; }
+.scale-in[data-delay="2"] { transition-delay: 0.18s; }
+.scale-in[data-delay="3"] { transition-delay: 0.28s; }
+.scale-in[data-delay="4"] { transition-delay: 0.38s; }
+
+/* ── Clip-path wipe ──────────────────────────── */
+.wipe-in { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s cubic-bezier(0.22,1,0.36,1); }
+.wipe-in.visible { clip-path: inset(0 0% 0 0); }
+.wipe-in[data-delay="1"] { transition-delay: 0.06s; }
+.wipe-in[data-delay="2"] { transition-delay: 0.14s; }
+.wipe-in[data-delay="3"] { transition-delay: 0.22s; }
+
+/* ── Text line reveal ────────────────────────── */
+.reveal-text .line-wrap { display: block; overflow: hidden; }
+.reveal-text .line-inner {
+  display: block;
+  transform: translateY(108%);
+  transition: transform 0.9s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-text.visible .line-inner { transform: translateY(0); }
+.reveal-text.visible .line-inner:nth-child(1) { transition-delay: 0s; }
+.reveal-text.visible .line-inner:nth-child(2) { transition-delay: 0.12s; }
+.reveal-text.visible .line-inner:nth-child(3) { transition-delay: 0.22s; }
+
 /* ── Mobile Responsive ──────────────────────── */
 @media (max-width: 900px) {
   nav { padding: 14px 24px; }
@@ -938,9 +965,9 @@ footer {
 <div class="recruiter-banner" id="rBanner">// RECRUITER_MODE_ACTIVE // SYSTEM_SIMPLIFIED</div>
 
 <section class="hero">
-  <div class="hero-left fade-in">
-    <div class="hero-tag"><span>Senior Product Designer</span></div>
-    <h1 class="hero-h1">
+  <div class="hero-left">
+    <div class="hero-tag fade-in"><span>Senior Product Designer</span></div>
+    <h1 class="hero-h1 wipe-in">
       <span class="h1-tagline">Systems thinker. Pixel-level <em>craft.</em></span>
       <span class="h1-main">I design systems that make complex products usable.</span>
     </h1>
@@ -982,8 +1009,8 @@ footer {
 <section class="work" id="work">
   <div class="work-header">
     <div>
-      <div class="s-label">Selected Work</div>
-      <div class="s-title">Work that ships.<br>Systems that scale.</div>
+      <div class="s-label wipe-in">Selected Work</div>
+      <div class="s-title reveal-text">Work that ships.<br>Systems that scale.</div>
     </div>
     <div class="r-badge" id="rBadge">2 min read · Condensed</div>
   </div>
@@ -999,7 +1026,7 @@ footer {
   </div>
 
   <div class="work-grid">
-    <div class="card fade-in" data-delay="1" data-n="01">
+    <div class="card scale-in" data-delay="1" data-n="01">
       <div class="card-num">01 / 04</div>
       <div class="card-title">Design System</div>
       <div class="card-problem" id="prob1">From Scattered Files to Governed Infrastructure. An enterprise cybersecurity company had a system mapped to zero governance.</div>
@@ -1020,7 +1047,7 @@ footer {
       <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-delay="2" data-n="02">
+    <div class="card scale-in" data-delay="2" data-n="02">
       <div class="card-num">02 / 04</div>
       <div class="card-title">Inline Alert</div>
       <div class="card-problem" id="prob2">Solving Alert Fatigue in Security Software. When everything is an emergency, nobody reads anything.</div>
@@ -1041,7 +1068,7 @@ footer {
       <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-delay="3" data-n="03">
+    <div class="card scale-in" data-delay="3" data-n="03">
       <div class="card-num">03 / 04</div>
       <div class="card-title">Platform Navigation</div>
       <div class="card-problem" id="prob3">Defining Behavior Before Visuals. 6 legacy products merged with no shared hierarchy or routing logic.</div>
@@ -1062,7 +1089,7 @@ footer {
       <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
     </div>
 
-    <div class="card fade-in" data-delay="4" data-n="04">
+    <div class="card scale-in" data-delay="4" data-n="04">
       <div class="card-num">04 / 04</div>
       <div class="card-title">Login Redesign</div>
       <div class="card-problem" id="prob4">Where It Started: The Old Login Page Was Working Against Us. The legacy entry point was a visual outlier that shattered trust.</div>
@@ -1084,7 +1111,7 @@ footer {
     </div>
   </div>
 
-  <a href="case-studies/portfolio-as-product.html" class="featured-cs fade-in">
+  <a href="case-studies/portfolio-as-product.html" class="featured-cs scale-in">
     <div class="featured-cs-left">
       <div class="featured-cs-eyebrow"><span class="cs-live-dot"></span>05 / 05 · Featured Case Study</div>
       <div class="featured-cs-title">Portfolio as a Product</div>
@@ -1098,7 +1125,7 @@ footer {
 
 
 <section class="about" id="about">
-  <div class="s-label">About</div>
+  <div class="s-label wipe-in">About</div>
   <div class="about-inner">
     <div class="about-text fade-in">
       <p>I'm a Senior Product Designer. Most of my time goes to systems: what the tokens are named and why, how components get reviewed, where the documentation actually lives.</p>
@@ -1121,8 +1148,8 @@ footer {
 <section class="contact" id="contact">
   <div class="contact-inner">
     <div class="contact-left fade-in">
-      <div class="s-label">Contact</div>
-      <h2 class="contact-h">Let's build something<br>that lasts.</h2>
+      <div class="s-label wipe-in">Contact</div>
+      <h2 class="contact-h reveal-text">Let's build something<br>that lasts.</h2>
       <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
       <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
     </div>
@@ -1638,21 +1665,66 @@ function toggleRecruiter() {
 // ═══════════════════════════════════════════
 // SCROLL ANIMATIONS
 // ═══════════════════════════════════════════
+// ── Main scroll observer (fade, scale, wipe) ──
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-in, .slide-left, .slide-right').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in, .wipe-in').forEach(el => observer.observe(el));
 
-// ── Subtle hero parallax ──────────────────
-const heroLeft = document.querySelector('.hero-left');
+// ── Text line reveal ──────────────────────
+function initRevealText() {
+  document.querySelectorAll('.reveal-text').forEach(el => {
+    const parts = el.innerHTML.split(/<br\s*\/?>/i);
+    el.innerHTML = parts.map(line =>
+      `<span class="line-wrap"><span class="line-inner">${line.trim()}</span></span>`
+    ).join('');
+  });
+}
+initRevealText();
+
+const textObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      textObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('.reveal-text').forEach(el => textObserver.observe(el));
+
+// ── Counter animation ─────────────────────
+function runCounter(el) {
+  const sup = el.querySelector('sup');
+  const supHTML = sup ? sup.outerHTML : '';
+  let raw = el.textContent;
+  if (sup) raw = raw.replace(sup.textContent, '');
+  const target = parseInt(raw.trim(), 10);
+  if (isNaN(target)) return;
+  const duration = 1600;
+  const t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 4);
+    el.innerHTML = Math.round(eased * target) + supHTML;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { runCounter(e.target); counterObs.unobserve(e.target); }
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.metric-num').forEach(el => counterObs.observe(el));
+
+// ── Hero parallax ─────────────────────────
 const heroRight = document.querySelector('.hero-right');
-if (heroLeft && heroRight) {
+if (heroRight) {
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    heroLeft.style.transform = `translateY(${y * 0.06}px)`;
-    heroRight.style.transform = `translateY(${y * 0.03}px)`;
+    heroRight.style.transform = `translateY(${window.scrollY * 0.04}px)`;
   }, { passive: true });
 }
 </script>
