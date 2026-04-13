@@ -704,40 +704,6 @@ section { padding: 96px 56px; }
   transition: border-color 0.2s;
 }
 .contact-email:hover { border-color: var(--yellow); }
-.contact-form { flex: 1; max-width: 480px; }
-.contact-form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.contact-form-row label { font-family: 'Press Start 2P', monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.contact-form-row input,
-.contact-form-row textarea {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-family: 'Jost', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  padding: 12px 14px;
-  outline: none;
-  transition: border-color 0.2s;
-  resize: none;
-}
-.contact-form-row input:focus,
-.contact-form-row textarea:focus { border-color: var(--accent); }
-.contact-form-row textarea { min-height: 100px; }
-.contact-submit {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 14px 24px;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-top: 4px;
-}
-.contact-submit:hover { background: var(--accent2); }
-.contact-success { font-family: 'Press Start 2P', monospace; font-size: 7px; letter-spacing: 0.08em; color: var(--accent-teal); margin-top: 12px; display: none; }
 
 /* ── Footer ──────────────────────────────────── */
 footer {
@@ -896,7 +862,6 @@ footer {
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
 
   .contact-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
-  .contact-form { max-width: 100%; width: 100%; }
   .contact { padding: 56px 24px; }
   .nav-social { display: none; }
 
@@ -1150,27 +1115,6 @@ footer {
       <h2 class="contact-h">Let's build something<br>that lasts.</h2>
       <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
       <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
-    </div>
-    <div class="contact-form fade-in">
-      <form id="contactForm" onsubmit="handleContact(event)">
-        <!-- honeypot — bot check (hidden from humans) -->
-        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="contact-form-row">
-          <label for="cf-name">Name</label>
-          <input type="text" id="cf-name" name="name" placeholder="Your name" required>
-        </div>
-        <div class="contact-form-row">
-          <label for="cf-email">Email</label>
-          <input type="email" id="cf-email" name="email" placeholder="your@email.com" required>
-        </div>
-        <div class="contact-form-row">
-          <label for="cf-msg">Message</label>
-          <textarea id="cf-msg" name="message" placeholder="What are you working on?" required></textarea>
-        </div>
-        <button type="submit" id="contactSubmit" class="contact-submit">Send Message →</button>
-        <div class="contact-success" id="contactSuccess">// MESSAGE SENT. I'll be in touch.</div>
-        <div class="contact-error" id="contactError" style="display:none;color:var(--accent);font-family:'Press Start 2P',monospace;font-size:8px;margin-top:16px;">// SOMETHING WENT WRONG. Email me directly.</div>
-      </form>
     </div>
   </div>
 </section>
@@ -1613,44 +1557,6 @@ pixelWrap.addEventListener('mouseleave', () => {
 // ═══════════════════════════════════════════
 let recruiterOn = false;
 
-async function handleContact(e) {
-  e.preventDefault();
-  const btn = document.getElementById('contactSubmit');
-  const successEl = document.getElementById('contactSuccess');
-  const errorEl = document.getElementById('contactError');
-
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const payload = {
-    name: document.getElementById('cf-name').value.trim(),
-    email: document.getElementById('cf-email').value.trim(),
-    message: document.getElementById('cf-msg').value.trim(),
-    botcheck: document.querySelector('[name="botcheck"]').checked
-  };
-
-  try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const json = await res.json();
-    if (json.success) {
-      successEl.style.display = 'block';
-      errorEl.style.display = 'none';
-      document.getElementById('contactForm').reset();
-      btn.textContent = 'Sent ✓';
-    } else {
-      throw new Error('Failed');
-    }
-  } catch {
-    errorEl.style.display = 'block';
-    successEl.style.display = 'none';
-    btn.textContent = 'Send Message →';
-    btn.disabled = false;
-  }
-}
 
 function toggleTheme() {
   const html = document.documentElement;
