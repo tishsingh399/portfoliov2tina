@@ -757,34 +757,43 @@ section { padding: 96px 56px; }
 /* contact is always dark — force colors */
 .contact .s-label { color: #ff5c3d; }
 .contact .s-label::before { background: #ff5c3d; }
-.contact-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; }
-.contact-left { flex: 1; }
 .contact-h {
   font-family: 'Spectral', serif;
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: clamp(52px, 9vw, 120px);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
   color: #ffffff;
-  margin-bottom: 24px;
+  margin: 24px 0 48px;
+  max-width: none;
+  width: 100%;
+}
+.contact-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 .contact-sub {
   font-size: 16px;
   font-weight: 400;
   color: #a0a0a0;
-  max-width: 40ch;
+  max-width: 44ch;
   line-height: 1.7;
-  margin-bottom: 36px;
+  flex: 1;
 }
 .contact-email {
   font-family: 'Spectral', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 400;
   color: #f5c542;
   text-decoration: none;
   border-bottom: 1px solid #444444;
   padding-bottom: 4px;
   transition: border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .contact-email:hover { border-color: #f5c542; }
 
@@ -980,7 +989,7 @@ footer {
 
   .about-inner { grid-template-columns: 1fr; gap: 40px; }
 
-  .contact-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .contact-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
   .contact { padding: 56px 24px; }
   .nav-social { display: none; }
 
@@ -1210,10 +1219,10 @@ footer {
   <div class="s-label wipe-in">About</div>
   <div class="about-inner">
     <div class="about-text fade-in">
-      <p>I'm a Senior Product Designer. Most of my time goes to systems: what the tokens are named and why, how components get reviewed, where the documentation actually lives.</p>
-      <p>A lot of my work sits in the gap between design and engineering. The part where a Figma file has to become something real in a codebase, and that gap is usually wider than anyone expected.</p>
-      <p>Right now I'm building a design system at an enterprise security company, covering six products across Angular and React stacks. The work is less about making things look consistent and more about making sure teams can maintain that consistency without me in the room.</p>
-      <p>I think in systems first. I question things that won't hold at scale.</p>
+      <p>I'm a Senior Product Designer. Most of my work is systems: naming conventions, component governance, where the documentation actually lives versus where people think it does.</p>
+      <p>A lot of what I do sits between design and engineering. A Figma file has to become real in a codebase, and that translation layer is usually more fragile than anyone planned for. I spend a lot of time in that space.</p>
+      <p>Currently I'm building a design system across six products at an enterprise security company, working with Angular and React teams. The harder part isn't making things look consistent. It's making sure teams can keep it consistent when I'm not in the room.</p>
+      <p>I question things that won't hold at scale. I try to do it early.</p>
     </div>
     <div class="fade-in">
       <div class="about-list">
@@ -1228,13 +1237,11 @@ footer {
 </section>
 
 <section class="contact" id="contact">
-  <div class="contact-inner">
-    <div class="contact-left fade-in">
-      <div class="s-label wipe-in">Contact</div>
-      <h2 class="contact-h reveal-text">Let's build something<br>that lasts.</h2>
-      <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
-      <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
-    </div>
+  <div class="s-label wipe-in">Contact</div>
+  <h2 class="contact-h reveal-text">Let's build something<br>that lasts.</h2>
+  <div class="contact-bottom fade-in">
+    <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
+    <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
   </div>
 </section>
 
