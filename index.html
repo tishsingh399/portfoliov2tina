@@ -75,11 +75,11 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 
 /* ── Section card stack ──────────────────────── */
 :root {
-  --card-shadow: 0 -12px 48px rgba(0,0,0,0.5), 0 -1px 0 rgba(255,255,255,0.06);
-  --card-radius: 24px;
+  --card-shadow: 0 -4px 24px rgba(0,0,0,0.3);
+  --card-radius: 20px;
 }
 [data-theme="light"] {
-  --card-shadow: 0 -12px 48px rgba(0,0,0,0.1), 0 -1px 0 rgba(0,0,0,0.12);
+  --card-shadow: 0 -4px 24px rgba(0,0,0,0.08);
 }
 
 .hero {
@@ -97,14 +97,6 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
   box-shadow: var(--card-shadow);
   overflow: hidden;
 }
-.work::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 60%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.5;
-}
 .about {
   position: relative;
   z-index: 4;
@@ -112,14 +104,6 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   box-shadow: var(--card-shadow);
   overflow: hidden;
-}
-.about::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 60%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
-  opacity: 0.5;
 }
 .contact {
   position: relative;
@@ -129,14 +113,6 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
   border-radius: var(--card-radius) var(--card-radius) 0 0;
   box-shadow: var(--card-shadow);
   overflow: hidden;
-}
-.contact::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 60%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--yellow), transparent);
-  opacity: 0.6;
 }
 footer {
   position: relative;
