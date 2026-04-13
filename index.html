@@ -889,7 +889,7 @@ footer {
   60%  { border-color: var(--accent); }
   100% { border-color: var(--border); }
 }
-.featured-cs-left {}
+.featured-cs-left { flex: 1; min-width: 0; }
 .featured-cs-eyebrow {
   font-family: 'Press Start 2P', monospace;
   font-size: 7px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -925,7 +925,9 @@ footer {
   font-size: 8px; letter-spacing: 0.1em;
   color: #fff; background: var(--accent);
   display: flex; align-items: center; gap: 12px;
-  padding: 16px 24px;
+  padding: 16px 28px;
+  flex-shrink: 0;
+  white-space: nowrap;
   transition: background 0.23s, transform 0.23s;
 }
 .featured-cs:hover .featured-cs-cta {
