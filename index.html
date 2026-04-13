@@ -421,12 +421,13 @@ section { padding: 96px 56px; }
 .s-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
 .s-title {
   font-family: 'Spectral', serif;
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: clamp(24px, 2.4vw, 36px);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 32px;
+  white-space: nowrap;
 }
 
 /* ── Mini About ──────────────────────────────── */
@@ -702,14 +703,15 @@ section { padding: 96px 56px; }
 .contact .s-label::before { background: var(--accent); }
 .contact-h {
   font-family: 'Spectral', serif;
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(24px, 3vw, 44px);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--text);
   margin: 20px 0 40px;
   max-width: none;
   width: 100%;
+  white-space: nowrap;
 }
 .contact-bottom {
   display: flex;
@@ -936,6 +938,7 @@ footer {
   .contact-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
   .contact { padding: 56px 24px; }
   .nav-social { display: none; }
+  .s-title, .contact-h { white-space: normal; }
 
   .featured-cs { padding: 36px 24px; grid-template-columns: 1fr; }
   .featured-cs-cta { justify-self: start; }
@@ -1111,7 +1114,7 @@ footer {
   <div class="work-header">
     <div>
       <div class="s-label fade-in">Selected Work</div>
-      <div class="s-title reveal-text">Work that ships.<br>Systems that scale.</div>
+      <div class="s-title reveal-text">Work that ships. Systems that scale.</div>
     </div>
     <div class="r-badge" id="rBadge">2 min read · Condensed</div>
   </div>
@@ -1227,7 +1230,7 @@ footer {
 
 <section class="about" id="about">
   <div class="s-label fade-in">About</div>
-  <div class="s-title reveal-text fade-in" style="margin-bottom: 40px;">The designer<br>behind the system.</div>
+  <div class="s-title reveal-text fade-in" style="margin-bottom: 40px;">The designer behind the system.</div>
   <div class="about-inner">
     <div class="about-text fade-in">
       <p>I'm a Senior Product Designer. Most of my work is systems: naming conventions, component governance, where the documentation actually lives versus where people think it does.</p>
@@ -1249,7 +1252,7 @@ footer {
 
 <section class="contact" id="contact">
   <div class="s-label fade-in">Contact</div>
-  <h2 class="contact-h reveal-text">Let's build something<br>that lasts.</h2>
+  <h2 class="contact-h reveal-text">Let's build something that lasts.</h2>
   <div class="contact-bottom fade-in">
     <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
     <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
