@@ -6,13 +6,16 @@
 <link rel="apple-touch-icon" href="/ts-icon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Tina Singh — Senior Product Designer specialising in design systems, component architecture, and cross-platform product design. Currently at BeyondTrust.">
-<meta property="og:title" content="Tina Singh — Product Designer">
+<meta property="og:title" content="Tina Singh — Senior Product Designer">
 <meta property="og:description" content="Senior Product Designer specialising in design systems, component architecture, and cross-platform product design.">
 <meta property="og:url" content="https://tinasingh.app">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://tinasingh.app/case-studies/images/shield-card-thumbnail-2x.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tina Singh — Product Designer">
+<meta name="twitter:title" content="Tina Singh — Senior Product Designer">
 <meta name="twitter:description" content="Senior Product Designer specialising in design systems, component architecture, and cross-platform product design.">
+<meta name="twitter:image" content="https://tinasingh.app/case-studies/images/shield-card-thumbnail-2x.jpg">
+<link rel="canonical" href="https://tinasingh.app">
 <title>Tina Singh — Senior Product Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -225,29 +228,24 @@ nav.scrolled {
   width: 22px; height: 1px;
   background: var(--accent);
 }
-.hero-h1 {
+.h1-tagline {
   font-family: 'Spectral', serif;
   font-size: clamp(36px, 4vw, 56px);
   font-weight: 400;
   line-height: 1.12;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 24px;
-}
-.hero-h1 em { font-style: italic; font-weight: 600; }
-.hero-h1 .h1-tagline {
-  display: block;
-  font-size: clamp(36px, 4vw, 56px);
-  color: var(--text);
   margin-bottom: 10px;
 }
-.hero-h1 .h1-main {
-  display: block;
+.h1-tagline em { font-style: italic; font-weight: 600; }
+.hero-h1 {
+  font-family: 'Spectral', serif;
   font-size: clamp(20px, 2.2vw, 30px);
   font-weight: 400;
   color: var(--text2);
   letter-spacing: -0.01em;
   line-height: 1.3;
+  margin-bottom: 24px;
 }
 .hero-desc {
   font-size: 16px;
@@ -989,9 +987,8 @@ footer {
   .featured-cs-cta { margin-top: 16px; }
   .footer-r { display: none; }
 
-  .hero-h1 { font-size: clamp(28px, 9vw, 44px); }
-  .hero-h1 .h1-tagline { font-size: clamp(28px, 9vw, 44px); }
-  .hero-h1 .h1-main { font-size: clamp(16px, 5vw, 22px); }
+  .h1-tagline { font-size: clamp(28px, 9vw, 44px); }
+  .hero-h1 { font-size: clamp(16px, 5vw, 22px); }
 }
 
 /* ═══════════════════════════════════════════
@@ -1091,10 +1088,8 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag fade-in"><span>Senior Product Designer</span></div>
-    <h1 class="hero-h1">
-      <span class="h1-tagline">Systems thinker. Pixel-level <em>craft.</em></span>
-      <span class="h1-main">I design systems that make complex products usable.</span>
-    </h1>
+    <p class="h1-tagline">Systems thinker. Pixel-level <em>craft.</em></p>
+    <h1 class="hero-h1">I design systems that make complex products usable.</h1>
     <p class="hero-desc">
       Senior product designer working across design systems and product UX.
       I focus on structure, clarity, and decisions that scale across teams and products.
@@ -1164,10 +1159,14 @@ footer {
           <span class="tag">Architecture</span>
           <span class="tag">Governance</span>
         </div>
-        <a href="case-studies/design-system-rebuild.html" class="card-link">View Case Study</a>
+        <a href="case-studies/design-system-rebuild.html" class="card-link" aria-label="View Design System case study">View Case Study</a>
       </div>
       <div class="card-right">
-        <img src="case-studies/images/shield-card-thumbnail.jpg" alt="Design System case study" class="card-thumb" loading="lazy">
+        <img src="case-studies/images/shield-card-thumbnail-2x.jpg"
+             srcset="case-studies/images/shield-card-thumbnail-1x.jpg 637w, case-studies/images/shield-card-thumbnail-2x.jpg 1274w"
+             sizes="(max-width: 768px) 100vw, 637px"
+             width="637" height="382"
+             alt="Design System case study" class="card-thumb" loading="lazy">
       </div>
     </div>
 
@@ -1184,10 +1183,14 @@ footer {
           <span class="tag">Accessibility</span>
           <span class="tag">Enterprise Logic</span>
         </div>
-        <a href="case-studies/inline-alert.html" class="card-link">View Case Study</a>
+        <a href="case-studies/inline-alert.html" class="card-link" aria-label="View Inline Alert case study">View Case Study</a>
       </div>
       <div class="card-right">
-        <img src="case-studies/images/alert-card-thumbnail.png" alt="Inline Alert case study" class="card-thumb" loading="lazy">
+        <img src="case-studies/images/alert-card-thumbnail-2x.png"
+             srcset="case-studies/images/alert-card-thumbnail-1x.png 637w, case-studies/images/alert-card-thumbnail-2x.png 1274w"
+             sizes="(max-width: 768px) 100vw, 637px"
+             width="637" height="364"
+             alt="Inline Alert case study" class="card-thumb" loading="lazy">
       </div>
     </div>
 
@@ -1204,10 +1207,14 @@ footer {
           <span class="tag">System Design</span>
           <span class="tag">Behavior Specs</span>
         </div>
-        <a href="case-studies/platform-navigation.html" class="card-link">View Case Study</a>
+        <a href="case-studies/platform-navigation.html" class="card-link" aria-label="View Platform Navigation case study">View Case Study</a>
       </div>
       <div class="card-right">
-        <img src="case-studies/images/nav-card-thumbnail.jpg" alt="Platform Navigation case study" class="card-thumb" loading="lazy">
+        <img src="case-studies/images/nav-card-thumbnail-2x.jpg"
+             srcset="case-studies/images/nav-card-thumbnail-1x.jpg 637w, case-studies/images/nav-card-thumbnail-2x.jpg 1274w"
+             sizes="(max-width: 768px) 100vw, 637px"
+             width="637" height="382"
+             alt="Platform Navigation case study" class="card-thumb" loading="lazy">
       </div>
     </div>
 
@@ -1224,10 +1231,14 @@ footer {
           <span class="tag">Identity Access</span>
           <span class="tag">Error Handling</span>
         </div>
-        <a href="case-studies/login-redesign.html" class="card-link">View Case Study</a>
+        <a href="case-studies/login-redesign.html" class="card-link" aria-label="View Login Redesign case study">View Case Study</a>
       </div>
       <div class="card-right">
-        <img src="case-studies/images/login-card-thumbnail.jpg" alt="Login Redesign case study" class="card-thumb" loading="lazy">
+        <img src="case-studies/images/login-card-thumbnail-2x.jpg"
+             srcset="case-studies/images/login-card-thumbnail-1x.jpg 637w, case-studies/images/login-card-thumbnail-2x.jpg 1274w"
+             sizes="(max-width: 768px) 100vw, 637px"
+             width="637" height="382"
+             alt="Login Redesign case study" class="card-thumb" loading="lazy">
       </div>
     </div>
 
