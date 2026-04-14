@@ -1840,7 +1840,7 @@ function toggleRecruiter() {
   // Theme check — respect saved pref, then system pref, then default dark
   const saved = localStorage.getItem('sds-theme');
   const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (sysDark ? 'dark' : 'light');
+  const theme = saved || 'dark';
   document.documentElement.setAttribute('data-theme', theme);
   const tIcon = document.getElementById('themeIcon');
   if (tIcon) tIcon.textContent = theme === 'light' ? '☀' : '◑';
