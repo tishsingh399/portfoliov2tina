@@ -713,6 +713,18 @@ footer {
   font-family: 'Press Start 2P', monospace;
   line-height: 1.8;
 }
+.footer-mobile-links {
+  display: none;
+}
+.footer-mobile-links a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.footer-mobile-links a:hover { color: var(--accent); }
 
 /* ── Featured Case Study — BONUS STAGE ───────── */
 @keyframes marchBorder {
@@ -967,7 +979,9 @@ footer {
   .featured-cs { padding: 36px 24px; gap: 28px; flex-wrap: wrap; }
   .featured-cs-cta { align-self: flex-start; }
 
-  footer { padding: 22px 24px; }
+  footer { padding: 22px 24px; flex-wrap: wrap; gap: 14px; }
+  .footer-mobile-links { display: flex; gap: 20px; flex-wrap: wrap; width: 100%; }
+  .footer-r { display: none; }
   .mini-about { padding: 24px; }
   .work-header { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
@@ -1013,7 +1027,8 @@ footer {
 
   .featured-cs { flex-direction: column; gap: 24px; padding: 28px 16px; }
   .featured-cs-cta { margin-top: 8px; }
-  .footer-r { display: none; }
+  .footer-mobile-links { gap: 14px; }
+  .footer-mobile-links a { font-size: 7px; }
 
   .contact-h { font-size: clamp(22px, 7vw, 36px); }
 }
@@ -1326,6 +1341,12 @@ footer {
 
 <footer id="pageFooter">
   <span class="footer-l">© 2026 Tina Singh</span>
+  <div class="footer-mobile-links">
+    <a href="https://www.linkedin.com/in/tina-singh-0503/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://medium.com/@tishsingh3" target="_blank" rel="noopener">Medium</a>
+    <a href="https://dribbble.com/tishiris" target="_blank" rel="noopener">Dribbble</a>
+    <a href="interactive-resume.html">Resume</a>
+  </div>
   <span class="footer-r">Design is the argument.</span>
 </footer>
 
