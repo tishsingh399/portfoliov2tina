@@ -86,12 +86,16 @@ nav, section, footer, .mini-about, .marquee-strip, .contact, .recruiter-banner,
 .featured-cs, .hero { position: relative; z-index: 1; }
 
 
-/* ── Hero h1 auto-animate (above fold — no observer needed) ── */
+/* ── Hero text entrance (above fold — no observer needed) ── */
+.h1-tagline {
+  animation: heroTextIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+}
 .hero-h1 {
-  animation: heroTextIn 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+  animation: heroTextIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.12s forwards;
+  opacity: 0; /* explicit start so no flash before animation */
 }
 @keyframes heroTextIn {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -236,6 +240,7 @@ nav.scrolled {
   letter-spacing: -0.02em;
   color: var(--text);
   margin-bottom: 10px;
+  opacity: 0; /* animation sets it to 1 */
 }
 .h1-tagline em { font-style: italic; font-weight: 600; }
 .hero-h1 {
@@ -935,6 +940,7 @@ footer {
     padding: 36px 32px 52px;
     justify-content: center;
     border-top: 1px solid var(--border);
+    overflow: hidden;
   }
   .pixel-stage { align-items: center; }
   /* Tablet canvas: 320px — crisp pixel art, comfortable size */
@@ -975,7 +981,7 @@ footer {
   .nav-links a { font-size: 9px; }
 
   .hero-left { padding: 36px 20px 28px; }
-  .hero-right { padding: 28px 20px 44px; }
+  .hero-right { padding: 28px 20px 44px; overflow: hidden; }
 
   /* Mobile canvas: 200px — still crisp at this scale, image-rendering keeps pixels sharp */
   canvas { width: 200px !important; height: 200px !important; }
