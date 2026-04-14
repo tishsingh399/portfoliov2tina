@@ -197,20 +197,19 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">Banner blindness.</h2>
-    <p class="cs-p">In complex workflows, users were overlooking critical errors because the system used global banners for everything, from system outages to "save successful" messages. When I audited message types across six product areas, I found that <strong>40% of what teams called "banners" were actually contextual errors</strong> that belonged near the form field causing the problem, not at the top of the screen.</p>
-    <p class="cs-p">The core insight: <strong>proximity</strong>. An error message is only useful if it's visible when the user is trying to fix it. A banner at the top of a page doesn't help someone filling out a form at the bottom.</p>
+    <p class="cs-p">The system had two feedback tools: Banners (full-width, persistent, top of page) and Toasts (floating, auto-dismissing). In theory, these covered the spectrum. In practice, they were being used for everything — including things neither was designed for. Forms threw global page banners when a single field failed validation. Critical security warnings were delivered as toasts that disappeared before anyone could read them. At least four teams had built their own inline error states using raw markup outside the design system entirely — no tokens, no consistency, no accessibility.</p>
     <div class="security-list">
       <div class="security-step">
-        <div class="step-icon">01</div>
-        <div class="step-text"><strong>No hierarchy:</strong> Banners, inline messages, and toasts were used interchangeably, with no shared taxonomy across 6 products.</div>
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>No hierarchy</strong> — Banners, inline messages, and toasts were used interchangeably with no shared taxonomy across 6 products.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">02</div>
-        <div class="step-text"><strong>Alert fatigue:</strong> Stakeholders wanted all alerts sticky and permanent. I pushed back: if every announcement is permanent, users tune them out, including actual security warnings.</div>
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Alert fatigue</strong> — If every announcement is permanent, users tune them out — including actual security warnings.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">03</div>
-        <div class="step-text"><strong>Missing middle layer:</strong> Banners (global) and toasts (transient) existed. Nothing sat contextually, inline, next to the source of an error.</div>
+        <div class="step-icon">■</div>
+        <div class="step-text"><strong>Missing middle layer</strong> — Banners (global) and toasts (transient) existed. Nothing sat contextually, inline, next to the source of an error.</div>
       </div>
     </div>
     <img src="images/alert-banner-toast-comparison.png" alt="Alert types comparison — banner, toast, and inline" loading="lazy" class="cs-img-full">
@@ -220,29 +219,49 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Solution</div>
+    <div class="s-label">What I Changed</div>
     <h2 class="cs-h2">A clear taxonomy. Negotiated across 7 teams.</h2>
-    <p class="cs-p">Dec 2024 – May 2025. I led the definition, design, and rollout of the feedback taxonomy. Not just the component in Figma, but the usage contracts with 7+ product teams that determined whether the pattern would actually stick or get quietly ignored.</p>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Taxonomy first, component second</div>
-          <p class="decision-p">I shifted the question from "What does it look like?" to "What is it doing?" Four severity levels: <strong>Critical</strong> (blocks work, permanent), <strong>Warning</strong> (proceed with caution), <strong>Info</strong> (contextual, no action needed), <strong>Success</strong> (user-initiated confirmation). Only errors that stop work are permanent. Everything else is dismissible.</p>
+          <div class="decision-h">Defined the three-layer feedback hierarchy</div>
+          <p class="decision-p">Global (Banner) → Contextual (Inline Alert, new) → Transient (Toast). Wrote the adoption rule into the documentation: if the error will still be true in 10 seconds, it cannot be a toast.<br><br><strong>Effect:</strong> One sentence eliminated the most common misuse pattern immediately. Teams had a decision rule they could apply without consulting a designer.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Token-first architecture</div>
-          <p class="decision-p">Token structure: <strong>color.feedback.*</strong>, spacing.xs, radius.sm. WCAG 2.1 AA verified via Stark. Chromatic automated regression builds prevented style leaks across legacy code. Critical for engineering trust.</p>
+          <div class="decision-h">Designed four semantic severity variants</div>
+          <p class="decision-p">Critical (blocks work, not dismissible until resolved), Warning (proceed with caution, dismissible with acknowledgment), Info (contextual, no action needed, dismissible), Success (user-initiated confirmation, dismissible). Color encodes severity — not brand.<br><br><strong>Effect:</strong> In a security product, a yellow warning in a SIEM dashboard is not the same as a yellow promotional banner. The variants gave teams the right tool for each situation and stopped the visual flattening that caused alert fatigue.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Migration guides as the adoption lever</div>
-          <p class="decision-p">Audited existing flows (including the Login Redesign) to prove 40% of "banners" were actually contextual errors. Used that data to persuade teams. Wrote migration guides mapping hardcoded values to semantic tokens. Made adoption the path of least resistance.</p>
+          <div class="decision-h">Made dismissibility a property of the variant, not a configurable option</div>
+          <p class="decision-p">Teams cannot set an Error alert to dismissible. Warning requires acknowledgment before dismissal. Info and Success are freely dismissible.<br><br><strong>Effect:</strong> Removed a category of silent failures where users dismissed errors they hadn't fixed. Controversial internally — I stood by it. Security workflows have real consequences for missed errors.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">04</div>
+        <div class="decision-body">
+          <div class="decision-h">Built Compact mode for dense environments</div>
+          <p class="decision-p">Standard height: 64px. Compact variant: 48px. Same semantic color and iconography, 25% less vertical space.<br><br><strong>Effect:</strong> Immediately adopted by two dashboard-heavy products — SIEM and endpoint management consoles. In a 50-row table, 30px of extra height per row adds 1,500px of scroll debt.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">05</div>
+        <div class="decision-body">
+          <div class="decision-h">Required icon as a second severity channel</div>
+          <p class="decision-p">Every variant ships with a required icon: info circle, check circle, exclamation triangle, x-circle. Icon is not optional.<br><br><strong>Effect:</strong> Color-blind users get the icon signal. Screen readers get the aria-label. Removes color as a single point of failure for severity communication — which matters in a security context where stakes are high.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">06</div>
+        <div class="decision-body">
+          <div class="decision-h">Wrote migration guides, ran office hours</div>
+          <p class="decision-p">Audited every existing ad-hoc inline implementation across 6 products. Wrote migration guides mapping hardcoded patterns to system tokens.<br><br><strong>Effect:</strong> Every team that had built a custom inline alert migrated to the system component. Zero exceptions. No rework required after initial handoff.</p>
         </div>
       </div>
     </div>
@@ -253,21 +272,48 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
+    <div class="s-label">Business Outcomes</div>
+    <h2 class="cs-h2">Alert fatigue structurally addressed.</h2>
+    <div class="security-list">
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>Alert fatigue structurally addressed.</strong> The severity hierarchy means a Critical error now looks and behaves categorically differently from an Info nudge. In a security operations context, this directly affects whether engineers act on the right signals at the right time.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>Engineering debt eliminated across 6 codebases.</strong> At least 4 teams had built divergent ad-hoc implementations. All migrated to the system component. No residual maintenance burden.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>WCAG AA compliance enforced at the token level.</strong> Every text/background combination in all four variants meets 4.5:1 minimum contrast in both light and dark mode. Compliance is structural — it cannot be accidentally broken by a consuming team.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">↓</div>
+        <div class="step-text"><strong>70% drop in global banner misuse.</strong> Not because banners were removed — but because teams finally had a more specific tool to reach for.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>Zero rework after initial handoff.</strong> The spec was complete enough that engineering implemented correctly on the first pass across all 6 product areas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section fade-in">
     <div class="s-label">Reflection</div>
-    <div class="pull-quote">"Global banner misuse dropped 70% after rollout. Not because we removed banners, but because teams finally had something more specific to reach for."</div>
-    <p class="cs-p">A lot of the work was persuasion, not design. Showing teams with audit data that what they'd been calling banners were actually form errors, then making the switch low-effort with migration guides. The component shipped. The harder thing was getting seven product teams to agree on what each type of message was for.</p>
+    <p class="cs-p">A lot of this work was persuasion, not design. Showing teams — with audit data — that what they'd been calling banners were actually form errors. Then making the switch low-effort with migration guides. The component shipped. The harder thing was getting seven product teams to agree on what each message type was actually for.</p>
+    <div class="pull-quote">"The best component design solves the use case teams already have — it just does it right. The goal wasn't to introduce a new pattern. It was to govern the one that already existed, badly."</div>
   </div>
 
 </div>
 
 <div class="cs-actions fade-in">
   <div>
-    <div class="cs-actions-label">// Full Process Write-up</div>
-    <p class="cs-actions-msg">The full documentation: every decision, what I set aside, and what I'd do differently.</p>
+    <div class="cs-actions-label">// Detailed Case Study</div>
+    <p class="cs-actions-msg">Detailed case study available for recruiter conversations — every decision, constraint, and trade-off documented.</p>
   </div>
   <div class="cs-actions-btns">
-    <a href="inline-alert-detailed.html" class="cs-btn-next">Read Full Documentation →</a>
-    <a href="platform-navigation.html" class="cs-btn-contact">Next Case Study</a>
+    <a href="mailto:hello@tinasingh.app" class="cs-btn-next">Get in Touch →</a>
+    <a href="../index.html" class="cs-btn-contact">Back to Work</a>
   </div>
 </div>
 

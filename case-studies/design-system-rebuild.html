@@ -280,8 +280,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   <div class="cs-section fade-in">
     <div class="s-label">The Problem</div>
     <h2 class="cs-h2">What I walked into.</h2>
-    <p class="cs-p">The design system existed technically: a shared Figma file that nobody trusted. Designers detached components at a <strong>40% rate</strong>. Products looked different from each other. Dark mode was handled per-product with hardcoded values. Federal accessibility audits produced inconsistent results, putting government contracts at real risk.</p>
-    <p class="cs-p">I audited the v3.0 library and found 100+ components misaligned between what Figma showed and what engineering had built. The same UI got built twice because nobody trusted the source. This wasn't a cosmetic problem. The company sells to US federal agencies under contracts requiring Section 508 compliance and VPAT maintenance. The estimated contract exposure: <strong>$60M–$140M</strong>.</p>
+    <p class="cs-p">The design system existed technically. Designers detached components at a <strong>40% rate</strong>. Products diverged visually. Dark mode was handled per-product with hardcoded values. Federal accessibility audits produced inconsistent results across 16 active VPATs, putting government contracts at real risk.</p>
+    <p class="cs-p">I audited the v3.0 library and found 100+ components misaligned between what Figma showed and what engineering had built. The same UI was getting rebuilt from scratch because nobody trusted the source. This wasn't a cosmetic problem — the company sells to US federal agencies under contracts requiring Section 508 compliance. The estimated contract exposure: <strong>$60M–$140M</strong>.</p>
     <img src="images/shield-component-library.png" alt="Legacy component library vs new design system library" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Legacy Library 1 → Legacy Library 2 → unified existing library</p>
     <img src="../assets/img/shield-what-was-broken.png" alt="What was broken — component misalignment and detach issues" loading="lazy" class="cs-img-full">
@@ -289,20 +289,52 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">Scope & Execution</div>
+    <div class="s-label">What I Changed</div>
     <h2 class="cs-h2">What I owned, start to finish.</h2>
-    <dl class="cs-def-list">
-      <dt>Audit</dt>
-      <dd>Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioral view revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.</dd>
-      <dt>Naming conflicts</dt>
-      <dd>Resolved "Tiles vs Cards." Teams used both interchangeably, which was blurring accessibility focus state requirements across products. Defined Tiles as navigation triggers, Cards as content containers. One decision. Five products clarified.</dd>
-      <dt>Token architecture</dt>
-      <dd>Built a three-layer Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.</dd>
-      <dt>Documentation</dt>
-      <dd>Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.</dd>
-      <dt>Governance</dt>
-      <dd>Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.</dd>
-    </dl>
+    <div class="decision-list">
+      <div class="decision-item">
+        <div class="decision-num">01</div>
+        <div class="decision-body">
+          <div class="decision-h">Audited the full component library</div>
+          <p class="decision-p">Classified every SDS color, radius, and typographic style as decorative, functional, or state-driven. That behavioral lens revealed where values were duplicated, misaligned, or carrying hidden intent nobody had named.<br><br><strong>Effect:</strong> Gave the rebuild a documented foundation rather than a guess. Teams understood why components were changing, not just what was changing.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">02</div>
+        <div class="decision-body">
+          <div class="decision-h">Resolved naming conflicts</div>
+          <p class="decision-p">"Tiles vs Cards" — teams used both interchangeably, which was blurring accessibility focus state requirements across products. Defined Tiles as navigation triggers, Cards as content containers.<br><br><strong>Effect:</strong> One decision. Five products clarified. Focus state inconsistencies that had been generating accessibility flags were resolved without touching any component code.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">03</div>
+        <div class="decision-body">
+          <div class="decision-h">Built a 3-layer token architecture</div>
+          <p class="decision-p">Primitive → Semantic → Component system with 791 variables. Implemented in Token Studio, synced to Figma, exported as JSON and SCSS. Theme generation for light and dark is now automated.<br><br><strong>Effect:</strong> Dark mode stopped being a per-product engineering problem. Global visual updates — color, spacing, contrast — now happen in one place and propagate everywhere automatically.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">04</div>
+        <div class="decision-body">
+          <div class="decision-h">Unified documentation</div>
+          <p class="decision-p">Migrated usage guidance, token references, and code demos into a single versioned Storybook + README. Designers and engineers read the same source.<br><br><strong>Effect:</strong> Eliminated the "slack-based documentation" pattern where tribal knowledge lived in DMs. New team members can onboard to the system without a handholding session.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">05</div>
+        <div class="decision-body">
+          <div class="decision-h">Introduced governance</div>
+          <p class="decision-p">Formal entry gates, version-controlled releases, change logs, adoption analytics dashboards tracking insertions, detaches, and usage per team.<br><br><strong>Effect:</strong> Detach rate dropped from 40% to under 1%. The governance structure is what held the adoption — not just the quality of the components.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">06</div>
+        <div class="decision-body">
+          <div class="decision-h">Made a deliberate architectural trade-off</div>
+          <p class="decision-p">Shipped component tokens pointing directly to primitives (not through a semantic layer) for legacy framework compatibility. Documented and championed the full three-layer roadmap for future implementation.<br><br><strong>Effect:</strong> Two products on PrimeNG and custom Angular adopted immediately instead of waiting 6+ months for a full migration. The shortcut was documented, not hidden — teams knew the roadmap.</p>
+        </div>
+      </div>
+    </div>
     <img src="images/shield-tokens-figma.png" alt="Token architecture in Figma — Token Studio structure" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Token Studio — Primitive, Semantic, and Component token layers in Figma</p>
     <img src="images/shield-figma-component-states.png" alt="Figma component states — variants and interactive states" loading="lazy" class="cs-img-full">
@@ -311,34 +343,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <p class="cs-img-caption">// Color token layers: Core → Semantic → Component</p>
     <img src="images/shield-color-token-layers.png" alt="Token layer diagram — how token layers connect" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Token layer diagram — how primitive values flow into semantic roles</p>
-  </div>
-
-  <div class="cs-section fade-in">
-    <div class="s-label">Key Decision</div>
-    <h2 class="cs-h2">A hybrid architecture — deliberately.</h2>
-    <div class="decision-list">
-      <div class="decision-item">
-        <div class="decision-num">01</div>
-        <div class="decision-body">
-          <div class="decision-h">Current: Component tokens → Primitives</div>
-          <p class="decision-p">For speed and immediate stability during rollout. Two products ran legacy frameworks (PrimeNG, custom Angular) that couldn't consume tokens natively. I wrote migration guides mapping hardcoded values to semantic tokens to keep adoption low-effort.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">02</div>
-        <div class="decision-body">
-          <div class="decision-h">Future: Component tokens → Semantics → Primitives</div>
-          <p class="decision-p">I documented and championed the full three-layer roadmap. Moving component tokens to reference semantics will fully decouple intent from implementation. I needed teams to trust the system before asking them to trust additional abstraction. This was a conscious decision, not a shortcut.</p>
-        </div>
-      </div>
-      <div class="decision-item">
-        <div class="decision-num">03</div>
-        <div class="decision-body">
-          <div class="decision-h">Token naming that explains itself</div>
-          <p class="decision-p">Semantic tokens: <strong>{category}.{role}.{state}.{mode}</strong>. Component tokens: <strong>{component}.{variant}.{state}-{element}.{attribute}</strong>. Designers and engineers can read a token name and understand what it controls without needing documentation. Automation tools can parse the taxonomy without special logic.</p>
-        </div>
-      </div>
-    </div>
     <img src="images/shield-design-code-diagram.jpg" alt="Design system — design and code architecture" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Token flow: Design → Design System → Development</p>
     <img src="images/design-system-shield-color-system.png" alt="Color system overview — full palette and roles" loading="lazy" class="cs-img-full">
@@ -348,24 +352,24 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Outcome</div>
-    <h2 class="cs-h2">Measured. Verified. Still running.</h2>
+    <div class="s-label">Business Outcomes</div>
+    <h2 class="cs-h2">Federal contract risk mitigated.</h2>
     <div class="security-list">
       <div class="security-step">
         <div class="step-icon">↓</div>
-        <div class="step-text"><strong>Detach rate: 40% → under 1%.</strong> Hundreds of engineering hours per quarter returned to feature work instead of rebuilding UI that already existed in the system.</div>
+        <div class="step-text"><strong>Detach rate: 40% → under 1%.</strong> Engineers stopped rebuilding UI that already existed in the system. Hundreds of engineering hours per quarter returned to feature work.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">↑</div>
-        <div class="step-text"><strong>Component usage: 7,000 → 61,000+ insertions per quarter.</strong> Across 6 products and 11 teams. 90% system-wide adoption. All numbers verified via design analytics tooling.</div>
+        <div class="step-text"><strong>61,000+ quarterly component insertions at peak.</strong> Up from 7,000. 90% system-wide adoption across 6 products and 11 teams — driven by the governance structure, not just component quality.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">✓</div>
-        <div class="step-text"><strong>791 variables, 94,000+ tokens in production.</strong> Light and dark mode. AA+ contrast. Section 508 alignment. Procurement risk from accessibility failures mitigated across 16 active VPATs.</div>
+        <div class="step-text"><strong>Federal accessibility compliance built in.</strong> Inconsistent WCAG compliance across 16 active VPATs was a documented disqualification risk during federal procurement reviews. The token system enforces AA+ contrast by design — compliance is now structural, not dependent on individual engineer awareness.</div>
       </div>
       <div class="security-step">
-        <div class="step-icon">!</div>
-        <div class="step-text"><strong>What I still question:</strong> Adoption metrics confirm teams use the system. They don't confirm teams understand it well enough to extend it correctly without me. The gap between usage and genuine shared ownership is unsolved.</div>
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>94,000+ tokens in production.</strong> Light and dark mode. AA+ contrast. Section 508 alignment. The system is measurable, observable, and still running.</div>
       </div>
     </div>
     <img src="images/design-system-shield-ui-components.png" alt="UI component examples — Shield Design System" loading="lazy" class="cs-img-full">
@@ -378,16 +382,21 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <p class="cs-img-caption">// Usage guidance — component documentation and adoption patterns across teams</p>
   </div>
 
+  <div class="cs-section fade-in">
+    <div class="s-label">What I Still Question</div>
+    <p class="cs-p">Adoption metrics confirm teams use the system. They don't confirm teams understand it well enough to extend it correctly without me. The gap between usage and genuine shared ownership is the unsolved problem.</p>
+  </div>
+
 </div>
 
 <div class="cs-actions fade-in">
   <div>
-    <div class="cs-actions-label">// Full Process Write-up</div>
-    <p class="cs-actions-msg">The full documentation: every decision, what I set aside, and what I'd do differently.</p>
+    <div class="cs-actions-label">// Detailed Case Study</div>
+    <p class="cs-actions-msg">Detailed case study available for recruiter conversations — every decision, constraint, and trade-off documented.</p>
   </div>
   <div class="cs-actions-btns">
-    <a href="shield-design-system-detailed.html" class="cs-btn-next">Read Full Documentation →</a>
-    <a href="inline-alert.html" class="cs-btn-contact">Next Case Study</a>
+    <a href="mailto:hello@tinasingh.app" class="cs-btn-next">Get in Touch →</a>
+    <a href="../index.html" class="cs-btn-contact">Back to Work</a>
   </div>
 </div>
 

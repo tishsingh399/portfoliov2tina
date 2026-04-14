@@ -206,28 +206,49 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">My Approach</div>
+    <div class="s-label">What I Changed</div>
     <h2 class="cs-h2">State maps before mockups.</h2>
     <div class="decision-list">
       <div class="decision-item">
         <div class="decision-num">01</div>
         <div class="decision-body">
-          <div class="decision-h">Replaced static mocks with full lifecycle prototypes</div>
-          <p class="decision-p">Documented every state: Hover, Focus, Active, Pinned, Expanded, Collapsed, in both light and dark mode. This gave stakeholders behavior to react to, not just pixels. The UXA team used the state map to build a functional proof of concept immediately after handoff.</p>
+          <div class="decision-h">Wrote the behavioral specification before opening Figma</div>
+          <p class="decision-p">Documented every navigation state, every transition rule, every edge case: hover delays for fly-outs, active state persistence three levels deep, breadcrumb logic after a deep link, what happens when a session expires mid-navigation.<br><br><strong>Effect:</strong> Engineering had answers before implementation started. The spec eliminated the back-and-forth QA cycle that had added weeks to previous releases. The UXA team built a working proof of concept the day after receiving the state map.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">02</div>
         <div class="decision-body">
-          <div class="decision-h">Pin/unpin: three prototypes, one decision</div>
-          <p class="decision-p">To define the pinned state, I built three distinct prototypes: a solid pin for clarity, an outline pin with an accent ring for dark mode visibility, and a dynamic motion-based indicator. Each was fully interactive and linked to design tokens. The final model uses action-based labels, instant persistent feedback, and <strong>160ms fade and scale transitions</strong> aligned to SDS tokens.</p>
+          <div class="decision-h">Proposed and designed a Hub and Spoke IA model</div>
+          <p class="decision-p">Separated global navigation (persistent across all products — product switcher, search, profile, notifications) from contextual navigation (side rail, purpose-built per product suite).<br><br><strong>Effect:</strong> Users got a stable "where am I?" anchor in the global bar that never changed, regardless of which product they were in. Product-specific navigation got shorter and more focused.</p>
         </div>
       </div>
       <div class="decision-item">
         <div class="decision-num">03</div>
         <div class="decision-body">
-          <div class="decision-h">Token-driven theming throughout</div>
-          <p class="decision-p">Colors, typography, spacing, and elevation mapped to semantic tokens, including <strong>icon.action.active</strong> for built-in accessibility and theming. The nav is consistent in light and dark mode and aligned to the design system without manual overrides.</p>
+          <div class="decision-h">Replaced search-based tenant switching with a dropdown</div>
+          <p class="decision-p">Initial design used a search field for tenant selection. In usability testing, users didn't know what to search for — the input required knowledge they didn't have (exact tenant names).<br><br><strong>Effect:</strong> A pre-populated dropdown of authorised tenants resolved the most-reported tenant switching confusion pattern. Users could see their options instead of having to recall them. Support tickets referencing tenant switching dropped after rollout.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">04</div>
+        <div class="decision-body">
+          <div class="decision-h">Built three fully interactive pin/unpin prototypes</div>
+          <p class="decision-p">Solid pin, outline pin with accent ring, and a motion-based dynamic indicator — each fully interactive and token-linked — before settling on the final model.<br><br><strong>Effect:</strong> Stakeholders reacted to real behavior, not a description of behavior. The final decision was made in one review session instead of iterating through written feedback cycles.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">05</div>
+        <div class="decision-body">
+          <div class="decision-h">Defined a single JSON routing payload for all 6 products</div>
+          <p class="decision-p">One structured data file governing the navigation tree, permission levels per item, active state logic, and deep link mappings — agreed on with engineering before any Figma frames were built.<br><br><strong>Effect:</strong> 1,000+ previously hardcoded, per-product deep-link routes unified. Adding a new product or updating a navigation item now requires a change in one place.</p>
+        </div>
+      </div>
+      <div class="decision-item">
+        <div class="decision-num">06</div>
+        <div class="decision-body">
+          <div class="decision-h">Designed a Slim/Expanded rail toggle with session persistence</div>
+          <p class="decision-p">Icon-only Slim state (56px) for power users in dense environments. Labeled Expanded state for orientation and discovery. Preference persisted to localStorage.<br><br><strong>Effect:</strong> Security operations center users on wide monitors reclaimed horizontal content space without losing spatial awareness. The preference follows users across sessions without any backend changes.</p>
         </div>
       </div>
     </div>
@@ -236,34 +257,47 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
   </div>
 
   <div class="cs-section fade-in">
-    <div class="s-label">The Impact</div>
+    <div class="s-label">Business Outcomes</div>
+    <h2 class="cs-h2">40% navigation redundancy eliminated.</h2>
     <div class="security-list">
       <div class="security-step">
-        <div class="step-icon">→</div>
-        <div class="step-text"><strong>Engineering built a working POC immediately</strong> from the state map. No back-and-forth on "what does hover do?" or "what happens to pinned items after tenant switch?"</div>
+        <div class="step-icon">↓</div>
+        <div class="step-text"><strong>40% navigation redundancy eliminated.</strong> "Reports," "Analytics," and "Audit Logs" pointing to the same destination across three products — consolidated and labelled consistently. Menus got shorter. Paths got clearer.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>1,000+ routes unified under one JSON file.</strong> Engineering stopped maintaining six separate routing tables. The ongoing maintenance burden that had been generating debt with every product integration was resolved structurally.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">↑</div>
+        <div class="step-text"><strong>22% faster cross-product workflows.</strong> Measured after rollout. The behavioral spec meant engineers implemented correctly on the first pass — no post-launch patching of undefined states.</div>
+      </div>
+      <div class="security-step">
+        <div class="step-icon">✓</div>
+        <div class="step-text"><strong>100% adoption across 6 products in 4 months.</strong> The Hub & Spoke model and JSON payload were adopted by every product team without exception.</div>
       </div>
       <div class="security-step">
         <div class="step-icon">→</div>
-        <div class="step-text"><strong>Tenant switcher simplified</strong> from a search box to a dropdown in the top global bar. Users got a consistent "where am I?" anchor across all products.</div>
-      </div>
-      <div class="security-step">
-        <div class="step-icon">→</div>
-        <div class="step-text"><strong>Defined behavior became the system standard</strong> for future platform components. The logic introduced here prevented future navigation debt.</div>
+        <div class="step-text"><strong>Behavioral spec became the platform standard.</strong> The logic and documentation format introduced in this project became the template for how future platform components are specified.</div>
       </div>
     </div>
-    <div class="pull-quote">"I built three fully interactive pin/unpin prototypes before we settled on one. The team needed to react to real behavior, not a description of it. The state map went to engineering the next day."</div>
+  </div>
+
+  <div class="cs-section fade-in">
+    <div class="s-label">Reflection</div>
+    <div class="pull-quote">"Navigation design is information architecture, not visual design. The visual execution took a fraction of the time once the structure was right. The work that mattered was the audit, the matrix, and the specification — the unglamorous foundation that let everything else ship cleanly."</div>
   </div>
 
 </div>
 
 <div class="cs-actions fade-in">
   <div>
-    <div class="cs-actions-label">// Full Process Write-up</div>
-    <p class="cs-actions-msg">The full documentation: every decision, what I set aside, and what I'd do differently.</p>
+    <div class="cs-actions-label">// Detailed Case Study</div>
+    <p class="cs-actions-msg">Detailed case study available for recruiter conversations — every decision, constraint, and trade-off documented.</p>
   </div>
   <div class="cs-actions-btns">
-    <a href="platform-navigation-detailed.html" class="cs-btn-next">Read Full Documentation →</a>
-    <a href="login-redesign.html" class="cs-btn-contact">Next Case Study</a>
+    <a href="mailto:hello@tinasingh.app" class="cs-btn-next">Get in Touch →</a>
+    <a href="../index.html" class="cs-btn-contact">Back to Work</a>
   </div>
 </div>
 
