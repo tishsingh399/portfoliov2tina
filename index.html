@@ -212,7 +212,7 @@ nav.scrolled {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 72px 64px 72px 56px;
+  padding: 48px 64px 48px 56px;
 }
 .hero-tag {
   display: flex;
@@ -438,7 +438,7 @@ section { padding: 96px 56px; }
 .mini-about p + p { margin-top: 6px; }
 
 /* ── Work ────────────────────────────────────── */
-.work { padding: 72px 56px 0; background: var(--bg); border-top: 1px solid var(--border); }
+.work { padding: 72px 56px 0; background: var(--bg); }
 .work-header {
   display: flex;
   justify-content: space-between;
@@ -939,7 +939,6 @@ footer {
     order: 2;
     padding: 36px 32px 52px;
     justify-content: center;
-    border-top: 1px solid var(--border);
     overflow: hidden;
   }
   .pixel-stage { align-items: center; }
@@ -1733,20 +1732,22 @@ frames.forEach((_, i) => {
 
 requestAnimationFrame(render);
 
-// ── Floating pixel particles ─────────────────
+// ── Floating pixel particles (desktop only) ───
 const pixelWrap = document.querySelector('.pixel-wrap');
-[
-  { x: 30,  y: -20, s: 10, c: '#e83015', d: 0   },
-  { x: 180, y: -30, s: 7,  c: '#0aab96', d: 0.8 },
-  { x: 360, y: -15, s: 12, c: '#0d0d1a', d: 1.4 },
-  { x: 260, y: -25, s: 6,  c: '#ff8800', d: 0.5 },
-  { x: 110, y: -10, s: 8,  c: '#e8dfd6', d: 1.1 },
-  { x: 80,  y: -35, s: 5,  c: '#0d0d1a', d: 1.8 },
-].forEach(p => {
-  const el = document.createElement('div');
-  el.style.cssText = `position:absolute;width:${p.s}px;height:${p.s}px;left:${p.x}px;top:${p.y}px;background:${p.c};animation:pixFloat 3.5s ease-in-out ${p.d}s infinite;pointer-events:none;z-index:3;`;
-  pixelWrap.appendChild(el);
-});
+if (window.innerWidth > 900) {
+  [
+    { x: 30,  y: -20, s: 10, c: '#e83015', d: 0   },
+    { x: 180, y: -30, s: 7,  c: '#0aab96', d: 0.8 },
+    { x: 360, y: -15, s: 12, c: '#0d0d1a', d: 1.4 },
+    { x: 260, y: -25, s: 6,  c: '#ff8800', d: 0.5 },
+    { x: 110, y: -10, s: 8,  c: '#e8dfd6', d: 1.1 },
+    { x: 80,  y: -35, s: 5,  c: '#0d0d1a', d: 1.8 },
+  ].forEach(p => {
+    const el = document.createElement('div');
+    el.style.cssText = `position:absolute;width:${p.s}px;height:${p.s}px;left:${p.x}px;top:${p.y}px;background:${p.c};animation:pixFloat 3.5s ease-in-out ${p.d}s infinite;pointer-events:none;z-index:3;`;
+    pixelWrap.appendChild(el);
+  });
+}
 
 
 // ── Touch swipe for carousel ─────────────
