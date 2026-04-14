@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="ts-icon.svg">
+<link rel="apple-touch-icon" href="/ts-icon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8-Bit Resume — Tina Singh</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -413,9 +415,12 @@ footer {
   .stat-grid { grid-template-columns: 1fr 1fr; }
   .container { margin: 32px auto; }
 }
+.skip-nav { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 9px; z-index: 9999; transition: top 0.2s; }
+.skip-nav:focus { top: 0; }
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-nav">Skip to content</a>
 
 <div class="bg-stars" id="bgStars"></div>
 <div id="levelComplete" role="dialog" aria-modal="true" aria-label="Level complete">
@@ -436,7 +441,7 @@ footer {
   <span class="nav-name">PLAYER 1: TINA &nbsp;<span class="blink">▮</span></span>
 </nav>
 
-<div class="container">
+<div class="container" id="main-content">
 
   <div class="score-bar">
     <span>★ SCORE: <span id="scoreVal">000000</span></span>

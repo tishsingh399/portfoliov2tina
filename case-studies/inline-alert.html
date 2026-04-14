@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="../ts-icon.svg">
+<link rel="apple-touch-icon" href="/ts-icon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inline Alert — Tina Singh</title>
 <meta name="description" content="Case study: Solving Alert Fatigue in Security Software with a semantic 4-tier alert system.">
@@ -127,17 +128,20 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 .cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
+.skip-nav { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 9px; z-index: 9999; transition: top 0.2s; }
+.skip-nav:focus { top: 0; }
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-nav">Skip to content</a>
 
 <nav>
   <a href="../index.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Work</a>
   <span class="nav-name">Tina Singh</span>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"><span id="themeIcon">◑</span></button>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" type="button" aria-label="Toggle light/dark mode"><span id="themeIcon">◑</span></button>
 </nav>
 
-<div class="cs-hero">
+<div class="cs-hero" id="main-content">
   <div class="cs-bg-num">02</div>
 
   <div class="cs-tag">Case Study</div>
@@ -175,7 +179,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     </div>
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Timeline</div>
-      <div class="cs-meta-val">2023</div>
+      <div class="cs-meta-val">Dec 2024 – May 2025</div>
     </div>
     <div class="cs-meta-cell">
       <div class="cs-meta-label">Status</div>
