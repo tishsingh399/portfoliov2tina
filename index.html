@@ -713,18 +713,6 @@ footer {
   font-family: 'Press Start 2P', monospace;
   line-height: 1.8;
 }
-.footer-mobile-links {
-  display: none;
-}
-.footer-mobile-links a {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
-  color: var(--text2);
-  text-decoration: none;
-  letter-spacing: 0.08em;
-  transition: color 0.2s;
-}
-.footer-mobile-links a:hover { color: var(--accent); }
 
 /* ── Featured Case Study — BONUS STAGE ───────── */
 @keyframes marchBorder {
@@ -939,11 +927,106 @@ footer {
 .reveal-text.visible .line-inner:nth-child(2) { transition-delay: 0.12s; }
 .reveal-text.visible .line-inner:nth-child(3) { transition-delay: 0.22s; }
 
+/* ── Hamburger button ─────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  z-index: 301;
+  position: relative;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.2s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile menu overlay ──────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: 96px 40px 56px;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.22,1,0.36,1);
+  overflow-y: auto;
+  pointer-events: none;
+}
+.mobile-menu.open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-menu-links a {
+  font-family: 'Spectral', serif;
+  font-size: clamp(40px, 13vw, 64px);
+  font-weight: 300;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  transition: color 0.2s;
+}
+.mobile-menu-links a:hover { color: var(--accent); }
+.mobile-menu-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  margin: 36px 0 28px;
+}
+.mobile-menu-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mobile-menu-socials a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.mobile-menu-socials a:hover { color: var(--accent); }
+.mobile-menu-theme {
+  margin-top: 40px;
+  align-self: flex-start;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--text2);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: color 0.2s, border-color 0.2s;
+}
+.mobile-menu-theme:hover { color: var(--accent); border-color: var(--accent); }
+
 /* ── Responsive: Tablet (≤900px) ─────────────── */
 @media (max-width: 900px) {
   nav { padding: 14px 24px; }
-  .nav-links { gap: 20px; }
+  .nav-links { display: none; }
   .nav-social { display: none; }
+  .hamburger { display: flex; }
 
   .hero { grid-template-columns: 1fr; }
   .hero-left { padding: 48px 32px 36px; order: 1; }
@@ -980,7 +1063,6 @@ footer {
   .featured-cs-cta { align-self: flex-start; }
 
   footer { padding: 22px 24px; flex-wrap: wrap; gap: 14px; }
-  .footer-mobile-links { display: flex; gap: 20px; flex-wrap: wrap; width: 100%; }
   .footer-r { display: none; }
   .mini-about { padding: 24px; }
   .work-header { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -1027,8 +1109,6 @@ footer {
 
   .featured-cs { flex-direction: column; gap: 24px; padding: 28px 16px; }
   .featured-cs-cta { margin-top: 8px; }
-  .footer-mobile-links { gap: 14px; }
-  .footer-mobile-links a { font-size: 7px; }
 
   .contact-h { font-size: clamp(22px, 7vw, 36px); }
 }
@@ -1096,6 +1176,7 @@ footer {
 }
 .skip-nav { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 9px; z-index: 9999; transition: top 0.2s; }
 .skip-nav:focus { top: 0; }
+
 </style>
 </head>
 <body>
@@ -1124,7 +1205,26 @@ footer {
     <a href="https://dribbble.com/tishiris" target="_blank" rel="noopener">Dribbble</a>
     <a href="interactive-resume.html">Resume</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+  <nav class="mobile-menu-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="mobile-menu-divider"></div>
+  <div class="mobile-menu-socials">
+    <a href="https://www.linkedin.com/in/tina-singh-0503/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://medium.com/@tishsingh3" target="_blank" rel="noopener">Medium</a>
+    <a href="https://dribbble.com/tishiris" target="_blank" rel="noopener">Dribbble</a>
+    <a href="interactive-resume.html">Resume</a>
+  </div>
+  <button class="mobile-menu-theme" onclick="toggleTheme()" type="button">◑ Toggle theme</button>
+</div>
 
 <main id="main-content">
 <section class="hero">
@@ -1341,12 +1441,6 @@ footer {
 
 <footer id="pageFooter">
   <span class="footer-l">© 2026 Tina Singh</span>
-  <div class="footer-mobile-links">
-    <a href="https://www.linkedin.com/in/tina-singh-0503/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://medium.com/@tishsingh3" target="_blank" rel="noopener">Medium</a>
-    <a href="https://dribbble.com/tishiris" target="_blank" rel="noopener">Dribbble</a>
-    <a href="interactive-resume.html">Resume</a>
-  </div>
   <span class="footer-r">Design is the argument.</span>
 </footer>
 
@@ -2145,6 +2239,45 @@ document.querySelectorAll('.card').forEach(card => {
     window.location.href = link.href;
   });
 });
+
+// ── Hamburger menu ────────────────────────
+(function() {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (!hamburger || !mobileMenu) return;
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-label', 'Close menu');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  mobileMenu.querySelector('.mobile-menu-theme').addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+  });
+})();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
