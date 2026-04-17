@@ -2378,12 +2378,19 @@ document.querySelectorAll('.card').forEach(card => {
   var seed = 7;
   var rand = function(){ seed = (seed*9301+49297)%233280; return seed/233280; };
 
+  // Measure the actual rendered position of #co-name
+  var nameEl = document.getElementById('co-name');
+  var nr = nameEl.getBoundingClientRect();
+  var cx = nr.left + nr.width / 2;
+  var cy = nr.top + nr.height / 2;
+  var spread = Math.min(nr.width * 0.6, 260);
+
   var particles = [];
   for (var i = 0; i < 60; i++) {
     particles.push({
       fromX: rand()*W, fromY: rand()*H,
-      toX: W/2 - 250 + rand()*500,
-      toY: H/2 - 20 + rand()*40,
+      toX: cx - spread + rand()*spread*2,
+      toY: cy - 16 + rand()*32,
       size: 4 + Math.floor(rand()*4),
       color: COLS[i%4],
       delay: rand()*0.4,
