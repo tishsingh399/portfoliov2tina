@@ -2377,55 +2377,44 @@ document.querySelectorAll('.card').forEach(card => {
   var seed = 7;
   var rand = function(){ seed = (seed*9301+49297)%233280; return seed/233280; };
 
-  function startAnim() {
-    // Measure after fonts loaded so getBoundingClientRect is accurate
-    var nameEl = document.getElementById('co-name');
-    var nr = nameEl.getBoundingClientRect();
-    var cx = nr.width > 0 ? nr.left + nr.width / 2 : W / 2;
-    var cy = nr.height > 0 ? nr.top + nr.height / 2 : H * 0.45;
-    var spread = Math.min(Math.max(nr.width * 0.5, 120), 300);
+  // #cold-open is position:fixed inset:0 flex center — name is always at W/2, slightly above H/2
+  var cx = W / 2;
+  var cy = H * 0.44;
+  var spread = Math.min(W * 0.28, 340);
 
-    var particles = [];
-    for (var i = 0; i < 60; i++) {
-      particles.push({
-        fromX: rand()*W, fromY: rand()*H,
-        toX: cx - spread + rand()*spread*2,
-        toY: cy - 16 + rand()*32,
-        size: 4 + Math.floor(rand()*4),
-        color: COLS[i%4],
-        delay: rand()*0.4,
-      });
-    }
-
-    var t0 = null;
-    function draw(now) {
-      if (!t0) t0 = now;
-      var t = (now - t0) / 1000;
-      ctx.clearRect(0, 0, W, H);
-      var gather = Math.min(1, t / 1.2);
-      particles.forEach(function(p) {
-        var localT = Math.max(0, Math.min(1, (gather - p.delay) / Math.max(0.01, 1 - p.delay)));
-        var eased = 1 - Math.pow(1 - localT, 3);
-        var x = p.fromX + (p.toX - p.fromX) * eased;
-        var y = p.fromY + (p.toY - p.fromY) * eased;
-        var op = t < 1.2 ? 0.85 : Math.max(0, 1 - (t - 1.2) / 0.5);
-        if (op <= 0) return;
-        ctx.globalAlpha = op;
-        ctx.fillStyle = p.color;
-        ctx.fillRect(Math.floor(x), Math.floor(y), p.size, p.size);
-      });
-      ctx.globalAlpha = 1;
-      if (t < 2.0) requestAnimationFrame(draw);
-    }
-    requestAnimationFrame(draw);
+  var particles = [];
+  for (var i = 0; i < 80; i++) {
+    particles.push({
+      fromX: rand()*W, fromY: rand()*H,
+      toX: cx - spread + rand()*spread*2,
+      toY: cy - 24 + rand()*48,
+      size: 8 + Math.floor(rand()*10),
+      color: COLS[i%4],
+      delay: rand()*0.4,
+    });
   }
 
-  // Wait for Press Start 2P to load so the name element has correct dimensions
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(startAnim);
-  } else {
-    setTimeout(startAnim, 200);
+  var t0 = null;
+  function draw(now) {
+    if (!t0) t0 = now;
+    var t = (now - t0) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    var gather = Math.min(1, t / 1.2);
+    particles.forEach(function(p) {
+      var localT = Math.max(0, Math.min(1, (gather - p.delay) / Math.max(0.01, 1 - p.delay)));
+      var eased = 1 - Math.pow(1 - localT, 3);
+      var x = p.fromX + (p.toX - p.fromX) * eased;
+      var y = p.fromY + (p.toY - p.fromY) * eased;
+      var op = t < 1.2 ? 0.9 : Math.max(0, 1 - (t - 1.2) / 0.5);
+      if (op <= 0) return;
+      ctx.globalAlpha = op;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(Math.floor(x), Math.floor(y), p.size, p.size);
+    });
+    ctx.globalAlpha = 1;
+    if (t < 2.0) requestAnimationFrame(draw);
   }
+  requestAnimationFrame(draw);
 
   // Dismiss after animation completes
   setTimeout(function() {
