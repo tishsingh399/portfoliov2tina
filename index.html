@@ -1178,6 +1178,25 @@ footer {
 .skip-nav { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 9px; z-index: 9999; transition: top 0.2s; }
 .skip-nav:focus { top: 0; }
 
+/* ── Mission toast + coin burst ──────────────── */
+.coin-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+.coin { position: absolute; bottom: 0; font-family: 'Press Start 2P', monospace; animation: coinUp 1.6s cubic-bezier(.22,.61,.36,1) forwards; }
+@keyframes coinUp {
+  from { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  to   { transform: translateY(-90vh) rotate(400deg) scale(0.4); opacity: 0; }
+}
+.mission-toast {
+  position: fixed; bottom: 48px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--bg2); border: 3px solid var(--yellow);
+  box-shadow: 6px 6px 0 var(--accent); color: var(--yellow);
+  font-family: 'Press Start 2P', monospace; font-size: 11px;
+  padding: 18px 30px; letter-spacing: 0.06em;
+  opacity: 0; transition: opacity 0.4s, transform 0.5s cubic-bezier(.22,.61,.36,1);
+  z-index: 9998; pointer-events: none; white-space: nowrap;
+}
+.mission-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
 </style>
 </head>
 <body>
@@ -1431,8 +1450,9 @@ footer {
 </section>
 
 <section class="contact" id="contact">
+  <div class="coin-layer" id="coinLayer"></div>
   <div class="s-label fade-in">Contact</div>
-  <h2 class="contact-h reveal-text">Let's build something that lasts.</h2>
+  <h2 class="contact-h reveal-text">Let's build<br>something<br>that lasts.</h2>
   <div class="contact-bottom fade-in">
     <p class="contact-sub">Open to senior IC roles in design systems, principal designer positions, or embedded consulting on token architecture.</p>
     <a href="mailto:hello@tinasingh.app" class="contact-email">hello@tinasingh.app</a>
@@ -2280,6 +2300,40 @@ document.querySelectorAll('.card').forEach(card => {
   });
 })();
 </script>
+<div class="mission-toast" id="missionToast">★ MISSION COMPLETE ★</div>
+<script>(function(){
+  const GLYPHS = ['★','●','✦','◆','♦'];
+  const COLS   = ['#f5c542','#ff5c3d','#00d9b4','#e8dfd6'];
+  function spawnCoins() {
+    const layer = document.getElementById('coinLayer');
+    if (!layer) return;
+    for (let i = 0; i < 22; i++) {
+      const c = document.createElement('span');
+      c.className = 'coin';
+      c.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      c.style.cssText = `left:${10 + Math.random()*80}%;color:${COLS[Math.floor(Math.random()*COLS.length)]};font-size:${16+Math.random()*18}px;animation-duration:${1.4+Math.random()*0.8}s;animation-delay:${Math.random()*0.5}s`;
+      layer.appendChild(c);
+      setTimeout(() => c.remove(), 2600);
+    }
+  }
+  function showToast() {
+    const t = document.getElementById('missionToast');
+    if (!t) return;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+  const contactEl = document.querySelector('.contact');
+  if (contactEl) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setTimeout(spawnCoins, 600);
+        setTimeout(showToast, 1800);
+        obs.disconnect();
+      }
+    }, { threshold: 0.4 });
+    obs.observe(contactEl);
+  }
+})();</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
