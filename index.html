@@ -17,6 +17,8 @@
 <meta name="twitter:image" content="https://tinasingh.app/case-studies/images/shield-card-thumbnail-2x.jpg">
 <link rel="canonical" href="https://tinasingh.app">
 <title>Tina Singh — Senior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ── Reset & Tokens ──────────────────────────── */
@@ -138,7 +140,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 56px;
+  padding: 18px 56px;
 }
 nav.scrolled {
   background: rgba(17,17,17,0.7);
@@ -775,7 +777,7 @@ footer {
 }
 /* idle pulse */
 .featured-cs.pulse {
-  animation: marchBorder 0.6s infinite linear, csPulse 1.2s cubic-bezier(0.25,1,0.5,1) forwards;
+  animation: marchBorder 0.6s infinite linear;
 }
 
 /* thumbnail: pixel checkerboard */
@@ -833,8 +835,8 @@ footer {
   animation: liveBlink 2.2s ease-in-out infinite;
 }
 @keyframes liveBlink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.25; transform: scale(0.7); }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }
 .featured-cs-title {
   font-family: 'Spectral', serif;
@@ -1311,11 +1313,11 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag fade-in"><span>Senior Product Designer</span></div>
-    <p class="h1-tagline">Systems thinker. Pixel-level <em>craft.</em></p>
-    <h1 class="hero-h1">I design systems that make complex products usable.</h1>
+    <p class="h1-tagline">Design systems that <em>scale.</em></p>
+    <h1 class="hero-h1">Token architecture, governance, and component libraries across 6 products and 11 teams.</h1>
     <p class="hero-desc">
-      Senior product designer working across design systems and product UX.
-      I focus on structure, clarity, and decisions that scale across teams and products.
+      Senior product designer at an enterprise cybersecurity company ($400M+ ARR).
+      I build the infrastructure that keeps design consistent across teams — tokens, components, governance, and the measurement to prove it's working.
     </p>
     <div class="hero-skills">
       <span class="skill-tag">Design Systems</span>
@@ -1325,9 +1327,9 @@ footer {
       <span class="skill-tag">Design × Engineering</span>
     </div>
     <!-- AVAILABILITY SIGNAL — flip SHOW_AVAILABILITY to true in the script to enable -->
-    <div class="hero-avail" id="heroAvail" style="display:none">
+    <div class="hero-avail" id="heroAvail">
       <span class="avail-dot"></span>
-      <span class="avail-text">Open to senior IC and lead roles</span>
+      <span class="avail-text">Open to senior IC roles — design systems, principal designer, or embedded consulting</span>
     </div>
     <div class="hero-ctas">
       <a href="#work" class="btn-primary">View Selected Work</a>
@@ -1360,10 +1362,10 @@ footer {
   <div class="metrics-inline">
     <div class="s-label" style="margin-bottom:20px;">Proof Points</div>
     <div class="metrics-grid">
-      <div class="metric fade-in" data-delay="1"><div class="metric-num">6<sup>+</sup></div><div class="metric-label">Products unified</div></div>
-      <div class="metric fade-in" data-delay="2"><div class="metric-num">340<sup>+</sup></div><div class="metric-label">Components shipped</div></div>
-      <div class="metric fade-in" data-delay="3"><div class="metric-num">60<sup>%</sup></div><div class="metric-label">Accessibility improvement</div></div>
-      <div class="metric fade-in" data-delay="4"><div class="metric-num">6</div><div class="metric-label">Years in systems design</div></div>
+      <div class="metric fade-in" data-delay="1"><div class="metric-num">61<sup>k+</sup></div><div class="metric-label">Component insertions / quarter</div></div>
+      <div class="metric fade-in" data-delay="2"><div class="metric-num">0.3<sup>%</sup></div><div class="metric-label">Detach rate (down from 40%)</div></div>
+      <div class="metric fade-in" data-delay="3"><div class="metric-num">791</div><div class="metric-label">Design tokens in production</div></div>
+      <div class="metric fade-in" data-delay="4"><div class="metric-num">11</div><div class="metric-label">Teams on one system</div></div>
     </div>
   </div>
 
@@ -1375,8 +1377,8 @@ footer {
         <div class="card-num">01 / 04</div>
         <div class="card-title">Design System</div>
         <div class="card-sub">Design Systems · Architecture · Governance</div>
-        <div class="card-desc">Rebuilt the design system infrastructure to support 6 products across 11 teams, reaching 61,000+ insertions per quarter.</div>
-        <div class="card-outcome">61k+ insertions · &lt;1% detach rate · 6 products</div>
+        <div class="card-desc">40% component detach rate. Products diverging. Federal accessibility audits failing. I rebuilt the system from a shared file into a governed, token-driven infrastructure.</div>
+        <div class="card-outcome">40% → 0.3% detach rate · 61k+ insertions/quarter · 6 products</div>
         <div class="card-tags">
           <span class="tag">Design Systems</span>
           <span class="tag">Architecture</span>
@@ -1399,8 +1401,8 @@ footer {
         <div class="card-num">02 / 04</div>
         <div class="card-title">Inline Alert</div>
         <div class="card-sub">Component Design · Accessibility · Enterprise Logic</div>
-        <div class="card-desc">Redesigned the alert taxonomy from a single visual pattern into a 4-tier system rooted in user actionability.</div>
-        <div class="card-outcome">4-tier system · unified semantic scale · adopted platform-wide</div>
+        <div class="card-desc">One alert style for every severity level — info, warning, error, critical — all looked the same. I created a 4-tier semantic system engineers could implement without a designer in the room.</div>
+        <div class="card-outcome">4-tier system · AA contrast on all states · adopted platform-wide</div>
         <div class="card-tags">
           <span class="tag">Component Design</span>
           <span class="tag">Accessibility</span>
@@ -1423,8 +1425,8 @@ footer {
         <div class="card-num">03 / 04</div>
         <div class="card-title">Platform Navigation</div>
         <div class="card-sub">Information Architecture · System Design · Behavior Specs</div>
-        <div class="card-desc">Built a Hub and Spoke model and exact behavioral matrix mapping context shifts between multi-tenant suites.</div>
-        <div class="card-outcome">Unified routing · single JSON logic · 6 products</div>
+        <div class="card-desc">6 products, no shared navigation. Users couldn't tell which product they were in or how to switch. I defined the behavioral model before touching a single screen.</div>
+        <div class="card-outcome">Hub + Spoke model · single routing spec · 6 products unified</div>
         <div class="card-tags">
           <span class="tag">Information Architecture</span>
           <span class="tag">System Design</span>
@@ -1447,8 +1449,8 @@ footer {
         <div class="card-num">04 / 04</div>
         <div class="card-title">Login Redesign</div>
         <div class="card-sub">Interaction Design · Identity Access · Error Handling</div>
-        <div class="card-desc">Transformed a dated single-page login into a governed system component mapped exactly to IAM response logic.</div>
-        <div class="card-outcome">SSO failure recovery · system adoption · progressive auth</div>
+        <div class="card-desc">The login page had 12 undocumented error states, no SSO failure recovery, and wasn't part of the design system. I mapped every IAM response and rebuilt it as a governed component.</div>
+        <div class="card-outcome">12 error states mapped · SSO recovery · system-adopted</div>
         <div class="card-tags">
           <span class="tag">Interaction Design</span>
           <span class="tag">Identity Access</span>
@@ -2328,6 +2330,18 @@ document.querySelectorAll('.card').forEach(card => {
   const mobileMenu = document.getElementById('mobileMenu');
   if (!hamburger || !mobileMenu) return;
 
+  const focusable = 'a[href], button:not([disabled])';
+
+  function trapFocus(e) {
+    const els = Array.from(mobileMenu.querySelectorAll(focusable));
+    if (!els.length) return;
+    const first = els[0], last = els[els.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+
   function openMenu() {
     hamburger.classList.add('open');
     mobileMenu.classList.add('open');
@@ -2335,6 +2349,9 @@ document.querySelectorAll('.card').forEach(card => {
     mobileMenu.setAttribute('aria-hidden', 'false');
     hamburger.setAttribute('aria-label', 'Close menu');
     document.body.style.overflow = 'hidden';
+    const firstLink = mobileMenu.querySelector(focusable);
+    if (firstLink) setTimeout(() => firstLink.focus(), 50);
+    document.addEventListener('keydown', trapFocus);
   }
 
   function closeMenu() {
@@ -2344,6 +2361,8 @@ document.querySelectorAll('.card').forEach(card => {
     mobileMenu.setAttribute('aria-hidden', 'true');
     hamburger.setAttribute('aria-label', 'Open menu');
     document.body.style.overflow = '';
+    document.removeEventListener('keydown', trapFocus);
+    hamburger.focus();
   }
 
   hamburger.addEventListener('click', () => {

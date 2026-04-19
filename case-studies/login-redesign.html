@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login Redesign — Tina Singh</title>
 <meta name="description" content="Case study: A system fix disguised as a small update — rebuilding the enterprise front door to be accessible, system-integrated, and state-aware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -17,7 +19,7 @@
   --bg3:     #242424;
   --text:    #ffffff;
   --text2:   #d4d4d4;
-  --muted:   #8a8a8a;
+  --muted:   #666666;
   --border:  #333333;
   --accent:  #ff5c3d;
   --accent2: #cc4a31;
@@ -43,7 +45,8 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text
 body, nav, section, .cs-hero, .decision-item, .security-step, .outcome-cell { transition: background 0.3s, color 0.3s, border-color 0.3s; }
 
 nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
-.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-cs-title { font-family: 'Spectral', serif; font-size: 15px; font-weight: 400; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40ch; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; min-height: 44px; padding: 4px 0; }
 .nav-back:hover { color: var(--text); }
 .nav-back-arrow { color: var(--accent); }
 .nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
@@ -147,7 +150,7 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 <nav>
   <a href="../index.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Work</a>
-  <span class="nav-name">Tina Singh</span>
+  <span class="nav-cs-title">04 — Login Redesign</span>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" type="button" aria-label="Toggle light/dark mode"><span id="themeIcon">◑</span></button>
 </nav>
 

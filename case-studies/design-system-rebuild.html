@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Design System Rebuild — Tina Singh</title>
 <meta name="description" content="Case study: How I rebuilt a fragmented UI into a governed token-driven design system across 6 products and 11 teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -43,7 +45,8 @@ body { font-family: 'Jost', sans-serif; background: var(--bg); color: var(--text
 body, nav, section, .cs-hero, .decision-item, .security-step, .outcome-cell { transition: background 0.3s, color 0.3s, border-color 0.3s; }
 
 nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; }
-.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; }
+.nav-cs-title { font-family: 'Spectral', serif; font-size: 15px; font-weight: 400; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40ch; }
+.nav-back { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: color 0.2s; min-height: 44px; padding: 4px 0; }
 .nav-back:hover { color: var(--text); }
 .nav-back-arrow { color: var(--accent); }
 .nav-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text); }
@@ -68,18 +71,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-glance-outcomes li { font-size: 16px; font-weight: 400; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.65; }
 .cs-glance-outcomes li::before { content: '→'; color: var(--accent-teal); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
 
-.cs-img-cap { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 28px; }
-.cs-image-caption {
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 20px;        /* clear of shadow */
-  font-style: italic;
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
 
 .cs-detail-cta {
   border-top: 1px solid var(--border);
@@ -206,17 +197,6 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 .cs-next-title { font-family: 'Spectral', serif; font-size: 26px; font-weight: 400; color: var(--text); }
 .cs-next-arrow { font-size: 24px; color: var(--accent); }
 
-.cs-image-caption {
-  font-size: 13px;
-  color: var(--muted);
-  text-align: center;
-  margin-top: 14px;
-  max-width: 60ch;
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 400;
-  line-height: 1.5;
-}
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 .skip-nav { position: absolute; top: -40px; left: 0; background: var(--accent); color: #fff; padding: 8px 16px; font-family: 'Press Start 2P', monospace; font-size: 9px; z-index: 9999; transition: top 0.2s; }
@@ -228,8 +208,8 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
 
 <nav>
   <a href="../index.html" class="nav-back"><span class="nav-back-arrow">←</span> Back to Work</a>
-  <span class="nav-name">Tina Singh</span>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" type="button" aria-label="Toggle light/dark mode"><span id="themeIcon">◑</span></button>
+  <span class="nav-cs-title">01 — Design System Rebuild</span>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" type="button" aria-label="Toggle light/dark mode" aria-pressed="false"><span id="themeIcon">◑</span></button>
 </nav>
 
 <div class="cs-hero" id="main-content">
@@ -412,6 +392,11 @@ nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bott
     <p class="cs-p" style="margin-top:28px;">The gap between high team-level adoption and 4% instance coverage is the real story. Teams use the system where it fits. Everywhere else is work that hasn't been migrated yet. Having the number makes the roadmap defensible instead of aspirational.</p>
     <img src="images/design-system-guidance.png" alt="Design system usage guidance and documentation" loading="lazy" class="cs-img-full">
     <p class="cs-img-caption">// Usage guidance — component documentation and adoption patterns across teams</p>
+  </div>
+
+  <div class="cs-section fade-in" style="border-top:1px solid var(--border);padding-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <p style="font-size:17px;color:var(--text2);max-width:48ch;line-height:1.7;">Open to senior IC roles in design systems and principal designer positions. If this work is relevant to a role you're hiring for —</p>
+    <a href="mailto:hello@tinasingh.app" style="font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:0.1em;color:var(--accent);text-decoration:none;padding:14px 24px;border:2px solid var(--accent);white-space:nowrap;flex-shrink:0;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--accent)'">Get in Touch →</a>
   </div>
 
   <div class="cs-section fade-in">
